@@ -1,0 +1,49 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Why Us Section
+--------------------------------------------------------------*/
+.why-us {
+  .card-item {
+    background: color-mix(in srgb, var(--default-color), transparent 95%);
+    padding: 50px 30px;
+    transition: all ease-in-out 0.3s;
+    height: 100%;
+    position: relative;
+
+    span {
+      color: var(--accent-color);
+      display: block;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    h4 {
+      font-size: 24px;
+      font-weight: 600;
+      padding: 0;
+      margin: 20px 0;
+
+      a {
+        color: var(--heading-color);
+      }
+    }
+
+    p {
+      font-size: 15px;
+      color: color-mix(in srgb, var(--default-color), transparent 40%);
+      margin: 0;
+      padding: 0;
+    }
+
+    &:hover {
+      background: var(--accent-color);
+      padding: 30px 30px 70px 30px;
+
+      span,
+      h4 a,
+      p {
+        color: var(--contrast-color);
+      }
+    }
+  }
+}

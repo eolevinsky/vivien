@@ -1,0 +1,69 @@
+/*--------------------------------------------------------------
+# Global Sections
+--------------------------------------------------------------*/
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  scroll-margin-top: 77px;
+  overflow: clip;
+}
+
+@media (max-width: 1199px) {
+
+  section,
+  .section {
+    scroll-margin-top: 60px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Section Titles
+--------------------------------------------------------------*/
+.section-title {
+  padding-bottom: 60px;
+  position: relative;
+
+  h2 {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0;
+    line-height: 1px;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 120px;
+      height: 1px;
+      display: inline-block;
+      background: var(--accent-color);
+      margin: 4px 10px;
+    }
+  }
+
+  p {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 36px;
+    font-weight: 600;
+    font-family: var(--heading-font);
+  }
+}
+
+@import './sections/_hero.scss';
+@import './sections/_about.scss';
+@import './sections/_why-us.scss';
+@import './sections/_menu.scss';
+@import './sections/_specials.scss';
+@import './sections/_events.scss';
+@import './sections/_book-a-table.scss';
+@import './sections/_testimonials.scss';
+@import './sections/_gallery.scss';
+@import './sections/_chefs.scss';
+@import './sections/_contact.scss';
+@import './sections/_starter-section.scss';

@@ -1,0 +1,65 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about {
+  background: url("../img/about-bg.jpg") center center;
+  background-size: cover;
+  position: relative;
+  padding: 80px 0;
+
+  &:before {
+    content: "";
+    background: color-mix(in srgb, var(--background-color), transparent 12%);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .content {
+    h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .fst-italic {
+      color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 10px 0 0 0;
+        display: flex;
+      }
+
+      i {
+        color: var(--accent-color);
+        margin-right: 0.5rem;
+        line-height: 1.2;
+        font-size: 1.25rem;
+      }
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .about-img {
+    border: 6px solid color-mix(in srgb, var(--default-color), transparent 80%);
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+}

@@ -1,0 +1,59 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Book A Table Section
+--------------------------------------------------------------*/
+.book-a-table {
+  .reservation-img {
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .reservation-form-bg {
+    background: color-mix(in srgb, var(--default-color), transparent 97%);
+  }
+
+  .php-email-form {
+    padding: 30px;
+
+    @media (max-width: 575px) {
+      padding: 20px;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=number],
+    input[type=date],
+    input[type=time],
+    textarea {
+      font-size: 14px;
+      padding: 10px 15px;
+      box-shadow: none;
+      border-radius: 0;
+      color: var(--default-color);
+      background-color: color-mix(in srgb, var(--background-color), transparent 20%);
+      border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+
+      &:focus {
+        border-color: var(--accent-color);
+      }
+
+      &::placeholder {
+        color: color-mix(in srgb, var(--default-color), transparent 70%);
+      }
+    }
+
+    button[type="submit"] {
+      color: var(--default-color);
+      border: 2px solid var(--accent-color);
+      background: transparent;
+      padding: 14px 60px;
+      transition: 0.4s;
+      border-radius: 50px;
+
+      &:hover {
+        background: var(--accent-color);
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Events Section
+--------------------------------------------------------------*/
+.events {
+  --default-color: #ffffff;
+  --background-color: #000000;
+  --heading-color: #ffffff;
+  padding: 80px 0;
+  position: relative;
+
+  .slider-bg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  &:before {
+    content: '';
+    background-color: color-mix(in srgb, var(--background-color), transparent 30%);
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+
+  .section-title h2 {
+    color: #ffffff;
+  }
+
+  .container {
+    position: relative;
+    z-index: 3;
+  }
+
+  .event-item {
+    h3 {
+      font-weight: 700;
+      font-size: 30px;
+    }
+
+    .price {
+      font-size: 26px;
+      font-family: var(--default-font);
+      font-weight: 700;
+      margin-bottom: 15px;
+
+      span {
+        border-bottom: 2px solid var(--accent-color);
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-bottom: 10px;
+      }
+
+      i {
+        font-size: 20px;
+        padding-right: 4px;
+        color: var(--accent-color);
+      }
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .swiper-wrapper {
+    height: auto;
+  }
+
+  .swiper-pagination {
+    margin-top: 30px;
+    position: relative;
+
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: color-mix(in srgb, var(--default-color), transparent 70%);
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: var(--accent-color);
+    }
+  }
+}

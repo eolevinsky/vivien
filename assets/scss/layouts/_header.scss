@@ -1,0 +1,133 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Global Header
+--------------------------------------------------------------*/
+.header {
+  --background-color: rgba(12, 11, 9, 0.61);
+  color: var(--default-color);
+  transition: all 0.5s;
+  z-index: 997;
+
+  .topbar {
+    height: 40px;
+    padding: 0;
+    font-size: 14px;
+    transition: all 0.5s;
+
+    .contact-info {
+      i {
+        font-style: normal;
+        color: var(--accent-color);
+
+        a,
+        span {
+          padding-left: 5px;
+          color: var(--default-color);
+
+          @media (max-width: 575px) {
+            font-size: 13px;
+          }
+        }
+
+        a {
+          line-height: 0;
+          transition: 0.3s;
+
+          &:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .languages {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: var(--accent-color);
+
+        a {
+          color: var(--default-color);
+
+          &:hover {
+            color: var(--accent-color);
+          }
+        }
+
+        li+li {
+          padding-left: 10px;
+        }
+
+        li+li::before {
+          display: inline-block;
+          padding-right: 10px;
+          color: color-mix(in srgb, var(--default-color), transparent 10%);
+          content: "/";
+        }
+      }
+    }
+  }
+
+  .branding {
+    background-color: var(--background-color);
+    min-height: 60px;
+    padding: 10px 0;
+    transition: 0.3s;
+    border-bottom: 1px solid var(--background-color);
+  }
+
+  .logo {
+    line-height: 1;
+
+    img {
+      max-height: 36px;
+      margin-right: 8px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 0;
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+  }
+
+  .btn-book-a-table,
+  .btn-book-a-table:focus {
+    color: var(--default-color);
+    border: 2px solid var(--accent-color);
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 6px 24px;
+    margin: 0 5px 0 30px;
+    border-radius: 50px;
+    transition: 0.3s;
+
+    &:hover {
+      color: var(--default-color);
+      background: var(--accent-color);
+    }
+  }
+
+  .scrolled & {
+    .topbar {
+      height: 0;
+      visibility: hidden;
+      overflow: hidden;
+    }
+
+    .branding {
+      border-color: color-mix(in srgb, var(--accent-color), transparent 80%);
+    }
+  }
+}
+
+/* Global Header on Scroll
+------------------------------*/
+.scrolled .header {
+  --background-color: #0c0b09;
+}
