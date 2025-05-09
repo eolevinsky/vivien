@@ -64,6 +64,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  scroll-padding-top: 100px;
 }
 
 a {
@@ -1020,6 +1021,9 @@ section,
 
   .hero p {
     font-size: 18px;
+  }
+  main {
+    padding-top: 100px; /* или точная высота вашего header */
   }
 }
 
