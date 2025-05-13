@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <style>
+    .v { font: bold 42px 'Playfair Display', serif; }
+    .b { font: italic 36px 'Great Vibes', cursive; }
+  </style>
+  <text x="5" y="48" class="v">V</text>
+  <text x="30" y="48" class="b">b</text>
+</svg>
