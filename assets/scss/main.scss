@@ -12,3 +12,24 @@
 @import './layouts/_aos.scss';
 @import './layouts/_page-titles.scss';
 @import './_sections.scss';
+
+.sitename {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25em;
+  line-height: 1;
+}
+
+.sitename .brasserie {
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 1.6em;
+  font-style: italic;
+  margin-right: 0.2em;
+}
+
+.sitename .vivien {
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 700;
+  font-size: 1.4em;
+  letter-spacing: 0.03em;
+}

@@ -1732,3 +1732,24 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+.sitename {
+  display: inline-flex;
+  gap: 0.3em;
+  align-items: baseline;
+}
+
+.brasserie {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6em;
+  font-style: italic;
+  line-height: 1;
+}
+
+.vivien {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.4em;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
