@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="lv">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Brasserie Vivien – Cuisine raffinée à Riga</title>
+  <title>Brasserie Vivien – Augstas klases restorāns Rīgā</title>
   <link rel="canonical" href="index.html">
   <link rel="alternate" href="index.html" hreflang="en" />
   <link rel="alternate" href="coming-soon-lv.html" hreflang="lv" />
   <link rel="alternate" href="coming-soon-fr.html" hreflang="fr" />
   <link rel="alternate" href="coming-soon-ru.html" hreflang="ru" />
-  <meta name="description" content="Découvrez Brasserie Vivien, une expérience gastronomique au cœur de Riga.">
+  <meta name="description" content="Izbaudiet Brasserie Vivien – augstas klases ēdināšanu pašā Rīgas centrā.">
   
 
   <!-- Favicons -->
@@ -55,7 +55,7 @@
           <!-- Mobile dropdown -->
           <div class="dropdown d-md-none ms-3">
             <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              FR
+              LV
             </button>
             <ul class="dropdown-menu" aria-labelledby="langDropdown">
               <li><a class="dropdown-item" href="index.html">EN</a></li>
@@ -68,10 +68,10 @@
         <!-- Desktop languages -->
         <div class="languages d-none d-md-flex align-items-center">
           <ul>
-            <li>FR</li>
-            <li><a href="coming-soon-lv.html">LV</a></li>
-            <li><a href="index.html">EN</a></li>
+            <li>LV</li>
             <li><a href="coming-soon-ru.html">RU</a></li>
+            <li><a href="index.html">EN</a></li>
+            <li><a href="coming-soon-fr.html">FR</a></li>
           </ul>
         </div>
       </div>
@@ -84,7 +84,7 @@
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="sitename">
-            <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
+            <span class="brasserie">Club&nbsp;</span> <span class="vivien">VIVIEN</span>
           </h1>
         </a>
 
@@ -102,37 +102,93 @@
 
   <main class="main">
 
-<section id="hero" class="hero section dark-background">
-  <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 d-flex flex-column align-items-center text-center">
-        <h2 data-aos="fade-up" data-aos-delay="100">Le site web est encore en cours de développement</h2>
-        <p data-aos="fade-up" data-aos-delay="200">Mais nous sommes ouverts et vous attendons tous les jours de 18h00 à 23h00, et le bar est ouvert jusqu'à minuit, et les vendredis et samedis jusqu'à 2h00 du matin.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section id="hero" class="hero section dark-background">
+      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
 
-</main>
+      <div class="container pt-5">
+        <section id="book-a-table" class="book-a-table section">
+
+          <!-- Section Title -->
+          <div class="container">
+            <div class="section-title" data-aos="fade-up">
+              <h6 style="
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: rgba(255, 255, 255, 0.3);
+                line-height: 1;
+                margin: 0;">Uzkrājumu programma <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
+              </h6>
+              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Lūdzu, aizpildiet anketu</p>
+            </div>
+          </div>
+          <!-- End Section Title -->
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <form action="forms/register-new-loyal.php" method="post" role="form" class="php-email-form">
+              <p>Mēs nevācam personas datus, bet lūdzam minimālu informāciju (lai neaizmirstu Jūsu vārda dienu, varētu nosūtīt apstiprinājumu uz tālruni, uzkrāt 10% no Jūsu maksājumiem, nosūtīt Jums karti Apple Wallet vai Google Wallet, ar kuru varēsiet tos iztērēt u.c.)</p>
+              <div class="row gy-4 pt-3">
+                <div class="col-lg-4 col-md-6">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Jūsu vārds" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Jūsu e-pasts" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <label class="form-label d-block mb-2" style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+                    Dzimums (nav obligāti):
+                  </label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male">
+                    <label class="form-check-label" for="genderMale" style="color: rgba(255, 255, 255, 0.7);">Vīrietis</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                    <label class="form-check-label" for="genderFemale" style="color: rgba(255, 255, 255, 0.7);">Sieviete</label>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="Jūsu tālrunis" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="text"
+                        name="birthdate"
+                        class="form-control"
+                        id="birthdate"
+                        placeholder="Dzimšanas diena"
+                        autocomplete="off">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="number" class="form-control" name="people" id="people" placeholder="Ģimene – # cilvēki">
+                </div>
+                <input type="hidden" name="language" value="Krievu">
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="infosource" rows="1" placeholder="Persona vai pasākums, kurā saņēmāt mūsu ielūgumu"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Nedaudz par Jūsu interesēm"></textarea>
+              </div>
+
+              <div class="text-center mt-3">
+                <div class="loading">Ielādējas</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Jūsu kartes pieprasījums ir nosūtīts. Mēs sazināsimies ar Jums, lai apstiprinātu reģistrāciju, un nosūtīsim biedra karti uzkrājumu izlietošanai. Paldies!</div>
+                <button type="submit">Pieprasīt uzkrājumu karti</button>
+              </div>
+            </form><!-- End Reservation Form -->
+
+          </div>
+
+        </section><!-- /Book A Table Section -->
+      </div>
+    </section>
+
+  </main>
 
   <footer id="footer" class="footer">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
-        </div>
-
-      </div>
-    </div>
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIA Brīvības 37</strong> <span>All Rights Reserved</span></p>

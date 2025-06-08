@@ -84,7 +84,7 @@
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="sitename">
-            <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
+            <span class="brasserie">Club&nbsp;</span> <span class="vivien">VIVIEN</span>
           </h1>
         </a>
 
@@ -102,37 +102,93 @@
 
   <main class="main">
 
-<section id="hero" class="hero section dark-background">
-  <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 d-flex flex-column align-items-center text-center">
-        <h2 data-aos="fade-up" data-aos-delay="100">Le site web est encore en cours de développement</h2>
-        <p data-aos="fade-up" data-aos-delay="200">Mais nous sommes ouverts et vous attendons tous les jours de 18h00 à 23h00, et le bar est ouvert jusqu'à minuit, et les vendredis et samedis jusqu'à 2h00 du matin.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section id="hero" class="hero section dark-background">
+      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
 
-</main>
+      <div class="container pt-5">
+        <section id="book-a-table" class="book-a-table section">
+
+          <!-- Section Title -->
+          <div class="container">
+            <div class="section-title" data-aos="fade-up">
+              <h6 style="
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: rgba(255, 255, 255, 0.3);
+                line-height: 1;
+                margin: 0;">Programme de fidélité <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
+              </h6>
+              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Veuillez remplir le formulaire</p>
+            </div>
+          </div>
+          <!-- End Section Title -->
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <form action="forms/register-new-loyal.php" method="post" role="form" class="php-email-form">
+              <p>Nous ne collectons pas de données personnelles, mais nous demandons un minimum d'informations (pour ne pas rater votre fête, envoyer une confirmation par téléphone, créditer 10 % de vos paiements sur votre compte fidélité, vous envoyer une carte compatible avec Apple Wallet ou Google Wallet, etc.).</p>
+              <div class="row gy-4 pt-3">
+                <div class="col-lg-4 col-md-6">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre prénom" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre email" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <label class="form-label d-block mb-2" style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+                    Sexe (facultatif) :
+                  </label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male">
+                    <label class="form-check-label" for="genderMale" style="color: rgba(255, 255, 255, 0.7);">Homme</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                    <label class="form-check-label" for="genderFemale" style="color: rgba(255, 255, 255, 0.7);">Femme</label>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="Votre téléphone" required="">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="text"
+                        name="birthdate"
+                        class="form-control"
+                        id="birthdate"
+                        placeholder="Date d'anniversaire"
+                        autocomplete="off">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <input type="number" class="form-control" name="people" id="people" placeholder="Famille de # personnes">
+                </div>
+                <input type="hidden" name="language" value="Russe">
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="infosource" rows="1" placeholder="Personne ou événement où vous avez reçu notre invitation"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Parlez-nous un peu de vos intérêts"></textarea>
+              </div>
+
+              <div class="text-center mt-3">
+                <div class="loading">Chargement</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Votre demande de carte a été envoyée. Nous vous contacterons pour confirmer l'inscription et vous enverrons la carte membre pour dépenser vos crédits. Merci !</div>
+                <button type="submit">Demander une carte de fidélité</button>
+              </div>
+            </form><!-- End Reservation Form -->
+
+          </div>
+
+        </section><!-- /Book A Table Section -->
+      </div>
+    </section>
+
+  </main>
 
   <footer id="footer" class="footer">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-          <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-          </form>
-        </div>
-
-      </div>
-    </div>
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIA Brīvības 37</strong> <span>All Rights Reserved</span></p>
