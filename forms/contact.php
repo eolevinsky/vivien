@@ -7,7 +7,7 @@
   */
 
   // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'bobo.brivibas37@gmail.com';
+  $receiving_email_address = 'new_contact@brivibas.planfix.com';
 
   if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
     include( $php_email_form );
@@ -33,6 +33,7 @@
   );
   */
 
+  $contact->add_message( $_POST['language'], 'Language' );
   $contact->add_message( $_POST['name'], 'From');
   $contact->add_message( $_POST['email'], 'Email');
   $contact->add_message( $_POST['message'], 'Message', 10);

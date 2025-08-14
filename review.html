@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Share Your Experience – Brasserie Vivien</title>
+
+  <!-- Match existing site assets (adjust paths if needed) -->
+  <link rel="icon" type="image/png" href="assets/img/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
+  <link rel="shortcut icon" href="assets/img/favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png"/>
+  <link rel="manifest" href="assets/img/site.webmanifest"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS (same as index.html) -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    body { background: #0b0b0b; color: #eee; }
+    .section-title h2 { font-family: "Playfair Display", serif; }
+    .vivien-accent { color: #cda45e; }
+    .btn-big { padding: 0.9rem 1.25rem; border-radius: 1rem; font-weight: 600; }
+    .btn-love { background: #cda45e; color: #0b0b0b; border: none; }
+    .btn-love:hover { filter: brightness(1.05); }
+    .btn-fix { background: transparent; color: #eee; border: 1px solid rgba(255,255,255,.25); }
+    .btn-fix:hover { border-color: #cda45e; color: #cda45e; }
+    .card-lite { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 1.25rem; }
+    .qr-wrap img { width: 100%; height: auto; border-radius: 1rem; background: #fff; padding: 1rem; }
+    .logo-wordmark { font-family: "Playfair Display", serif; font-weight: 700; letter-spacing: .8px; }
+    .logo-wordmark .brasserie { font-weight: 500; }
+  </style>
+</head>
+<body class="review-page">
+
+  <header class="py-3 border-bottom border-dark">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="text-decoration-none text-light logo-wordmark">
+        <span class="brasserie">Brasserie&nbsp;</span><span class="vivien-accent">VIVIEN</span>
+      </a>
+      <a class="btn btn-sm btn-outline-light" href="http://vivien.restoplace.ws/">Book a Table</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="section py-5">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h1 class="mb-3">Tell us how we did</h1>
+            <p class="lead mb-4">If your visit was delightful, a quick review helps other guests discover us. If something could be better, tell us privately — we’ll fix it fast.</p>
+
+            <div class="d-flex gap-3 justify-content-center mb-5">
+              <a class="btn btn-big btn-love" href="https://g.page/r/CeOFF5g6VoU8EBM/review" target="_blank" rel="noopener">Loved it! &nbsp; ★★★★★</a>
+              <a class="btn btn-big btn-fix" href="#feedback">Something could be better</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-6">
+            <div class="p-4 h-100 card-lite">
+              <h4 class="mb-3">Scan to open this page</h4>
+              <div class="qr-wrap">
+                <!-- External QR for quick start; replace with a local image later if desired -->
+                <img alt="QR to review landing" src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=https%3A//vivien.lv/review">
+              </div>
+              <div class="small text-secondary mt-2">Current QR opens: <code>https://vivien.lv/review</code></div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" id="feedback">
+            <div class="p-4 h-100 card-lite">
+              <h4 class="mb-3">Private feedback</h4>
+              <form action="forms/contact.php" method="post" class="php-email-form">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name (optional)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="email" class="form-control" name="email" placeholder="Your Email (optional)">
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" name="phone" placeholder="Phone (optional)">
+                  </div>
+                  <div class="col-12">
+                    <textarea class="form-control" name="message" rows="5" placeholder="What could we improve?"></textarea>
+                  </div>
+                  <!-- Tag messages so you can route/filter them -->
+                  <input type="hidden" name="subject" value="Review page feedback">
+                  <input type="hidden" name="language" value="English">
+
+                  <div class="col-12">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">Thanks! We’ll get back to you shortly.</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-big btn-fix">Send privately</button>
+                  </div>
+                </div>
+              </form>
+              <div class="small text-secondary mt-3">
+                We never publish private feedback. If your experience was great, please consider leaving a public review — it helps our small team a lot.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4 border-top border-dark">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+      <div class="text-secondary small">© Brasserie Vivien</div>
+      <div class="small"><a class="text-decoration-none vivien-accent" href="https://g.page/r/CeOFF5g6VoU8EBM/review" target="_blank" rel="noopener">Open Google review form</a></div>
+    </div>
+  </footer>
+
+  <!-- Vendor JS -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

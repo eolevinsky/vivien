@@ -33,6 +33,7 @@
   );
   */
 
+  $contact->add_message( $_POST['language'], 'Language' );
   $contact->add_message( $_POST['email'], 'Email');
 
   echo $contact->send();

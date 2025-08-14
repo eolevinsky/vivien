@@ -58,10 +58,10 @@
               FR
             </button>
             <ul class="dropdown-menu" aria-labelledby="langDropdown">
-              <li><a class="dropdown-item" href="index.html">EN</a></li>
-              <li><a class="dropdown-item" href="coming-soon-lv.html">LV</a></li>
-              <li><a class="dropdown-item" href="coming-soon-fr.html">FR</a></li>
-              <li><a class="dropdown-item" href="coming-soon-ru.html">RU</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-en.html">EN</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-lv.html">LV</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-fr.html">FR</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-ru.html">RU</a></li>
             </ul>
           </div>
         </div>
@@ -69,9 +69,9 @@
         <div class="languages d-none d-md-flex align-items-center">
           <ul>
             <li>FR</li>
-            <li><a href="coming-soon-lv.html">LV</a></li>
-            <li><a href="index.html">EN</a></li>
-            <li><a href="coming-soon-ru.html">RU</a></li>
+            <li><a href="new-loyal-registration-lv.html">LV</a></li>
+            <li><a href="new-loyal-registration-en.html">EN</a></li>
+            <li><a href="new-loyal-registration-ru.html">RU</a></li>
           </ul>
         </div>
       </div>
@@ -80,7 +80,7 @@
     <div class="branding d-flex align-items-cente">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <a href="new-loyal-registration-en.html" class="logo d-flex align-items-center me-auto me-xl-0">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="sitename">
@@ -90,9 +90,9 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <a class="btn-book-a-table d-none d-xl-block" href="tel:+37163013005">Réserver</a>
+            <a class="btn-book-a-table d-none d-xl-block" href="http://vivien.restoplace.ws/">Réserver</a>
             <li><a href="#hero" class="active">Home<br></a></li>
-            <li class="d-xl-none"><a href="tel:+37163013005" class="active">Réserver<br></a></li>
+            <li class="d-xl-none"><a href="http://vivien.restoplace.ws/" class="active">Réserver<br></a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -120,9 +120,9 @@
                 letter-spacing: 1.5px;
                 color: rgba(255, 255, 255, 0.3);
                 line-height: 1;
-                margin: 0;">Programme de fidélité <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
+                margin: 0;">Inscription au Club <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
               </h6>
-              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Veuillez remplir le formulaire</p>
+              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Bienvenue au Club Vivien</p>
             </div>
           </div>
           <!-- End Section Title -->
@@ -130,17 +130,24 @@
           <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <form action="forms/register-new-loyal.php" method="post" role="form" class="php-email-form">
-              <p>Nous ne collectons pas de données personnelles, mais nous demandons un minimum d'informations (pour ne pas rater votre fête, envoyer une confirmation par téléphone, créditer 10 % de vos paiements sur votre compte fidélité, vous envoyer une carte compatible avec Apple Wallet ou Google Wallet, etc.).</p>
+              <p>
+                Le Club Vivien, c’est bien plus que des avantages.
+                Ce sont des soirées intimistes avec des vignerons, artistes ou auteurs,
+                et l’occasion de rester en lien humain et vivant avec nous.
+              </p>
+              <p>
+                Nous vous offrons une carte numérique (Apple / Google Wallet) pour rester en contact — rarement, calmement, avec sincérité et pertinence.
+              </p>
               <div class="row gy-4 pt-3">
                 <div class="col-lg-4 col-md-6">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre prénom" required="">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" required="">
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Votre email" required="">
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <label class="form-label d-block mb-2" style="color: rgba(255, 255, 255, 0.7); font-size: 14px;">
-                    Sexe (facultatif) :
+                    Sexe (optionnel) :
                   </label>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male">
@@ -159,32 +166,42 @@
                         name="birthdate"
                         class="form-control"
                         id="birthdate"
-                        placeholder="Date d'anniversaire"
+                        placeholder="Date de naissance"
                         autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <input type="number" class="form-control" name="people" id="people" placeholder="Famille de # personnes">
                 </div>
-                <input type="hidden" name="language" value="Russe">
+                <input type="hidden" name="language" value="Français">
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="infosource" rows="1" placeholder="Personne ou événement où vous avez reçu notre invitation"></textarea>
+                <textarea class="form-control" name="infosource" rows="1" placeholder="Personne de référence ou événement lors duquel vous avez reçu notre invitation"></textarea>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Parlez-nous un peu de vos intérêts"></textarea>
+                <textarea class="form-control" name="profession" rows="1" placeholder="Votre profession"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Quelques mots sur vos centres d’intérêt"></textarea>
               </div>
 
+              <small>
+                Nous ne demandons que le minimum — juste ce qu’il faut pour vous envoyer la carte Wallet, créditer 10% en points lors de vos paiements et vous rappeler parfois quelque chose de beau. Pas de traitement abusif des données, aucun service tiers.
+              </small>
+
               <div class="text-center mt-3">
-                <div class="loading">Chargement</div>
+                <div class="loading">Chargement…</div>
                 <div class="error-message"></div>
-                <div class="sent-message">Votre demande de carte a été envoyée. Nous vous contacterons pour confirmer l'inscription et vous enverrons la carte membre pour dépenser vos crédits. Merci !</div>
-                <button type="submit">Demander une carte de fidélité</button>
+                <div class="sent-message">
+                  <strong>Merci !</strong> Nous avons bien reçu votre demande. Après une brève vérification, nous vous enverrons votre carte de membre pour Apple/Google Wallet — ce sera le début de votre compte club. Heureux d’être en contact avec vous !
+                </div>
+                <button type="submit">Demander la carte du Club</button>
               </div>
+
             </form><!-- End Reservation Form -->
 
           </div>
 
-        </section><!-- /Book A Table Section -->
+        </section>
       </div>
     </section>
 

@@ -58,10 +58,10 @@
               LV
             </button>
             <ul class="dropdown-menu" aria-labelledby="langDropdown">
-              <li><a class="dropdown-item" href="index.html">EN</a></li>
-              <li><a class="dropdown-item" href="coming-soon-lv.html">LV</a></li>
-              <li><a class="dropdown-item" href="coming-soon-fr.html">FR</a></li>
-              <li><a class="dropdown-item" href="coming-soon-ru.html">RU</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-en.html">EN</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-lv.html">LV</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-fr.html">FR</a></li>
+              <li><a class="dropdown-item" href="new-loyal-registration-ru.html">RU</a></li>
             </ul>
           </div>
         </div>
@@ -69,9 +69,9 @@
         <div class="languages d-none d-md-flex align-items-center">
           <ul>
             <li>LV</li>
-            <li><a href="coming-soon-ru.html">RU</a></li>
-            <li><a href="index.html">EN</a></li>
-            <li><a href="coming-soon-fr.html">FR</a></li>
+            <li><a href="new-loyal-registration-ru.html">RU</a></li>
+            <li><a href="new-loyal-registration-en.html">EN</a></li>
+            <li><a href="new-loyal-registration-fr.html">FR</a></li>
           </ul>
         </div>
       </div>
@@ -80,7 +80,7 @@
     <div class="branding d-flex align-items-cente">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <a href="new-loyal-registration-en.html" class="logo d-flex align-items-center me-auto me-xl-0">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="sitename">
@@ -90,9 +90,9 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <a class="btn-book-a-table d-none d-xl-block" href="tel:+37163013005">Rezervēt</a>
+            <a class="btn-book-a-table d-none d-xl-block" href="http://vivien.restoplace.ws/">Rezervēt</a>
             <li><a href="#hero" class="active">Home<br></a></li>
-            <li class="d-xl-none"><a href="tel:+37163013005" class="active">Rezervēt<br></a></li>
+            <li class="d-xl-none"><a href="http://vivien.restoplace.ws/" class="active">Rezervēt<br></a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -120,9 +120,9 @@
                 letter-spacing: 1.5px;
                 color: rgba(255, 255, 255, 0.3);
                 line-height: 1;
-                margin: 0;">Uzkrājumu programma <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
+                margin: 0;">Reģistrācija Klubā <span style="display:inline-block;width:120px;height:1px;background:#cda45e;vertical-align:middle;"></span>
               </h6>
-              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Lūdzu, aizpildiet anketu</p>
+              <p style="color:#cda45e;font-size:36px;font-weight:600;font-family:'Playfair Display',serif;">Laipni lūdzam Club Vivien</p>
             </div>
           </div>
           <!-- End Section Title -->
@@ -130,7 +130,14 @@
           <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <form action="forms/register-new-loyal.php" method="post" role="form" class="php-email-form">
-              <p>Mēs nevācam personas datus, bet lūdzam minimālu informāciju (lai neaizmirstu Jūsu vārda dienu, varētu nosūtīt apstiprinājumu uz tālruni, uzkrāt 10% no Jūsu maksājumiem, nosūtīt Jums karti Apple Wallet vai Google Wallet, ar kuru varēsiet tos iztērēt u.c.)</p>
+              <p>
+                Vivien Klubs — tas ir kas vairāk nekā bonusi.
+                Tie ir intīmi vakari ar vīndariem, māksliniekiem un rakstniekiem,
+                kā arī iespēja saglabāt dzīvu, personīgu saikni ar mums.
+              </p>
+              <p>
+                Mēs piedāvājam digitālo karti (Apple / Google Wallet), lai sazinātos ar Jums — reti, klusi, jēgpilni un no sirds.
+              </p>
               <div class="row gy-4 pt-3">
                 <div class="col-lg-4 col-md-6">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Jūsu vārds" required="">
@@ -159,32 +166,42 @@
                         name="birthdate"
                         class="form-control"
                         id="birthdate"
-                        placeholder="Dzimšanas diena"
+                        placeholder="Dzimšanas datums"
                         autocomplete="off">
                 </div>
                 <div class="col-lg-4 col-md-6">
-                  <input type="number" class="form-control" name="people" id="people" placeholder="Ģimene – # cilvēki">
+                  <input type="number" class="form-control" name="people" id="people" placeholder="Ģimene, cilvēku skaits">
                 </div>
-                <input type="hidden" name="language" value="Krievu">
+                <input type="hidden" name="language" value="Latviešu">
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="infosource" rows="1" placeholder="Persona vai pasākums, kurā saņēmāt mūsu ielūgumu"></textarea>
+                <textarea class="form-control" name="infosource" rows="1" placeholder="Kur saņēmāt ielūgumu vai ieteikumu?"></textarea>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Nedaudz par Jūsu interesēm"></textarea>
+                <textarea class="form-control" name="profession" rows="1" placeholder="Jūsu nodarbošanās"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Daži vārdi par Jūsu interesēm"></textarea>
               </div>
 
+              <small>
+                Mēs prasām tikai to, kas nepieciešams, lai nosūtītu Jums karti Apple/Google Wallet formātā, uzkrātu 10% bonusa punktos par norēķiniem un retu reizi atgādinātu par kaut ko labu. Nekādas liekas personas datu apstrādes un nekādu ārēju servisu.
+              </small>
+
               <div class="text-center mt-3">
-                <div class="loading">Ielādējas</div>
+                <div class="loading">Notiek ielāde</div>
                 <div class="error-message"></div>
-                <div class="sent-message">Jūsu kartes pieprasījums ir nosūtīts. Mēs sazināsimies ar Jums, lai apstiprinātu reģistrāciju, un nosūtīsim biedra karti uzkrājumu izlietošanai. Paldies!</div>
-                <button type="submit">Pieprasīt uzkrājumu karti</button>
+                <div class="sent-message">
+                  <strong>Paldies!</strong> Mēs saņēmām Jūsu pieteikumu. Pēc īsas pārbaudes nosūtīsim Jums dalībnieka karti Apple/Google Wallet formātā — tā kļūs par sākumu Jūsu klubam. Priecājamies būt saziņā!
+                </div>
+                <button type="submit">Saņemt kluba karti</button>
               </div>
+
             </form><!-- End Reservation Form -->
 
           </div>
 
-        </section><!-- /Book A Table Section -->
+        </section>
       </div>
     </section>
 

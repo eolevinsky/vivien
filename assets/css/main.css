@@ -1186,19 +1186,30 @@ section,
   margin-left: 95px;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Center items vertically */
+  position: relative; /* Position relative for the pseudo-element */;
 }
 
-.menu .menu-content::after {
-  content: "......................................................................" "...................................................................." "....................................................................";
-  position: absolute;
-  left: 20px;
-  right: 0;
-  top: -4px;
-  z-index: 1;
-  color: color-mix(in srgb, var(--default-color), transparent 60%);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+.imaginary .menu .menu-content h6::after {
+  content: ""; /* Empty content for the line */
+  display: block; /* Ensure it displays as a block */
+  height: 2px; /* Line thickness */
+  width: 100%; /* Line length */
+  border-top: 2px dotted color-mix(in srgb, var(--default-color), transparent 60%); /* Dotted line */
+  /* position: absolute;  Position absolute to align it */
+  left: 0; /* Align to the left */
+  top: 50%; /* Position it in the middle */
+  transform: translateY(-50%); /* Adjust for half the height of the line */
+  z-index: 1; /* Ensure it stays behind the text */;
+}
+
+.priceline {
+  width: 100%;
+  border-bottom: 2px dotted grey;
+  height: 100%;
+  margin-top: auto;
+  margin-right: 1rem;
 }
 
 .menu .menu-content a {
@@ -1414,6 +1425,8 @@ section,
 .book-a-table .php-email-form input[type=number],
 .book-a-table .php-email-form input[type=date],
 .book-a-table .php-email-form input[type=time],
+.book-a-table .php-email-form input[type=file],
+.book-a-table .php-email-form input[type=file]::file-selector-button,
 .book-a-table .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
@@ -1429,6 +1442,8 @@ section,
 .book-a-table .php-email-form input[type=number]:focus,
 .book-a-table .php-email-form input[type=date]:focus,
 .book-a-table .php-email-form input[type=time]:focus,
+.book-a-table .php-email-form input[type=file]:focus,
+.book-a-table .php-email-form input[type=file]::file-selector-button,
 .book-a-table .php-email-form textarea:focus {
   border-color: var(--accent-color);
 }
@@ -1438,6 +1453,8 @@ section,
 .book-a-table .php-email-form input[type=number]::placeholder,
 .book-a-table .php-email-form input[type=date]::placeholder,
 .book-a-table .php-email-form input[type=time]::placeholder,
+.book-a-table .php-email-form input[type=file]::placeholder,
+.book-a-table .php-email-form input[type=file]::file-selector-button,
 .book-a-table .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
@@ -1454,6 +1471,33 @@ section,
 .book-a-table .php-email-form button[type=submit]:hover {
   background: var(--accent-color);
 }
+
+.book-a-table .php-email-form button[type=file]:hover {
+  background: var(--accent-color);
+}
+
+.book-a-table .php-email-form input[type="file"]::file-selector-button {
+  all: unset;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--default-color);
+  padding: 14px 60px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  font: inherit;
+}
+
+.book-a-table .php-email-form input[type="file"]::file-selector-button:hover,
+.book-a-table .php-email-form input[type="file"]:hover::file-selector-button {
+  background: var(--accent-color);
+  color: var(--background-color);
+}
+
+.book-a-table .php-email-form input[type=email]:valid {
+  background-color: color-mix(in srgb, var(--background-color), transparent 20%) !important;
+}
+
 
 /*--------------------------------------------------------------
 # Testimonials Section
@@ -1752,4 +1796,30 @@ section,
   font-size: 1.4em;
   letter-spacing: 0.05em;
   line-height: 1;
+}
+
+/* Центрирование всей секции по вертикали */
+#choose-lang.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* Сетка карточек */
+#choose-lang .card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  #choose-lang .card-grid {
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }

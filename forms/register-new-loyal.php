@@ -40,6 +40,7 @@
   $book_a_table->add_message( $_POST['birthdate'], 'Birthdate');
   $book_a_table->add_message( $_POST['people'], '# of people', 1);
   $book_a_table->add_message( $_POST['gender'], 'Gender', 1 );
+  $book_a_table->add_message( $_POST['profession'], 'Profession', 1 );
   $book_a_table->add_message( $_POST['infosource'], 'Infosource');
   $book_a_table->add_message( $_POST['message'], 'Message');
 
