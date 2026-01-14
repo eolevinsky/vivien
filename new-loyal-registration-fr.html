@@ -3,6 +3,33 @@
 
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H3TT546F5J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H3TT546F5J');
+  </script>
+  
+  <!-- Google tag (gtag.js) event - delayed navigation helper -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion_event_outbound_click', {
+        'event_callback': callback,
+        'event_timeout': 2000
+        // можно добавить параметры, например {'event_category':'Booking'}
+      });
+      return false;
+    }
+  </script>
+
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Brasserie Vivien – Cuisine raffinée à Riga</title>
   <link rel="canonical" href="index.html">
@@ -90,9 +117,9 @@
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <a class="btn-book-a-table d-none d-xl-block" href="http://vivien.restoplace.ws/">Réserver</a>
+            <a class="btn-book-a-table d-none d-xl-block" href="https://vivien.restoplace.ws/" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Réserver</a>
             <li><a href="#hero" class="active">Home<br></a></li>
-            <li class="d-xl-none"><a href="http://vivien.restoplace.ws/" class="active">Réserver<br></a></li>
+            <li class="d-xl-none"><a href="https://vivien.restoplace.ws/" class="active" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Réserver<br></a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>

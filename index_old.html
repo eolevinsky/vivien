@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H3TT546F5J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H3TT546F5J');
+  </script>
+
+  <!-- Google tag (gtag.js) event - delayed navigation helper -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion_event_outbound_click', {
+        'event_callback': callback,
+        'event_timeout': 2000
+        // можно добавить параметры, например {'event_category':'Booking'}
+      });
+      return false;
+    }
+  </script>
+
+
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Brasserie Vivien – Изысканное бистро в Риге</title>
+  <title>Brasserie Vivien Riga | French Bistro, Breakfast, Wine & Art</title>
   <link rel="canonical" href="index.html">
   <link rel="alternate" href="index.html" hreflang="en" />
   <link rel="alternate" href="index-lv.html" hreflang="lv" />
   <link rel="alternate" href="index-fr.html" hreflang="fr" />
   <link rel="alternate" href="index-ru.html" hreflang="ru" />
-  <meta name="description" content="Откройте для себя Brasserie Vivien — изысканный ресторан в центре Риги.">
+  <meta name="description" content="French bistro in the heart of Riga: creative cuisine, breakfast, curated wines and art exhibitions. Separate areas for smokers and non-smokers.">
   
 
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="assets/img/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
-  <link rel="shortcut icon" href="assets/img/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="assets/img/site.webmanifest" />
-
+  <link rel="icon" type="image/png" href="assets/img/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg"/>
+  <link rel="shortcut icon" href="assets/img/favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png"/>
+  <link rel="manifest" href="assets/img/site.webmanifest"/>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -56,7 +83,7 @@
           <!-- Mobile dropdown -->
           <div class="dropdown d-md-none ms-3">
             <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              RU
+              EN
             </button>
             <ul class="dropdown-menu" aria-labelledby="langDropdown">
               <li><a class="dropdown-item" href="index.html">EN</a></li>
@@ -67,12 +94,12 @@
           </div>
         </div>
         <!-- Desktop languages -->
-        <div class="languages d-none d-md-flex align-items-center">
-          <ul>
-            <li>RU</li>
-            <li><a href="index-lv.html">LV</a></li>
-            <li><a href="index.html">EN</a></li>
-            <li><a href="index-fr.html">FR</a></li>
+        <div class="languages d-none d-md-flex align-items-center ms-4">
+          <ul class="mb-0">
+            <li class="me-2"><a href="index.html">EN</a></li>
+            <li class="me-2"><a href="index-lv.html">LV</a></li>
+            <li class="me-2"><a href="index-fr.html">FR</a></li>
+            <li><a href="index-ru.html">RU</a></li>
           </ul>
         </div>
       </div>
@@ -85,20 +112,23 @@
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo.png" alt=""> -->
           <h1 class="sitename">
-            <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
+              <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
           </h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="#hero" class="active">Домой<br></a></li>
-            <!-- <li><a href="#about">О нас</a></li> -->
-            <li><a href="#menu">Меню</a></li>
-            <li><a href="#drinks">Карта вин</a></li> 
-            <li><a href="#specials">Фирменные блюда</a></li>
-            <!-- <li><a href="#events">События</a></li>
-            <li><a href="#chefs">Команда</a></li> -->
-            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#hero" class="active">Home<br></a></li>
+            <!-- <li><a href="#about">About</a></li> -->
+            <li><a href="#breakfast">Breakfast</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#drinks">Drinks</a></li>
+            <li><a href="#specials">Specials</a></li>
+            <!-- <li><a href="#events">Events</a></li>
+            <li><a href="#chefs">Chefs</a></li> -->
+            <li><a href="#gallery">Gallery</a></li>
+            <!-- <li><a href="#careers">We Are Hiring!</a></li> -->
+
             <!-- Dropdown menu ===========================================
              <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
@@ -118,12 +148,17 @@
               </ul>
             </li> 
             ============================================================ -->
-            <li><a href="#contact">Контакты</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="gift-card/giftcard-en.html">Gift Card</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
-        <a class="btn-book-a-table d-none d-xl-block" href="tel:+37163013005">Заказать стол</a>
+        <a href="https://vivien.restoplace.ws/"
+          class="btn-book-a-table d-none d-xl-block"
+          onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">
+          Book a Table
+        </a>
 
       </div>
 
@@ -136,20 +171,20 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <img src="assets/img/Hero.jpg" alt="" data-aos="fade-in">
+      <img src="assets/img/hero-7.jpg" alt="" data-aos="fade-in">
 
       <div class="container">
         <div class="row">
           <div class="col-lg-8 d-flex flex-column align-items-center align-items-lg-start">
-            <h2 data-aos="fade-up" data-aos-delay="100">Добро пожаловать в <span>Brasserie&nbsp;Vivien</span></h2>
-            <p data-aos="fade-up" data-aos-delay="200">Аутентичная французская кухня в сердце Риги</p>
+            <h2 data-aos="fade-up" data-aos-delay="100">Welcome to <span>Brasserie&nbsp;Vivien</span></h2>
+            <p data-aos="fade-up" data-aos-delay="200">Authentic French cuisine in the heart of Riga</p>
             <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-              <a href="#menu" class="cta-btn">Наше Меню</a>
-              <a href="tel:+37163013005" class="cta-btn">Заказать стол</a>
+              <a href="#menu" class="cta-btn">Our Menu</a>
+              <a href="https://vivien.restoplace.ws/" class="cta-btn" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Book a Table</a>
             </div>
           </div>
           <div class="col-lg-4 d-flex align-items-center justify-content-center mt-5 mt-lg-0">
-            <a href="https://www.youtube.com/watch?v=ZW4QPBT4BdE" class="glightbox pulsating-play-btn"></a>
+            <a href="https://youtu.be/pacdFCTfgo8" class="glightbox pulsating-play-btn"></a>
           </div>
         </div>
       </div>
@@ -166,17 +201,19 @@
             <img src="assets/img/about.jpg" class="img-fluid about-img" alt="">
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content">
-            <h3>О нас</h3>
+            <h3>Voluptatem dignissimos provident</h3>
             <p class="fst-italic">
-              Суть аутентичной французской гастрономии в сердце Риги
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
             </p>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Brasserie Vivien – первая в Риге аутентичная французская pop-up брассери, предлагающая классическую кухню различных регионов Франции по доступным ценам.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Наше меню, созданное шеф-поваром Вивьеном, привносит в Латвию сущность французской кулинарной традиции с тщательно отобранными рецептами, которые подчеркивают красоту простых, высококачественных ингредиентов.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Каждое блюдо рассказывает историю французского наследия, приготовленного с уважением к аутентичным техникам и вкусам, которые на протяжении поколений бережно хранились во французских домах и любимых местных заведениях.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
             </ul>
             <p>
-              Присоединяйтесь к нам для непретенциозного, но подлинного французского гастрономического опыта, который перенесет вас в теплую, гостеприимную атмосферу лучших региональных заведений по всей Франции, где почитаемые кулинарные традиции встречаются с комфортом современной кухни.
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
             </p>
           </div>
         </div>
@@ -191,8 +228,8 @@
 
       <!-- Section Title -->
       <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Почему к нам</h2>
-        <p>Почему стоит выбрать Brasserie Vivien</p>
+        <h2>WHY US</h2>
+        <p>Why Choose Our Restaurant</p>
       </div> -->
       <!-- End Section Title -->
 
@@ -203,8 +240,8 @@
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="card-item">
               <span>01</span>
-              <h4><a href="" class="stretched-link">Аутентичная региональная кухня</a></h4>
-              <p>В Brasserie Vivien мы привозим в Ригу подлинные французские региональные рецепты, приготовленные с использованием традиционных техник и лучших сезонных ингредиентов. Каждое блюдо предлагает настоящий вкус разнообразного кулинарного наследия Франции, выходящий за рамки типичного туристического опыта.</p>
+              <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
             </div>
           </div> -->
           <!-- Card Item -->
@@ -212,8 +249,8 @@
           <!-- <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="card-item">
               <span>02</span>
-              <h4><a href="" class="stretched-link">Экспертиза шеф-повара Вивьена Лебека</a></h4>
-              <p>С более чем 20-летним опытом работы в известных французских кухнях, шеф-повар Вивьен лично создает каждое блюдо меню, обеспечивая исключительное качество и аутентичные вкусы, отражающие глубину французских гастрономических традиций.</p>
+              <h4><a href="" class="stretched-link">Repellat Nihil</a></h4>
+              <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
             </div>
           </div> -->
           <!-- Card Item -->
@@ -221,8 +258,8 @@
           <!-- <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
             <div class="card-item">
               <span>03</span>
-              <h4><a href="" class="stretched-link">Теплая, располагающая атмосфера</a></h4>
-              <p>Мы создали пространство, где изысканная французская кухня встречается с доступностью – никакой претенциозности, только страсть. Наслаждайтесь профессионально приготовленными блюдами и тщательно подобранной винной коллекцией в гостеприимной обстановке, где каждый чувствует себя желанным гостем.</p>
+              <h4><a href="" class="stretched-link">Ad ad velit qui</a></h4>
+              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
             </div>
           </div> -->
           <!-- Card Item -->
@@ -234,668 +271,860 @@
     </section> -->
     <!-- /Why Us Section -->
 
-    <!-- Menu Section -->
-    <section id="menu" class="menu section">
+    <!-- Breakfast Section (no filters) -->
+    <section class="menu section" id="breakfast">
+      <div class="container section-title pb-0 mb-0" data-aos="fade-up">
+        <h2>Breakfast <span class="text-white">(9:00 – 13:00)</span></h2>
+        <p>French classics for a cozy start</p>
+      </div>
 
-      <!-- Section Title -->
+      <div class="container isotope-layout mt-0" data-layout="masonry" data-sort="original-order">
+        <div class="row isotope-container mt-0" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Consommé <em>(Consommé)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Omelette aux herbes <em>(Omelette with Herbs)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Omelette au saumon <em>(Omelette with Salmon)</em></h6>
+              <p class="priceline"></p>
+              <span>8.50€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Œufs Bénédicte au bacon <em>(Eggs Benedict with Bacon)</em></h6>
+              <p class="priceline"></p>
+              <span>7.50€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Œufs Bénédicte au saumon <em>(Eggs Benedict with Salmon)</em></h6>
+              <p class="priceline"></p>
+              <span>9.50€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Croissant au rosbif <em>(Croissant with roast beef)</em></h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Croissant à la betterave <em>(Croissant with beetroot)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Flocons d’avoine <em>(Oatmeal porridge)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Œuf parfait aux champignons <em>(Perfect egg with mushrooms)</em></h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Petit déjeuner anglais <em>(English breakfast)</em></h6>
+              <p class="priceline"></p>
+              <span>12.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Petit déjeuner américain <em>(American breakfast)</em></h6>
+              <p class="priceline"></p>
+              <span>12.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Granola au yaourt <em>(Granola with yogurt)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Croque Monsieur <em>(Croque Monsieur)</em></h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Croque Madame <em>(Croque Madame)</em></h6>
+              <p class="priceline"></p>
+              <span>8.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Quiche Lorraine <em>(Quiche Lorraine)</em></h6>
+              <p class="priceline"></p>
+              <span>5.50€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Crêpes à la confiture et crème <em>(Pancakes with jam and cream)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Crêpes au bacon et œuf <em>(Pancakes with bacon and egg)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Crêpes au Grand Marnier <em>(Pancakes with orange liqueur)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Œufs au choix <em>(Eggs of your choice)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Syrniki <em>(Syrniki)</em></h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+
+        <div class="col-lg-6 menu-item isotope-item">
+          <div class="menu-content" style="margin-left: 0;">
+            <h6>Café KALVE de votre choix </h6>
+            <span>KALVE coffee of your choice</span>
+          </div>
+        </div>
+
+      </div><!-- /container -->
+    </section>
+
+
+    <!-- Menu Section -->
+    <section class="menu section" id="menu">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Меню</h2>
-        <p>Классическая французская кухня из свежих ингредиентов</p>
-      </div><!-- End Section Title -->
+        <h2>Menu</h2>
+        <p>Classic French cuisine made with fresh ingredients</p>
+      </div>
 
       <div class="container isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul class="menu-filters isotope-filters">
-              <li data-filter="*" class="filter-active">Все</li>
-              <li data-filter=".filter-soupes">Супы</li>
-              <li data-filter=".filter-snacking">Закуски</li>
-              <li data-filter=".filter-salads">Салаты</li>
-              <li data-filter=".filter-entrees">Холодные закуски</li>
-              <li data-filter=".filter-seafood">Морепродукты</li>
-              <li data-filter=".filter-meat">Мясо и рагу</li>
-              <li data-filter=".filter-desserts">Десерты</li>
+              <li class="filter-active" data-filter="*">All</li>
+              <li data-filter=".filter-soupes">Soups</li>
+              <li data-filter=".filter-entrees">Starters</li>
+              <li data-filter=".filter-salads">Salads</li>
+              <li data-filter=".filter-seafood">Seafood</li>
+              <li data-filter=".filter-pasta">Pasta</li>
+              <li data-filter=".filter-meat">Meat & Stews</li>
+              <li data-filter=".filter-sides">Sides</li>
+              <li data-filter=".filter-desserts">Desserts</li>
             </ul>
           </div>
-        </div><!-- Menu Filters -->
+        </div>
 
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
 
+          <!-- Soups -->
           <div class="col-lg-6 menu-item isotope-item filter-soupes">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Soupe à l&#180;oignon gratinée <em>(Луковый суп)</em></a><span>11.70€</span>
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Soupe à l’oignon <em>(French onion soup)</em></h6>
+              <p class="priceline"></p>
+              <span>8.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Классический луковый суп с сырной корочкой.
-            </div>
-          </div><!-- Menu Item -->
-      
+          </div>
+          
           <div class="col-lg-6 menu-item isotope-item filter-soupes">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Soupe de poisson, rouille et croûtons <em>(Рыбный суп)</em></a><span>12.60€</span>
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Soupe verte vitaminée <em>(Chilled Green Vitamin Soup)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Пряный рыбный суп с крутонами и соусом руй.
+          </div>
+
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-soupes">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Soupe aux champignons <em>(Mushroom soup)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-snacking">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Quiche Lorraine <em>(Киш Лорен)</em></a><span>9.90€</span>
-            </div>
-            <div class="menu-ingredients">
-              Пирог с беконом, сыром и сливками.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-snacking">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Croque Monsieur / Madame <em>(Крок-месье / мадам)</em></a><span>10.80€</span>
-            </div>
-            <div class="menu-ingredients">
-              Тост с ветчиной и сыром, с яйцом или без.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-salads">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade tomates (confites, gelee et poudre roties) <em>(Салат из томатов)</em></a><span>11.70€</span>
-            </div>
-            <div class="menu-ingredients">
-              Салат из томатов (конфи, желе и хрустящая томатная крошка).
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-salads">
-            <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade Tarantino CV <em>(Салат Тарантино)</em></a><span>12.60€</span>
-            </div>
-            <div class="menu-ingredients">
-              Салат с томатами и клубникой.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-salads">
-            <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade César <em>(Салат Цезарь)</em></a><span>14.40€</span>
-            </div>
-            <div class="menu-ingredients">
-              Классический Цезарь с курицей и пармезаном.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-salads">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade de chèvre chaud <em>(Салат с тёплым козьим сыром)</em></a><span>13.50€</span>
-            </div>
-            <div class="menu-ingredients">
-              Салат с тостами, козьим сыром, мёдом и тимьяном.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-salads">
-            <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade Lyonnaise <em>(Салат Лионский)</em></a><span>13.50€</span>
-            </div>
-            <div class="menu-ingredients">
-              Салат с беконом и яйцом пашот.
-            </div>
-          </div><!-- Menu Item -->
-      
+          </div> -->
+
+          <!-- Starters -->
           <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Terrine de campagne <em>(Террин по-деревенски)</em></a><span>11.70€</span>
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Huîtres (1 pc) <em>(Oysters 1 pc)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Мясной террин с маринадом.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Œuf Mayonnaise <em>(Яйцо с майонезом)</em></a><span>7.20€</span>
-            </div>
-            <div class="menu-ingredients">
-              Классическая закуска из яйца и домашнего майонеза.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Poireau vinaigrette <em>(Порей с винегретом)</em></a><span>9.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Лук-порей с фирменным винегретом.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Légumes à la grecque <em>(Овощи по-гречески)</em></a><span>9.90€</span>
-            </div>
-            <div class="menu-ingredients">
-              Тушёные овощи с пряным соусом.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Terrine de bœuf sauce ravigote <em>(Говяжий террин)</em></a><span>12.60€</span>
-            </div>
-            <div class="menu-ingredients">
-              Говяжий террин с соусом равигот.
-            </div>
-          </div><!-- Menu Item -->
+          </div>
 
           <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Gravlax de saumon <em>(Гравлакс из лосося)</em></a><span>14.40€</span>
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Huîtres (6 pcs) <em>(Oysters 6 pcs)</em></h6>
+              <p class="priceline"></p>
+              <span>18.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Лосось с соусом гуави и киви.
-            </div>
-          </div><!-- Menu Item -->
-      
+          </div>
+
           <div class="col-lg-6 menu-item isotope-item filter-entrees">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Tartare de saumon <em>(Тартар из лосося)</em></a><span>15.30€</span>
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Gougères (20 pcs) <em>(Cheese puffs)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Тартар с огурцом, яблоком и малиной.
+          </div>
+
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-entrees">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Mousse de foie de poulet <em>(Chicken liver mousse)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Plateau de fruits de mer <em>(Морской плато)</em></a><span>28.80€</span>
-            </div>
-            <div class="menu-ingredients">
-              Ассорти из морепродуктов.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Sole meunière <em>(Камбала по-менюрски)</em></a><span>21.60€</span>
-            </div>
-            <div class="menu-ingredients">
-              Обжаренная камбала в масле с лимоном.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Filet de daurade au fenouil <em>(Филе дорадо)</em></a><span>23.40€</span>
-            </div>
-            <div class="menu-ingredients">
-              Дорадо с фенхелем и фламбе.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Darne de saumon sauce béarnaise <em>(Стейк из лосося)</em></a><span>23.40€</span>
-            </div>
-            <div class="menu-ingredients">
-              Лосось с соусом Беарнез или малиновым.
-            </div>
-          </div><!-- Menu Item -->
+          </div> -->
           
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Aile de raie aux câpres <em>(Крыло ската)</em></a><span>22.50€</span>
+          <div class="col-lg-6 menu-item isotope-item filter-entrees">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Terrine de campagne <em>(Country-style Meat Terrine)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Скат в каперсовом соусе.
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-entrees">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Œufs Mayonnaise (3 pcs) <em>(Eggs with Mayonnaise)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
             </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Crevettes flambées au whisky <em>(Креветки во фламбе)</em></a><span>20.70€</span>
-            </div>
-            <div class="menu-ingredients">
-              Креветки в виски и огне.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-seafood">
-            <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Moules marinières <em>(Мидии по-моряцки)</em></a><span>18.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Мидии в белом вине и чесноке.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Steak Tartare <em>(Тартар из говядины)</em></a><span>19.80€</span>
-            </div>
-            <div class="menu-ingredients">
-              Сырой фарш с каперсами и специями.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Steak au poivre <em>(Стейк с перцем)</em></a><span>21.60€</span>
-            </div>
-            <div class="menu-ingredients">
-              Говяжий стейк с перечным соусом.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Carre d&#39;agneau roti croute d herbes Ratatouille <em>(Каре ягнёнка)</em></a><span>25.20€</span>
-            </div>
-            <div class="menu-ingredients">
-              Жареное каре ягненка с корочкой из трав и рататуем.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Bœuf Bourguignon <em>(Говядина по-бургундски)</em></a><span>20.70€</span>
-            </div>
-            <div class="menu-ingredients">
-              Тушёная говядина в вине с тальятелле.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Osso Buco de veau <em>(Оссобуко)</em></a><span>19.80€</span>
-            </div>
-            <div class="menu-ingredients">
-              Тушёная телятина по-милански.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Coq au vin <em>(Петух в вине)</em></a><span>18.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Петух, тушёный в вине с овощами.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Pot-au-feu <em>(Пот-о-фё)</em></a><span>17.10€</span>
-            </div>
-            <div class="menu-ingredients">
-              Французский говяжий бульон с овощами.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Poulet rôti <em>(Курица с картофелем)</em></a><span>16.20€</span>
-            </div>
-            <div class="menu-ingredients">
-              Запечённая курица с чесноком и тимьяном.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-meat">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Blanquette de veau <em>(Бланкет из телятины)</em></a><span>18.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Телятина в сливочном соусе.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Salade de fruits frais <em>(Фруктовый салат)</em></a><span>8.10€</span>
-            </div>
-            <div class="menu-ingredients">
-              Салат из свежих сезонных фруктов.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Bananes flambées <em>(Бананы фламбе)</em></a><span>9.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Банан во фламбе с мороженым.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Tarte Tatin <em>(Тарт Татен)</em></a><span>8.10€</span>
-            </div>
-            <div class="menu-ingredients">
-              Перевёрнутый яблочный пирог с карамелью.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Mousse au chocolat <em>(Шоколадный мусс)</em></a><span>8.10€</span>
-            </div>
-            <div class="menu-ingredients">
-              Классический мусс из чёрного шоколада.
-            </div>
-          </div><!-- Menu Item -->
-      
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Profiteroles <em>(Профитроли)</em></a><span>9.00€</span>
-            </div>
-            <div class="menu-ingredients">
-              Профитроли с кремом и шоколадом.
-            </div>
-          </div><!-- Menu Item -->
+          </div>
           
-          <div class="col-lg-6 menu-item isotope-item filter-desserts">
-            <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-            <div class="menu-content">
-              <a href="#">Tarte aux fruits <em>(Фруктовый тарт)</em></a><span>8.10€</span>
+          <div class="col-lg-6 menu-item isotope-item filter-entrees">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Poireaux vinaigrette <em>(Leeks with Vinaigrette)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
-            <div class="menu-ingredients">
-              Пирог с сезонными фруктами.
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-entrees">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Gravlax de saumon <em>(Salmon Gravlax with Guakiwi Sauce)</em></h6>
+              <p class="priceline"></p>
+              <span>10.00€</span>
             </div>
-          </div><!-- Menu Item -->
+          </div>
           
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-snacking">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Panier de pain et beurre <em>(Bread Basket with Butter)</em></h6>
+              <p class="priceline"></p>
+              <span>3.50€</span>
+            </div>
+          </div> -->
+
+          <!-- Salads -->
+          <div class="col-lg-6 menu-item isotope-item filter-salads">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Salade César au poulet <em>(Caesar Salad with Chicken)</em></h6>
+              <p class="priceline"></p>
+              <span>9.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-salads">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Salade César au gravlax de saumon <em>(Caesar Salad with Salmon Gravlax)</em></h6>
+              <p class="priceline"></p>
+              <span>12.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-salads">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Salade de chèvre chaud <em>(Warm Goat Cheese Salad)</em></h6>
+              <p class="priceline"></p>
+              <span>9.00€</span>
+            </div>
+          </div>
+
+          <!-- Pasta -->
+          <div class="col-lg-6 menu-item isotope-item filter-pasta">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Pâtes aux champignons et crème truffée <em>(Pasta with Mushrooms and Truffle Cream)</em></h6>
+              <p class="priceline"></p>
+              <span>11.00€</span>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-pasta">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Pâtes aux fruits de mer et bisque <em>(Seafood pasta with bisque)</em></h6>
+              <p class="priceline"></p>
+              <span>11.00€</span>
+            </div>
+          </div> -->
+
+          <!-- Seafood -->
+          <div class="col-lg-6 menu-item isotope-item filter-seafood">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Filet de dorade sauce au fenouil <em>(Dorado fillet with fennel sauce)</em></h6>
+              <p class="priceline"></p>
+              <span>16.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-seafood">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Moules marinières (0.5 kg) <em>(Mussels Marinière 0.5 kg)</em></h6>
+              <p class="priceline"></p>
+              <span>12.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-seafood">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Saumon sauce béarnaise <em>(Salmon Béarnaise)</em></h6>
+              <p class="priceline"></p>
+              <span>14.00€</span>
+            </div>
+          </div>
+
+          <!-- Meat & Stews -->
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Steak Tartare du chef Vivien <em>(Chef Vivien’s Steak Tartare)</em></h6>
+              <p class="priceline"></p>
+              <span>10.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Double Tartare <em>(Double Tartare)</em></h6>
+              <p class="priceline"></p>
+              <span>19.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Steak au poivre <em>(Peppercorn Steak)</em></h6>
+              <p class="priceline"></p>
+              <span>16.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Entrecôte «Bistrot Vivien» <em>(Bistrot Vivien Entrecôte)</em></h6>
+              <p class="priceline"></p>
+              <span>23.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Bœuf Bourguignon aux tagliatelles <em>(Beef Bourguignon with Tagliatelle)</em></h6>
+              <p class="priceline"></p>
+              <span>12.00€</span>
+            </div>
+          </div>
+
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Confit de canard à la sauce Bigarade <em>(Duck confit with Bigarade sauce)</em></h6>
+              <p class="priceline"></p>
+              <span>10.50€</span>
+            </div>
+          </div> -->
+
+          <!-- <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Côtes d'agneau à la sauce à la menthe <em>(Lamb ribs with mint sauce)</em></h6>
+              <p class="priceline"></p>
+              <span>13.00€</span>
+            </div>
+          </div> -->
+          
+          <div class="col-lg-6 menu-item isotope-item filter-meat">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Poulet rôti au maïs avec sauce Ju, thym, ail et cocotte de pommes de terre <em>(Roasted Corn Chicken with Ju sauce, Thyme, Garlic and Potatoes)</em></h6>
+              <p class="priceline"></p>
+              <span>13.00€</span>
+            </div>
+          </div>
+
+          <!-- Sides -->
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Ratatouille <em>(Ratatouille)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Gratin de Vivien <em>(Vivien’s Gratin)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Pommes sautées lyonnaises <em>(Lyonnaise-style Sautéed Potatoes)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Brocoli vapeur <em>(Steamed Broccoli)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Salade mixte aux légumes <em>(Mixed salad with vegetables)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-sides">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Agata confit <em>(Agate confite)</em></h6>
+              <p class="priceline"></p>
+              <span>3.00€</span>
+            </div>
+          </div>
+
+          <!-- Desserts -->
+          <div class="col-lg-6 menu-item isotope-item filter-desserts">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Tarte Tatin <em>(Tarte Tatin)</em></h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-desserts">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Mousse au chocolat <em>(Chocolate Mousse)</em></h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-desserts">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Panna Cotta <em>(Panna Cotta)</em></h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
+            </div>
+          </div>
+
+          <div class="col-lg-6 menu-item isotope-item filter-desserts">
+            <div class="menu-content" style="margin-left: 0;">
+              <h6>Sorbet de saison <em>(Seasonal Sorbet)</em></h6>
+              <p class="priceline"></p>
+              <span>4.00€</span>
+            </div>
+          </div>
+
         </div><!-- Menu Container -->
-
       </div>
-
     </section><!-- /Menu Section -->
 
     <!-- Drinks Section -->
     <section class="menu section" id="drinks">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Карта вин</h2>
-        <p>Вина, коктейли и пиво</p>
+        <h2>Drinks</h2>
+        <p>Selection of wines, cocktails, and beers</p>
       </div>
-      
+
       <div class="container isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-       
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul class="menu-filters isotope-filters">
-              <li class="filter-active" data-filter="*">Все</li>
-              <li data-filter=".filter-bubbles">Игристые вина</li>
-              <li data-filter=".filter-white-fr">Белое вино (Франция)</li>
-              <li data-filter=".filter-white-intl">Белое вино (другие страны)</li>
-              <li data-filter=".filter-rose">Розовое вино</li>
-              <li data-filter=".filter-house">Домашнее вино</li>
-              <li data-filter=".filter-red-fr">Красное вино (Франция)</li>
-              <li data-filter=".filter-red-intl">Красное вино (другие страны)</li>
-              <li data-filter=".filter-cocktails">Коктейли</li>
-              <li data-filter=".filter-beer">Пиво</li>
+              <li class="filter-active" data-filter="*">All</li>
+              <li data-filter=".filter-bubbles">Bubbles</li>
+              <li data-filter=".filter-white-fr">White wine (France)</li>
+              <li data-filter=".filter-white-intl">White wine (other countries)</li>
+              <li data-filter=".filter-rose">Rosé wine</li>
+              <li data-filter=".filter-house">House wine</li>
+              <li data-filter=".filter-red-fr">Red wine (France)</li>
+              <li data-filter=".filter-red-intl">Red wine (other countries)</li>
+              <li data-filter=".filter-cocktails">Cocktails</li>
+              <li data-filter=".filter-beer">Beer</li>
             </ul>
           </div>
         </div>
-        
+
         <div class="row isotope-container" data-aos="fade-up" data-aos-delay="200">
 
           <!-- Bubbles -->
           <div class="col-lg-6 menu-item isotope-item filter-bubbles">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Prosecco, Veneto, Italy</h6><span>6.00 / 30.00€</span>
+              <h6>Prosecco, Veneto, Italy</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 30.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-bubbles">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Joseph Cattin Cremant d’Alsace Blanc brut</h6><span>7.00 / 35.00€</span>
+              <h6>Joseph Cattin Cremant d’Alsace Blanc brut</h6>
+              <p class="priceline"></p>
+              <span>7.00 / 35.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-bubbles">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Mi Mi Brut Rosé, Provence</h6><span>8.00 / 40.00€</span>
+              <h6>Mi Mi Brut Rosé, Provence</h6>
+              <p class="priceline"></p>
+              <span>8.00 / 40.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-bubbles">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Haslinger & Fils Brut, Champagne, France</h6><span>12.00 / 60.00€</span>
+              <h6>Haslinger & Fils Brut, Champagne, France</h6>
+              <p class="priceline"></p>
+              <span>12.00 / 60.00€</span>
             </div>
           </div>
 
           <!-- White wine (France) -->
           <div class="col-lg-6 menu-item isotope-item filter-white-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Pfaff Riesling, Alsace</h6><span>7.00 / 35.00€</span>
+              <h6>Pfaff Riesling, Alsace</h6>
+              <p class="priceline"></p>
+              <span>7.00 / 35.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Joseph Cattin Gewurztraminer, Alsace</h6><span>6.00 / 30.00€</span>
+              <h6>Joseph Cattin Gewurztraminer, Alsace</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 30.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Chateau Les Reuilles Sauvignon Blanc, Bordeaux</h6><span>6.00 / 30.00€</span>
+              <h6>Chateau Les Reuilles Sauvignon Blanc, Bordeaux</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 30.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Terrassous Terra BIO Blanc, Cotes Catalanes</h6><span>6.00 / 30.00€</span>
+              <h6>Terrassous Terra BIO Blanc, Cotes Catalanes</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 30.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Brunel de la Gardine Cotes du Rhône Blanc</h6><span>40.00€</span>
+              <h6>Brunel de la Gardine Cotes du Rhône Blanc</h6>
+              <p class="priceline"></p>
+              <span>40.00€</span>
             </div>
           </div>
 
           <!-- White wine (other countries) -->
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Aresti Bellavista Reserva Sauvignon Blanc, Chili</h6><span>6.00 / 29.00€</span>
+              <h6>Aresti Bellavista Reserva Sauvignon Blanc, Chili</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 29.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Zap Vinho Verde, Portugal</h6><span>6.00 / 29.00€</span>
+              <h6>Zap Vinho Verde, Portugal</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 29.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Ramon Bilbao Verdejo, Rueda, Spain</h6><span>35.00€</span>
+              <h6>Ramon Bilbao Verdejo, Rueda, Spain</h6>
+              <p class="priceline"></p>
+              <span>35.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Peter Lehmann Portrait Riesling, Australia</h6><span>35.00€</span>
+              <h6>Peter Lehmann Portrait Riesling, Australia</h6>
+              <p class="priceline"></p>
+              <span>35.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Purcari Viorica-Muscat Ottonel, Moldova</h6><span>38.00€</span>
+              <h6>Purcari Viorica-Muscat Ottonel, Moldova</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Durnberg Gruner Veltliner, Austria</h6><span>38.00€</span>
+              <h6>Durnberg Gruner Veltliner, Austria</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-white-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Rabbit Island Sauvignon Blanc, New Zealand</h6><span>38.00€</span>
+              <h6>Rabbit Island Sauvignon Blanc, New Zealand</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
 
           <!-- Rosé wine -->
           <div class="col-lg-6 menu-item isotope-item filter-rose">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Rosé d’Anjou Arlequin, Loire</h6><span>7.00 / 35.00€</span>
+              <h6>Rosé d’Anjou Arlequin, Loire</h6>
+              <p class="priceline"></p>
+              <span>7.00 / 35.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-rose">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Estandon Pour la Vie Organic, Provence</h6><span>35.00€</span>
+              <h6>Estandon Pour la Vie Organic, Provence</h6>
+              <p class="priceline"></p>
+              <span>35.00€</span>
             </div>
           </div>
 
           <!-- House wine -->
           <div class="col-lg-6 menu-item isotope-item filter-house">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Red house wine 150/1000</h6><span>5.50 / 32.00€</span>
+              <h6>Red house wine 150/1000</h6>
+              <p class="priceline"></p>
+              <span>5.50 / 32.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-house">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>White house wine 150/1000</h6><span>5.50 / 32.00€</span>
+              <h6>White house wine 150/1000</h6>
+              <p class="priceline"></p>
+              <span>5.50 / 32.00€</span>
             </div>
           </div>
 
           <!-- Red wine (France) -->
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Chateau du Trignon Cotes du Rhone</h6><span>6.00 / 29.00€</span>
+              <h6>Chateau du Trignon Cotes du Rhone</h6>
+              <p class="priceline"></p>
+              <span>6.00 / 29.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Domaine du Prince L’Envol du Prince, Cahors</h6><span>8.50 / 42.50€</span>
+              <h6>Domaine du Prince L’Envol du Prince, Cahors</h6>
+              <p class="priceline"></p>
+              <span>8.50 / 42.50€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Chateau Grezan Faugeres rouge, Languedoc</h6><span>8.00 / 40.00€</span>
+              <h6>Chateau Grezan Faugeres rouge, Languedoc</h6>
+              <p class="priceline"></p>
+              <span>8.00 / 40.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Terrassous Terra Bio Rouge, Languedoc</h6><span>6.50 / 29.00€</span>
+              <h6>Terrassous Terra Bio Rouge, Languedoc</h6>
+              <p class="priceline"></p>
+              <span>6.50 / 29.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Cros-Pujol Le Cul de Lampe, Pays d’Oc</h6><span>29.00€</span>
+              <h6>Cros-Pujol Le Cul de Lampe, Pays d’Oc</h6>
+              <p class="priceline"></p>
+              <span>29.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Terrassous Cotes du Roussillon Juliani</h6><span>38.00€</span>
+              <h6>Terrassous Cotes du Roussillon Juliani</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Chateau Mosse Cotes du Roussillon</h6><span>38.00€</span>
+              <h6>Chateau Mosse Cotes du Roussillon</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-fr">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Chateau La Plaige, Bordeaux Superieur</h6><span>35.00€</span>
+              <h6>Chateau La Plaige, Bordeaux Superieur</h6>
+              <p class="priceline"></p>
+              <span>35.00€</span>
             </div>
           </div>
 
           <!-- Red wine (other countries) -->
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Ruffino Chianti, Tuscany, Italy</h6><span>8.00 / 38.00€</span>
+              <h6>Ruffino Chianti, Tuscany, Italy</h6>
+              <p class="priceline"></p>
+              <span>8.00 / 38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Ramon Bilbao Crianza, Rioja, Spain</h6><span>7.00 / 34.00€</span>
+              <h6>Ramon Bilbao Crianza, Rioja, Spain</h6>
+              <p class="priceline"></p>
+              <span>7.00 / 34.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Cloud Break Red Blend, California, USA</h6><span>8.00 / 39.00€</span>
+              <h6>Cloud Break Red Blend, California, USA</h6>
+              <p class="priceline"></p>
+              <span>8.00 / 39.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Purcari 1827 Rara Neagra-Saperavi, Moldova</h6><span>39.00€</span>
+              <h6>Purcari 1827 Rara Neagra-Saperavi, Moldova</h6>
+              <p class="priceline"></p>
+              <span>39.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Peter Lehmann Portrait Shiraz, Australia</h6><span>38.00€</span>
+              <h6>Peter Lehmann Portrait Shiraz, Australia</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-red-intl">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Elettra Primitivo Negroamaro, Italy</h6><span>38.00€</span>
+              <h6>Elettra Primitivo Negroamaro, Italy</h6>
+              <p class="priceline"></p>
+              <span>38.00€</span>
             </div>
           </div>
 
           <!-- Cocktails -->
           <div class="col-lg-6 menu-item isotope-item filter-cocktails">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Classic (Negroni; Old fashioned; Espresso Martini; Margarita; Tom Collins; Sazerac)</h6><span>6.00€</span>
+              <h6>Classic (Negroni; Old fashioned; Espresso Martini; Margarita; Tom Collins; Sazerac)</h6>
+              <p class="priceline"></p>
+              <span>6.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-cocktails">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Spritz (Aperol; Campari; Sprissetto; Limoncello; Hugo)</h6><span>5.00€</span>
+              <h6>Spritz (Aperol; Campari; Sprissetto; Limoncello; Hugo)</h6>
+              <p class="priceline"></p>
+              <span>5.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-cocktails">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Easy mix (Gin Tonic; Cuba Libre; Whiskey Cola)</h6><span>5.50€</span>
+              <h6>Easy mix (Gin Tonic; Cuba Libre; Whiskey Cola)</h6>
+              <p class="priceline"></p>
+              <span>5.50€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-cocktails">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Sapphire&Tonic</h6><span>7.00€</span>
+              <h6>Sapphire&Tonic</h6>
+              <p class="priceline"></p>
+              <span>7.00€</span>
             </div>
           </div>
 
           <!-- Beer -->
           <div class="col-lg-6 menu-item isotope-item filter-beer">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Mežpils, Latvija</h6><span>4.50 / 5.00€</span>
+              <h6>Mežpils, Latvija</h6>
+              <p class="priceline"></p>
+              <span>4.50 / 5.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-beer">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Kronenbourg 1664 Blanc, France</h6><span>4.50 / 5.00€</span>
+              <h6>Kronenbourg 1664 Blanc, France</h6>
+              <p class="priceline"></p>
+              <span>4.50 / 5.00€</span>
             </div>
           </div>
           <div class="col-lg-6 menu-item isotope-item filter-beer">
             <div class="menu-content" style="margin-left: 0;">
-              <h6>Kronenbourg 1664 Blanc B/A 0,33L</h6><span>4.50€</span>
+              <h6>Kronenbourg 1664 Blanc B/A 0,33L</h6>
+              <p class="priceline"></p>
+              <span>4.50€</span>
             </div>
           </div>
 
@@ -908,8 +1137,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Наши специальные блюда</h2>
-        <p>Шеф-повар рекомендует</p>
+        <h2>Specials</h2>
+        <p>Check Our Specials</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -939,9 +1168,9 @@
               <div class="tab-pane active show" id="specials-tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Луковый суп с сырной корочкой</h3>
-                    <p class="fst-italic">Этот суп готовится из обжаренного в сливочном масле репчатого лука. Подаётся с поджаренными хлебными ломтиками, посыпанными тёртым сыром грюйер и запечёнными до золотистой корочки. </p>
-                    <p>Идеальный суп для утешения или после бурной ночи.</p>
+                    <h3>Gratinated Onion Soup</h3>
+                    <p class="fst-italic">This soup is made from sliced onions browned in butter. Garnished with slices of oven-dried bread sprinkled with grated Gruyère cheese, and served after being gratinated in the oven.</p>
+                    <p>It&#180;s the perfect soup for comfort or after a lively evening.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img src="assets/img/Onion_soup.jpg" alt="" class="img-fluid">
@@ -951,9 +1180,9 @@
               <div class="tab-pane" id="specials-tab-2">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Киш Лорен</h3>
-                    <p class="fst-italic">Киш Лорен — классическое блюдо в виде песочного пирога с начинкой из молока, сливок и яиц, дополненной сыром грюйер и копчёной свиной грудинкой. Выпекается в духовке и подаётся тёплым.</p>
-                    <p>Изысканная закуска. Подаётся с небольшим зелёным салатом для свежести.</p>
+                    <h3>Quiche Lorraine</h3>
+                    <p class="fst-italic">Quiche Lorraine is a classic dish in the form of a shortcrust pastry tart, filled with a mixture of milk, cream, and eggs, enriched with Gruyère cheese and smoked pork belly strips. Baked in the oven, it is served warm.</p>
+                    <p>The ultimate gourmet starter, usually accompanied by a fresh green salad.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img src="assets/img/Quiche-lorraine.jpg" alt="" class="img-fluid">
@@ -963,8 +1192,8 @@
               <div class="tab-pane" id="specials-tab-3">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Бёф бургиньон</h3>
-                    <p class="fst-italic">Настоящая классика бистро и брассери, любимое блюдо шефа. Готовится из кусочков говядины, тушёных в красном вине с луком, беконом и шампиньонами.</p>
+                    <h3>Beef Bourguignon</h3>
+                    <p class="fst-italic">This is the ultimate bistro and brasserie specialty, the chef&#180;s favorite dish. Made from small pieces of beef cooked in a red wine sauce, with pearl onions, bacon, and Paris mushrooms.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img src="assets/img/Beef_Bourguignon.jpg" alt="" class="img-fluid">
@@ -974,8 +1203,8 @@
               <div class="tab-pane" id="specials-tab-4">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Стейк из лосося с соусом Беарнез</h3>
-                    <p class="fst-italic">Филе лосося, запечённое в духовке, подаётся с настоящим соусом Беарнез — любимым соусом шефа: это тёплая эмульсия из яичных желтков и масла, ароматизированная шалотом и изысканными травами (петрушка, кервель, эстрагон). Легко подкисленный уксусом из эстрагона, этот соус идеально сочетается с лососем.</p>
+                    <h3>Salmon Steak with Béarnaise Sauce</h3>
+                    <p class="fst-italic">A beautiful roasted salmon fillet steak, served with real Béarnaise sauce, the chef&#180;s favourite: A delicate emulsion of egg yolks and butter, flavoured with shallots and fine herbs (parsley, chervil, tarragon). Enhanced with tarragon vinegar, it is served warm and brings a perfect depth of flavour to the salmon.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img src="assets/img/Salmon-Bearnaise.jpg" alt="" class="img-fluid">
@@ -985,8 +1214,8 @@
               <div class="tab-pane" id="specials-tab-5">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Тарт Татен</h3>
-                    <p class="fst-italic">Самый известный французский пирог — перевёрнутый яблочный тарт с карамелизированными яблоками, очаровывающий своей сладостью, гармонией и карамелью. Подаётся с местной сметаной.</p>
+                    <h3>Tarte Tatin</h3>
+                    <p class="fst-italic">The most famous of French tarts, an upside-down caramelized apple tart that is simply irresistible with its sweetness, harmony, and rich caramel. Served with fresh local sour cream.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
                     <img src="assets/img/Tarte-Tatin-Bliss.jpg" alt="" class="img-fluid">
@@ -1023,18 +1252,18 @@
                 "clickable": true
               }
             }
-          </script> -->
-          <!-- <div class="swiper-wrapper">
+          </script>
+          <div class="swiper-wrapper"> -->
 
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <div class="row gy-4 event-item">
                 <div class="col-lg-6">
                   <img src="assets/img/events-slider/events-slider-1.jpg" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>Создание атмосферы</h3>
+                  <h3>Building an atmosphere</h3>
                   <div class="price">
-                    <p><span>$бесценно</span></p>
+                    <p><span>$priceless</span></p>
                   </div>
                   <p class="fst-italic">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -1163,7 +1392,7 @@
             <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
             <button type="submit">Book a Table</button>
           </div>
-        </form> -->
+        </form>
         <!-- End Reservation Form -->
 
       <!-- </div>
@@ -1295,8 +1524,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Галерея</h2>
-        <p>Некоторые фото из нашего бистро</p>
+        <h2>Gallery</h2>
+        <p>Some photos from our bistro</p>
       </div><!-- End Section Title -->
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -1378,8 +1607,8 @@
 
       <!-- Section Title -->
       <!-- <div class="container section-title" data-aos="fade-up">
-        <h2>Наши шефы</h2>
-        <p>Познакомьтесь с увлеченной командой Brasserie Vivien</p>
+        <h2>Team</h2>
+        <p>Necessitatibus eius consequatur</p>
       </div> -->
       <!-- End Section Title -->
 
@@ -1392,8 +1621,8 @@
               <img src="assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Vivien Lebecq</h4>
-                  <span>Бренд-шеф</span>
+                  <h4>Walter White</h4>
+                  <span>Master Chef</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -1411,8 +1640,8 @@
               <img src="assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Mikhailo Karaianov</h4>
-                  <span>Шеф-повар</span>
+                  <h4>Sarah Jhonson</h4>
+                  <span>Patissier</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -1430,8 +1659,8 @@
               <img src="assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
               <div class="member-info">
                 <div class="member-info-content">
-                  <h4>Reinis Poļakovs</h4>
-                  <span>Sommelier</span>
+                  <h4>William Anderson</h4>
+                  <span>Cook</span>
                 </div>
                 <div class="social">
                   <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -1451,13 +1680,59 @@
     </section> -->
     <!-- /Chefs Section -->
 
+    <!-- Careers Section -->
+    <section id="careers" class="why-us section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>We Are Hiring</h2>
+        <p>Become part of the Vivien team</p>
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-item">
+              <span>01</span>
+              <h4><a href="JD-Maitre-d-hotel.html" class="stretched-link">Maître d’hôtel</a></h4>
+              <p>Orchestrate the dining experience, greet guests with warmth and oversee daily service excellence.</p>
+            </div>
+          </div>
+          <!-- Card Item -->
+
+          <!-- <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-item">
+              <span>02</span>
+              <h4><a href="job-souschef.html" class="stretched-link">Sous Chef</a></h4>
+              <p>Support the head chef and lead the kitchen team with precision, creativity, and consistency.</p>
+            </div>
+          </div> -->
+          <!-- Card Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-item">
+              <span>02</span>
+              <h4><a href="JD-Waiter.html" class="stretched-link">Waiter / Waitress</a></h4>
+              <p>Deliver memorable service with charm, attentiveness, and deep knowledge of our menu and wines.</p>
+            </div>
+          </div>
+          <!-- Card Item -->
+
+        <!-- </div>
+      </div>
+
+    </section> -->
+    <!-- /Careers Section -->    
+
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Контакты</h2>
-        <p>Мы будем рады вашим отзывам</p>
+        <h2>Contact</h2>
+        <p>Contact Us</p>
       </div><!-- End Section Title -->
 
       <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
@@ -1472,33 +1747,31 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
-                <h3>Адрес</h3>
-                <p>Brīvības iela 37</p>
-                <p>Rīga, LV-1010</p>
+                <h3>Location</h3>
+                <p>Brīvības iela 37, Rīga, LV-1010</p>
               </div>
-            </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-clock flex-shrink-0"></i>
+              <div>
+                <h3>Open Hours</h3>
+                <p>Monday-Sunday:<br>09:00-23:00</p>
+              </div>
+            </div><!-- End Info Item -->
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
-                <h3>Часы работы</h3>
-                <p>Понедельник–Суббота:<br>11:00–23:00</p>
+                <h3>Call Us</h3>
+                <p>+371 63 01 30 05</p>
               </div>
-            </div>
-
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Позвоните нам</h3>
-                <p>+371 63 01 30 05</p>
-              </div>
-            </div>
-
+            </div><!-- End Info Item -->
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
-                <h3>Электронная почта</h3>
+                <h3>Email Us</h3>
                 <p>info@vivien.lv</p>
               </div>
             </div><!-- End Info Item -->
@@ -1510,31 +1783,31 @@
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Ваше имя" required="">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Ваш e-mail" required="">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Тема" required="">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Сообщение" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
                 </div>
+                <input type="hidden" name="language" value="English">
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Загрузка</div>
+                  <div class="loading">Loading</div>
                   <div class="error-message"></div>
-                  <div class="sent-message">Ваше сообщение отправлено. Спасибо!</div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Отправить</button>
+                  <button type="submit">Send Message</button>
                 </div>
 
               </div>
-
             </form>
           </div><!-- End Contact Form -->
 
@@ -1552,9 +1825,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">
-              <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
-            </span>
+            <span class="brasserie">Brasserie&nbsp;</span> <span class="vivien">VIVIEN</span>
           </a>
           <div class="footer-contact pt-3">
             <p>Brīvības iela 37</p>
@@ -1563,8 +1834,8 @@
             <p><strong>Email:</strong> <span>info@vivien.lv</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <!-- <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a> -->
+            <!-- <a href=""><i class="bi bi-twitter-x"></i></a> -->
+            <a href="https://www.facebook.com/profile.php?id=61577398982301"><i class="bi bi-facebook"></i></a>
             <a href="https://www.instagram.com/vivien_riga?igsh=N2gwazNzcndqcTFu"><i class="bi bi-instagram"></i></a>
             <!-- <a href=""><i class="bi bi-linkedin"></i></a> -->
           </div>
@@ -1593,13 +1864,17 @@
         </div> -->
 
         <div class="col-lg-4 col-md-12 footer-newsletter">
-          <h4>Наша рассылка</h4>
-          <p>Подпишитесь на рассылку и первыми узнавайте о наших новостях!</p>
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive our latest news!</p>
           <form action="forms/newsletter.php" method="post" class="php-email-form">
-            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Подписаться"></div>
-            <div class="loading">Загрузка</div>
+            <div class="newsletter-form">
+              <input type="email" name="email">
+              <input type="hidden" name="language" value="English">
+              <input type="submit" value="Subscribe">
+            </div>
+            <div class="loading">Loading</div>
             <div class="error-message"></div>
-            <div class="sent-message">Ваша подписка успешно оформлена. Спасибо!</div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
           </form>
         </div>
 
@@ -1629,6 +1904,26 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Restoplace Widget -->
+  <script src='//app.restoplace.cc/widget.js?h=5a003b0dc90935f47c87' async></script>
+
+  <!-- Outbound click tracking -->
+  <script>
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('a, button');
+    if(!btn) return;
+    const txt = (btn.innerText || '').toLowerCase();
+    const href = btn.getAttribute('href') || '';
+
+    const isBooking = /(book a table|rezervēt|забронировать|réservation)/i.test(txt) 
+                      || /restoplace/i.test(href);
+
+    if(isBooking){
+      return gtagSendEvent(href || window.location.href);
+    }
+  }, true);
+  </script>
 
 </body>
 

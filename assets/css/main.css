@@ -1419,83 +1419,78 @@ section,
     padding: 20px;
   }
 }
-
-.book-a-table .php-email-form input[type=text],
-.book-a-table .php-email-form input[type=email],
-.book-a-table .php-email-form input[type=number],
-.book-a-table .php-email-form input[type=date],
-.book-a-table .php-email-form input[type=time],
-.book-a-table .php-email-form input[type=file],
-.book-a-table .php-email-form input[type=file]::file-selector-button,
-.book-a-table .php-email-form textarea {
+/* Базовые стили для всех php-email-form (тёмная тема по умолчанию) */
+.php-email-form input[type=text],
+.php-email-form input[type=tel],
+.php-email-form input[type=email],
+.php-email-form input[type=number],
+.php-email-form input[type=date],
+.php-email-form input[type=time],
+.php-email-form input[type=file],
+.php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
   box-shadow: none;
   border-radius: 0;
-  color: var(--default-color);
   background-color: color-mix(in srgb, var(--background-color), transparent 20%);
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.book-a-table .php-email-form input[type=text]:focus,
-.book-a-table .php-email-form input[type=email]:focus,
-.book-a-table .php-email-form input[type=number]:focus,
-.book-a-table .php-email-form input[type=date]:focus,
-.book-a-table .php-email-form input[type=time]:focus,
-.book-a-table .php-email-form input[type=file]:focus,
-.book-a-table .php-email-form input[type=file]::file-selector-button,
-.book-a-table .php-email-form textarea:focus {
-  border-color: var(--accent-color);
+/* одинаковый цвет текста */
+.php-email-form input.form-control,
+.php-email-form textarea.form-control {
+  color: var(--default-color);
 }
 
-.book-a-table .php-email-form input[type=text]::placeholder,
-.book-a-table .php-email-form input[type=email]::placeholder,
-.book-a-table .php-email-form input[type=number]::placeholder,
-.book-a-table .php-email-form input[type=date]::placeholder,
-.book-a-table .php-email-form input[type=time]::placeholder,
-.book-a-table .php-email-form input[type=file]::placeholder,
-.book-a-table .php-email-form input[type=file]::file-selector-button,
-.book-a-table .php-email-form textarea::placeholder {
+.php-email-form input:focus,
+.php-email-form textarea:focus {
+  border-color: var(--accent-color);
+  outline: 0;
+  background-color: inherit;
+}
+
+/* Плейсхолдеры для тёмной темы */
+.php-email-form input::placeholder,
+.php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.book-a-table .php-email-form button[type=submit] {
-  color: var(--default-color);
-  border: 2px solid var(--accent-color);
-  background: transparent;
-  padding: 14px 60px;
+/* Светлый вариант — только если форма внутри блока .light-background */
+.light-background .php-email-form input[type=text],
+.light-background .php-email-form input[type=tel],
+.light-background .php-email-form input[type=email],
+.light-background .php-email-form input[type=number],
+.light-background .php-email-form input[type=date],
+.light-background .php-email-form input[type=time],
+.light-background .php-email-form input[type=file],
+.light-background .php-email-form textarea,
+/* .contact .php-email-form input[type=text],
+.contact .php-email-form input[type=tel],
+.contact .php-email-form input[type=email],
+.contact .php-email-form input[type=number],
+.contact .php-email-form input[type=date],
+.contact .php-email-form input[type=time],
+.contact .php-email-form input[type=file],
+.contact .php-email-form textarea {
+  background: #fff;
+  border: 1px solid #ced4da;
+  color: #212529;
+} */
+
+.light-background .php-email-form input::placeholder,
+.light-background .php-email-form textarea::placeholder,
+/* .contact .php-email-form input::placeholder,
+.contact .php-email-form textarea::placeholder {
+  color: #6c757d;
+} */
+
+.php-email-form button[type=submit] {
+  background: var(--accent-color);
+  border: 0;
+  padding: 10px 24px;
+  color: var(--contrast-color);
   transition: 0.4s;
   border-radius: 50px;
-}
-
-.book-a-table .php-email-form button[type=submit]:hover {
-  background: var(--accent-color);
-}
-
-.book-a-table .php-email-form button[type=file]:hover {
-  background: var(--accent-color);
-}
-
-.book-a-table .php-email-form input[type="file"]::file-selector-button {
-  all: unset;
-  background: transparent;
-  border: 2px solid var(--accent-color);
-  color: var(--default-color);
-  padding: 14px 60px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: 0.3s;
-  font: inherit;
-}
-
-.book-a-table .php-email-form input[type="file"]::file-selector-button:hover,
-.book-a-table .php-email-form input[type="file"]:hover::file-selector-button {
-  background: var(--accent-color);
-  color: var(--background-color);
-}
-
-.book-a-table .php-email-form input[type=email]:valid {
-  background-color: color-mix(in srgb, var(--background-color), transparent 20%) !important;
 }
 
 
@@ -1729,11 +1724,12 @@ section,
   font-size: 14px;
 }
 
-.contact .php-email-form {
+/* .contact .php-email-form {
   height: 100%;
 }
 
 .contact .php-email-form input[type=text],
+.contact .php-email-form input[type=tel],
 .contact .php-email-form input[type=email],
 .contact .php-email-form textarea {
   font-size: 14px;
@@ -1746,12 +1742,14 @@ section,
 }
 
 .contact .php-email-form input[type=text]:focus,
+.contact .php-email-form input[type=tel]:focus,
 .contact .php-email-form input[type=email]:focus,
 .contact .php-email-form textarea:focus {
   border-color: var(--accent-color);
 }
 
 .contact .php-email-form input[type=text]::placeholder,
+.contact .php-email-form input[type=tel]::placeholder,
 .contact .php-email-form input[type=email]::placeholder,
 .contact .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--accent-color), transparent 50%);
@@ -1768,14 +1766,14 @@ section,
 
 .contact .php-email-form button[type=submit]:hover {
   background: var(--accent-color);
-}
+} */
 
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
+/* .starter-section { */
   /* Add your styles here */
-}
+/* } */
 
 .sitename {
   display: inline-flex;
@@ -1823,3 +1821,153 @@ section,
     margin: 0 auto;
   }
 }
+
+/* --------------------------------------------------------------
+# Vivien / Isotope-based Menu Grid (API)
+# Две колонки как в Drinks + совместимость с Isotope (fitRows/masonry)
+-------------------------------------------------------------- */
+
+/* Контейнер: имитируем .row и даём позиционирование для Isotope */
+#menu-items {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left:  calc(-.5 * var(--bs-gutter-x));
+  position: relative;
+  min-height: 100px; /* страховка от схлопывания до первого layout */
+}
+
+/* Две колонки: ширина элемента и калибровочный sizer */
+#menu-items .menu-item.isotope-item,
+#menu-items .grid-sizer {
+  width: 50% !important;
+  box-sizing: border-box;
+  padding-left:  calc(var(--bs-gutter-x, 1.5rem) * .5);
+  padding-right: calc(var(--bs-gutter-x, 1.5rem) * .5);
+  /* глушим возможные правила темы */
+  float: none !important;
+  flex: none !important;
+  max-width: none !important;
+}
+
+@media (max-width: 991.98px) {
+  #menu-items .menu-item.isotope-item,
+  #menu-items .grid-sizer {
+    width: 100% !important;
+  }
+}
+
+/* Отступ сверху между карточками (как у темы) */
+#menu-items .menu-item { margin-top: 50px; }
+
+/* Визуал карточки — как в Drinks */
+#menu-items .menu-content {
+  margin-left: 0;                   /* было 95px — убрали */
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+#menu-items .menu-content h6 {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  color: var(--heading-color);
+  font-size: 1rem;
+  margin: 0;
+}
+
+#menu-items .menu-content .priceline {
+  width: 100%;
+  border-bottom: 2px dotted rgba(255,255,255,.35); /* как в Drinks */
+  margin: 0 1rem;                                   /* место под цену */
+}
+
+#menu-items .menu-content span {
+  background: var(--background-color);
+  color: var(--accent-color);
+  position: relative;
+  z-index: 3;
+  padding: 0 .6rem;
+  font-weight: 600;
+}
+
+/* Hover — как в теме */
+#menu-items .menu-content a:hover,
+#menu-items .menu-content h6:hover {
+  color: var(--accent-color);
+}
+
+.menu-item.has-desc { cursor: pointer; }
+
+/* Простая модалка */
+.menu-modal[aria-hidden="true"] { display: none; }
+.menu-modal[aria-hidden="false"] { display: block; }
+.menu-modal {
+  position: fixed; inset: 0; z-index: 1050;
+}
+.menu-modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.5);
+}
+.menu-modal__dialog {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px; width: calc(100% - 2rem);
+  background: #111; color: #eee; /* под тёмную тему сайта */
+  border-radius: 12px; padding: 16px 20px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.menu-modal__title { margin: 0 2rem .75rem 0; font-weight: 600; }
+.menu-modal__body { white-space: pre-wrap; line-height: 1.5; }
+.menu-modal__close {
+  position: absolute; right: 10px; top: 8px;
+  background: transparent; border: 0; font-size: 28px; color: #aaa; line-height: 1;
+}
+.menu-modal__close:hover { color: #fff; cursor: pointer; }
+
+/* Пометьте оба контейнера классом .menu-api-grid и примените эти правила */
+.menu-api-grid {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left:  calc(-.5 * var(--bs-gutter-x));
+  position: relative;
+  min-height: 100px;
+}
+.menu-api-grid .menu-item.isotope-item,
+.menu-api-grid .grid-sizer {
+  width: 50% !important;
+  box-sizing: border-box;
+  padding-left:  calc(var(--bs-gutter-x, 1.5rem) * .5);
+  padding-right: calc(var(--bs-gutter-x, 1.5rem) * .5);
+  float: none !important;
+  flex: none !important;
+  max-width: none !important;
+}
+@media (max-width: 991.98px) {
+  .menu-api-grid .menu-item.isotope-item,
+  .menu-api-grid .grid-sizer { width: 100% !important; }
+}
+.menu-api-grid .menu-item { margin-top: 50px; }
+.menu-api-grid .menu-content { /* карточка — как раньше */
+  margin-left: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.menu-api-grid .menu-content h6 { font-family: var(--heading-font); font-weight: 700; color: var(--heading-color); font-size: 1rem; margin: 0; }
+.menu-api-grid .menu-content .priceline { width: 100%; border-bottom: 2px dotted rgba(255,255,255,.35); margin: 0 1rem; }
+.menu-api-grid .menu-content span { background: var(--background-color); color: var(--accent-color); position: relative; z-index: 3; padding: 0 .6rem; font-weight: 600; }
+
+.menu-item.has-desc { cursor: pointer; }
+/* модалка уже есть — можно не дублировать */
+
+/* один раз на старте страницы — вычисляем реальную высоту хедера */
+.menu-item { scroll-margin-top: calc(var(--sticky-offset, 92px)); }
+
+/* добавляем перспективу контейнеру, чтобы flip-left выглядел объёмнееs */
+.isotope-container { perspective: 1000px; }

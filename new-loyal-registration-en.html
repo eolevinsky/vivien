@@ -3,6 +3,34 @@
 
 <head>
   <meta charset="utf-8">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H3TT546F5J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H3TT546F5J');
+  </script>
+
+  <!-- Google tag (gtag.js) event - delayed navigation helper -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion_event_outbound_click', {
+        'event_callback': callback,
+        'event_timeout': 2000
+        // можно добавить параметры, например {'event_category':'Booking'}
+      });
+      return false;
+    }
+  </script>
+
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Brasserie&nbsp;Vivien – Fine Dining in Rīga</title>
   <link rel="canonical" href="index.html">
@@ -91,12 +119,12 @@
             <span class="brasserie">Club&nbsp;</span> <span class="vivien">VIVIEN</span>
           </h1>
         </a>
-        <a class="btn-book-a-table d-none d-xl-block" href="http://vivien.restoplace.ws/">Book a Table</a>
+        <a class="btn-book-a-table d-none d-xl-block" href="https://vivien.restoplace.ws/" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Book a Table</a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="#hero" class="active">Home<br></a></li>
-            <li class="d-xl-none"><a href="http://vivien.restoplace.ws/" class="active">Book a Table<br></a></li>
+            <li class="d-xl-none"><a href="https://vivien.restoplace.ws/" class="active" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Book a Table<br></a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -156,11 +184,11 @@
                   </label>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male">
-                    <label class="form-check-label" for="genderMale" style="color: rgba(255, 255, 255, 0.7);">Mail</label>
+                    <label class="form-check-label" for="genderMale" style="color: rgba(255, 255, 255, 0.7);">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
-                    <label class="form-check-label" for="genderFemale" style="color: rgba(255, 255, 255, 0.7);">Femail</label>
+                    <label class="form-check-label" for="genderFemale" style="color: rgba(255, 255, 255, 0.7);">Female</label>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
