@@ -35,6 +35,17 @@
     z-index: 3;
   }
 
+  .hero-content-card {
+    width: min(100%, 760px);
+    padding: clamp(20px, 3vw, 32px);
+    border-radius: 18px;
+    background: linear-gradient(140deg, rgba(12, 11, 9, 0.82), rgba(12, 11, 9, 0.64));
+    border: 1px solid rgba(205, 164, 94, 0.28);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
   h2 {
     margin: 0;
     font-size: 48px;
@@ -49,6 +60,15 @@
     color: color-mix(in srgb, var(--default-color), transparent 20%);
     margin: 10px 0 0 0;
     font-size: 24px;
+  }
+
+  .hero-content-card p {
+    color: color-mix(in srgb, var(--default-color), transparent 10%);
+  }
+
+  .hero-content-card .d-flex.mt-4 {
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .cta-btn {
@@ -66,7 +86,6 @@
 
     &:first-child {
       margin-right: 10px;
-      ;
     }
 
     &:hover {
@@ -78,13 +97,54 @@
     }
   }
 
+  .hero-content-card .cta-btn:first-child {
+    margin-right: 0;
+  }
+
+  .visit-invite {
+    margin-top: 28px;
+    max-width: 100%;
+  }
+
+  .visit-accent {
+    padding-left: 18px;
+    border-left: 3px solid #cda45e;
+  }
+
+  .visit-accent p {
+    margin-bottom: 6px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .visit-accent p:last-child {
+    opacity: 0.85;
+  }
+
+  .visit-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.75;
+  }
+
   @media (max-width: 768px) {
+    .hero-content-card {
+      width: 100%;
+      padding: 18px 16px;
+    }
+
     h2 {
       font-size: 32px;
     }
 
     p {
       font-size: 18px;
+    }
+
+    .visit-accent p {
+      font-size: 17px;
     }
   }
 }

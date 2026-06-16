@@ -32,12 +32,12 @@
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Brasserie Vivien Рига | Французское бистро, завтраки, вино и искусство</title>
-  <link rel="canonical" href="index.html">
-  <link rel="alternate" href="index.html" hreflang="en" />
-  <link rel="alternate" href="index-lv.html" hreflang="lv" />
-  <link rel="alternate" href="index-fr.html" hreflang="fr" />
-  <link rel="alternate" href="index-ru.html" hreflang="ru" />
-  <meta name="description" content="Французское бистро в центре Риги: авторская кухня, завтраки, вина и художественные выставки. Отдельные залы для курящих и некурящих гостей.">  
+  <link rel="canonical" href="https://vivien.lv/index-ru.html">
+  <link rel="alternate" href="https://vivien.lv/index.html" hreflang="en" />
+  <link rel="alternate" href="https://vivien.lv/index-lv.html" hreflang="lv" />
+  <link rel="alternate" href="https://vivien.lv/index-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://vivien.lv/index-ru.html" hreflang="ru" />
+  <meta name="description" content="Французская брассерия в самом сердце Риги: классическая французская кухня, тщательно подобранные вина, творческая атмосфера и гостеприимные пространства для курящих и некурящих гостей.">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="assets/img/favicon-96x96.png" sizes="96x96" />
@@ -120,7 +120,7 @@
             <li><a href="#hero" class="active">Домой<br></a></li>
             <!-- <li><a href="#about">О нас</a></li> -->
             <li><a href="#menu">Меню</a></li>
-            <li><a href="#wine">Карта вин</a></li> 
+            <!-- <li><a href="#wine">Карта вин</a></li>  -->
             <li><a href="#specials">Фирменные блюда</a></li>
             <!-- <li><a href="#events">События</a></li>
             <li><a href="#chefs">Команда</a></li> -->
@@ -172,15 +172,51 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 d-flex flex-column align-items-center align-items-lg-start">
-            <h2 data-aos="fade-up" data-aos-delay="100">Добро пожаловать в <span>Brasserie&nbsp;Vivien</span></h2>
-            <p data-aos="fade-up" data-aos-delay="200">Аутентичная французская кухня в сердце Риги</p>
-            <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-              <a href="#menu" class="cta-btn">Наше Меню</a>
-              <a href="https://vivien.restoplace.ws/" class="cta-btn" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Бронировать</a>
+            <div class="hero-content-card">
+              <h2 data-aos="fade-up" data-aos-delay="100">Добро пожаловать в <span>Brasserie&nbsp;Vivien</span></h2>
+              <p data-aos="fade-up" data-aos-delay="200">Аутентичная французская кухня в сердце Риги</p>
+              <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+                <a href="#menu" class="cta-btn">Наше Меню</a>
+                <a href="https://vivien.restoplace.ws/" class="cta-btn" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Бронировать</a>
+              </div>
+              <div class="visit-invite" data-aos="fade-up" data-aos-delay="200">
+                <div class="visit-accent">
+
+                  <p>Хотите, чтобы всё было готово к вашему приходу?</p>
+                  <p>Или устроить кому-то особенный вечер?</p>
+
+                  <div class="mt-3">
+                    <a href="https://payattable.app/scheduled-visit/widget?merchant=vivien-riga"
+                      class="cta-btn"
+                      onclick="return gtagSendEvent('https://payattable.app/scheduled-visit/widget?merchant=vivien-riga');">
+                      Подготовить стол
+                    </a>
+                  </div>
+
+                  <div class="visit-note">
+                    Забронируйте стол и выберите блюда заранее
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-lg-4 d-flex align-items-center justify-content-center mt-5 mt-lg-0">
+          <div class="col-lg-4 d-flex align-items-center justify-content-center mt-4 mt-lg-0 hero-event-video-col">
+            <!-- VIVIEN BIRTHDAY HERO EVENT START - remove after 12.06.2026 -->
+            <!-- Original YouTube play link temporarily disabled:
             <a href="https://youtu.be/pacdFCTfgo8" class="glightbox pulsating-play-btn"></a>
+            -->
+            <div class="hero-event-video" aria-label="Видео настроения ко дню рождения Vivien">
+              <video src="assets/video/vivien-birthday-reel.mp4" autoplay muted loop playsinline webkit-playsinline preload="metadata"></video>
+              <div class="hero-event-video__overlay">
+                <p class="hero-event-video__eyebrow">12 июня · с 17:00 · Brīvības iela 37</p>
+                <h3>Вино, винил и лёгкий хаос</h3>
+                <p class="hero-event-video__subtitle">День рождения Vivien</p>
+                <a class="hero-event-video__button" href="https://vivien.restoplace.ws/" onclick="return gtagSendEvent('https://vivien.restoplace.ws/');">Бронировать / События</a>
+                <p class="hero-event-video__note">На мобильном внизу выберите “События”, между Reservation и Banquets.</p>
+              </div>
+            </div>
+            <!-- VIVIEN BIRTHDAY HERO EVENT END -->
           </div>
         </div>
       </div>
@@ -318,13 +354,28 @@
       </div><!-- End Section Title -->
 
       <div class="container isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        <div
+          class="container"
+          data-merchant-slug="vivien-riga"
+          data-api-base="https://app.a3-as.com"
+        >
+          <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-12 d-flex justify-content-center">
+              <ul id="menu-filters" class="menu-filters isotope-filters"></ul>
+            </div>
+          </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div id="menu-items" class="isotope-container menu-api-grid">
+            <div class="grid-sizer"></div>
+          </div>
+        </div>
+
+        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul class="menu-filters isotope-filters">
-              <li data-filter="*" class="filter-active">Все</li>
+              <li data-filter="*" class="filter-active">Все</li> -->
               <!-- <li data-filter=".filter-breakfast">Завтрак <span class="text-white">(9:00–13:00)</span></li> -->
-              <li data-filter=".filter-soupes">Супы</li>
+              <!-- <li data-filter=".filter-soupes">Супы</li>
               <li data-filter=".filter-entrees">Закуски</li>
               <li data-filter=".filter-salads">Салаты</li>
               <li data-filter=".filter-seafood">Рыба &amp; морепродукты</li>
@@ -337,20 +388,20 @@
               <li data-filter=".filter-beer">Пиво</li>
             </ul>
           </div>
-        </div><!-- Menu Filters -->
+        </div>Menu Filters -->
 
         <!-- Menu items container for Isotope -->
-        <div id="menu-items" class="isotope-container menu-api-grid">
-          <div class="grid-sizer"></div>
+        <!-- <div id="menu-items" class="isotope-container menu-api-grid">
+          <div class="grid-sizer"></div> -->
           <!-- сюда скрипт будет добавлять .menu-item -->
-        </div><!-- Menu Container -->
+        <!-- </div>Menu Container -->
 
       </div>
 
     </section><!-- /Menu Section -->
 
     <!-- Wine Section -->
-    <section class="menu section" id="wine">
+    <!-- <section class="menu section" id="wine">
       <div class="container section-title" data-aos="fade-up">
         <h2>Вина</h2>
         <p>Отборные вина по бокалам и бутылкам</p>
@@ -381,7 +432,7 @@
           <div class="grid-sizer"></div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- /Wine Section -->
 
     <!-- Specials Section -->
@@ -407,9 +458,9 @@
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#specials-tab-3">Bœuf bourguignon</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#specials-tab-4">Steak saumon sauce béarnaise</a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#specials-tab-5">Tarte Tatin</a>
               </li>
@@ -452,7 +503,7 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="specials-tab-4">
+              <!-- <div class="tab-pane" id="specials-tab-4">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>Стейк из лосося с соусом Беарнез</h3>
@@ -462,7 +513,7 @@
                     <img src="assets/img/Salmon-Bearnaise.jpg" alt="" class="img-fluid">
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="tab-pane" id="specials-tab-5">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
@@ -942,7 +993,7 @@
       </div><!-- End Section Title -->
 
       <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-        <iframe style="border:0; width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2175.592245611252!2d24.120112!3d56.955786999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2slv!4v1746722439156!5m2!1sen!2slv" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5438.98061402813!2d24.120112!3d56.955787!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46eecfcdd639a813%3A0x52ba19648adebdc4!2zQnLEq3bEq2JhcyBpZWxhIDM3LCBDZW50cmEgcmFqb25zLCBSxKtnYSwgTFYtMTAxMA!5e1!3m2!1sen!2slv!4v1775033012886!5m2!1sen!2slv" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div><!-- End Google Maps -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -963,8 +1014,8 @@
               <i class="bi bi-clock flex-shrink-0"></i>
               <div>
                 <h3>Часы работы</h3>
-                <p>Четверг &amp; Пятница:<br>18:00–23:00</p>
-                <p>Суббота &amp; Воскресенье:<br>10:00–23:00</p>
+                <p>Понедельник &amp; Пятница:<br>17:00–23:00</p>
+                <p>Суббота &amp; Воскресенье:<br>12:00–23:00</p>
               </div>
             </div>
 
@@ -1118,7 +1169,7 @@
   <script src="assets/js/main.js"></script>
 
   <!-- Restoplace Widget -->
-  <script src='//app.restoplace.cc/widget.js?h=5a003b0dc90935f47c87' async></script>
+  <script src="https://app.restoplace.cc/widget.js?h=5a003b0dc90935f47c87" async></script>
 
   <!-- Outbound click tracking -->
   <script>
@@ -1138,7 +1189,340 @@
   </script>
 
   <!-- Menu fetching API -->
-  <script>
+    <script>
+    (function () {
+      function bootMerchantMenu() {
+        const ensureOnce = (fn => {
+          let done = false;
+          return () => {
+            if (!done) {
+              done = true;
+              fn();
+            }
+          };
+        });
+
+        function currentLang() {
+          const l = (document.documentElement.lang || 'lv').toLowerCase();
+          return ['lv', 'en', 'ru', 'fr'].includes(l) ? l : 'lv';
+        }
+
+        function allLabel(lang) {
+          return {
+            lv: 'Visi',
+            en: 'All',
+            ru: 'Все',
+            fr: 'Tous'
+          }[lang] || 'All';
+        }
+
+        function formatPrice(minor, currencyCode) {
+          if (typeof minor !== 'number') return '';
+          const major = minor / 100;
+          try {
+            return new Intl.NumberFormat(currentLang(), {
+              style: 'currency',
+              currency: currencyCode || 'EUR'
+            }).format(major);
+          } catch (_) {
+            return major.toFixed(2);
+          }
+        }
+
+        const installModal = ensureOnce(function () {
+          const wrapper = document.createElement('div');
+          wrapper.id = 'menu-desc-modal';
+          wrapper.className = 'menu-modal';
+          wrapper.setAttribute('role', 'dialog');
+          wrapper.setAttribute('aria-modal', 'true');
+          wrapper.setAttribute('aria-hidden', 'true');
+
+          const backdrop = document.createElement('div');
+          backdrop.className = 'menu-modal__backdrop';
+
+          const dialog = document.createElement('div');
+          dialog.className = 'menu-modal__dialog';
+          dialog.setAttribute('role', 'document');
+
+          const closeBtn = document.createElement('button');
+          closeBtn.type = 'button';
+          closeBtn.className = 'menu-modal__close';
+          closeBtn.setAttribute('aria-label', 'Close');
+          closeBtn.textContent = '×';
+
+          const title = document.createElement('h5');
+          title.className = 'menu-modal__title';
+
+          const body = document.createElement('div');
+          body.className = 'menu-modal__body';
+
+          dialog.appendChild(closeBtn);
+          dialog.appendChild(title);
+          dialog.appendChild(body);
+          wrapper.appendChild(backdrop);
+          wrapper.appendChild(dialog);
+          document.body.appendChild(wrapper);
+
+          const close = () => {
+            wrapper.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          };
+
+          backdrop.addEventListener('click', close);
+          closeBtn.addEventListener('click', close);
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && wrapper.getAttribute('aria-hidden') === 'false') close();
+          });
+        });
+
+        function openMenuModal(titleText, descText) {
+          installModal();
+          const modal = document.getElementById('menu-desc-modal');
+          const titleEl = modal.querySelector('.menu-modal__title');
+          const bodyEl = modal.querySelector('.menu-modal__body');
+
+          titleEl.textContent = titleText || '';
+          bodyEl.innerHTML = '';
+
+          String(descText || '')
+            .replace(/\r\n|\r/g, '\n')
+            .split('\n')
+            .forEach((line, i) => {
+              if (i) bodyEl.appendChild(document.createElement('br'));
+              bodyEl.appendChild(document.createTextNode(line));
+            });
+
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function createFilter(label, filter, isActive) {
+          const li = document.createElement('li');
+          li.setAttribute('data-filter', filter);
+          li.textContent = label;
+          if (isActive) li.classList.add('filter-active');
+          return li;
+        }
+
+        function createCard(item, currencyCode) {
+          const card = document.createElement('div');
+          card.className = 'menu-item isotope-item';
+          card.setAttribute('data-category-id', item.categoryId);
+
+          const hasDesc = typeof item.description === 'string' && item.description.trim().length > 0;
+          if (hasDesc) {
+            card.classList.add('has-desc');
+            card.tabIndex = 0;
+            card.setAttribute('aria-haspopup', 'dialog');
+            card.dataset.desc = item.description;
+          } else {
+            card.tabIndex = -1;
+            card.setAttribute('aria-haspopup', 'false');
+          }
+
+          const content = document.createElement('div');
+          content.className = 'menu-content';
+          content.style.marginLeft = '0';
+
+          const title = document.createElement('h6');
+          title.textContent = item.name || '';
+
+          const priceLine = document.createElement('p');
+          priceLine.className = 'priceline';
+
+          const price = document.createElement('span');
+          price.textContent = formatPrice(
+            item.priceWithVatMinor != null ? item.priceWithVatMinor : item.priceMinor,
+            item.currencyCode || currencyCode
+          );
+
+          content.appendChild(title);
+          content.appendChild(priceLine);
+          content.appendChild(price);
+          card.appendChild(content);
+
+          return card;
+        }
+
+        function applyItemWidth(root) {
+          const isMobile = window.matchMedia('(max-width: 991.98px)').matches;
+          root.querySelectorAll('.menu-item').forEach((el) => {
+            el.style.width = isMobile ? '100%' : '50%';
+            el.style.boxSizing = 'border-box';
+            el.style.float = 'none';
+            el.style.flex = 'none';
+            el.style.maxWidth = 'none';
+          });
+        }
+
+        async function initMenuGrid() {
+          const container = document.querySelector('[data-merchant-slug]');
+          const root = document.querySelector('#menu-items');
+          const filterBar = document.querySelector('#menu-filters');
+          if (!container || !root || !filterBar) return;
+
+          const merchantSlug = container.getAttribute('data-merchant-slug');
+          const apiBase = container.getAttribute('data-api-base') || '';
+          const lang = currentLang();
+
+          if (!merchantSlug) {
+            root.textContent = 'Missing merchant slug.';
+            return;
+          }
+
+          const url = new URL('/api/guest/scheduled-visits/widget/bootstrap', apiBase || window.location.origin);
+          url.searchParams.set('merchant', merchantSlug);
+          url.searchParams.set('locale', lang);
+
+          const res = await fetch(url.toString(), { cache: 'no-store' });
+          if (!res.ok) throw new Error('Failed to load menu');
+
+          const data = await res.json();
+          const menu = data && data.storefrontMenu ? data.storefrontMenu : null;
+          if (!menu) throw new Error('Missing storefrontMenu');
+
+          const categories = Array.isArray(menu.categories) ? menu.categories : [];
+          const items = Array.isArray(menu.items) ? menu.items : [];
+          const currencyCode = menu.currencyCode || 'EUR';
+
+          filterBar.innerHTML = '';
+          filterBar.appendChild(createFilter(allLabel(lang), '*', true));
+          categories.forEach((category) => {
+            filterBar.appendChild(
+              createFilter(category.name || '', '[data-category-id="' + category.id + '"]', false)
+            );
+          });
+
+          const existingSizer = root.querySelector('.grid-sizer');
+          root.innerHTML = '';
+          if (existingSizer) {
+            root.appendChild(existingSizer);
+          } else {
+            const sizer = document.createElement('div');
+            sizer.className = 'grid-sizer';
+            root.appendChild(sizer);
+          }
+
+          items.forEach((item) => {
+            root.appendChild(createCard(item, currencyCode));
+          });
+
+          applyItemWidth(root);
+
+          if (typeof window.Isotope === 'undefined') {
+            console.warn('Isotope is not loaded');
+            return;
+          }
+
+          let iso = window.Isotope.data(root);
+          if (!iso) {
+            iso = new window.Isotope(root, {
+              itemSelector: '.menu-item',
+              layoutMode: 'fitRows',
+              percentPosition: true,
+              initLayout: false,
+              transitionDuration: 0
+            });
+          } else {
+            iso.reloadItems();
+          }
+
+          const relayout = () => {
+            if (iso) iso.layout();
+          };
+
+          const doFirstArrange = () => {
+            iso.arrange({ filter: '*' });
+            requestAnimationFrame(relayout);
+            setTimeout(relayout, 80);
+            setTimeout(relayout, 320);
+          };
+
+          if (window.imagesLoaded) {
+            window.imagesLoaded(root, () => {
+              if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(doFirstArrange);
+              } else {
+                doFirstArrange();
+              }
+            });
+          } else {
+            doFirstArrange();
+          }
+
+          if (!filterBar.dataset.bound) {
+            filterBar.dataset.bound = '1';
+            filterBar.addEventListener('click', (e) => {
+              const li = e.target.closest('li[data-filter]');
+              if (!li) return;
+
+              filterBar.querySelectorAll('li').forEach((x) => x.classList.remove('filter-active'));
+              li.classList.add('filter-active');
+
+              const filter = li.getAttribute('data-filter') || '*';
+              iso.arrange({ filter });
+
+              if (window.innerWidth < 992 && typeof iso.once === 'function') {
+                iso.once('arrangeComplete', (filteredItems) => {
+                  const firstEl = filteredItems && filteredItems[0] ? filteredItems[0].element : null;
+                  if (!firstEl) return;
+                  const header = document.getElementById('header');
+                  const headerH = header ? header.offsetHeight : 80;
+                  const y = firstEl.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
+                  window.scrollTo({ top: y, behavior: 'auto' });
+                });
+              }
+            });
+          }
+
+          let resizeTimer;
+          window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+              applyItemWidth(root);
+              if (iso) iso.layout();
+            }, 120);
+          });
+
+          root.addEventListener('click', (e) => {
+            const card = e.target.closest('.menu-item.has-desc');
+            if (!card) return;
+            const title = card.querySelector('h6');
+            openMenuModal(title ? title.textContent : '', card.dataset.desc || '');
+          });
+
+          root.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            const card = e.target.closest('.menu-item.has-desc');
+            if (!card) return;
+            e.preventDefault();
+            const title = card.querySelector('h6');
+            openMenuModal(title ? title.textContent : '', card.dataset.desc || '');
+          });
+        }
+
+        const header = document.getElementById('header');
+        const headerHeight = header ? header.offsetHeight : 80;
+        document.documentElement.style.setProperty('--sticky-offset', (headerHeight + 12) + 'px');
+
+        initMenuGrid().catch((err) => {
+          console.error('Merchant menu init failed:', err);
+          const root = document.querySelector('#menu-items');
+          if (root) root.textContent = 'Failed to load.';
+        });
+      }
+
+      window.addEventListener('load', function () {
+        try {
+          bootMerchantMenu();
+        } catch (err) {
+          console.error('Merchant menu bootstrap failed:', err);
+        }
+      });
+    })();
+    </script>
+
+  <!-- <script>
   (function(){
     // Общие хелперы (как у вас)
     const ensureOnce = (fn => { let done=false; return ()=>{ if(!done){done=true; fn();} }; });
@@ -1341,7 +1725,7 @@
       filterSelector: '#wine-filters'
     });
   })();
-  </script>
+  </script> -->
 
 </body>
 

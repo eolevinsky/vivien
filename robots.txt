@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /search
+Disallow: /tmp
+
+Sitemap: https://vivien.lv/sitemap.xml
