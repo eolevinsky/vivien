@@ -1092,17 +1092,15 @@ section,
   overflow: hidden;
   border: 1px solid rgba(205, 164, 94, 0.36);
   border-radius: 8px;
-  background: #000000 url('https://img.youtube.com/vi/fcqXtM6Tzsk/maxresdefault.jpg') center/cover no-repeat;
+  background: #000000;
   box-shadow: 0 22px 52px rgba(0, 0, 0, 0.42);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   isolation: isolate;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   -webkit-mask-image: -webkit-radial-gradient(#ffffff, #000000);
   clip-path: inset(0 round 8px);
 }
+
 .hero .hero-event-video video {
   position: absolute;
   inset: 0;
