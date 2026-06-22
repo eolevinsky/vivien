@@ -1071,10 +1071,15 @@ section,
 }
 
 .hero .hero-event-video-col {
-  width: 100%;
-  max-width: 100%;
   align-self: auto;
   overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .hero .hero-event-video-col {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .hero .hero-event-video {
@@ -1113,7 +1118,7 @@ section,
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(10, 8, 7, 0.58) 50%, rgba(75, 7, 16, 0.94)), linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 42%);
+  background: transparent;
 }
 
 .hero .hero-event-video__overlay {
