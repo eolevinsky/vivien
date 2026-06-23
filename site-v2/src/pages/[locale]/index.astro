@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BookingButton from '../../components/BookingButton.astro';
+import MenuSection from '../../components/MenuSection.astro';
+import FormShell from '../../components/FormShell.astro';
+import { alternatesFor, canonicalUrl, getGallery, getMenu, locales, localizedPath, site, specials, t, withBase } from '../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'home');
+const menu = getMenu(locale);
+const gallery = getGallery();
+const restaurantSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['Restaurant', 'LocalBusiness'],
+  name: 'Brasserie Vivien',
+  url: canonicalUrl(path),
+  image: [
+    canonicalUrl('/assets/img/hero-7.jpg'),
+    canonicalUrl('/assets/img/gallery/1_Vivien_and_Oysters.jpg'),
+    canonicalUrl('/assets/img/gallery/3_Wine_Stand.jpg')
+  ],
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Brivibas iela 37',
+    addressLocality: 'Riga',
+    postalCode: 'LV-1010',
+    addressCountry: 'LV'
+  },
+  servesCuisine: ['French', 'Brasserie', 'Bistro'],
+  priceRange: '€€',
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Friday'], opens: '17:00', closes: '23:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday'], opens: '12:00', closes: '23:00' }
+  ],
+  menu: canonicalUrl(path + '#menu'),
+  acceptsReservations: true,
+  potentialAction: {
+    '@type': 'ReserveAction',
+    target: canonicalUrl('/book/?openBooking=1'),
+    result: { '@type': 'FoodEstablishmentReservation', name: 'Table reservation' }
+  },
+  sameAs: site.social
+};
+---
+<BaseLayout locale={locale} title={copy.meta.homeTitle} description={copy.meta.homeDescription} canonicalPath={path} alternates={alternatesFor('home')} schema={restaurantSchema}>
+  <Header locale={locale} active="home" kind="home" />
+  <main>
+    <section class="hero">
+      <img src={withBase('/assets/img/hero-7.jpg')} alt="Brasserie Vivien dining room atmosphere" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.home.heroKicker}</p>
+        <h1>{copy.home.heroTitle}</h1>
+        <p>{copy.home.heroText}</p>
+        <div class="hero-actions">
+          <a class="button" href="#menu">{copy.home.menuCta}</a>
+          <BookingButton label={copy.nav.book} source="home_hero" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div>
+          <div class="section-title">
+            <p>{copy.home.prepareTitle}</p>
+            <h2>{copy.home.prepareText}</h2>
+          </div>
+          <a class="button" href={site.prepareTableUrl} data-prepare-table>{copy.home.prepareCta}</a>
+        </div>
+        <video controls preload="metadata" poster={withBase('/assets/img/Hero.jpg')}>
+          <source src={withBase('/assets/video/vivien-birthday-reel.mp4')} type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <MenuSection locale={locale} menu={menu} />
+
+    <section class="section" id="specials">
+      <div class="section-title">
+        <p>{copy.home.specialsTitle}</p>
+        <h2>{copy.home.specialsSubtitle}</h2>
+      </div>
+      <div class="special-grid">
+        {specials.map((item) => (
+          <article class="special-card">
+            <img src={withBase(item.image)} alt={item.title[locale] || item.title.en} loading="lazy" />
+            <div>
+              <h3>{item.title[locale] || item.title.en}</h3>
+              <p>{item.text[locale] || item.text.en}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-title">
+        <p>{copy.home.galleryTitle}</p>
+        <h2>{copy.home.gallerySubtitle}</h2>
+      </div>
+      <div class="gallery-grid">
+        {gallery.map((image) => (
+          <a href={withBase(image.src)} target="_blank" rel="noopener">
+            <img src={withBase(image.src)} alt={image.alt || 'Brasserie Vivien gallery image'} loading="lazy" width="640" height="640" />
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="careers">
+      <div class="section-title">
+        <p>{copy.home.careersTitle}</p>
+        <h2>{copy.home.careersSubtitle}</h2>
+      </div>
+      <div class="job-grid">
+        <article class="job-card">
+          <h3>{copy.jobs.waiterTitle}</h3>
+          <p>{copy.jobs.intro}</p>
+          <a class="text-button" href={withBase(localizedPath(locale, 'waiter'))}>{copy.jobs.apply}</a>
+        </article>
+        {locale === 'en' && (
+          <article class="job-card">
+            <h3>{copy.jobs.maitreTitle}</h3>
+            <p>{copy.jobs.intro}</p>
+            <a class="text-button" href={withBase(localizedPath(locale, 'maitre'))}>{copy.jobs.apply}</a>
+          </article>
+        )}
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-title">
+        <p>{copy.home.contactTitle}</p>
+        <h2>{copy.home.contactSubtitle}</h2>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-list">
+          <div class="panel"><h3>{copy.home.location}</h3><p>{site.address}</p></div>
+          <div class="panel"><h3>{copy.home.hours}</h3><p>{copy.home.hoursText}</p></div>
+          <div class="panel"><h3>{copy.home.call}</h3><p><a href={`tel:${site.phoneHref}`}>{site.phone}</a></p></div>
+          <div class="panel"><h3>{copy.home.email}</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+        </div>
+        <div class="panel">
+          <FormShell locale={locale} action={withBase('/forms/contact.php')} eventName="contact_submit" submitLabel={copy.form.send}>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.form.name} required />
+              <input type="email" name="email" placeholder={copy.form.email} required />
+            </div>
+            <input type="text" name="subject" placeholder={copy.form.subject} required />
+            <textarea name="message" placeholder={copy.form.message} required></textarea>
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

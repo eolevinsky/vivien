@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import legalDocs from '../../../data/legal-docs.json';
+import { alternatesFor, legalLabels, legalRouteSlugs, locales, localizedPath, t } from '../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.flatMap((locale) => legalRouteSlugs.map((legal) => ({ params: { locale, legal } })));
+}
+
+const { locale, legal } = Astro.params;
+const copy = t(locale);
+const doc = legalDocs.docs[legal];
+const title = legalLabels[legal][locale];
+const path = localizedPath(locale, 'legal', { legal });
+---
+<BaseLayout locale={locale} title={`${title} | Brasserie Vivien`} description={`${title} for Brasserie Vivien Riga.`} canonicalPath={path} alternates={alternatesFor('legal', { legal })}>
+  <Header locale={locale} active="legal" kind="legal" params={{ legal }} />
+  <main>
+    <section class="page-content">
+      <div class="legal-note">
+        <p><strong>{title}</strong></p>
+        <p>{copy.legalFallback}</p>
+        <p>Source: <a href={doc.sourceUrl} rel="noopener" target="_blank">{doc.sourceTitle || doc.sourceUrl}</a>. Snapshot: {legalDocs.generatedAt || 'pending'}.</p>
+      </div>
+      <article class="legal-body">
+        <h1>{title}</h1>
+        <div set:html={doc.bodyHtml}></div>
+      </article>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

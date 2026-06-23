@@ -1,0 +1,4 @@
+---
+const { label, source = 'fallback', className = 'button primary' } = Astro.props;
+---
+<button type="button" class={className + ' js-booking-trigger'} data-booking-source={source}>{label}</button>

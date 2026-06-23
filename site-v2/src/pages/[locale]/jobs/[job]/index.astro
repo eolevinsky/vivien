@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import FormShell from '../../../../components/FormShell.astro';
+import { alternatesFor, locales, localizedPath, t, withBase } from '../../../../content/site.js';
+
+export function getStaticPaths() {
+  const paths = locales.map((locale) => ({ params: { locale, job: 'waiter' } }));
+  paths.push({ params: { locale: 'en', job: 'maitre-d-hotel' } });
+  return paths;
+}
+
+const { locale, job } = Astro.params;
+const copy = t(locale);
+const isMaitre = job === 'maitre-d-hotel';
+const title = isMaitre ? copy.jobs.maitreTitle : copy.jobs.waiterTitle;
+const path = isMaitre ? localizedPath(locale, 'maitre') : localizedPath(locale, 'waiter');
+const kind = isMaitre ? 'maitre' : 'waiter';
+---
+<BaseLayout locale={locale} title={`${title} | Brasserie Vivien Careers`} description={copy.jobs.intro} canonicalPath={path} alternates={alternatesFor(kind)}>
+  <Header locale={locale} active="jobs" kind={kind} />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/gallery/2_Vivien_at_Work.jpg')} alt="Brasserie Vivien team at work" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.nav.jobs}</p>
+        <h1>{title}</h1>
+        <p>{copy.jobs.intro}</p>
+        <a class="button" href="#apply-now">{copy.jobs.apply}</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="split">
+        <div>
+          <div class="section-title">
+            <p>{copy.jobs.position}</p>
+            <h2>{title}</h2>
+          </div>
+          <div class="panel">
+            <p>{copy.jobs.intro}</p>
+            <ul>
+              <li>Warm, attentive guest service.</li>
+              <li>Confident communication with guests and team members.</li>
+              <li>Interest in French brasserie food, wine and hospitality.</li>
+              <li>Responsible rhythm during busy service periods.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel" id="apply-now">
+          <FormShell locale={locale} action={withBase('/forms/job-application.php')} eventName="job_application_submit" submitLabel={copy.jobs.submit}>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.form.name} required />
+              <input type="email" name="email" placeholder={copy.form.email} required />
+            </div>
+            <input type="tel" name="phone" placeholder={copy.form.phone} required />
+            <textarea name="message" placeholder={copy.jobs.cover} required></textarea>
+            <input type="file" name="attachment[]" multiple aria-label={copy.jobs.attachment} />
+            <input type="hidden" name="position" value={title} />
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

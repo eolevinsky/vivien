@@ -1,0 +1,30 @@
+---
+import { t } from '../content/site.js';
+const { locale, menu } = Astro.props;
+const copy = t(locale);
+---
+<section class="section menu-section" id="menu">
+  <div class="section-title">
+    <p>{copy.home.menuTitle}</p>
+    <h2>{copy.home.menuSubtitle}</h2>
+  </div>
+  <div class="menu-shell" data-menu-shell>
+    <div class="menu-filters" role="list" aria-label="Menu filters">
+      <button type="button" class="active" data-menu-filter="*">All</button>
+      {menu.categories.map((category) => (
+        <button type="button" data-menu-filter={category.id}>{category.name}</button>
+      ))}
+    </div>
+    <div class="menu-grid">
+      {menu.items.map((item) => (
+        <article class="menu-item" data-menu-category={item.categoryId} data-menu-description={item.description || ''} tabindex={item.description ? '0' : undefined}>
+          <div>
+            <h3>{item.name}</h3>
+            {item.description && <p>{item.description}</p>}
+          </div>
+          {item.price && <strong>{item.price}</strong>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

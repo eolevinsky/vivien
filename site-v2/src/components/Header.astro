@@ -1,0 +1,43 @@
+---
+import { localeLabels, locales, localizedPath, site, t, withBase } from '../content/site.js';
+
+const { locale, active = 'home', kind = 'home', params = {} } = Astro.props;
+const copy = t(locale);
+const nav = copy.nav;
+
+function languageHref(targetLocale) {
+  return withBase(localizedPath(targetLocale, kind, params));
+}
+---
+<header class="site-header" id="top">
+  <div class="topbar">
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+    <nav class="language-switch" aria-label="Language">
+      {locales.map((item) => (
+        <a href={languageHref(item)} class:list={[item === locale && 'active']} hreflang={item}>{localeLabels[item]}</a>
+      ))}
+    </nav>
+  </div>
+  <div class="mainbar">
+    <a class="brand" href={withBase(localizedPath(locale, 'home'))} aria-label="Brasserie Vivien">
+      <span class="brand-script">Brasserie</span>
+      <span class="brand-name">VIVIEN</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="primary-nav" id="primary-nav" data-nav>
+      <a href={withBase(localizedPath(locale, 'home'))} class:list={[active === 'home' && 'active']}>{nav.home}</a>
+      <a href={withBase(localizedPath(locale, 'home') + '#menu')}>{nav.menu}</a>
+      <a href={withBase(localizedPath(locale, 'home') + '#specials')}>{nav.specials}</a>
+      <a href={withBase(localizedPath(locale, 'home') + '#gallery')}>{nav.gallery}</a>
+      <a href={withBase(localizedPath(locale, 'gift'))} class:list={[active === 'gift' && 'active']}>{nav.giftCard}</a>
+      <a href={withBase(localizedPath(locale, 'loyalty'))} class:list={[active === 'loyalty' && 'active']}>{nav.loyalty}</a>
+      <a href={withBase(localizedPath(locale, 'review'))} class:list={[active === 'review' && 'active']}>{nav.review}</a>
+      <a href={withBase(localizedPath(locale, 'waiter'))} class:list={[active === 'jobs' && 'active']}>{nav.jobs}</a>
+      <a href={withBase(localizedPath(locale, 'home') + '#contact')}>{nav.contact}</a>
+    </nav>
+    <button type="button" class="booking-pill js-booking-trigger" data-booking-source="header_cta">{nav.book}</button>
+  </div>
+</header>

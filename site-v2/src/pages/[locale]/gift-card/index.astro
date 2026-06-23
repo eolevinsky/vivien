@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FormShell from '../../../components/FormShell.astro';
+import { alternatesFor, locales, localizedPath, t, withBase } from '../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'gift');
+---
+<BaseLayout locale={locale} title={`${copy.gift.title} | Brasserie Vivien`} description={copy.gift.description} canonicalPath={path} alternates={alternatesFor('gift')}>
+  <Header locale={locale} active="gift" kind="gift" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/Hero.jpg')} alt="Brasserie Vivien gift card mood" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.nav.giftCard}</p>
+        <h1>{copy.gift.title}</h1>
+        <p>{copy.gift.description}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="split">
+        <div>
+          <div class="section-title">
+            <p>{copy.gift.formTitle}</p>
+            <h2>{copy.gift.description}</h2>
+          </div>
+          <p><a href={withBase(localizedPath(locale, 'legal', { legal: 'terms' }))}>Terms</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'public-offer' }))}>Public offer</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'personal-data-consent' }))}>Personal data consent</a></p>
+        </div>
+        <div class="panel">
+          <FormShell locale={locale} action={withBase('/forms/giftcard.php')} eventName="gift_card_submit" submitLabel={copy.gift.submit}>
+            <div class="row">
+              <input type="number" min="10" max="500" name="amount" placeholder={copy.gift.amount} required />
+              <input type="date" name="delivery_at" aria-label={copy.gift.deliveryAt} />
+            </div>
+            <input type="email" name="payer_email" placeholder={copy.gift.payerEmail} required />
+            <textarea name="payer_note" placeholder={copy.gift.payerNote}></textarea>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.gift.recipientName} required />
+              <input type="email" name="email" placeholder={copy.gift.recipientEmail} required />
+            </div>
+            <input type="tel" name="phone" placeholder={copy.gift.recipientPhone} required />
+            <textarea name="message_to_recipient" placeholder={copy.gift.recipientMessage}></textarea>
+            <input type="hidden" name="subject" value={`New Vivien Gift Card Order (${locale.toUpperCase()})`} />
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

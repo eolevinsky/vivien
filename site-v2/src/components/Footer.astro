@@ -1,0 +1,48 @@
+---
+import { legalLabels, legalRouteSlugs, localizedPath, site, t, withBase } from '../content/site.js';
+
+const { locale } = Astro.props;
+const copy = t(locale);
+---
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <a class="footer-brand" href={withBase(localizedPath(locale, 'home'))}>
+        <span class="brand-script">Brasserie</span>
+        <span class="brand-name">VIVIEN</span>
+      </a>
+      <p>{site.address}</p>
+      <p><a href={`tel:${site.phoneHref}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+    <div>
+      <h2>{copy.nav.contact}</h2>
+      <p>{copy.home.hoursText}</p>
+      <button type="button" class="text-button js-booking-trigger" data-booking-source="footer_cta">{copy.nav.book}</button>
+    </div>
+    <div>
+      <h2>{copy.nav.giftCard}</h2>
+      <p>{copy.gift.description}</p>
+      <a class="text-button" href={withBase(localizedPath(locale, 'gift'))}>{copy.gift.submit}</a>
+    </div>
+    <div>
+      <h2>Newsletter</h2>
+      <form class="vivien-form compact-form" method="post" action={withBase('/forms/newsletter.php')} data-success-event="newsletter_submit">
+        <input type="email" name="email" placeholder={copy.form.email} required />
+        <label class="consent-line">
+          <input type="checkbox" name="consent" value="yes" required />
+          <span>{copy.form.consent}</span>
+        </label>
+        <input type="hidden" name="language" value={locale} />
+        <input type="hidden" name="source_page" value={withBase(localizedPath(locale, 'home'))} />
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" />
+        <button type="submit">{copy.form.send}</button>
+        <div class="form-state" data-form-state></div>
+      </form>
+    </div>
+  </div>
+  <nav class="legal-nav" aria-label="Legal">
+    {legalRouteSlugs.map((slug) => (
+      <a href={withBase(localizedPath(locale, 'legal', { legal: slug }))}>{legalLabels[slug][locale]}</a>
+    ))}
+  </nav>
+</footer>

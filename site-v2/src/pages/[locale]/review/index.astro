@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FormShell from '../../../components/FormShell.astro';
+import { alternatesFor, locales, localizedPath, site, t, withBase } from '../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'review');
+---
+<BaseLayout locale={locale} title={`${copy.review.title} | Brasserie Vivien`} description={copy.review.description} canonicalPath={path} alternates={alternatesFor('review')}>
+  <Header locale={locale} active="review" kind="review" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/gallery/4_The_Mim.jpg')} alt="Brasserie Vivien guest atmosphere" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.nav.review}</p>
+        <h1>{copy.review.title}</h1>
+        <p>{copy.review.description}</p>
+        <div class="hero-actions">
+          <button type="button" class="button primary" data-positive-review={withBase('/forms/review_positive.php')} data-google-review-url={site.googleReviewUrl}>{copy.review.positive}</button>
+          <a class="button" href="#feedback">{copy.review.negative}</a>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="feedback">
+      <div class="split">
+        <div class="section-title">
+          <p>{copy.review.privateTitle}</p>
+          <h2>{copy.review.description}</h2>
+        </div>
+        <div class="panel">
+          <FormShell locale={locale} action={withBase('/forms/review.php')} eventName="review_negative" submitLabel={copy.review.submit}>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.form.name} />
+              <input type="email" name="email" placeholder={copy.form.email} required />
+            </div>
+            <input type="tel" name="phone" placeholder={copy.form.phone} />
+            <textarea name="message" placeholder={copy.review.message} required></textarea>
+            <input type="file" name="attachment[]" multiple />
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
