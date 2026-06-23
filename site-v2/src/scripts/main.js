@@ -171,6 +171,23 @@ function bootReviewPositive() {
   });
 }
 
+function bootPrivateFeedback() {
+  const trigger = document.querySelector('[data-private-feedback-trigger]');
+  const section = document.querySelector('[data-private-feedback]');
+  if (!trigger || !section) return;
+
+  trigger.addEventListener('click', (event) => {
+    event.preventDefault();
+    section.hidden = false;
+    window.history.pushState(null, '', trigger.getAttribute('href') || '#feedback');
+    pushEvent('review_private_feedback_open');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      section.focus({ preventScroll: true });
+    }, 350);
+  });
+}
+
 function bootRestoplaceMessages() {
   window.addEventListener('message', (event) => {
     const raw = typeof event.data === 'string' ? event.data : JSON.stringify(event.data || {});
@@ -188,5 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
   bootMenuFilters();
   bootForms();
   bootReviewPositive();
+  bootPrivateFeedback();
   bootRestoplaceMessages();
 });

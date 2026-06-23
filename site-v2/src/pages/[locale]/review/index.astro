@@ -24,11 +24,11 @@ const path = localizedPath(locale, 'review');
         <p>{copy.review.description}</p>
         <div class="hero-actions">
           <button type="button" class="button primary" data-positive-review={withBase('/forms/review_positive.php')} data-google-review-url={site.googleReviewUrl}>{copy.review.positive}</button>
-          <a class="button" href="#feedback">{copy.review.negative}</a>
+          <a class="button" href="#feedback" data-private-feedback-trigger>{copy.review.negative}</a>
         </div>
       </div>
     </section>
-    <section class="section" id="feedback">
+    <section class="section" id="feedback" data-private-feedback hidden tabindex="-1">
       <div class="split">
         <div class="section-title">
           <p>{copy.review.privateTitle}</p>
