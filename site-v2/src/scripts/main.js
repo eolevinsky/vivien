@@ -71,6 +71,26 @@ function bootHeaderScroll() {
   window.addEventListener('scroll', applyState, { passive: true });
 }
 
+function bootScrollTop() {
+  const button = document.querySelector('[data-scroll-top]');
+  if (!button) return;
+
+  const applyState = () => {
+    button.classList.toggle('active', window.scrollY > 100);
+  };
+
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
+
+  applyState();
+  window.addEventListener('scroll', applyState, { passive: true });
+}
+
 function bootBookingButtons() {
   document.addEventListener('click', (event) => {
     const button = event.target.closest('.js-booking-trigger');
@@ -199,6 +219,7 @@ function bootRestoplaceMessages() {
 
 document.addEventListener('DOMContentLoaded', () => {
   bootHeaderScroll();
+  bootScrollTop();
   bootNavigation();
   bootBookingButtons();
   bootPrepareTableButtons();

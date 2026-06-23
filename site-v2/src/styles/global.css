@@ -590,6 +590,41 @@ body.scrolled .topbar {
   margin-top: 0.4rem;
 }
 
+.scroll-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 90;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 4px;
+  background: var(--gold);
+  color: #0c0b09;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity .4s ease, visibility .4s ease, background .4s ease;
+}
+
+.scroll-top::before {
+  content: "\2191";
+  font-size: 24px;
+  line-height: 1;
+}
+
+.scroll-top:hover {
+  background: rgba(205, 164, 94, 0.8);
+  color: #0c0b09;
+}
+
+.scroll-top.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .staging-marker {
   position: fixed;
   top: 0.5rem;

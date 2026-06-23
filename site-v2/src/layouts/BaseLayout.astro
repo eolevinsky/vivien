@@ -49,9 +49,9 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     <link rel="shortcut icon" href={withBase('/assets/img/favicon.ico')} />
     <link rel="apple-touch-icon" href={withBase('/assets/img/apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('/assets/img/site.webmanifest')} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href={withBase('/assets/fonts/great-vibes-400.ttf')} as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href={withBase('/assets/fonts/playfair-display-700.ttf')} as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href={withBase('/assets/fonts.css')} />
 
     <Fragment set:html={`<!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/${cookieYesId}/script.js"></script> <!-- End cookieyes banner -->`} />
 
@@ -91,6 +91,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
       <span>Booking widget did not open.</span>
       <a href={site.restoplaceUrl} rel="noopener" target="_blank">Open booking page</a>
     </div>
+    <button type="button" class="scroll-top" data-scroll-top aria-label="Back to top"></button>
     <script src={`https://app.restoplace.cc/widget.js?h=${site.restoplaceWidgetHash}`} async></script>
     <script>
       import '../scripts/main.js';
