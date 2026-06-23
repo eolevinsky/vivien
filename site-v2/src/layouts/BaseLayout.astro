@@ -18,7 +18,7 @@ const canonical = canonicalUrl(canonicalPath || `/${locale}/`);
 const ogImage = canonicalUrl(image);
 const isStaging = import.meta.env.PUBLIC_VIVIEN_BUILD_TARGET === 'staging' || import.meta.env.VIVIEN_BUILD_TARGET === 'staging';
 const robots = noindex || isStaging ? 'noindex, nofollow' : 'index, follow';
-const cookieYesId = import.meta.env.PUBLIC_COOKIEYES_ID;
+const cookieYesId = import.meta.env.PUBLIC_COOKIEYES_ID || '4a5d342324df0e340b2b034917706d78';
 const gtmId = import.meta.env.PUBLIC_GTM_ID;
 ---
 <!doctype html>
@@ -53,6 +53,8 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 
+    <Fragment set:html={`<!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/${cookieYesId}/script.js"></script> <!-- End cookieyes banner -->`} />
+
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ window.dataLayer.push(arguments); }
@@ -65,7 +67,6 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
         security_storage: 'granted'
       });
     </script>
-    {cookieYesId && <script id="cookieyes" src={`https://cdn-cookieyes.com/client_data/${cookieYesId}/script.js`} async></script>}
     {gtmId && (
       <script is:inline define:vars={{ gtmId }}>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
