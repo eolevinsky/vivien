@@ -136,7 +136,7 @@ export const content = {
       attachment: 'CV or portfolio',
       submit: 'Send application',
     },
-    legalFallback: 'This page uses the source legal text snapshot from Restoplace. Translations must be reviewed before production launch if this language is legally authoritative for your users.',
+    legalFallback: 'Juridiskais dokuments ir publicēts latviešu valodā, izmantojot Restoplace avota momentuzņēmumu.',
   },
   lv: {
     meta: {
@@ -237,7 +237,7 @@ export const content = {
       attachment: 'CV vai portfolio',
       submit: 'Nosūtīt pieteikumu',
     },
-    legalFallback: 'Šajā lapā izmantots Restoplace juridiskā teksta avota momentuzņēmums. Tulkojumi jāpārskata pirms production palaišanas.',
+    legalFallback: 'Juridiskais dokuments ir publicēts latviešu valodā, izmantojot Restoplace avota momentuzņēmumu.',
   },
   fr: {
     meta: {
@@ -338,7 +338,7 @@ export const content = {
       attachment: 'CV ou portfolio',
       submit: 'Envoyer la candidature',
     },
-    legalFallback: 'Cette page utilise un instantané du texte juridique source de Restoplace. Les traductions doivent être revues avant la mise en production.',
+    legalFallback: 'Juridiskais dokuments ir publicēts latviešu valodā, izmantojot Restoplace avota momentuzņēmumu.',
   },
   ru: {
     meta: {
@@ -439,7 +439,7 @@ export const content = {
       attachment: 'CV или портфолио',
       submit: 'Отправить отклик',
     },
-    legalFallback: 'Эта страница использует снимок юридического текста из Restoplace. Переводы нужно проверить до production-запуска.',
+    legalFallback: 'Juridiskais dokuments ir publicēts latviešu valodā, izmantojot Restoplace avota momentuzņēmumu.',
   }
 };
 
@@ -447,34 +447,34 @@ export const legalRouteSlugs = ['terms', 'privacy', 'public-offer', 'personal-da
 
 export const legalLabels = {
   terms: {
-    en: 'Terms of Use',
+    en: 'Lietošanas noteikumi',
     lv: 'Lietošanas noteikumi',
-    fr: 'Conditions d’utilisation',
-    ru: 'Условия использования',
+    fr: 'Lietošanas noteikumi',
+    ru: 'Lietošanas noteikumi',
   },
   privacy: {
-    en: 'Privacy Policy',
+    en: 'Privātuma politika',
     lv: 'Privātuma politika',
-    fr: 'Politique de confidentialité',
-    ru: 'Политика конфиденциальности',
+    fr: 'Privātuma politika',
+    ru: 'Privātuma politika',
   },
   'public-offer': {
-    en: 'Public Offer',
+    en: 'Publiskais piedāvājums',
     lv: 'Publiskais piedāvājums',
-    fr: 'Offre publique',
-    ru: 'Публичная оферта',
+    fr: 'Publiskais piedāvājums',
+    ru: 'Publiskais piedāvājums',
   },
   'personal-data-consent': {
-    en: 'Personal Data Consent',
-    lv: 'Piekrišana personas datu apstrādei',
-    fr: 'Consentement aux données personnelles',
-    ru: 'Согласие на обработку персональных данных',
+    en: 'Manu personas datu apstrāde',
+    lv: 'Manu personas datu apstrāde',
+    fr: 'Manu personas datu apstrāde',
+    ru: 'Manu personas datu apstrāde',
   },
   'cookie-policy': {
-    en: 'Cookie Policy',
+    en: 'Sīkfailu politika',
     lv: 'Sīkfailu politika',
-    fr: 'Politique des cookies',
-    ru: 'Политика cookies',
+    fr: 'Sīkfailu politika',
+    ru: 'Sīkfailu politika',
   },
 };
 

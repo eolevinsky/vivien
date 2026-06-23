@@ -63,6 +63,14 @@ function bootNavigation() {
   });
 }
 
+function bootHeaderScroll() {
+  const applyState = () => {
+    document.body.classList.toggle('scrolled', window.scrollY > 100);
+  };
+  applyState();
+  window.addEventListener('scroll', applyState, { passive: true });
+}
+
 function bootBookingButtons() {
   document.addEventListener('click', (event) => {
     const button = event.target.closest('.js-booking-trigger');
@@ -80,6 +88,16 @@ function bootBookingButtons() {
       window.openBooking({ source: 'book_auto', auto: true });
     }, 450);
   }
+}
+
+function bootPrepareTableButtons() {
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('[data-prepare-table]');
+    if (!link) return;
+    pushEvent('prepare_table_click', {
+      outbound_url: link.href,
+    });
+  });
 }
 
 function bootMenuFilters() {
@@ -163,8 +181,10 @@ function bootRestoplaceMessages() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  bootHeaderScroll();
   bootNavigation();
   bootBookingButtons();
+  bootPrepareTableButtons();
   bootMenuFilters();
   bootForms();
   bootReviewPositive();
