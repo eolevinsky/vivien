@@ -57,28 +57,24 @@ const restaurantSchema = {
     <section class="hero">
       <img src={withBase('/assets/img/hero-7.jpg')} alt="Brasserie Vivien dining room atmosphere" loading="eager" />
       <div class="hero-content">
-        <p class="kicker">{copy.home.heroKicker}</p>
-        <h1>{copy.home.heroTitle}</h1>
-        <p>{copy.home.heroText}</p>
-        <div class="hero-actions">
-          <a class="button" href="#menu">{copy.home.menuCta}</a>
-          <BookingButton label={copy.nav.book} source="home_hero" />
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="split">
-        <div>
-          <div class="section-title">
-            <p>{copy.home.prepareTitle}</p>
-            <h2>{copy.home.prepareText}</h2>
+        <div class="hero-content-card">
+          <h1>{copy.home.heroTitleLead} <span>{copy.home.heroBrand}</span></h1>
+          <p>{copy.home.heroText}</p>
+          <div class="hero-actions">
+            <a class="button" href="#menu">{copy.home.menuCta}</a>
+            <BookingButton label={copy.home.bookCta} source="home_hero" />
           </div>
-          <a class="button" href={site.prepareTableUrl} data-prepare-table>{copy.home.prepareCta}</a>
+          <div class="visit-invite">
+            <div class="visit-accent">
+              <p>{copy.home.prepareTitle}</p>
+              <p>{copy.home.prepareText}</p>
+              <div class="visit-action">
+                <a class="button" href={site.prepareTableUrl} data-prepare-table>{copy.home.prepareCta}</a>
+              </div>
+              <div class="visit-note">{copy.home.prepareNote}</div>
+            </div>
+          </div>
         </div>
-        <video controls preload="metadata" poster={withBase('/assets/img/Hero.jpg')}>
-          <source src={withBase('/assets/video/vivien-birthday-reel.mp4')} type="video/mp4" />
-        </video>
       </div>
     </section>
 

@@ -126,12 +126,24 @@ function bootMenuFilters() {
   const buttons = shell.querySelectorAll('[data-menu-filter]');
   const items = shell.querySelectorAll('[data-menu-category]');
   buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+    const applyFilter = () => {
       const filter = button.dataset.menuFilter;
-      buttons.forEach((item) => item.classList.toggle('active', item === button));
+      buttons.forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle('active', selected);
+        item.classList.toggle('filter-active', selected);
+      });
       items.forEach((item) => {
         item.hidden = filter !== '*' && item.dataset.menuCategory !== filter;
       });
+    };
+
+    button.addEventListener('click', applyFilter);
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        applyFilter();
+      }
     });
   });
 }

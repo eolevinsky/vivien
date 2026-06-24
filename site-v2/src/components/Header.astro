@@ -4,12 +4,13 @@ import { localeLabels, locales, localizedPath, site, t, withBase } from '../cont
 const { locale, active = 'home', kind = 'home', params = {} } = Astro.props;
 const copy = t(locale);
 const nav = copy.nav;
+const overlayHeader = kind !== 'legal';
 
 function languageHref(targetLocale) {
   return withBase(localizedPath(targetLocale, kind, params));
 }
 ---
-<header class="site-header" id="top">
+<header class:list={['site-header', overlayHeader && 'site-header--overlay']} id="top">
   <div class="topbar">
     <a href={`mailto:${site.email}`}>{site.email}</a>
     <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
