@@ -15,39 +15,44 @@ const { locale, job } = Astro.params;
 const copy = t(locale);
 const isMaitre = job === 'maitre-d-hotel';
 const title = isMaitre ? copy.jobs.maitreTitle : copy.jobs.waiterTitle;
+const jobCopy = isMaitre ? (copy.jobs.maitre || copy.jobs.waiter) : copy.jobs.waiter;
 const path = isMaitre ? localizedPath(locale, 'maitre') : localizedPath(locale, 'waiter');
 const kind = isMaitre ? 'maitre' : 'waiter';
 ---
-<BaseLayout locale={locale} title={`${title} | Brasserie Vivien Careers`} description={copy.jobs.intro} canonicalPath={path} alternates={alternatesFor(kind)}>
+<BaseLayout locale={locale} title={`${title} | Brasserie Vivien Careers`} description={jobCopy.description || copy.jobs.intro} canonicalPath={path} alternates={alternatesFor(kind)}>
   <Header locale={locale} active="jobs" kind={kind} />
   <main>
     <section class="hero page-hero">
       <img src={withBase('/assets/img/gallery/2_Vivien_at_Work.jpg')} alt="Brasserie Vivien team at work" loading="eager" />
       <div class="hero-content">
-        <p class="kicker">{copy.nav.jobs}</p>
-        <h1>{title}</h1>
-        <p>{copy.jobs.intro}</p>
-        <a class="button" href="#apply-now">{copy.jobs.apply}</a>
+        <h1>{jobCopy.titleLead} <span>{jobCopy.titleBrand}</span></h1>
+        <p>{jobCopy.location}</p>
+        <p>{jobCopy.schedule}</p>
+        <p>{jobCopy.languages}</p>
+        <div class="hero-actions">
+          <a class="button" href="#apply-now">{copy.jobs.apply}</a>
+        </div>
       </div>
     </section>
     <section class="section">
-      <div class="split">
-        <div>
+      <div class="job-layout">
+        <article class="job-copy">
           <div class="section-title">
             <p>{copy.jobs.position}</p>
-            <h2>{title}</h2>
+            <h2>{jobCopy.aboutTitle}</h2>
           </div>
-          <div class="panel">
-            <p>{copy.jobs.intro}</p>
-            <ul>
-              <li>Warm, attentive guest service.</li>
-              <li>Confident communication with guests and team members.</li>
-              <li>Interest in French brasserie food, wine and hospitality.</li>
-              <li>Responsible rhythm during busy service periods.</li>
-            </ul>
-          </div>
-        </div>
+          <p set:html={jobCopy.introHtml}></p>
+          {jobCopy.sections.map((section) => (
+            <section class="job-copy-section">
+              <h3>{section.title}</h3>
+              <ul>
+                {section.items.map((item) => <li set:html={item}></li>)}
+              </ul>
+            </section>
+          ))}
+        </article>
         <div class="panel" id="apply-now">
+          <p class="job-apply-intro" set:html={jobCopy.applyIntroHtml}></p>
           <FormShell locale={locale} action={withBase('/forms/job-application.php')} eventName="job_application_submit" submitLabel={copy.jobs.submit}>
             <div class="row">
               <input type="text" name="name" placeholder={copy.form.name} required />
@@ -56,7 +61,8 @@ const kind = isMaitre ? 'maitre' : 'waiter';
             <input type="tel" name="phone" placeholder={copy.form.phone} required />
             <textarea name="message" placeholder={copy.jobs.cover} required></textarea>
             <input type="file" name="attachment[]" multiple aria-label={copy.jobs.attachment} />
-            <input type="hidden" name="position" value={title} />
+            <input type="hidden" name="position" value={jobCopy.positionValue || title} />
+            <input type="hidden" name="language_label" value={copy.review?.languageName || locale} />
           </FormShell>
         </div>
       </div>

@@ -384,6 +384,55 @@ body.scrolled .site-header--overlay .mainbar::before {
   opacity: 0.85;
 }
 
+.review-source {
+  max-width: 760px;
+  margin-top: 1.2rem;
+}
+
+.review-question {
+  margin-top: 0;
+  color: #ffffff;
+  font-family: var(--font-nav);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.source-options {
+  margin-top: 0.85rem;
+}
+
+.source-hint {
+  margin-top: 0;
+  color: color-mix(in srgb, #ffffff, transparent 35%);
+  font-size: 14px;
+}
+
+.choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.choice-button {
+  min-height: 36px;
+  border: 1px solid color-mix(in srgb, #ffffff, transparent 34%);
+  border-radius: 50px;
+  background: transparent;
+  color: #ffffff;
+  padding: 7px 14px;
+  font-family: var(--font-nav);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+
+.choice-button:hover,
+.choice-button.active {
+  border-color: var(--gold);
+  background: rgba(205, 164, 94, 0.18);
+  color: #ffffff;
+}
+
 .visit-action {
   margin-top: 1rem;
 }
@@ -452,6 +501,46 @@ body.scrolled .site-header--overlay .mainbar::before {
   background: var(--surface);
   border: 1px solid var(--line);
   padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.job-layout {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.48fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.job-copy {
+  max-width: 820px;
+}
+
+.job-copy .section-title {
+  margin: 0;
+}
+
+.job-copy p,
+.job-copy li {
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.job-copy-section {
+  margin-top: 1.6rem;
+}
+
+.job-copy-section h3 {
+  margin: 0 0 0.75rem;
+  color: #ffffff;
+  font-family: var(--font-nav);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.job-apply-intro {
+  margin-top: 0;
 }
 
 .menu-section {
@@ -833,7 +922,7 @@ body.scrolled .site-header--overlay .mainbar::before {
   .hero h1 { font-size: 32px; }
   .hero p { font-size: 18px; }
   .hero .visit-accent p { font-size: 17px; }
-  .split, .contact-layout, .footer-grid { grid-template-columns: 1fr; }
+  .split, .job-layout, .contact-layout, .footer-grid { grid-template-columns: 1fr; }
   .menu-grid, .special-grid, .gallery-grid, .job-grid { grid-template-columns: 1fr; }
   .vivien-form .row { grid-template-columns: 1fr; }
   .compact-form { grid-template-columns: 1fr; }

@@ -216,12 +216,52 @@ function bootReviewPositive() {
       formData.set('sentiment', 'positive');
       formData.set('language', document.documentElement.lang || 'en');
       formData.set('source_page', window.location.pathname);
+      formData.set('visitor_type', document.querySelector('[data-review-visitor-value]')?.value || '');
+      formData.set('source', document.querySelector('[data-review-source-value]')?.value || '');
       try {
         await fetch(button.dataset.positiveReview, { method: 'POST', body: formData });
       } catch (_) {
         // The public review flow should continue even if internal notification fails.
       }
       window.location.href = button.dataset.googleReviewUrl;
+    });
+  });
+}
+
+function bootReviewSource() {
+  const shell = document.querySelector('[data-review-source]');
+  if (!shell) return;
+
+  const sourceBlock = shell.querySelector('[data-source-block]');
+  const sourceLabel = shell.querySelector('[data-source-label]');
+  const syncFields = (selector, value) => {
+    document.querySelectorAll(selector).forEach((input) => {
+      input.value = value;
+    });
+  };
+
+  shell.querySelectorAll('[data-visitor-value]').forEach((button) => {
+    button.addEventListener('click', () => {
+      shell.querySelectorAll('[data-visitor-value]').forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      const value = button.dataset.visitorValue || '';
+      syncFields('[data-review-visitor-value]', value);
+      if (sourceBlock) {
+        sourceBlock.hidden = false;
+        if (sourceLabel) {
+          sourceLabel.textContent = value === 'first_time'
+            ? sourceBlock.dataset.sourceFirst || sourceLabel.textContent
+            : sourceBlock.dataset.sourceReturning || sourceLabel.textContent;
+        }
+      }
+    });
+  });
+
+  shell.querySelectorAll('[data-source-value]').forEach((button) => {
+    button.addEventListener('click', () => {
+      shell.querySelectorAll('[data-source-value]').forEach((item) => item.classList.remove('active'));
+      button.classList.add('active');
+      syncFields('[data-review-source-value]', button.dataset.sourceValue || button.textContent.trim());
     });
   });
 }
@@ -260,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bootPrepareTableButtons();
   bootMenuFilters();
   bootForms();
+  bootReviewSource();
   bootReviewPositive();
   bootPrivateFeedback();
   bootRestoplaceMessages();

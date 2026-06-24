@@ -19,9 +19,24 @@ const path = localizedPath(locale, 'review');
     <section class="hero page-hero">
       <img src={withBase('/assets/img/gallery/4_The_Mim.jpg')} alt="Brasserie Vivien guest atmosphere" loading="eager" />
       <div class="hero-content">
-        <p class="kicker">{copy.nav.review}</p>
-        <h1>{copy.review.title}</h1>
-        <p>{copy.review.description}</p>
+        <h1>{copy.review.titleLead} <span>{copy.review.titleHighlight}</span></h1>
+        {copy.review.heroLines.map((line) => <p>{line}</p>)}
+        <div class="review-source" data-review-source>
+          <p class="review-question">{copy.review.visitorQuestion}</p>
+          <div class="choice-group" role="group" aria-label={copy.review.visitorQuestion}>
+            <button type="button" class="choice-button" data-visitor-value="first_time">{copy.review.firstTime}</button>
+            <button type="button" class="choice-button" data-visitor-value="returning">{copy.review.returning}</button>
+          </div>
+          <div class="source-options" data-source-block hidden data-source-first={copy.review.sourceFirst} data-source-returning={copy.review.sourceReturning}>
+            <p class="review-question" data-source-label>{copy.review.sourceFirst}</p>
+            <p class="source-hint">{copy.review.sourceHint}</p>
+            <div class="choice-group" role="group" aria-label={copy.review.sourceFirst}>
+              {copy.review.sources.map((source) => <button type="button" class="choice-button" data-source-value={source}>{source}</button>)}
+            </div>
+          </div>
+          <input type="hidden" name="visitor_type" data-review-visitor-value />
+          <input type="hidden" name="source" data-review-source-value />
+        </div>
         <div class="hero-actions">
           <button type="button" class="button primary" data-positive-review={withBase('/forms/review_positive.php')} data-google-review-url={site.googleReviewUrl}>{copy.review.positive}</button>
           <a class="button" href="#feedback" data-private-feedback-trigger>{copy.review.negative}</a>
@@ -32,7 +47,6 @@ const path = localizedPath(locale, 'review');
       <div class="split">
         <div class="section-title">
           <p>{copy.review.privateTitle}</p>
-          <h2>{copy.review.description}</h2>
         </div>
         <div class="panel">
           <FormShell locale={locale} action={withBase('/forms/review.php')} eventName="review_negative" submitLabel={copy.review.submit}>
@@ -43,6 +57,9 @@ const path = localizedPath(locale, 'review');
             <input type="tel" name="phone" placeholder={copy.form.phone} />
             <textarea name="message" placeholder={copy.review.message} required></textarea>
             <input type="file" name="attachment[]" multiple />
+            <input type="hidden" name="visitor_type" data-review-visitor-value />
+            <input type="hidden" name="source" data-review-source-value />
+            <input type="hidden" name="language_label" value={copy.review.languageName} />
           </FormShell>
         </div>
       </div>
