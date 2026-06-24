@@ -685,7 +685,7 @@ body.scrolled .site-header--overlay .mainbar::before {
 }
 
 .page-hero {
-  min-height: 460px;
+  min-height: 100vh;
 }
 
 .page-content {
