@@ -25,6 +25,25 @@ If Plesk allows directory-level Apache config, also place `deploy/staging.htacce
 
 Staging must not be used for ad traffic. The build includes a visible internal staging marker when `PUBLIC_VIVIEN_BUILD_TARGET=staging` is set.
 
+## Form and email testing
+
+The local static preview used for UI checks, for example `python3 -m http.server`, cannot execute PHP form handlers. A POST to `/forms/*.php` on that server returns `501 Unsupported method`, so it is not an SMTP credential test.
+
+Real form testing requires a PHP runtime with `site-v2/public/forms/` deployed and the SMTP/Plesk environment variables below configured. On a local machine with PHP installed, test from the same document root that contains `/_staging/v2/`:
+
+```sh
+VIVIEN_SMTP_HOST=... \
+VIVIEN_SMTP_PORT=587 \
+VIVIEN_SMTP_USER=... \
+VIVIEN_SMTP_PASS=... \
+VIVIEN_SMTP_SECURE=tls \
+VIVIEN_MAIL_FROM=noreply@vivien.lv \
+VIVIEN_MAIL_FROM_NAME="Brasserie Vivien" \
+php -S 127.0.0.1:8080
+```
+
+Without SMTP variables, `_mailer.php` falls back to PHP `mail()`, which usually is not configured on laptops and should not be treated as a successful staging test.
+
 ## Required environment variables
 
 Set these in Plesk or the CI/deploy process, not in git:

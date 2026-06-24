@@ -26,7 +26,16 @@ const copy = t(locale);
     </div>
     <div>
       <h2>Newsletter</h2>
-      <form class="vivien-form compact-form" method="post" action={withBase('/forms/newsletter.php')} data-success-event="newsletter_submit">
+      <form
+        class="vivien-form compact-form"
+        method="post"
+        action={withBase('/forms/newsletter.php')}
+        data-success-event="newsletter_submit"
+        data-loading-message={copy.form.loading}
+        data-success-message={copy.form.success}
+        data-error-message={copy.form.error}
+        data-server-error-message={copy.form.serverUnavailable}
+      >
         <input type="email" name="email" placeholder={copy.form.email} required />
         <label class="consent-line">
           <input type="checkbox" name="consent" value="yes" required />

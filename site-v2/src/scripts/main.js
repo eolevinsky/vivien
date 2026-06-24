@@ -136,6 +136,29 @@ function bootMenuFilters() {
   });
 }
 
+function formFailureMessage(form, response, text) {
+  const fallback = form.dataset.errorMessage || 'Submission failed. Please try again or contact us by phone.';
+  const serverUnavailable = form.dataset.serverErrorMessage || fallback;
+  const contentType = response.headers.get('content-type') || '';
+  const looksLikeHtml = contentType.includes('text/html') || /^<!doctype|<html[\s>]/i.test(text);
+
+  if (response.status === 405 || response.status === 501 || looksLikeHtml) {
+    console.warn('Vivien form endpoint is not available for POST in this environment.', {
+      action: form.getAttribute('action') || '',
+      status: response.status,
+      contentType,
+      responsePreview: text.slice(0, 240),
+    });
+    return serverUnavailable;
+  }
+
+  if (text.startsWith('ERROR:')) {
+    return text.replace(/^ERROR:\s*/, '') || fallback;
+  }
+
+  return text || fallback;
+}
+
 function bootForms() {
   document.querySelectorAll('form.vivien-form').forEach((form) => {
     const state = form.querySelector('[data-form-state]');
@@ -143,7 +166,7 @@ function bootForms() {
       event.preventDefault();
       if (state) {
         state.className = 'form-state';
-        state.textContent = 'Sending...';
+        state.textContent = form.dataset.loadingMessage || 'Sending...';
       }
       try {
         const response = await fetch(form.action, {
@@ -153,7 +176,7 @@ function bootForms() {
         });
         const text = (await response.text()).trim();
         if (!response.ok || text !== 'OK') {
-          throw new Error(text || 'Submission failed');
+          throw new Error(formFailureMessage(form, response, text));
         }
         form.reset();
         if (state) {
@@ -166,7 +189,7 @@ function bootForms() {
       } catch (error) {
         if (state) {
           state.className = 'form-state error';
-          state.textContent = error.message || 'Submission failed';
+          state.textContent = error.message || form.dataset.errorMessage || 'Submission failed';
         }
       }
     });
