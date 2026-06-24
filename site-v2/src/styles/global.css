@@ -835,6 +835,37 @@ body.scrolled .site-header--overlay .mainbar::before {
   margin-top: 0.4rem;
 }
 
+#restoplace-wrapper-btn {
+  display: none !important;
+}
+
+.booking-sticky {
+  position: fixed;
+  z-index: 89;
+  left: 24px;
+  bottom: 23px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background: var(--gold);
+  color: #ffffff;
+  padding: 14px 27px;
+  font-family: var(--font-nav);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.booking-sticky:hover {
+  background: var(--gold-strong);
+  color: #ffffff;
+}
+
 .scroll-top {
   position: fixed;
   right: 15px;

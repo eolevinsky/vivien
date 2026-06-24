@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { canonicalUrl, site, withBase } from '../content/site.js';
+import { canonicalUrl, localizedPath, site, t, withBase } from '../content/site.js';
 
 const {
   locale = 'en',
@@ -20,6 +20,8 @@ const isStaging = import.meta.env.PUBLIC_VIVIEN_BUILD_TARGET === 'staging' || im
 const robots = noindex || isStaging ? 'noindex, nofollow' : 'index, follow';
 const cookieYesId = import.meta.env.PUBLIC_COOKIEYES_ID || '4a5d342324df0e340b2b034917706d78';
 const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const copy = t(locale);
+const stickyBookingHref = withBase(`${localizedPath(locale, 'book')}?openBooking=1&booking_source=sticky_cta`);
 ---
 <!doctype html>
 <html lang={locale}>
@@ -86,6 +88,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     )}
     {isStaging && <div class="staging-marker">Internal staging: noindex</div>}
     <slot />
+    <a class="booking-sticky" href={stickyBookingHref}>{copy.nav.book}</a>
     <div id="restoplace-btn" class="restoplace-click-open" hidden></div>
     <div class="booking-fallback" data-booking-fallback hidden>
       <span>Booking widget did not open.</span>

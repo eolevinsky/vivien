@@ -105,7 +105,7 @@ function bootBookingButtons() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('openBooking') === '1') {
     window.setTimeout(() => {
-      window.openBooking({ source: 'book_auto', auto: true });
+      window.openBooking({ source: params.get('booking_source') || 'book_auto', auto: true });
     }, 450);
   }
 }
