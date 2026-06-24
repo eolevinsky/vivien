@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import FormShell from '../../../components/FormShell.astro';
-import { alternatesFor, locales, localizedPath, t, withBase } from '../../../content/site.js';
+import { alternatesFor, legalLabels, locales, localizedPath, t, withBase } from '../../../content/site.js';
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
@@ -12,6 +12,8 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const copy = t(locale);
 const path = localizedPath(locale, 'gift');
+const giftAmountMin = '10\u00a0€';
+const giftAmountMax = '500\u00a0€';
 ---
 <BaseLayout locale={locale} title={`${copy.gift.title} | Brasserie Vivien`} description={copy.gift.description} canonicalPath={path} alternates={alternatesFor('gift')}>
   <Header locale={locale} active="gift" kind="gift" />
@@ -19,19 +21,26 @@ const path = localizedPath(locale, 'gift');
     <section class="hero page-hero">
       <img src={withBase('/assets/img/Hero.jpg')} alt="Brasserie Vivien gift card mood" loading="eager" />
       <div class="hero-content">
-        <p class="kicker">{copy.nav.giftCard}</p>
-        <h1>{copy.gift.title}</h1>
-        <p>{copy.gift.description}</p>
+        <h1>{copy.gift.titleLead} <span>{copy.gift.titleBrand}</span></h1>
+        <p>
+          {copy.gift.formatLabel} <strong>Apple / Google Wallet</strong>. {copy.gift.amountPrefix} <strong>{giftAmountMin}</strong> {copy.gift.amountTo} <strong>{giftAmountMax}</strong>. {copy.gift.deliveryLine}
+        </p>
+        <p>{copy.gift.benefitLead}</p>
+        <ul class="hero-list">
+          {copy.gift.benefits.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="hero-actions">
+          <a class="button" href="#giftcard-form">{copy.gift.formTitle}</a>
+        </div>
       </div>
     </section>
-    <section class="section">
+    <section class="section" id="giftcard-form">
       <div class="split">
         <div>
           <div class="section-title">
             <p>{copy.gift.formTitle}</p>
-            <h2>{copy.gift.description}</h2>
           </div>
-          <p><a href={withBase(localizedPath(locale, 'legal', { legal: 'terms' }))}>Terms</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'public-offer' }))}>Public offer</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'personal-data-consent' }))}>Personal data consent</a></p>
+          <p><a href={withBase(localizedPath(locale, 'legal', { legal: 'terms' }))}>{legalLabels.terms[locale]}</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'public-offer' }))}>{legalLabels['public-offer'][locale]}</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'personal-data-consent' }))}>{legalLabels['personal-data-consent'][locale]}</a></p>
         </div>
         <div class="panel">
           <FormShell locale={locale} action={withBase('/forms/giftcard.php')} eventName="gift_card_submit" submitLabel={copy.gift.submit}>

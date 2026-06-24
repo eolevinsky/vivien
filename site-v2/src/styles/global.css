@@ -338,6 +338,24 @@ body.scrolled .site-header--overlay .mainbar::before {
   font-size: 24px;
 }
 
+.hero strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hero-list {
+  max-width: 760px;
+  margin: 12px 0 0;
+  padding-left: 1.35rem;
+  color: color-mix(in srgb, #ffffff, transparent 12%);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-list li + li {
+  margin-top: 0.2rem;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
