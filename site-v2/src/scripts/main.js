@@ -13,8 +13,12 @@ const ATTRIBUTION_KEYS = [
   'ttclid',
   'msclkid',
   'yclid',
+  'ga_client_id',
+  '_ga',
+  'ga_session_id',
 ];
 const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
+const GA_MEASUREMENT_ID = window.VIVIEN_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
 const RESTOPLACE_TRUSTED_HOSTS = ['app.restoplace.cc', 'restoplace.ws', 'vivien.restoplace.ws', 'www.restoplace.ws'];
 const RESTOPLACE_GOALS = {
   open_widget: { event: 'restoplace_widget_open', category: 'widget' },
@@ -30,6 +34,8 @@ const RESTOPLACE_GOALS = {
   reserve_success: { event: 'reserve_success', category: 'reservation', conversion: true },
 };
 const restoplaceGoalSeenAt = new Map();
+let analyticsConsentState = null;
+let gaAttributionRefreshPromise = null;
 
 function analyticsDebugEnabled() {
   return window.location.hostname === '127.0.0.1'
@@ -67,6 +73,188 @@ function storeAttribution(values) {
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+}
+
+function readCookie(name) {
+  const prefix = `${name}=`;
+  const match = document.cookie
+    .split(';')
+    .map((item) => item.trim())
+    .find((item) => item.startsWith(prefix));
+  if (!match) return '';
+  try {
+    return decodeURIComponent(match.slice(prefix.length));
+  } catch (_) {
+    return match.slice(prefix.length);
+  }
+}
+
+function clientIdFromGaCookie(value) {
+  if (!value) return '';
+  const parts = value.split('.');
+  if (parts.length < 4 || !/^GA\d+$/i.test(parts[0])) return '';
+  return parts.slice(-2).join('.');
+}
+
+function ga4SessionCookieName() {
+  return `_ga_${GA_MEASUREMENT_ID.replace(/^G-/i, '')}`;
+}
+
+function sessionIdFromGa4Cookie(value) {
+  if (!value) return '';
+  const gs2Match = value.match(/(?:^|[.$])s(\d+)(?:[$.]|$)/);
+  if (gs2Match) return gs2Match[1];
+
+  const parts = value.split('.');
+  if (/^GS\d+$/i.test(parts[0]) && /^\d+$/.test(parts[2] || '')) return parts[2];
+  return '';
+}
+
+function gaAttributionFromCookies() {
+  const values = {};
+  const gaCookie = readCookie('_ga');
+  const gaClientId = clientIdFromGaCookie(gaCookie);
+  const gaSessionId = sessionIdFromGa4Cookie(readCookie(ga4SessionCookieName()));
+
+  if (gaCookie) values._ga = gaCookie;
+  if (gaClientId) values.ga_client_id = gaClientId;
+  if (gaSessionId) values.ga_session_id = gaSessionId;
+
+  return values;
+}
+
+function dataLayerCommand(item) {
+  if (!item || typeof item !== 'object' || typeof item.length !== 'number') return null;
+  return Array.prototype.slice.call(item);
+}
+
+function analyticsConsentValueFromDataLayerItem(item) {
+  const command = dataLayerCommand(item);
+  if (command?.[0] === 'consent' && command[2]?.analytics_storage) {
+    return command[2].analytics_storage;
+  }
+  if (item && typeof item === 'object' && !command && item.analytics_storage) {
+    return item.analytics_storage;
+  }
+  return null;
+}
+
+function cookieYesConsentAllowsAnalytics() {
+  return /(?:^|,)analytics:(yes|true|1)(?:,|$)/i.test(readCookie('cookieyes-consent'));
+}
+
+function analyticsConsentGranted() {
+  let value = analyticsConsentState;
+  (window.dataLayer || []).forEach((item) => {
+    const nextValue = analyticsConsentValueFromDataLayerItem(item);
+    if (nextValue) value = nextValue;
+  });
+  if (value !== 'granted' && cookieYesConsentAllowsAnalytics()) value = 'granted';
+  analyticsConsentState = value;
+  return value === 'granted';
+}
+
+function eventDetailAllowsAnalytics(value) {
+  if (!value) return false;
+  if (typeof value === 'string') return ['analytics', 'analytics_storage', 'granted'].includes(value.toLowerCase());
+  if (Array.isArray(value)) return value.some(eventDetailAllowsAnalytics);
+  if (typeof value !== 'object') return false;
+  if (value.analytics === true || value.analytics_storage === 'granted') return true;
+  return [
+    value.accepted,
+    value.acceptedCategories,
+    value.categories,
+    value.categories?.analytics,
+    value.cookieCategories,
+    value.cookieCategories?.analytics,
+    value.consent,
+  ].some(eventDetailAllowsAnalytics);
+}
+
+function getGtagValue(fieldName, timeoutMs = 650) {
+  return new Promise((resolve) => {
+    if (!GA_MEASUREMENT_ID || typeof window.gtag !== 'function') {
+      resolve('');
+      return;
+    }
+
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timer);
+      resolve(value ? String(value) : '');
+    };
+    const timer = window.setTimeout(() => finish(''), timeoutMs);
+
+    try {
+      window.gtag('get', GA_MEASUREMENT_ID, fieldName, finish);
+    } catch (_) {
+      finish('');
+    }
+  });
+}
+
+function syncBookingLinks() {
+  document.querySelectorAll('a[href*="openBooking=1"], [data-booking-fallback] a[href]').forEach((link) => {
+    link.href = withAttribution(link.getAttribute('href'));
+  });
+}
+
+async function refreshGaAttribution() {
+  if (!analyticsConsentGranted()) return {};
+  if (gaAttributionRefreshPromise) return gaAttributionRefreshPromise;
+
+  gaAttributionRefreshPromise = (async () => {
+    const cookieValues = gaAttributionFromCookies();
+    const [clientId, sessionId] = await Promise.all([
+      getGtagValue('client_id'),
+      getGtagValue('session_id'),
+    ]);
+    const values = {
+      ...cookieValues,
+    };
+
+    if (clientId) values.ga_client_id = clientId;
+    if (sessionId) values.ga_session_id = sessionId;
+
+    storeAttribution(values);
+    syncBookingLinks();
+    return values;
+  })().finally(() => {
+    gaAttributionRefreshPromise = null;
+  });
+
+  return gaAttributionRefreshPromise;
+}
+
+function queueGaAttributionRefresh() {
+  if (analyticsConsentGranted()) {
+    refreshGaAttribution().catch(() => {});
+  }
+}
+
+function observeConsentUpdates() {
+  window.dataLayer = window.dataLayer || [];
+  if (!window.dataLayer.__vivienConsentObserver) {
+    const originalPush = window.dataLayer.push.bind(window.dataLayer);
+    Object.defineProperty(window.dataLayer, '__vivienConsentObserver', { value: true });
+    window.dataLayer.push = (...items) => {
+      const result = originalPush(...items);
+      if (items.some(analyticsConsentValueFromDataLayerItem)) queueGaAttributionRefresh();
+      return result;
+    };
+  }
+
+  ['cookieyes_consent_update', 'cky-consent-update', 'cky_consent_update'].forEach((eventName) => {
+    document.addEventListener(eventName, (event) => {
+      if (eventDetailAllowsAnalytics(event.detail)) analyticsConsentState = 'granted';
+      queueGaAttributionRefresh();
+    });
+  });
+
+  queueGaAttributionRefresh();
+  window.setTimeout(queueGaAttributionRefresh, 800);
 }
 
 function captureAttribution() {
@@ -181,14 +369,19 @@ function pushRestoplaceGoal(goal, origin) {
 
 function showBookingFallback() {
   const fallback = document.querySelector('[data-booking-fallback]');
-  if (fallback) fallback.hidden = false;
+  if (fallback) {
+    syncBookingLinks();
+    fallback.hidden = false;
+  }
 }
 
-window.openBooking = function openBooking(options = {}) {
+window.openBooking = async function openBooking(options = {}) {
   const source = options.source || 'fallback';
   const auto = Boolean(options.auto);
   captureAttribution();
+  await refreshGaAttribution().catch(() => ({}));
   ensureCurrentUrlCarriesAttribution({ booking_source: source });
+  syncBookingLinks();
   pushEvent('booking_intent', { booking_source: source, auto });
 
   const trigger = document.getElementById('restoplace-btn') || document.querySelector('.restoplace-click-open');
@@ -250,9 +443,7 @@ function bootScrollTop() {
 
 function bootBookingButtons() {
   captureAttribution();
-  document.querySelectorAll('a[href*="openBooking=1"], [data-booking-fallback] a[href]').forEach((link) => {
-    link.href = withAttribution(link.getAttribute('href'));
-  });
+  syncBookingLinks();
 
   document.addEventListener('click', (event) => {
     const button = event.target.closest('.js-booking-trigger');
@@ -464,6 +655,7 @@ function bootRestoplaceMessages() {
 }
 
 function bootSite() {
+  observeConsentUpdates();
   bootHeaderScroll();
   bootScrollTop();
   bootNavigation();
