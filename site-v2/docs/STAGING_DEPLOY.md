@@ -57,9 +57,25 @@ Set these in Plesk or the CI/deploy process, not in git:
 - `VIVIEN_SMTP_USER`
 - `VIVIEN_SMTP_PASS`
 - `VIVIEN_SMTP_SECURE`
+- `VIVIEN_SMTP_TIMEOUT` (optional, defaults to `10`)
 - `IMAGEKIT_PRIVATE_KEY`
 - `IMAGEKIT_ENDPOINT`
 - `IMAGEKIT_FOLDER`
+
+For Plesk PHP form handling, if Apache/PHP environment variables cannot be configured
+in the panel, create a private `.env` file in the subscription home directory above
+`httpdocs`:
+
+```text
+.env
+httpdocs/
+logs/
+tmp/
+```
+
+Do not place `.env` inside `httpdocs`, `_staging`, `v2`, or `dist`. The deployed
+`forms/_mailer.php` loads this private home-directory `.env` at runtime. Keep
+`site-v2/.env.example` as a template only; never put real secrets there.
 
 ## Rollout gates
 

@@ -15,6 +15,11 @@
   --danger: #c73b46;
   --success: #2b8f5c;
   --line: rgba(205, 164, 94, 0.22);
+  --floating-control-bottom: 18px;
+  --cookieyes-revisit-size: 56px;
+  --cookieyes-revisit-gap: 10px;
+  --cookieyes-revisit-bg: var(--gold);
+  --cookieyes-revisit-color: #17130f;
   color-scheme: dark;
   scroll-behavior: smooth;
 }
@@ -842,8 +847,8 @@ body.scrolled .site-header--overlay .mainbar::before {
 .booking-sticky {
   position: fixed;
   z-index: 89;
-  left: 24px;
-  bottom: 23px;
+  left: calc(16px + var(--cookieyes-revisit-size) + var(--cookieyes-revisit-gap));
+  bottom: var(--floating-control-bottom);
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -864,6 +869,19 @@ body.scrolled .site-header--overlay .mainbar::before {
 .booking-sticky:hover {
   background: var(--gold-strong);
   color: #ffffff;
+}
+
+.cky-btn-revisit-wrapper {
+  width: var(--cookieyes-revisit-size) !important;
+  height: var(--cookieyes-revisit-size) !important;
+  background: var(--cookieyes-revisit-bg) !important;
+  color: var(--cookieyes-revisit-color) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28) !important;
+}
+
+.cky-btn-revisit-wrapper .cky-btn-revisit {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .scroll-top {

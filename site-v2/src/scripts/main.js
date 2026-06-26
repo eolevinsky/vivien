@@ -1,11 +1,47 @@
-const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid'];
+const ATTRIBUTION_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'utm_referrer',
+  'roistat',
+  'gclid',
+  'gbraid',
+  'wbraid',
+  'fbclid',
+  'ttclid',
+  'msclkid',
+  'yclid',
+];
+const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
+const RESTOPLACE_TRUSTED_HOSTS = ['app.restoplace.cc', 'restoplace.ws', 'vivien.restoplace.ws', 'www.restoplace.ws'];
+const RESTOPLACE_GOALS = {
+  open_widget: { event: 'restoplace_widget_open', category: 'widget' },
+  click_phone: { event: 'restoplace_phone_click', category: 'widget' },
+  open_table_item: { event: 'restoplace_table_item_open', category: 'reservation' },
+  open_banquet_page: { event: 'restoplace_banquet_page_open', category: 'banquet' },
+  open_banquet_item: { event: 'restoplace_banquet_item_open', category: 'banquet' },
+  open_afisha_page: { event: 'restoplace_afisha_page_open', category: 'events' },
+  open_photo_page: { event: 'restoplace_photo_page_open', category: 'widget' },
+  btn_reserve_time: { event: 'reserve_time_click', category: 'reservation' },
+  btn_reserve_send: { event: 'reserve_submit_click', category: 'reservation' },
+  reserve_submit: { event: 'reserve_submit_click', category: 'reservation' },
+  reserve_success: { event: 'reserve_success', category: 'reservation', conversion: true },
+};
+const restoplaceGoalSeenAt = new Map();
+
+function analyticsDebugEnabled() {
+  return window.location.hostname === '127.0.0.1'
+    || window.location.hostname === 'localhost'
+    || document.body?.classList.contains('is-staging');
+}
 
 function eventId(prefix) {
   return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
-function attribution() {
-  const params = new URLSearchParams(window.location.search);
+function attributionFromParams(params = new URLSearchParams(window.location.search)) {
   return ATTRIBUTION_KEYS.reduce((memo, key) => {
     const value = params.get(key);
     if (value) memo[key] = value;
@@ -13,15 +49,134 @@ function attribution() {
   }, {});
 }
 
+function storedAttribution() {
+  try {
+    return JSON.parse(window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY) || '{}') || {};
+  } catch (_) {
+    return {};
+  }
+}
+
+function storeAttribution(values) {
+  if (!Object.keys(values).length) return;
+  try {
+    window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify({
+      ...storedAttribution(),
+      ...values,
+    }));
+  } catch (_) {
+    // Session storage may be unavailable in strict privacy modes.
+  }
+}
+
+function captureAttribution() {
+  storeAttribution(attributionFromParams());
+}
+
+function attribution() {
+  return {
+    ...storedAttribution(),
+    ...attributionFromParams(),
+  };
+}
+
+function withAttribution(url, extraParams = {}) {
+  const nextUrl = new URL(url, window.location.href);
+  Object.entries({
+    ...attribution(),
+    ...extraParams,
+  }).forEach(([key, value]) => {
+    if (value && !nextUrl.searchParams.has(key)) nextUrl.searchParams.set(key, value);
+  });
+  return nextUrl.href;
+}
+
+function ensureCurrentUrlCarriesAttribution(extraParams = {}) {
+  const nextUrl = new URL(window.location.href);
+  let changed = false;
+
+  Object.entries({
+    ...attribution(),
+    ...extraParams,
+  }).forEach(([key, value]) => {
+    if (!value || nextUrl.searchParams.get(key) === value) return;
+    nextUrl.searchParams.set(key, value);
+    changed = true;
+  });
+
+  if (changed) {
+    window.history.replaceState(window.history.state, '', `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+  }
+}
+
 function pushEvent(event, data = {}) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
+  const payload = {
     event,
     event_id: data.event_id || eventId(event),
     page_location: window.location.href,
     ...attribution(),
     ...data,
-  });
+  };
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+  if (analyticsDebugEnabled()) {
+    window.vivienEvents = window.vivienEvents || [];
+    window.vivienEvents.push(payload);
+  }
+}
+
+function isTrustedRestoplaceOrigin(origin) {
+  if (!origin) return false;
+  try {
+    const url = new URL(origin);
+    if (url.origin === window.location.origin) return true;
+    return RESTOPLACE_TRUSTED_HOSTS.some((host) => url.hostname === host || url.hostname.endsWith(`.${host}`));
+  } catch (_) {
+    return false;
+  }
+}
+
+function restoplaceMessageText(data) {
+  if (typeof data === 'string') return data;
+  try {
+    return JSON.stringify(data || {});
+  } catch (_) {
+    return '';
+  }
+}
+
+function restoplaceGoalFromMessage(data) {
+  const raw = restoplaceMessageText(data).toLowerCase();
+  if (!raw) return null;
+  return Object.keys(RESTOPLACE_GOALS).find((goal) => {
+    const pattern = new RegExp(`(^|[^a-z0-9_])${goal}($|[^a-z0-9_])`, 'i');
+    return pattern.test(raw);
+  }) || null;
+}
+
+function isRecentRestoplaceGoal(goal) {
+  const now = Date.now();
+  const previous = restoplaceGoalSeenAt.get(goal) || 0;
+  restoplaceGoalSeenAt.set(goal, now);
+  return now - previous < 1500;
+}
+
+function pushRestoplaceGoal(goal, origin) {
+  const config = RESTOPLACE_GOALS[goal];
+  if (!config) return;
+
+  const event_id = eventId(config.event);
+  const payload = {
+    event_id,
+    booking_source: 'restoplace',
+    restoplace_goal: goal,
+    restoplace_category: config.category,
+    restoplace_origin: origin || '',
+    conversion: Boolean(config.conversion),
+  };
+
+  pushEvent('restoplace_event', payload);
+  pushEvent(config.event, payload);
 }
 
 function showBookingFallback() {
@@ -32,12 +187,14 @@ function showBookingFallback() {
 window.openBooking = function openBooking(options = {}) {
   const source = options.source || 'fallback';
   const auto = Boolean(options.auto);
+  captureAttribution();
+  ensureCurrentUrlCarriesAttribution({ booking_source: source });
   pushEvent('booking_intent', { booking_source: source, auto });
 
   const trigger = document.getElementById('restoplace-btn') || document.querySelector('.restoplace-click-open');
   if (trigger) {
     trigger.click();
-    pushEvent('restoplace_widget_open', { booking_source: source, auto });
+    pushEvent('restoplace_widget_open_attempt', { booking_source: source, auto });
   }
 
   window.setTimeout(() => {
@@ -92,6 +249,11 @@ function bootScrollTop() {
 }
 
 function bootBookingButtons() {
+  captureAttribution();
+  document.querySelectorAll('a[href*="openBooking=1"], [data-booking-fallback] a[href]').forEach((link) => {
+    link.href = withAttribution(link.getAttribute('href'));
+  });
+
   document.addEventListener('click', (event) => {
     const button = event.target.closest('.js-booking-trigger');
     if (!button) return;
@@ -285,14 +447,23 @@ function bootPrivateFeedback() {
 
 function bootRestoplaceMessages() {
   window.addEventListener('message', (event) => {
-    const raw = typeof event.data === 'string' ? event.data : JSON.stringify(event.data || {});
-    if (/reserve_success/i.test(raw)) pushEvent('reserve_success', { booking_source: 'restoplace' });
-    if (/btn_reserve_send|reserve_submit/i.test(raw)) pushEvent('reserve_submit_click', { booking_source: 'restoplace' });
-    if (/open_widget/i.test(raw)) pushEvent('restoplace_widget_open', { booking_source: 'restoplace' });
+    if (analyticsDebugEnabled()) {
+      window.vivienRestoplaceMessages = window.vivienRestoplaceMessages || [];
+      window.vivienRestoplaceMessages.push({
+        origin: event.origin || '',
+        data_type: typeof event.data,
+        data_preview: restoplaceMessageText(event.data).slice(0, 500),
+      });
+      window.vivienRestoplaceMessages = window.vivienRestoplaceMessages.slice(-50);
+    }
+
+    const goal = restoplaceGoalFromMessage(event.data);
+    if (!goal || !isTrustedRestoplaceOrigin(event.origin) || isRecentRestoplaceGoal(goal)) return;
+    pushRestoplaceGoal(goal, event.origin);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootSite() {
   bootHeaderScroll();
   bootScrollTop();
   bootNavigation();
@@ -304,4 +475,10 @@ document.addEventListener('DOMContentLoaded', () => {
   bootReviewPositive();
   bootPrivateFeedback();
   bootRestoplaceMessages();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootSite, { once: true });
+} else {
+  bootSite();
+}

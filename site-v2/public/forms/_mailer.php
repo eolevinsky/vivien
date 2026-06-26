@@ -10,6 +10,95 @@ require_once __DIR__ . '/../vendor/phpmailer/SMTP.php';
 
 header('Content-Type: text/plain; charset=UTF-8');
 
+function vivien_find_env_file(): ?string {
+  $dir = __DIR__;
+
+  for ($depth = 0; $depth < 12; $depth++) {
+    if (basename($dir) === 'httpdocs') {
+      $candidate = dirname($dir) . '/.env';
+      return is_readable($candidate) ? $candidate : null;
+    }
+
+    $parent = dirname($dir);
+    if ($parent === $dir) break;
+    $dir = $parent;
+  }
+
+  $dir = __DIR__;
+  for ($depth = 0; $depth < 8; $depth++) {
+    $candidate = $dir . '/.env';
+    if (is_readable($candidate)) return $candidate;
+
+    $parent = dirname($dir);
+    if ($parent === $dir) break;
+    $dir = $parent;
+  }
+
+  return null;
+}
+
+function vivien_parse_env_value(string $value): string {
+  $value = trim($value);
+  if ($value === '') return '';
+
+  $quote = $value[0];
+  if (($quote === '"' || $quote === "'") && str_ends_with($value, $quote)) {
+    $value = substr($value, 1, -1);
+    if ($quote === '"') {
+      $value = strtr($value, [
+        '\\n' => "\n",
+        '\\r' => "\r",
+        '\\t' => "\t",
+        '\\"' => '"',
+        '\\\\' => '\\',
+      ]);
+    }
+  }
+
+  return $value;
+}
+
+function vivien_env(string $key, string $fallback = ''): string {
+  $value = getenv($key);
+  return $value === false || $value === '' ? $fallback : $value;
+}
+
+function vivien_smtp_secure(int $port): string {
+  $secure = strtolower(vivien_env('VIVIEN_SMTP_SECURE', $port === 465 ? 'ssl' : 'tls'));
+  if ($port === 465 && $secure === 'tls') return 'ssl';
+  return $secure;
+}
+
+function vivien_load_env_file(): void {
+  $envFile = vivien_find_env_file();
+  if ($envFile === null) return;
+
+  $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  if ($lines === false) return;
+
+  foreach ($lines as $line) {
+    $line = trim($line);
+    if ($line === '' || str_starts_with($line, '#')) continue;
+    if (str_starts_with($line, 'export ')) $line = trim(substr($line, 7));
+
+    $separator = strpos($line, '=');
+    if ($separator === false) continue;
+
+    $key = trim(substr($line, 0, $separator));
+    if (!preg_match('/^[A-Z_][A-Z0-9_]*$/', $key)) continue;
+
+    $current = getenv($key);
+    if ($current !== false && $current !== '') continue;
+
+    $value = vivien_parse_env_value(substr($line, $separator + 1));
+    putenv($key . '=' . $value);
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
+  }
+}
+
+vivien_load_env_file();
+
 function vivien_value(string $key): string {
   return trim((string)($_POST[$key] ?? ''));
 }
@@ -91,24 +180,25 @@ function vivien_send(array $config): void {
   [$html, $text] = vivien_body($fields);
   $mail = new PHPMailer(true);
   $mail->CharSet = 'UTF-8';
+  $mail->Timeout = max(3, (int)vivien_env('VIVIEN_SMTP_TIMEOUT', '10'));
 
   try {
-    $smtpHost = getenv('VIVIEN_SMTP_HOST') ?: '';
+    $smtpHost = vivien_env('VIVIEN_SMTP_HOST');
     if ($smtpHost !== '') {
       $mail->isSMTP();
       $mail->Host = $smtpHost;
-      $mail->Port = (int)(getenv('VIVIEN_SMTP_PORT') ?: 587);
+      $mail->Port = (int)vivien_env('VIVIEN_SMTP_PORT', '587');
       $mail->SMTPAuth = true;
-      $mail->Username = getenv('VIVIEN_SMTP_USER') ?: '';
-      $mail->Password = getenv('VIVIEN_SMTP_PASS') ?: '';
-      $secure = getenv('VIVIEN_SMTP_SECURE') ?: 'tls';
+      $mail->Username = vivien_env('VIVIEN_SMTP_USER');
+      $mail->Password = vivien_env('VIVIEN_SMTP_PASS');
+      $secure = vivien_smtp_secure($mail->Port);
       if ($secure !== 'none') $mail->SMTPSecure = $secure;
     } else {
       $mail->isMail();
     }
 
-    $fromEmail = getenv('VIVIEN_MAIL_FROM') ?: 'noreply@vivien.lv';
-    $fromName = getenv('VIVIEN_MAIL_FROM_NAME') ?: 'Brasserie Vivien';
+    $fromEmail = vivien_env('VIVIEN_MAIL_FROM', 'noreply@vivien.lv');
+    $fromName = vivien_env('VIVIEN_MAIL_FROM_NAME', 'Brasserie Vivien');
     $mail->setFrom($fromEmail, $fromName);
 
     foreach (($config['to'] ?? []) as $recipient) {
@@ -128,7 +218,15 @@ function vivien_send(array $config): void {
     $mail->send();
     echo 'OK';
   } catch (Exception $error) {
-    error_log('Vivien form mail failed: ' . $error->getMessage());
+    error_log(sprintf(
+      'Vivien form mail failed: %s; smtp_host=%s; smtp_port=%s; smtp_user_set=%s; smtp_pass_set=%s; timeout=%d',
+      $error->getMessage(),
+      $smtpHost !== '' ? $smtpHost : 'not configured',
+      $smtpHost !== '' ? (string)$mail->Port : 'n/a',
+      vivien_env('VIVIEN_SMTP_USER') !== '' ? 'yes' : 'no',
+      vivien_env('VIVIEN_SMTP_PASS') !== '' ? 'yes' : 'no',
+      $mail->Timeout
+    ));
     vivien_fail('Email delivery failed', 500);
   }
 }
