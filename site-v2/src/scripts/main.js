@@ -1,4 +1,5 @@
 const ATTRIBUTION_KEYS = [
+  'lang',
   'utm_source',
   'utm_medium',
   'utm_campaign',
@@ -14,11 +15,26 @@ const ATTRIBUTION_KEYS = [
   'msclkid',
   'yclid',
   'ga_client_id',
+  'ga_client_id_source',
   '_ga',
   'ga_session_id',
 ];
 const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
+const BOOKING_CLIENT_ID_STORAGE_KEY = 'vivien_booking_client_id';
 const GA_MEASUREMENT_ID = window.VIVIEN_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
+const RESTOPLACE_ADDRESS_HASH = window.VIVIEN_RESTOPLACE_ADDRESS_HASH || '5a003b0dc90935f47c87';
+const RESTOPLACE_LOCALES = Array.isArray(window.VIVIEN_RESTOPLACE_LOCALES)
+  ? window.VIVIEN_RESTOPLACE_LOCALES
+  : ['en', 'lv', 'ru'];
+const RESTOPLACE_GETPARAM_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'utm_referrer',
+  'roistat',
+];
 const RESTOPLACE_TRUSTED_HOSTS = ['app.restoplace.cc', 'restoplace.ws', 'vivien.restoplace.ws', 'www.restoplace.ws'];
 const RESTOPLACE_GOALS = {
   open_widget: { event: 'restoplace_widget_open', category: 'widget' },
@@ -36,6 +52,7 @@ const RESTOPLACE_GOALS = {
 const restoplaceGoalSeenAt = new Map();
 let analyticsConsentState = null;
 let gaAttributionRefreshPromise = null;
+let inMemoryBookingClientId = '';
 
 function analyticsDebugEnabled() {
   return window.location.hostname === '127.0.0.1'
@@ -73,6 +90,55 @@ function storeAttribution(values) {
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+}
+
+function storedBookingClientId() {
+  if (inMemoryBookingClientId) return inMemoryBookingClientId;
+  try {
+    inMemoryBookingClientId = window.sessionStorage.getItem(BOOKING_CLIENT_ID_STORAGE_KEY) || '';
+  } catch (_) {
+    // Session storage may be unavailable in strict privacy modes.
+  }
+  return inMemoryBookingClientId;
+}
+
+function storeBookingClientId(value) {
+  inMemoryBookingClientId = value;
+  try {
+    window.sessionStorage.setItem(BOOKING_CLIENT_ID_STORAGE_KEY, value);
+  } catch (_) {
+    // Keep the in-memory value for the current page if storage is unavailable.
+  }
+}
+
+function randomClientIdPart() {
+  try {
+    const values = new Uint32Array(1);
+    window.crypto.getRandomValues(values);
+    return String(values[0]).padStart(10, '0');
+  } catch (_) {
+    return String(Math.floor(Math.random() * 10000000000)).padStart(10, '0');
+  }
+}
+
+function fallbackGaClientId() {
+  const existing = storedBookingClientId();
+  if (existing) return existing;
+
+  const value = `${randomClientIdPart()}.${Math.floor(Date.now() / 1000)}`;
+  storeBookingClientId(value);
+  return value;
+}
+
+function ensureBookingGaClientId() {
+  if (attribution().ga_client_id) return {};
+
+  const values = {
+    ga_client_id: fallbackGaClientId(),
+    ga_client_id_source: 'vivien_session_fallback',
+  };
+  storeAttribution(values);
+  return values;
 }
 
 function readCookie(name) {
@@ -121,6 +187,21 @@ function gaAttributionFromCookies() {
   if (gaSessionId) values.ga_session_id = gaSessionId;
 
   return values;
+}
+
+function bookingFormLanguage(value) {
+  const lang = String(value || '').trim().toLowerCase().slice(0, 2);
+  return RESTOPLACE_LOCALES.includes(lang) ? lang : '';
+}
+
+function currentBookingLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const candidates = [
+    params.get('lang'),
+    document.documentElement.lang,
+    document.body?.dataset.locale,
+  ];
+  return candidates.map(bookingFormLanguage).find(Boolean) || 'en';
 }
 
 function dataLayerCommand(item) {
@@ -201,6 +282,118 @@ function syncBookingLinks() {
   });
 }
 
+function isIosBrowser() {
+  const ua = window.navigator.userAgent || '';
+  return /iPad|iPhone|iPod/i.test(ua)
+    || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+}
+
+function isInAppBrowser() {
+  return /FBAN|FBAV|FB_IAB|Instagram|TikTok|musical_ly|Bytedance|Line\/|MicroMessenger/i
+    .test(window.navigator.userAgent || '');
+}
+
+function shouldUseDirectBookingNavigation() {
+  return isIosBrowser() || isInAppBrowser();
+}
+
+function restoplaceParamValue(value) {
+  const text = String(value || '').trim();
+  return text ? text.slice(0, 500) : '';
+}
+
+function restoplaceGetparams(extraParams = {}) {
+  const current = attribution();
+  const params = RESTOPLACE_GETPARAM_KEYS.reduce((memo, key) => {
+    const value = restoplaceParamValue(current[key]);
+    if (value) memo[key] = value;
+    return memo;
+  }, {});
+
+  const clientId = restoplaceParamValue(current.ga_client_id);
+  if (!params.roistat && clientId) params.roistat = clientId;
+
+  if (!params.utm_source) params.utm_source = 'vivien.lv';
+  if (!params.utm_medium) params.utm_medium = 'restoplace';
+  if (!params.utm_campaign) params.utm_campaign = 'table_booking';
+  if (!params.utm_content) params.utm_content = restoplaceParamValue(extraParams.booking_source) || 'booking_widget';
+  if (!params.utm_term) params.utm_term = restoplaceParamValue(current.gclid || current.gbraid || current.wbraid || current.yclid);
+  if (!params.utm_referrer) {
+    params.utm_referrer = restoplaceParamValue(current.utm_referrer || document.referrer || `${window.location.origin}${window.location.pathname}`);
+  }
+
+  return RESTOPLACE_GETPARAM_KEYS.reduce((memo, key) => {
+    const value = restoplaceParamValue(params[key]);
+    if (value) memo[key] = value;
+    return memo;
+  }, {});
+}
+
+function restoplaceBookingUrl(extraParams = {}) {
+  const url = new URL('https://www.restoplace.ws/');
+  url.searchParams.set('address', RESTOPLACE_ADDRESS_HASH);
+  url.searchParams.set('iframe', '1');
+  url.searchParams.set('lang', bookingFormLanguage(extraParams.lang) || currentBookingLanguage());
+  url.searchParams.set('source', window.location.hostname);
+  Object.entries(restoplaceGetparams(extraParams)).forEach(([key, value]) => {
+    if (value && !url.searchParams.has(key)) url.searchParams.set(key, value);
+  });
+  return url.href;
+}
+
+function ensureRestoplaceShell() {
+  let bg = document.getElementById('restoplace-bg');
+  let modal = document.getElementById('restoplace-modal');
+  let content = document.getElementById('restoplace-content');
+
+  if (!bg) {
+    bg = document.createElement('div');
+    bg.id = 'restoplace-bg';
+    document.body.appendChild(bg);
+  }
+
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'restoplace-modal';
+    modal.innerHTML = '<div id="restoplace-content"></div>';
+    document.body.appendChild(modal);
+  }
+
+  if (!content || !modal.contains(content)) {
+    content = modal.querySelector('#restoplace-content');
+  }
+  if (!content) {
+    content = document.createElement('div');
+    content.id = 'restoplace-content';
+    modal.appendChild(content);
+  }
+
+  return { bg, modal, content };
+}
+
+function openRestoplaceFrame(url) {
+  const { bg, modal, content } = ensureRestoplaceShell();
+  content.innerHTML = '';
+
+  const iframe = document.createElement('iframe');
+  iframe.id = 'restoplace-iframe';
+  iframe.src = url;
+  iframe.title = 'Brasserie Vivien booking';
+  iframe.frameBorder = '0';
+  iframe.style.cssText = 'width:100%;height:100%;border:0;background:#34353e;';
+  content.appendChild(iframe);
+
+  bg.classList.add('restoplace-btn-open');
+  modal.classList.add('restoplace-open');
+  document.documentElement.classList.add('restoplace-modal-open');
+}
+
+function closeRestoplaceFrame() {
+  document.getElementById('restoplace-bg')?.classList.remove('restoplace-btn-open');
+  document.getElementById('restoplace-modal')?.classList.remove('restoplace-open');
+  document.documentElement.classList.remove('restoplace-modal-open');
+}
+
 async function refreshGaAttribution() {
   if (!analyticsConsentGranted()) return {};
   if (gaAttributionRefreshPromise) return gaAttributionRefreshPromise;
@@ -213,10 +406,12 @@ async function refreshGaAttribution() {
     ]);
     const values = {
       ...cookieValues,
+      ...gaAttributionFromCookies(),
     };
 
     if (clientId) values.ga_client_id = clientId;
     if (sessionId) values.ga_session_id = sessionId;
+    if (values.ga_client_id) values.ga_client_id_source = 'ga4';
 
     storeAttribution(values);
     syncBookingLinks();
@@ -378,17 +573,25 @@ function showBookingFallback() {
 window.openBooking = async function openBooking(options = {}) {
   const source = options.source || 'fallback';
   const auto = Boolean(options.auto);
+  const bookingParams = {
+    booking_source: source,
+    lang: currentBookingLanguage(),
+  };
   captureAttribution();
   await refreshGaAttribution().catch(() => ({}));
-  ensureCurrentUrlCarriesAttribution({ booking_source: source });
+  ensureBookingGaClientId();
+  ensureCurrentUrlCarriesAttribution(bookingParams);
   syncBookingLinks();
   pushEvent('booking_intent', { booking_source: source, auto });
 
-  const trigger = document.getElementById('restoplace-btn') || document.querySelector('.restoplace-click-open');
-  if (trigger) {
-    trigger.click();
-    pushEvent('restoplace_widget_open_attempt', { booking_source: source, auto });
+  if (shouldUseDirectBookingNavigation()) {
+    pushEvent('restoplace_direct_open_attempt', { booking_source: source, auto });
+    window.location.assign(restoplaceBookingUrl(bookingParams));
+    return;
   }
+
+  openRestoplaceFrame(restoplaceBookingUrl(bookingParams));
+  pushEvent('restoplace_widget_open_attempt', { booking_source: source, auto });
 
   window.setTimeout(() => {
     const hasRestoplaceFrame = document.querySelector('iframe[src*="restoplace"], .restoplace-widget, [class*="restoplace"]');
@@ -446,11 +649,14 @@ function bootBookingButtons() {
   syncBookingLinks();
 
   document.addEventListener('click', (event) => {
-    const button = event.target.closest('.js-booking-trigger');
+    const button = event.target.closest('.js-booking-trigger, .booking-sticky[href*="openBooking=1"]');
     if (!button) return;
     event.preventDefault();
+    const sourceFromHref = button.href
+      ? new URL(button.href, window.location.href).searchParams.get('booking_source')
+      : '';
     window.openBooking({
-      source: button.dataset.bookingSource || 'fallback',
+      source: button.dataset.bookingSource || sourceFromHref || 'fallback',
       auto: false,
     });
   });
@@ -638,12 +844,19 @@ function bootPrivateFeedback() {
 
 function bootRestoplaceMessages() {
   window.addEventListener('message', (event) => {
+    const messageText = restoplaceMessageText(event.data);
+
+    if (messageText === 'closemodal' && isTrustedRestoplaceOrigin(event.origin)) {
+      closeRestoplaceFrame();
+      return;
+    }
+
     if (analyticsDebugEnabled()) {
       window.vivienRestoplaceMessages = window.vivienRestoplaceMessages || [];
       window.vivienRestoplaceMessages.push({
         origin: event.origin || '',
         data_type: typeof event.data,
-        data_preview: restoplaceMessageText(event.data).slice(0, 500),
+        data_preview: messageText.slice(0, 500),
       });
       window.vivienRestoplaceMessages = window.vivienRestoplaceMessages.slice(-50);
     }

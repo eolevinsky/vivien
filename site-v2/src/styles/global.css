@@ -844,6 +844,88 @@ body.scrolled .site-header--overlay .mainbar::before {
   display: none !important;
 }
 
+html.restoplace-modal-open,
+html.restoplace-modal-open body {
+  height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  padding: 0 !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
+#restoplace-bg {
+  background: #2a2b34;
+  bottom: -9999px;
+  cursor: default !important;
+  display: none;
+  left: 0;
+  min-height: 100%;
+  position: fixed;
+  top: -9999px;
+  width: 100%;
+  z-index: 2147483649;
+}
+
+#restoplace-bg.restoplace-btn-open {
+  cursor: pointer;
+  display: block;
+  opacity: 0.95;
+}
+
+#restoplace-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  height: calc(100% - 60px);
+  left: 0;
+  margin: 30px auto;
+  max-width: 900px;
+  opacity: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: scale(0.95);
+  transition: 0.2s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 2147483650;
+}
+
+#restoplace-modal.restoplace-open {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+#restoplace-content {
+  -webkit-overflow-scrolling: touch !important;
+  background-color: #ffffff;
+  height: 100%;
+  left: 0;
+  overflow: hidden !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+#restoplace-content iframe {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 940px) {
+  #restoplace-modal {
+    border-radius: 0;
+    height: 100%;
+    margin: 0;
+    max-width: none;
+  }
+}
+
 .booking-sticky {
   position: fixed;
   z-index: 89;

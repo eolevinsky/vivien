@@ -29,6 +29,13 @@ export const localeLabels = {
   ru: 'RU'
 };
 
+export const restoplaceLocales = ['en', 'lv', 'ru'];
+
+export function bookingFormLocale(locale) {
+  const normalized = String(locale || '').trim().toLowerCase().slice(0, 2);
+  return restoplaceLocales.includes(normalized) ? normalized : 'en';
+}
+
 export const languageNames = {
   en: 'English',
   lv: 'Latvian',

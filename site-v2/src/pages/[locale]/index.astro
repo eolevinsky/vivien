@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import BookingButton from '../../components/BookingButton.astro';
 import MenuSection from '../../components/MenuSection.astro';
 import FormShell from '../../components/FormShell.astro';
-import { alternatesFor, canonicalUrl, getGallery, getMenu, locales, localizedPath, site, specials, t, withBase } from '../../content/site.js';
+import { alternatesFor, bookingFormLocale, canonicalUrl, getGallery, getMenu, locales, localizedPath, site, specials, t, withBase } from '../../content/site.js';
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
@@ -14,6 +14,7 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const copy = t(locale);
 const path = localizedPath(locale, 'home');
+const bookingLang = bookingFormLocale(locale);
 const menu = getMenu(locale);
 const gallery = getGallery();
 const restaurantSchema = {
@@ -45,7 +46,7 @@ const restaurantSchema = {
   acceptsReservations: true,
   potentialAction: {
     '@type': 'ReserveAction',
-    target: canonicalUrl('/book/?openBooking=1'),
+    target: canonicalUrl(`${path}?openBooking=1&lang=${bookingLang}&booking_source=schema_reserve`),
     result: { '@type': 'FoodEstablishmentReservation', name: 'Table reservation' }
   },
   sameAs: site.social

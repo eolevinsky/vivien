@@ -50,6 +50,7 @@ Set these in Plesk or the CI/deploy process, not in git:
 
 - `PUBLIC_COOKIEYES_ID`
 - `PUBLIC_GTM_ID`
+- `PUBLIC_GA_MEASUREMENT_ID`
 - `VIVIEN_MAIL_FROM`
 - `VIVIEN_MAIL_FROM_NAME`
 - `VIVIEN_SMTP_HOST`
@@ -61,6 +62,10 @@ Set these in Plesk or the CI/deploy process, not in git:
 - `IMAGEKIT_PRIVATE_KEY`
 - `IMAGEKIT_ENDPOINT`
 - `IMAGEKIT_FOLDER`
+
+Astro reads `PUBLIC_*` at build time. If the production `.env` lives above
+`httpdocs`, make sure the deploy command exports it before `npm run build`; the
+static files cannot pick up new `PUBLIC_*` values after the build is generated.
 
 For Plesk PHP form handling, if Apache/PHP environment variables cannot be configured
 in the panel, create a private `.env` file in the subscription home directory above
@@ -82,7 +87,10 @@ Do not place `.env` inside `httpdocs`, `_staging`, `v2`, or `dist`. The deployed
 - Check `/en/`, `/lv/`, `/fr/`, `/ru/` canonical and hreflang in page source.
 - Confirm menu items exist in HTML source before JS runs.
 - Confirm homepage booking opens Restoplace in one tap.
-- Confirm `/book/?openBooking=1&utm_source=test` auto-opens Restoplace.
+- Confirm `/book/?openBooking=1&utm_source=test&ga_client_id=1234567890.1719490000` auto-opens Restoplace.
+- Confirm booking links and the Restoplace iframe pass the site locale when Restoplace supports it, with unsupported locales falling back to `lang=en` (currently French pages use `lang=en`).
+- Confirm the Restoplace iframe `src` only uses documented webhook `getparams`: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_referrer`, `roistat`.
+- Confirm `roistat` carries the GA client id or Vivien session fallback id, including before CookieYes consent is accepted.
 - Confirm GTM receives `booking_intent`, `restoplace_widget_open`, form success events and `reserve_success`.
 - Confirm each form returns `OK` only after email delivery.
 - Confirm all form emails arrive in the correct Planfix mailbox.
