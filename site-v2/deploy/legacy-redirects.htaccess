@@ -1,0 +1,33 @@
+# Apply only during production launch after site-v2/dist has passed staging QA.
+RewriteEngine On
+
+Redirect 301 /index.html /en/
+Redirect 301 /index-lv.html /lv/
+Redirect 301 /index-fr.html /fr/
+Redirect 301 /index-ru.html /ru/
+
+Redirect 301 /gift-card/giftcard-en.html /en/gift-card/
+Redirect 301 /gift-card/giftcard-lv.html /lv/gift-card/
+Redirect 301 /gift-card/giftcard-fr.html /fr/gift-card/
+Redirect 301 /gift-card/giftcard-ru.html /ru/gift-card/
+Redirect 301 /gift-card/giftcard-thanks-en.html /en/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-lv.html /lv/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-fr.html /fr/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-ru.html /ru/gift-card/thanks/
+
+Redirect 301 /review_en.html /en/review/
+Redirect 301 /review_lv.html /lv/review/
+Redirect 301 /review_fr.html /fr/review/
+Redirect 301 /review_ru.html /ru/review/
+
+Redirect 301 /new-loyal-registration-en.html /en/loyalty/
+Redirect 301 /new-loyal-registration-lv.html /lv/loyalty/
+Redirect 301 /new-loyal-registration-fr.html /fr/loyalty/
+Redirect 301 /new-loyal-registration-ru.html /ru/loyalty/
+Redirect 301 /new-loyal.html /en/loyalty/
+
+Redirect 301 /JD-Waiter.html /en/jobs/waiter/
+Redirect 301 /JD-Waiter-lv.html /lv/jobs/waiter/
+Redirect 301 /JD-Waiter-fr.html /fr/jobs/waiter/
+Redirect 301 /JD-Waiter-ru.html /ru/jobs/waiter/
+Redirect 301 /JD-Maitre-d-hotel.html /en/jobs/maitre-d-hotel/

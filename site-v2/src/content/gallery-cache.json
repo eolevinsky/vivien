@@ -1,0 +1,38 @@
+{
+  "updatedAt": "2026-07-01T03:01:59.955Z",
+  "source": "local fallback: ImageKit folder returned no images",
+  "items": [
+    {
+      "src": "/assets/img/gallery/1_Vivien_and_Oysters.jpg",
+      "alt": "Vivien oysters and table setting"
+    },
+    {
+      "src": "/assets/img/gallery/2_Vivien_at_Work.jpg",
+      "alt": "Vivien team at work"
+    },
+    {
+      "src": "/assets/img/gallery/3_Wine_Stand.jpg",
+      "alt": "Wine stand at Brasserie Vivien"
+    },
+    {
+      "src": "/assets/img/gallery/4_The_Mim.jpg",
+      "alt": "Brasserie Vivien interior moment"
+    },
+    {
+      "src": "/assets/img/gallery/5_Accordeonist.jpg",
+      "alt": "Accordionist at Vivien"
+    },
+    {
+      "src": "/assets/img/gallery/6_Seiling_with_lamps.jpg",
+      "alt": "Vivien ceiling lamps"
+    },
+    {
+      "src": "/assets/img/gallery/7_Opera_Singer.jpg",
+      "alt": "Opera singer at Vivien"
+    },
+    {
+      "src": "/assets/img/gallery/8_Guitar_and_Singer.jpg",
+      "alt": "Guitar and singer at Vivien"
+    }
+  ]
+}

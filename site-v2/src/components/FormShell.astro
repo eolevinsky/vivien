@@ -1,0 +1,27 @@
+---
+import { localizedPath, t, withBase } from '../content/site.js';
+const { locale, action, eventName, submitLabel } = Astro.props;
+const copy = t(locale);
+---
+<form
+  class="vivien-form"
+  method="post"
+  action={action}
+  data-success-event={eventName}
+  data-loading-message={copy.form.loading}
+  data-success-message={copy.form.success}
+  data-error-message={copy.form.error}
+  data-server-error-message={copy.form.serverUnavailable}
+  enctype="multipart/form-data"
+>
+  <slot />
+  <label class="consent-line">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>{copy.form.consent} <a href={withBase(localizedPath(locale, 'legal', { legal: 'privacy' }))}>Privacy</a></span>
+  </label>
+  <input type="hidden" name="language" value={locale} />
+  <input type="hidden" name="source_page" value={Astro.url.pathname} />
+  <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" />
+  <div class="form-state" data-form-state></div>
+  <button type="submit">{submitLabel || copy.form.send}</button>
+</form>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FormShell from '../../../components/FormShell.astro';
+import { alternatesFor, locales, localizedPath, t, withBase } from '../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'loyalty');
+---
+<BaseLayout locale={locale} title={`${copy.loyalty.title} | Brasserie Vivien`} description={copy.loyalty.description} canonicalPath={path} alternates={alternatesFor('loyalty')}>
+  <Header locale={locale} active="loyalty" kind="loyalty" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/gallery/2_Vivien_at_Work.jpg')} alt="Brasserie Vivien team" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.nav.loyalty}</p>
+        <h1>{copy.loyalty.title}</h1>
+        <p>{copy.loyalty.description}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="split">
+        <div class="section-title">
+          <p>{copy.loyalty.title}</p>
+          <h2>{copy.loyalty.description}</h2>
+        </div>
+        <div class="panel">
+          <FormShell locale={locale} action={withBase('/forms/register-new-loyal.php')} eventName="loyalty_registration_submit" submitLabel={copy.loyalty.submit}>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.form.name} required />
+              <input type="email" name="email" placeholder={copy.form.email} required />
+            </div>
+            <div class="row">
+              <input type="tel" name="phone" placeholder={copy.form.phone} required />
+              <input type="date" name="birthdate" aria-label={copy.loyalty.birthdate} />
+            </div>
+            <div class="row">
+              <input type="number" name="people" placeholder={copy.loyalty.people} />
+              <select name="gender" aria-label={copy.loyalty.gender}>
+                <option value="">{copy.loyalty.gender}</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <input type="text" name="profession" placeholder={copy.loyalty.profession} />
+            <textarea name="infosource" placeholder={copy.loyalty.source}></textarea>
+            <textarea name="message" placeholder={copy.loyalty.interests}></textarea>
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

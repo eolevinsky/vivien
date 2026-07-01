@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import { alternatesFor, locales, localizedPath, t, withBase } from '../../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'giftThanks');
+---
+<BaseLayout locale={locale} title={`${copy.gift.thanksTitle} | Brasserie Vivien`} description={copy.gift.thanksText} canonicalPath={path} alternates={alternatesFor('giftThanks')} noindex={true}>
+  <Header locale={locale} active="gift" kind="giftThanks" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/Hero.jpg')} alt="Brasserie Vivien interior" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">{copy.nav.giftCard}</p>
+        <h1>{copy.gift.thanksTitle}</h1>
+        <p>{copy.gift.thanksText}</p>
+        <a class="button" href={withBase(localizedPath(locale, 'home'))}>{copy.nav.home}</a>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

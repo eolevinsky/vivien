@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BookingButton from '../../components/BookingButton.astro';
+import { alternatesFor, localizedPath, t, withBase } from '../../content/site.js';
+
+const locale = 'en';
+const copy = t(locale);
+---
+<BaseLayout locale={locale} title="Book a Table at Brasserie Vivien Riga" description="First-party Vivien booking entry page. Add openBooking=1 to auto-open the Restoplace reservation widget after page load." canonicalPath="/book/" alternates={alternatesFor('book')}>
+  <Header locale={locale} active="book" kind="book" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/hero-6.jpg')} alt="Brasserie Vivien table setting" loading="eager" />
+      <div class="hero-content">
+        <p class="kicker">Reservation</p>
+        <h1>Book a Table</h1>
+        <p>Use this Vivien page as the campaign destination. The booking widget opens automatically when the URL includes <code>openBooking=1</code>.</p>
+        <div class="hero-actions">
+          <BookingButton label={copy.nav.book} source="book_page" />
+          <a class="button" href={withBase(localizedPath(locale, 'home'))}>Back to Vivien</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+const {
+  label,
+  source = 'fallback',
+  className = 'button primary',
+  stepType = '',
+  lang = '',
+} = Astro.props;
+---
+<button
+  type="button"
+  class={className + ' js-booking-trigger'}
+  data-booking-source={source}
+  data-booking-step-type={stepType || undefined}
+  data-booking-lang={lang || undefined}
+>{label}</button>

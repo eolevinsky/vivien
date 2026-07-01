@@ -1,0 +1,42 @@
+---
+import { t } from '../content/site.js';
+const { locale, menu } = Astro.props;
+const copy = t(locale);
+const allLabel = { en: 'All', lv: 'Visi', fr: 'Tous', ru: 'Все' }[locale] || 'All';
+const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
+  String(import.meta.env.VIVIEN_MENU_IMAGES_ENABLED || '').trim().toLowerCase()
+);
+---
+<section class="section menu-section" id="menu">
+  <div class="section-title">
+    <p>{copy.home.menuTitle}</p>
+    <h2>{copy.home.menuSubtitle}</h2>
+  </div>
+  <div class="menu-shell" data-menu-shell>
+    <ul class="menu-filters isotope-filters" aria-label="Menu filters">
+      <li class="filter-active active" data-menu-filter="*" tabindex="0">{allLabel}</li>
+      {menu.categories.map((category) => (
+        <li data-menu-filter={category.id} tabindex="0">{category.name}</li>
+      ))}
+    </ul>
+    <div class="menu-grid menu-api-grid">
+      {menu.items.map((item) => (
+        <article class:list={['menu-item', 'isotope-item', item.description && 'has-desc', menuImagesEnabled && (item.thumbUrl || item.imageUrl) && 'has-image']} data-menu-category={item.categoryId} data-menu-description={item.description || ''} tabindex={item.description ? '0' : undefined}>
+          {menuImagesEnabled && (item.thumbUrl || item.imageUrl) && (
+            <figure class="menu-image">
+              <img src={item.thumbUrl || item.imageUrl} alt={item.imageAlt || item.name} loading="lazy" width="96" height="96" />
+            </figure>
+          )}
+          <div class="menu-item-body">
+            <div class="menu-content">
+              <h3>{item.name}</h3>
+              <p class="priceline" aria-hidden="true"></p>
+              {item.price && <span>{item.price}</span>}
+            </div>
+            {item.description && <p class="menu-ingredients">{item.description}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

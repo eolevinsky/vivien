@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FormShell from '../../../components/FormShell.astro';
+import { alternatesFor, legalLabels, locales, localizedPath, t, withBase } from '../../../content/site.js';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const copy = t(locale);
+const path = localizedPath(locale, 'gift');
+const giftAmountMin = '10\u00a0€';
+const giftAmountMax = '500\u00a0€';
+---
+<BaseLayout locale={locale} title={`${copy.gift.title} | Brasserie Vivien`} description={copy.gift.description} canonicalPath={path} alternates={alternatesFor('gift')}>
+  <Header locale={locale} active="gift" kind="gift" />
+  <main>
+    <section class="hero page-hero">
+      <img src={withBase('/assets/img/Hero.jpg')} alt="Brasserie Vivien gift card mood" loading="eager" />
+      <div class="hero-content">
+        <h1>{copy.gift.titleLead} <span>{copy.gift.titleBrand}</span></h1>
+        <p>
+          {copy.gift.formatLabel} <strong>Apple / Google Wallet</strong>. {copy.gift.amountPrefix} <strong>{giftAmountMin}</strong> {copy.gift.amountTo} <strong>{giftAmountMax}</strong>. {copy.gift.deliveryLine}
+        </p>
+        <p>{copy.gift.benefitLead}</p>
+        <ul class="hero-list">
+          {copy.gift.benefits.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="hero-actions">
+          <a class="button" href="#giftcard-form">{copy.gift.formTitle}</a>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="giftcard-form">
+      <div class="split">
+        <div>
+          <div class="section-title">
+            <p>{copy.gift.formTitle}</p>
+          </div>
+          <p><a href={withBase(localizedPath(locale, 'legal', { legal: 'terms' }))}>{legalLabels.terms[locale]}</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'public-offer' }))}>{legalLabels['public-offer'][locale]}</a> · <a href={withBase(localizedPath(locale, 'legal', { legal: 'personal-data-consent' }))}>{legalLabels['personal-data-consent'][locale]}</a></p>
+        </div>
+        <div class="panel">
+          <FormShell locale={locale} action={withBase('/forms/giftcard.php')} eventName="gift_card_submit" submitLabel={copy.gift.submit}>
+            <div class="row">
+              <input type="number" min="10" max="500" name="amount" placeholder={copy.gift.amount} required />
+              <input type="date" name="delivery_at" aria-label={copy.gift.deliveryAt} />
+            </div>
+            <input type="email" name="payer_email" placeholder={copy.gift.payerEmail} required />
+            <textarea name="payer_note" placeholder={copy.gift.payerNote}></textarea>
+            <div class="row">
+              <input type="text" name="name" placeholder={copy.gift.recipientName} required />
+              <input type="email" name="email" placeholder={copy.gift.recipientEmail} required />
+            </div>
+            <input type="tel" name="phone" placeholder={copy.gift.recipientPhone} required />
+            <textarea name="message_to_recipient" placeholder={copy.gift.recipientMessage}></textarea>
+            <input type="hidden" name="subject" value={`New Vivien Gift Card Order (${locale.toUpperCase()})`} />
+          </FormShell>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

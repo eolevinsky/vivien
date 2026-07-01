@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import { bookingFormLocale, canonicalUrl, localizedPath, restoplaceLocales, site, t, withBase } from '../content/site.js';
+
+const {
+  locale = 'en',
+  title,
+  description,
+  canonicalPath,
+  alternates = { links: [], xDefault: null },
+  image = '/assets/img/hero-7.jpg',
+  schema = null,
+  noindex = false,
+  bodyClass = '',
+} = Astro.props;
+
+const canonical = canonicalUrl(canonicalPath || `/${locale}/`);
+const ogImage = canonicalUrl(image);
+const isStaging = import.meta.env.PUBLIC_VIVIEN_BUILD_TARGET === 'staging' || import.meta.env.VIVIEN_BUILD_TARGET === 'staging';
+const robots = noindex || isStaging ? 'noindex, nofollow' : 'index, follow';
+const cookieYesId = import.meta.env.PUBLIC_COOKIEYES_ID || '4a5d342324df0e340b2b034917706d78';
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
+const restoplaceAddressHash = site.restoplaceWidgetHash;
+const restoplaceSupportedLocales = restoplaceLocales;
+const copy = t(locale);
+const stickyBookingHref = withBase(`${localizedPath(locale, 'home')}?openBooking=1&lang=${bookingFormLocale(locale)}&booking_source=sticky_cta`);
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content={robots} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.links?.map((alt) => (
+      <link rel="alternate" hreflang={alt.locale} href={alt.href} />
+    ))}
+    {alternates.xDefault && <link rel="alternate" hreflang="x-default" href={alternates.xDefault} />}
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href={withBase('/assets/img/favicon.svg')} />
+    <link rel="icon" type="image/png" href={withBase('/assets/img/favicon-96x96.png')} sizes="96x96" />
+    <link rel="shortcut icon" href={withBase('/assets/img/favicon.ico')} />
+    <link rel="apple-touch-icon" href={withBase('/assets/img/apple-touch-icon.png')} />
+    <link rel="manifest" href={withBase('/assets/img/site.webmanifest')} />
+    <link rel="preload" href={withBase('/assets/fonts/great-vibes-400.ttf')} as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href={withBase('/assets/fonts/playfair-display-700.ttf')} as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href={withBase('/assets/fonts.css')} />
+
+    <Fragment set:html={`<!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/${cookieYesId}/script.js"></script> <!-- End cookieyes banner -->`} />
+
+    <script is:inline define:vars={{ gaMeasurementId, restoplaceAddressHash, restoplaceSupportedLocales }}>
+      window.VIVIEN_GA_MEASUREMENT_ID = gaMeasurementId;
+      window.VIVIEN_RESTOPLACE_ADDRESS_HASH = restoplaceAddressHash;
+      window.VIVIEN_RESTOPLACE_LOCALES = restoplaceSupportedLocales;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      });
+    </script>
+    {gtmId && (
+      <script is:inline define:vars={{ gtmId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    )}
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body class:list={[bodyClass, isStaging && 'is-staging']} data-locale={locale}>
+    {gtmId && (
+      <noscript>
+        <iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    )}
+    {isStaging && <div class="staging-marker">Internal staging: noindex</div>}
+    <slot />
+    <a class="booking-sticky" href={stickyBookingHref}>{copy.nav.book}</a>
+    <div id="restoplace-btn" class="restoplace-click-open" hidden></div>
+    <div class="booking-fallback" data-booking-fallback hidden>
+      <span>Booking widget did not open.</span>
+      <a href={site.restoplaceUrl} rel="noopener" target="_blank">Open booking page</a>
+    </div>
+    <button type="button" class="scroll-top" data-scroll-top aria-label="Back to top"></button>
+    <script src={`https://app.restoplace.cc/widget.js?h=${site.restoplaceWidgetHash}`} async></script>
+    <script>
+      import '../scripts/main.js';
+    </script>
+  </body>
+</html>
