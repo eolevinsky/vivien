@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="{{LANGUAGE}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Vivien Card</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top, #2a0d0d 0, #0c0b09 42%, #050505 100%); color: #fff; font: 16px/1.5 Arial, sans-serif; }
+    main { min-height: 100vh; padding: 72px 20px; display: grid; place-items: center; }
+    section { width: min(800px, 100%); border: 1px solid rgba(205,164,94,.55); background: rgba(18,15,11,.94); padding: 42px; box-shadow: 0 24px 70px rgba(0,0,0,.45); }
+    h1, .amount { color: #cda45e; font-family: Georgia, serif; }
+    .print-card { display: none; margin-top: 30px; position: relative; overflow: hidden; border: 1px solid rgba(205,164,94,.9); padding: 42px 36px; text-align: center; background: linear-gradient(135deg, rgba(205,164,94,.18), transparent 28%), radial-gradient(circle at top right, rgba(126,28,28,.55), transparent 34%), linear-gradient(145deg, #140b0b, #050505 72%); color: #f8f1e5; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 18px 45px rgba(0,0,0,.35); }
+    .print-card:before, .print-card:after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(205,164,94,.38); pointer-events: none; }
+    .print-card:after { inset: 22px; border-color: rgba(255,255,255,.08); }
+    .print-card h2 { margin: 0; color: #cda45e; font-family: Georgia, serif; font-size: 34px; letter-spacing: .05em; text-transform: uppercase; }
+    .print-card .label { margin: 8px 0 24px; color: rgba(248,241,229,.76); letter-spacing: .22em; text-transform: uppercase; font-size: 12px; }
+    .print-card h3 { margin: 0 0 8px; font-size: 24px; color: #fff; }
+    .print-card img { width: 210px; height: 210px; margin: 24px auto; display: block; background: #fff; padding: 12px; border: 1px solid rgba(205,164,94,.65); }
+    .print-card .gift-message { width: min(520px, 100%); margin: 18px auto; color: rgba(248,241,229,.88); font-family: Georgia, serif; font-style: italic; font-size: 18px; }
+    .print-card .fine-print { margin: 18px 0 0; color: rgba(248,241,229,.66); font-size: 13px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .actions a, .actions button { border: 2px solid #cda45e; background: transparent; color: #fff; padding: 12px 20px; text-decoration: none; cursor: pointer; }
+    .actions a:hover, .actions button:hover { background: #cda45e; color: #080705; }
+    .spinner { width: 28px; height: 28px; border: 3px solid rgba(205,164,94,.3); border-top-color: #cda45e; border-radius: 50%; animation: spin 1s linear infinite; margin: 22px 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media print {
+      body { background: #fff; }
+      main { display: block; padding: 0; }
+      section > :not(.print-card) { display: none !important; }
+      section { border: 0; padding: 0; background: #fff; width: 100%; }
+      .print-card { display: block !important; min-height: 90vh; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section>
+    <h1 id="heading"></h1>
+    <p id="message"></p>
+    <div id="spinner" class="spinner" aria-label="Loading"></div>
+    <div id="ready" hidden>
+      <p><strong id="recipient"></strong></p>
+      <p class="amount" id="balance"></p>
+      <div class="actions">
+        <a id="wallet" href="#" rel="noopener noreferrer"></a>
+        <button id="print-button" type="button" onclick="window.print()"></button>
+      </div>
+    </div>
+    <div id="print-card" class="print-card">
+      <h2>Brasserie Vivien</h2>
+      <p class="label" id="print-label"></p>
+      <h3 id="print-recipient"></h3>
+      <p class="amount" id="print-balance"></p>
+      <img id="qr" alt="">
+      <p class="gift-message" id="gift-message"></p>
+      <p class="fine-print" id="print-note"></p>
+      <p class="fine-print"><span id="card-label"></span> <span id="card-number"></span></p>
+    </div>
+    <div class="actions">
+      <a id="buy-another" href="#"></a>
+      <a id="home" href="#"></a>
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  const token = {{PUBLIC_TOKEN}};
+  const language = document.documentElement.lang || "en";
+  const cardKind = {{CARD_KIND}};
+  const isLoyalty = cardKind === "loyalty";
+  const translations = {
+    en: {
+      preparingGift: "Preparing your gift card",
+      preparingLoyalty: "Preparing your loyalty card",
+      creatingGift: "Payment was received. We are creating and funding the gift card now.",
+      creatingLoyalty: "Payment was received. We are creating and funding the loyalty card now.",
+      readyGift: "Your gift card is ready",
+      readyLoyalty: "Your loyalty card is ready",
+      active: "The card is active and funded in Vivien’s loyalty system.",
+      wallet: "Open Wallet Card",
+      print: "Print / Save as PDF",
+      printGift: "Gift Card & Friends Club",
+      printLoyalty: "Vivien Friends Club",
+      qrAlt: "Vivien card QR code",
+      printNoteGift: "Scan the QR code to add the card to Apple or Google Wallet. This gift card also earns Vivien Friends Club points.",
+      printNoteLoyalty: "Scan the QR code to add the card to Apple or Google Wallet. Use it at Vivien to pay from the balance and earn points.",
+      card: "Card",
+      anotherGift: "Buy another gift card",
+      anotherLoyalty: "Create another loyalty card",
+      home: "Home",
+      refunded: "Payment refunded",
+      refundedMessage: "The card could not be activated and the payment was refunded.",
+      refunding: "Refund in progress",
+      refundingMessage: "The card could not be activated automatically. We are reversing the payment now.",
+      paymentFailed: "Payment was not completed",
+      paymentFailedMessage: "No card was created. Please try the purchase again.",
+      expired: "Checkout expired",
+      expiredMessage: "No payment was taken and no card was created. Please start again.",
+      disputed: "Payment disputed",
+      disputedMessage: "The payment was disputed. This card is being deactivated.",
+      revoked: "Card deactivated",
+      revokedMessage: "The payment was disputed and this card has been deactivated.",
+      review: "We are reviewing this order",
+      loadError: "Unable to load card status."
+    },
+    lv: {
+      preparingGift: "Dāvanu karte tiek sagatavota",
+      preparingLoyalty: "Lojalitātes karte tiek sagatavota",
+      creatingGift: "Maksājums saņemts. Mēs izveidojam un papildinām dāvanu karti.",
+      creatingLoyalty: "Maksājums saņemts. Mēs izveidojam un papildinām lojalitātes karti.",
+      readyGift: "Jūsu dāvanu karte ir gatava",
+      readyLoyalty: "Jūsu lojalitātes karte ir gatava",
+      active: "Karte ir aktīva un papildināta Vivien lojalitātes sistēmā.",
+      wallet: "Atvērt Wallet karti",
+      print: "Drukāt / saglabāt PDF",
+      printGift: "Dāvanu karte & Draugu Klubs",
+      printLoyalty: "Vivien Draugu Klubs",
+      qrAlt: "Vivien kartes QR kods",
+      printNoteGift: "Noskenējiet QR kodu, lai pievienotu karti Apple vai Google Wallet. Šī dāvanu karte arī uzkrāj Vivien Draugu Kluba punktus.",
+      printNoteLoyalty: "Noskenējiet QR kodu, lai pievienotu karti Apple vai Google Wallet. Izmantojiet to Vivien, lai maksātu no atlikuma un uzkrātu punktus.",
+      card: "Karte",
+      anotherGift: "Pirkt vēl vienu dāvanu karti",
+      anotherLoyalty: "Izveidot vēl vienu lojalitātes karti",
+      home: "Sākums",
+      refunded: "Maksājums atmaksāts",
+      refundedMessage: "Karti neizdevās aktivizēt, un maksājums tika atmaksāts.",
+      review: "Mēs pārbaudām šo pasūtījumu",
+      loadError: "Neizdevās ielādēt kartes statusu."
+    },
+    fr: {
+      preparingGift: "Préparation de votre carte cadeau",
+      preparingLoyalty: "Préparation de votre carte de fidélité",
+      creatingGift: "Paiement reçu. Nous créons et créditons la carte cadeau.",
+      creatingLoyalty: "Paiement reçu. Nous créons et créditons la carte de fidélité.",
+      readyGift: "Votre carte cadeau est prête",
+      readyLoyalty: "Votre carte de fidélité est prête",
+      active: "La carte est active et créditée dans le système de fidélité Vivien.",
+      wallet: "Ouvrir la carte Wallet",
+      print: "Imprimer / enregistrer en PDF",
+      printGift: "Carte cadeau & Club des Amis",
+      printLoyalty: "Club des Amis Vivien",
+      qrAlt: "QR code de la carte Vivien",
+      printNoteGift: "Scannez le QR code pour ajouter la carte à Apple ou Google Wallet. Cette carte cadeau cumule aussi des points du Club des Amis Vivien.",
+      printNoteLoyalty: "Scannez le QR code pour ajouter la carte à Apple ou Google Wallet. Utilisez-la chez Vivien pour payer avec le solde et cumuler des points.",
+      card: "Carte",
+      anotherGift: "Acheter une autre carte cadeau",
+      anotherLoyalty: "Créer une autre carte de fidélité",
+      home: "Accueil",
+      refunded: "Paiement remboursé",
+      refundedMessage: "La carte n’a pas pu être activée et le paiement a été remboursé.",
+      review: "Nous vérifions cette commande",
+      loadError: "Impossible de charger le statut de la carte."
+    },
+    ru: {
+      preparingGift: "Подарочная карта создаётся",
+      preparingLoyalty: "Карта лояльности создаётся",
+      creatingGift: "Оплата получена. Мы создаём и пополняем подарочную карту.",
+      creatingLoyalty: "Оплата получена. Мы создаём и пополняем карту лояльности.",
+      readyGift: "Ваша подарочная карта готова",
+      readyLoyalty: "Ваша карта лояльности готова",
+      active: "Карта активна и пополнена в системе лояльности Vivien.",
+      wallet: "Открыть Wallet-карту",
+      print: "Печать / сохранить PDF",
+      printGift: "Подарочная карта & Клуб друзей",
+      printLoyalty: "Клуб друзей Vivien",
+      qrAlt: "QR-код карты Vivien",
+      printNoteGift: "Отсканируйте QR-код, чтобы добавить карту в Apple или Google Wallet. Эта подарочная карта также накапливает баллы Клуба друзей Vivien.",
+      printNoteLoyalty: "Отсканируйте QR-код, чтобы добавить карту в Apple или Google Wallet. Используйте её в Vivien, чтобы платить с баланса и накапливать баллы.",
+      card: "Карта",
+      anotherGift: "Купить ещё одну подарочную карту",
+      anotherLoyalty: "Создать ещё одну карту лояльности",
+      home: "Главная",
+      refunded: "Оплата возвращена",
+      refundedMessage: "Карту не удалось активировать, и оплата была возвращена.",
+      review: "Мы проверяем этот заказ",
+      loadError: "Не удалось загрузить статус карты."
+    }
+  };
+  const copy = translations[language] || translations.en;
+  const heading = document.getElementById("heading");
+  const message = document.getElementById("message");
+  const spinner = document.getElementById("spinner");
+  const ready = document.getElementById("ready");
+  heading.textContent = isLoyalty ? copy.preparingLoyalty : copy.preparingGift;
+  message.textContent = isLoyalty ? copy.creatingLoyalty : copy.creatingGift;
+  document.getElementById("wallet").textContent = copy.wallet;
+  document.getElementById("print-button").textContent = copy.print;
+  document.getElementById("print-label").textContent = isLoyalty ? copy.printLoyalty : copy.printGift;
+  document.getElementById("print-note").textContent = isLoyalty ? copy.printNoteLoyalty : copy.printNoteGift;
+  document.getElementById("card-label").textContent = copy.card;
+  document.getElementById("qr").alt = copy.qrAlt;
+  document.getElementById("buy-another").textContent = isLoyalty ? copy.anotherLoyalty : copy.anotherGift;
+  document.getElementById("buy-another").href = `https://vivien.lv/gift-card/${isLoyalty ? "loyaltycard" : "giftcard"}-${language}.html`;
+  document.getElementById("home").textContent = copy.home;
+  document.getElementById("home").href = language === "en" ? "https://vivien.lv/" : `https://vivien.lv/index-${language}.html`;
+
+  async function refresh() {
+    try {
+      const response = await fetch(`/v1/gift-cards/${token}/status`, {cache: "no-store"});
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || copy.loadError);
+      if (data.status === "ready") {
+        heading.textContent = isLoyalty ? copy.readyLoyalty : copy.readyGift;
+        message.textContent = copy.active;
+        spinner.hidden = true;
+        ready.hidden = false;
+        document.getElementById("recipient").textContent = data.recipient_name;
+        document.getElementById("balance").textContent = data.balance;
+        document.getElementById("wallet").href = data.wallet_url;
+        document.getElementById("print-recipient").textContent = data.recipient_name;
+        document.getElementById("print-balance").textContent = data.balance;
+        document.getElementById("qr").src = data.qr_url;
+        document.getElementById("gift-message").textContent = data.gift_message || "";
+        document.getElementById("card-number").textContent = data.card_number;
+        document.getElementById("print-card").style.display = "block";
+        return;
+      }
+      if (data.status === "refunded") {
+        heading.textContent = copy.refunded;
+        message.textContent = copy.refundedMessage;
+        spinner.hidden = true;
+        return;
+      }
+      if (data.status === "refunding") {
+        heading.textContent = copy.refunding || translations.en.refunding;
+        message.textContent = data.error || copy.refundingMessage || translations.en.refundingMessage;
+        spinner.hidden = false;
+        setTimeout(refresh, 5000);
+        return;
+      }
+      if (data.status === "payment_failed" || data.status === "failed") {
+        heading.textContent = copy.paymentFailed || translations.en.paymentFailed;
+        message.textContent = data.error || copy.paymentFailedMessage || translations.en.paymentFailedMessage;
+        spinner.hidden = true;
+        return;
+      }
+      if (data.status === "expired") {
+        heading.textContent = copy.expired || translations.en.expired;
+        message.textContent = data.error || copy.expiredMessage || translations.en.expiredMessage;
+        spinner.hidden = true;
+        return;
+      }
+      if (data.status === "disputed" || data.status === "revoking") {
+        heading.textContent = copy.disputed || translations.en.disputed;
+        message.textContent = data.error || copy.disputedMessage || translations.en.disputedMessage;
+        spinner.hidden = data.status !== "revoking";
+        if (data.status === "revoking") setTimeout(refresh, 5000);
+        return;
+      }
+      if (data.status === "revoked") {
+        heading.textContent = copy.revoked || translations.en.revoked;
+        message.textContent = data.error || copy.revokedMessage || translations.en.revokedMessage;
+        spinner.hidden = true;
+        return;
+      }
+      if (data.status === "manual_review") {
+        heading.textContent = copy.review;
+        message.textContent = data.error;
+        spinner.hidden = true;
+        return;
+      }
+      setTimeout(refresh, 2500);
+    } catch (error) {
+      message.textContent = error.message;
+      setTimeout(refresh, 5000);
+    }
+  }
+  refresh();
+})();
+</script>
+</body>
+</html>

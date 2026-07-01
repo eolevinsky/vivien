@@ -1,12 +1,21 @@
 ---
 import { localizedPath, t, withBase } from '../content/site.js';
-const { locale, action, eventName, submitLabel } = Astro.props;
+const {
+  locale,
+  action,
+  eventName,
+  submitLabel,
+  checkout = false,
+  cancelledMessage = '',
+} = Astro.props;
 const copy = t(locale);
 ---
 <form
   class="vivien-form"
   method="post"
   action={action}
+  data-giftcard-checkout={checkout ? 'true' : undefined}
+  data-cancelled-message={cancelledMessage || undefined}
   data-success-event={eventName}
   data-loading-message={copy.form.loading}
   data-success-message={copy.form.success}

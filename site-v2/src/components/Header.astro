@@ -35,6 +35,7 @@ function languageHref(targetLocale) {
       <a href={withBase(localizedPath(locale, 'home') + '#specials')}>{nav.specials}</a>
       {showEventsNav && <a href={withBase(localizedPath(locale, 'home') + '#events')}>{nav.events}</a>}
       <a href={withBase(localizedPath(locale, 'home') + '#gallery')}>{nav.gallery}</a>
+      <a href={withBase(localizedPath(locale, 'loyalty'))} class:list={[active === 'loyalty' && 'active']}>{nav.loyalty}</a>
       <a href={withBase(localizedPath(locale, 'gift'))} class:list={[active === 'gift' && 'active']}>{nav.giftCard}</a>
       <a href={withBase(localizedPath(locale, 'review'))} class:list={[active === 'review' && 'active']}>{nav.review}</a>
       <a href={withBase(localizedPath(locale, 'waiter'))} class:list={[active === 'jobs' && 'active']}>{nav.jobs}</a>

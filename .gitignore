@@ -1,1 +1,32 @@
+# Secrets / local configuration
+.env
+.env.*
+.env.local
+.env.*.local
+!.env.example
+!**/.env.example
+
+# PHP dependencies and caches
+vendor/
+.phpunit.cache/
+
+# Python dependencies and caches
+.venv/
+.pytest_cache/
+.uv-cache/
+__pycache__/
+*.py[cod]
+
+# Runtime/generated data
+data/
+var/gift-card-orders/*.json
+*.log
+*.pid
+.stripe-local-config/
+STARTUP-DEPLOYMENT-CHECKLIST.md
+API-DEPLOYMENT-NOTES.md
+.tools/
+
+# OS/editor noise
 .DS_Store
+Thumbs.db
