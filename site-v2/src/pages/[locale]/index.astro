@@ -4,8 +4,10 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BookingButton from '../../components/BookingButton.astro';
 import MenuSection from '../../components/MenuSection.astro';
+import SpecialsSection from '../../components/SpecialsSection.astro';
+import EventsSection from '../../components/EventsSection.astro';
 import FormShell from '../../components/FormShell.astro';
-import { alternatesFor, bookingFormLocale, canonicalUrl, getGallery, getMenu, locales, localizedPath, site, specials, t, withBase } from '../../content/site.js';
+import { alternatesFor, bookingFormLocale, canonicalUrl, events, getGallery, getMenu, locales, localizedPath, site, specials, t, withBase } from '../../content/site.js';
 
 export function getStaticPaths() {
   return locales.map((locale) => ({ params: { locale } }));
@@ -17,6 +19,22 @@ const path = localizedPath(locale, 'home');
 const bookingLang = bookingFormLocale(locale);
 const menu = getMenu(locale);
 const gallery = getGallery();
+const showEventsSection = events.some((event) => !event.hidden);
+const contactHours = copy.home.hoursText.split('\n');
+const careerCards = [
+  locale === 'en' && {
+    href: localizedPath(locale, 'maitre'),
+    title: copy.jobs.maitre?.positionValue || copy.jobs.maitreTitle,
+    text: 'Orchestrate the dining experience, greet guests with warmth and oversee daily service excellence.',
+  },
+  {
+    href: localizedPath(locale, 'waiter'),
+    title: copy.jobs.waiter?.positionValue || copy.jobs.waiterTitle,
+    text: locale === 'en'
+      ? 'Deliver memorable service with charm, attentiveness, and deep knowledge of our menu and wines.'
+      : copy.jobs.intro,
+  },
+].filter(Boolean);
 const restaurantSchema = {
   '@context': 'https://schema.org',
   '@type': ['Restaurant', 'LocalBusiness'],
@@ -81,25 +99,11 @@ const restaurantSchema = {
 
     <MenuSection locale={locale} menu={menu} />
 
-    <section class="section" id="specials">
-      <div class="section-title">
-        <p>{copy.home.specialsTitle}</p>
-        <h2>{copy.home.specialsSubtitle}</h2>
-      </div>
-      <div class="special-grid">
-        {specials.map((item) => (
-          <article class="special-card">
-            <img src={withBase(item.image)} alt={item.title[locale] || item.title.en} loading="lazy" />
-            <div>
-              <h3>{item.title[locale] || item.title.en}</h3>
-              <p>{item.text[locale] || item.text.en}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+    <SpecialsSection locale={locale} copy={copy} specials={specials} />
 
-    <section class="section" id="gallery">
+    {showEventsSection && <EventsSection locale={locale} events={events} />}
+
+    <section class="section gallery-section" id="gallery">
       <div class="section-title">
         <p>{copy.home.galleryTitle}</p>
         <h2>{copy.home.gallerySubtitle}</h2>
@@ -113,41 +117,54 @@ const restaurantSchema = {
       </div>
     </section>
 
-    <section class="section" id="careers">
+    <section class="section careers-section" id="careers">
       <div class="section-title">
         <p>{copy.home.careersTitle}</p>
         <h2>{copy.home.careersSubtitle}</h2>
       </div>
       <div class="job-grid">
-        <article class="job-card">
-          <h3>{copy.jobs.waiterTitle}</h3>
-          <p>{copy.jobs.intro}</p>
-          <a class="text-button" href={withBase(localizedPath(locale, 'waiter'))}>{copy.jobs.apply}</a>
-        </article>
-        {locale === 'en' && (
+        {careerCards.map((job, index) => (
           <article class="job-card">
-            <h3>{copy.jobs.maitreTitle}</h3>
-            <p>{copy.jobs.intro}</p>
-            <a class="text-button" href={withBase(localizedPath(locale, 'maitre'))}>{copy.jobs.apply}</a>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3><a href={withBase(job.href)}>{job.title}</a></h3>
+            <p>{job.text}</p>
           </article>
-        )}
+        ))}
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section contact-section" id="contact">
       <div class="section-title">
         <p>{copy.home.contactTitle}</p>
         <h2>{copy.home.contactSubtitle}</h2>
       </div>
+      <div class="contact-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2175.592245611252!2d24.120112!3d56.955786999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2slv!4v1746722439156!5m2!1sen!2slv" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Brasserie Vivien map"></iframe>
+      </div>
       <div class="contact-layout">
         <div class="contact-list">
-          <div class="panel"><h3>{copy.home.location}</h3><p>{site.address}</p></div>
-          <div class="panel"><h3>{copy.home.hours}</h3><p>{copy.home.hoursText}</p></div>
-          <div class="panel"><h3>{copy.home.call}</h3><p><a href={`tel:${site.phoneHref}`}>{site.phone}</a></p></div>
-          <div class="panel"><h3>{copy.home.email}</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+          <div class="contact-info-item">
+            <span class="contact-icon contact-icon-location" aria-hidden="true"></span>
+            <div><h3>{copy.home.location}</h3><p>Brīvības iela 37, Rīga, LV-1010</p></div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-icon contact-icon-hours" aria-hidden="true"></span>
+            <div>
+              <h3>{copy.home.hours}</h3>
+              {contactHours.map((line) => <p>{line}</p>)}
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-icon contact-icon-phone" aria-hidden="true"></span>
+            <div><h3>{copy.home.call}</h3><p><a href={`tel:${site.phoneHref}`}>{site.phone}</a></p></div>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-icon contact-icon-email" aria-hidden="true"></span>
+            <div><h3>{copy.home.email}</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+          </div>
         </div>
-        <div class="panel">
-          <FormShell locale={locale} action={withBase('/forms/contact.php')} eventName="contact_submit" submitLabel={copy.form.send}>
+        <div class="contact-form-column">
+          <FormShell locale={locale} action={withBase('/forms/contact.php')} eventName="contact_submit" submitLabel={copy.home.contactSend || copy.form.send}>
             <div class="row">
               <input type="text" name="name" placeholder={copy.form.name} required />
               <input type="email" name="email" placeholder={copy.form.email} required />

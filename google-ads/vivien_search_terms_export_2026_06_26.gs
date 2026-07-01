@@ -1,9 +1,14 @@
 const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/12UweMKa2sIUDcSV0qrYHGTAVZcDvnrnp54FdQs0DmGs/edit';
 
 const USE_GEMINI = true;
+const GEMINI_API_KEY = '';
 const GEMINI_API_KEY_PROPERTY = 'GEMINI_API_KEY';
 const GEMINI_MODEL = 'gemini-3.5-flash';
 const MAX_GEMINI_TERMS_PER_RUN = 25;
+const GEMINI_INTER_CALL_SLEEP_MS = 5000;
+const GEMINI_MAX_ATTEMPTS = 3;
+const GEMINI_RETRY_BASE_SLEEP_MS = 5000;
+const MAX_CONSECUTIVE_GEMINI_ERRORS_PER_RUN = 3;
 
 const MIN_WASTE_COST_EUR = 0.75;
 
@@ -207,6 +212,7 @@ const BRAND_TOKENS = [
   'vivienn',
   'вивьен',
   'вивиен',
+  'вивиан',
   'вивьенн'
 ];
 
@@ -233,12 +239,14 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'job', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'jobs', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'vacancy', reason: 'Jobs / employment traffic', mode: 'token' },
+  { pattern: 'vacancies', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'vakance', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'vakances', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'darbs', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'alga', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'salary', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'cv', reason: 'Jobs / employment traffic', mode: 'token' },
+  { pattern: 'work', reason: 'Jobs / employment traffic', mode: 'token' },
   { pattern: 'вакансия', reason: 'Jobs / employment traffic' },
   { pattern: 'вакансии', reason: 'Jobs / employment traffic' },
   { pattern: 'работа', reason: 'Jobs / employment traffic' },
@@ -255,6 +263,9 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'equipment', reason: 'Restaurant equipment / supplier traffic', mode: 'token' },
   { pattern: 'supplier', reason: 'Supplier traffic', mode: 'token' },
   { pattern: 'franchise', reason: 'Restaurant business / franchise traffic', mode: 'token' },
+  { pattern: 'cheap', reason: 'Budget / low-value traffic', mode: 'token' },
+  { pattern: 'lēti', reason: 'Budget / low-value traffic', mode: 'token' },
+  { pattern: 'дешево', reason: 'Budget / low-value traffic' },
 
   { pattern: 'breakfast', reason: 'Breakfast traffic - not current campaign goal', mode: 'token' },
   { pattern: 'brunch', reason: 'Brunch traffic - not current campaign goal', mode: 'token' },
@@ -267,12 +278,15 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'buffet', reason: 'Buffet traffic - irrelevant format', mode: 'token' },
   { pattern: 'шведский стол', reason: 'Buffet traffic - irrelevant format' },
   { pattern: 'fast food', reason: 'Fast food traffic - irrelevant format' },
+  { pattern: 'фастфуд', reason: 'Fast food traffic - irrelevant format' },
   { pattern: 'delivery only', reason: 'Delivery-only traffic' },
   { pattern: 'food delivery', reason: 'Delivery marketplace traffic' },
   { pattern: 'delivery', reason: 'Delivery marketplace traffic', mode: 'token' },
   { pattern: 'takeaway', reason: 'Takeaway traffic - not current campaign goal', mode: 'token' },
+  { pattern: 'take away', reason: 'Takeaway traffic - not current campaign goal' },
   { pattern: 'на вынос', reason: 'Takeaway traffic - not current campaign goal' },
   { pattern: 'доставка', reason: 'Delivery marketplace traffic' },
+  { pattern: 'piegāde', reason: 'Delivery marketplace traffic', mode: 'token' },
   { pattern: 'līdzņemšanai', reason: 'Takeaway traffic - not current campaign goal' },
   { pattern: 'bolt food', reason: 'Delivery marketplace traffic' },
   { pattern: 'wolt', reason: 'Delivery marketplace traffic', mode: 'token' },
@@ -284,15 +298,19 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'brunch near me', reason: 'Brunch near-me traffic' },
   { pattern: 'lunch near me', reason: 'Lunch near-me traffic' },
   { pattern: 'top 10', reason: 'Listicle / low booking intent' },
+  { pattern: 'топ 10', reason: 'Listicle / low booking intent' },
   { pattern: 'reviews', reason: 'Review research traffic', mode: 'token' },
+  { pattern: 'tripadvisor', reason: 'Review research traffic', mode: 'token' },
   { pattern: 'atsauksmes', reason: 'Review research traffic', mode: 'token' },
   { pattern: 'отзывы', reason: 'Review research traffic' },
+  { pattern: 'map', reason: 'Map / navigation traffic', mode: 'token' },
   { pattern: 'menu pdf', reason: 'PDF menu traffic' },
   { pattern: 'меню pdf', reason: 'PDF menu traffic' },
   { pattern: 'menu template', reason: 'Template / DIY traffic' },
 
   { pattern: 'jurmala', reason: 'Wrong location / district' },
   { pattern: 'jūrmala', reason: 'Wrong location / district' },
+  { pattern: 'юрмала', reason: 'Wrong location / district' },
   { pattern: 'purvciems', reason: 'Wrong location / district' },
   { pattern: 'пурвциемс', reason: 'Wrong location / district' },
   { pattern: 'mežaparks', reason: 'Wrong location / district' },
@@ -300,7 +318,21 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'vecāķi', reason: 'Wrong location / district' },
   { pattern: 'vecaki', reason: 'Wrong location / district' },
   { pattern: 'andrejsala', reason: 'Wrong location / district' },
+  { pattern: 'ādaži', reason: 'Wrong location / district' },
+  { pattern: 'adazi', reason: 'Wrong location / district' },
+  { pattern: 'mārupe', reason: 'Wrong location / district' },
+  { pattern: 'marupe', reason: 'Wrong location / district' },
+  { pattern: 'airport', reason: 'Wrong location / airport traffic', mode: 'token' },
+  { pattern: 'rix', reason: 'Wrong location / airport traffic', mode: 'token' },
 
+  { pattern: 'azerbaijan', reason: 'Wrong cuisine' },
+  { pattern: 'azerbaijani', reason: 'Wrong cuisine' },
+  { pattern: 'asian food', reason: 'Wrong cuisine' },
+  { pattern: 'asian restaurant', reason: 'Wrong cuisine' },
+  { pattern: 'japanu restorans', reason: 'Wrong cuisine' },
+  { pattern: 'japanese', reason: 'Wrong cuisine', mode: 'token' },
+  { pattern: 'indian', reason: 'Wrong cuisine', mode: 'token' },
+  { pattern: 'indiesu', reason: 'Wrong cuisine' },
   { pattern: 'georgian', reason: 'Wrong cuisine' },
   { pattern: 'gruzīnu', reason: 'Wrong cuisine' },
   { pattern: 'грузин', reason: 'Wrong cuisine' },
@@ -316,13 +348,34 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'suši', reason: 'Wrong cuisine' },
   { pattern: 'суши', reason: 'Wrong cuisine' },
   { pattern: 'dumplings', reason: 'Wrong cuisine' },
+  { pattern: 'kebab', reason: 'Wrong cuisine', mode: 'token' },
   { pattern: 'kebabs', reason: 'Wrong cuisine' },
+  { pattern: 'кебаб', reason: 'Wrong cuisine' },
   { pattern: 'shashlik', reason: 'Wrong cuisine' },
   { pattern: 'шашлык', reason: 'Wrong cuisine' },
+  { pattern: 'pizza', reason: 'Wrong cuisine', mode: 'token' },
+  { pattern: 'пицца', reason: 'Wrong cuisine' },
+  { pattern: 'picērija', reason: 'Wrong cuisine', mode: 'token' },
+  { pattern: 'burger', reason: 'Wrong cuisine', mode: 'token' },
+  { pattern: 'bakery', reason: 'Bakery traffic - not current campaign goal', mode: 'token' },
   { pattern: 'рыбный', reason: 'Too broad / wrong cuisine intent' },
+  { pattern: 'michelin', reason: 'Michelin list / research traffic', mode: 'token' },
+  { pattern: 'rooftop', reason: 'Rooftop venue traffic - not current format', mode: 'token' },
 
   { pattern: 'hotel', reason: 'Hotel traffic', mode: 'token' },
 
+  { pattern: '1221 restaurant', reason: 'Competitor / other brand' },
+  { pattern: '12 21 restaurant', reason: 'Competitor / other brand' },
+  { pattern: '36 line restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'akhtamar', reason: 'Competitor / other brand' },
+  { pattern: 'ali baba', reason: 'Competitor / other brand' },
+  { pattern: 'amber restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'aragats', reason: 'Competitor / other brand' },
+  { pattern: 'austra riga restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'austrumu robeza', reason: 'Competitor / other brand' },
+  { pattern: 'bāka riga', reason: 'Competitor / other brand' },
+  { pattern: 'biff restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'biblioteka 1', reason: 'Competitor / other brand' },
   { pattern: 'barents', reason: 'Competitor / other brand' },
   { pattern: 'riviera', reason: 'Competitor / other brand' },
   { pattern: 'kolonade', reason: 'Competitor / other brand' },
@@ -335,9 +388,19 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'noble', reason: 'Competitor / other brand' },
   { pattern: 'rione', reason: 'Competitor / other brand' },
   { pattern: 'koya', reason: 'Competitor / other brand' },
+  { pattern: 'cacao riga', reason: 'Competitor / other brand' },
+  { pattern: 'fazenda', reason: 'Competitor / other brand' },
+  { pattern: 'gan bei', reason: 'Competitor / other brand' },
+  { pattern: 'gutenberg', reason: 'Competitor / other brand' },
   { pattern: 'rossini', reason: 'Competitor / other brand' },
+  { pattern: 'ala restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'ala riga restaurant', reason: 'Competitor / other brand' },
   { pattern: 'ala pagrabs', reason: 'Competitor / other brand' },
   { pattern: 'stargorod', reason: 'Competitor / other brand' },
+  { pattern: 'hesburger', reason: 'Competitor / other brand' },
+  { pattern: 'lido v rige', reason: 'Competitor / other brand' },
+  { pattern: 'lasite restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'mcdonalds', reason: 'Competitor / other brand' },
   { pattern: 'neptun', reason: 'Competitor / other brand' },
   { pattern: 'moltto', reason: 'Competitor / other brand' },
   { pattern: 'ezītis', reason: 'Competitor / other brand' },
@@ -347,9 +410,22 @@ const OBVIOUS_NEGATIVE_PATTERNS = [
   { pattern: 'truffle pig', reason: 'Competitor / other brand' },
   { pattern: 'zanazan', reason: 'Competitor / other brand' },
   { pattern: 'lighthouse', reason: 'Competitor / other brand' },
+  { pattern: 'piramida restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'portofino', reason: 'Competitor / other brand' },
+  { pattern: 'pullman riga restaurant menu', reason: 'Competitor / other brand' },
+  { pattern: 'radisson blu riga restaurant', reason: 'Competitor / other brand' },
+  { pattern: 'restaurant osta', reason: 'Competitor / other brand' },
+  { pattern: 'rozengrals', reason: 'Competitor / other brand' },
+  { pattern: 'burzujs', reason: 'Competitor / other brand' },
+  { pattern: 'skyline', reason: 'Competitor / other brand' },
+  { pattern: 'tbilisi', reason: 'Competitor / other brand' },
   { pattern: "chef's corner", reason: 'Competitor / other brand' },
+  { pattern: 'джульетта ресторан', reason: 'Competitor / other brand' },
   { pattern: 'дядя ваня', reason: 'Competitor / other brand' },
 
+  { pattern: "vivienne's", reason: 'Ambiguous Vivienne / fashion traffic' },
+  { pattern: 'viviennes', reason: 'Ambiguous Vivienne / fashion traffic' },
+  { pattern: 'vivienne', reason: 'Ambiguous Vivienne / fashion traffic', mode: 'token' },
   { pattern: 'westwood', reason: 'Fashion / clothing traffic', mode: 'token' },
   { pattern: 'shop', reason: 'Fashion / shopping traffic', mode: 'token' },
   { pattern: 'store', reason: 'Fashion / shopping traffic', mode: 'token' },
@@ -450,6 +526,7 @@ function exportSearchTerms(sheets) {
   );
 
   let geminiCalls = 0;
+  let consecutiveGeminiErrors = 0;
 
   const query = `
     SELECT
@@ -521,7 +598,10 @@ function exportSearchTerms(sheets) {
     }
 
     if (!isBrandTerm(term)) {
-      const negative = getNegativeCandidate(term, cost, conversions);
+      const negative = isSearchTermAlreadyExcluded(searchTermStatus)
+        ? null
+        : getNegativeCandidate(term, cost, conversions);
+
       if (negative) {
         appendNegativeCandidate(sheets.negatives, negativeKeys, {
           date: date,
@@ -538,7 +618,7 @@ function exportSearchTerms(sheets) {
 
         notes.push('Negative candidate');
         ruleMadeProposal = true;
-      } else {
+      } else if (!isSearchTermAlreadyHandled(searchTermStatus)) {
         const keywordIdea = getKeywordIdea(ctx);
         if (keywordIdea) {
           appendKeywordIdea(sheets.keywords, keywordKeys, {
@@ -567,6 +647,10 @@ function exportSearchTerms(sheets) {
       shouldAskGemini(ctx) &&
       geminiCalls < MAX_GEMINI_TERMS_PER_RUN
     ) {
+      if (geminiCalls > 0) {
+        sleepForGeminiRateLimit();
+      }
+
       const suggestion = classifyWithGemini(ctx);
       geminiCalls++;
 
@@ -574,6 +658,20 @@ function exportSearchTerms(sheets) {
         geminiAction = suggestion.action || '';
         geminiConfidence = suggestion.confidence === undefined ? '' : suggestion.confidence;
         geminiReason = suggestion.reason || '';
+
+        if (geminiAction === 'ERROR') {
+          consecutiveGeminiErrors++;
+
+          if (consecutiveGeminiErrors >= MAX_CONSECUTIVE_GEMINI_ERRORS_PER_RUN) {
+            Logger.log(
+              'Stopping Gemini for this run after ' + consecutiveGeminiErrors +
+              ' consecutive errors.'
+            );
+            geminiCalls = MAX_GEMINI_TERMS_PER_RUN;
+          }
+        } else {
+          consecutiveGeminiErrors = 0;
+        }
 
         const geminiMadeProposal = applyGeminiSuggestion(
           suggestion,
@@ -642,17 +740,17 @@ function proposeBrandRouting(ctx, sheets, keywordKeys, negativeKeys, notes) {
     appendNegativeCandidate(sheets.negatives, negativeKeys, {
       date: ctx.date,
       searchTerm: ctx.term,
-      reason: 'Brand routing: block Vivien/Vivienne query in source non-brand ad group',
+      reason: 'Brand routing: block Vivien/Vivienne query in source non-brand campaign',
       campaign: ctx.campaign,
-      adGroup: ctx.adGroup,
-      scope: 'Ad Group',
+      adGroup: '',
+      scope: 'Campaign',
       applyAs: brandToken,
       clicks: ctx.clicks,
       cost: ctx.cost,
       conversions: ctx.conversions
     });
 
-    notes.push('Brand ad-group negative candidate');
+    notes.push('Brand campaign negative candidate');
     madeProposal = true;
   }
 
@@ -718,22 +816,50 @@ function isRelevantRestaurantIntent(term) {
   const normalizedTerm = normalizeText(term);
   const tokens = [
     'french', 'francu', 'francais', 'franzos', 'fransk', 'ranskalainen',
-    'француз', 'brasserie', 'bistro',
+    'francu virtuve', 'franzosische kuche', 'cuisine francaise',
+    'prancuzu virtuve', 'prancuzu restoranas', 'fransk restaurant',
+    'француз', 'французская кухня', 'brasserie', 'bistro', 'bistrot',
     'restaurant riga', 'restaurant in riga', 'restaurants in riga',
+    'top restaurants riga', 'restaurant romantique', 'restaurant vin',
+    'restaurant reservierung',
     'restorans riga', 'restorani riga', 'restoran riga', 'restoranas riga',
-    'restaurang riga', 'ravintola riika', 'ресторан рига',
-    'wine', 'vino', 'vina', 'vins', 'вино',
-    'terrace', 'terase', 'terrasse', 'teras', 'терас',
-    'oyster', 'auster', 'huitr', 'устриц',
-    'dinner', 'middag', 'abendessen', 'vakarinas', 'vakarienes', 'illallinen',
-    'ужин', 'romantic', 'romantisk', 'romantiskas',
+    'restoranas rygoje', 'restoranai rygoje', 'restoranas su kiemu',
+    'restaurang riga', 'restaurang i riga', 'restaurant i riga',
+    'restaurang centrala', 'restoran riias', 'restoranid riias',
+    'terrassiga restoran', 'prantsuse restoran', 'prantsuse kook',
+    'restaurant centrum', 'restaurant sentrum', 'ravintola riika',
+    'ravintola riian keskustassa',
+    'restaurant a riga', 'ресторан рига', 'рестораны в риге',
+    'ресторан в риге', 'рестораны рига', 'ресторан в центре',
+    'рестораны в центре', 'рестораны рига центр', 'необычные рестораны', 'рестораны с террасой',
+    'wine', 'wine bar', 'vinbar', 'vino', 'vina', 'vins', 'vīna', 'vyno',
+    'wein restaurant', 'veinirestoran', 'viinibaari', 'вино',
+    'terrace', 'terase', 'terrasse', 'teras', 'терас', 'outdoor dining',
+    'courtyard', 'pagalmu', 'sisehooviga', 'hof restaurant',
+    'oyster', 'oysters', 'auster', 'austeres', 'austrid', 'huitr',
+    'østers', 'osters', 'osterit', 'ostron', 'austres', 'устриц',
+    'dinner', 'middag', 'abendessen', 'vakarinas', 'vakarienes', 'vakariene',
+    'vakariņas', 'vakarien', 'illallinen', 'ohtusook', 'diner a riga', 'ужин',
+    'romantic', 'romantisk', 'romantiskas', 'romanttinen',
+    'cozy', 'gemutlich', 'уютн', 'красивые рестораны',
     'booking', 'reserve', 'reservation', 'rezerv', 'book a table',
-    'boka bord', 'bestill bord', 'book bord', 'varaa poyta',
-    'galdi', 'staliuk'
+    'book table', 'restaurant reservation', 'reserver table', 'boka bord',
+    'bestill bord', 'book bord', 'broneeri laud', 'laua broneerimine',
+    'tisch reservieren', 'varaa poyta',
+    'galdi', 'staliuk', 'бронь столика', 'забронировать столик',
+    'заказать столик',
+    'where to eat', 'where to have dinner', 'where to go for dinner',
+    'fine dining', 'steaks riga', 'best bars in riga',
+    'essen gehen', 'wo essen', 'ou diner', 'kur paest', 'kur vakarinot',
+    'kus ohtust',
+    'kur vakarieniauti', 'куда пойти вечером', 'куда сходить вечером',
+    'где поесть', 'ресторан с террас', 'ресторан с дворик',
+    'restoranu nedela', 'restorani tops', 'labakie restorani',
+    'live riga restorani'
   ];
 
   for (let i = 0; i < tokens.length; i++) {
-    if (normalizedTerm.indexOf(tokens[i]) !== -1) {
+    if (normalizedTerm.indexOf(normalizeText(tokens[i])) !== -1) {
       return true;
     }
   }
@@ -782,53 +908,156 @@ function classifyWithGemini(ctx) {
     })
   ].join('\n');
 
-  try {
-    const response = UrlFetchApp.fetch(
-      'https://generativelanguage.googleapis.com/v1beta/interactions',
-      {
-        method: 'post',
-        contentType: 'application/json',
-        headers: { 'x-goog-api-key': getGeminiApiKey() },
-        payload: JSON.stringify({
-          model: GEMINI_MODEL,
-          system_instruction: 'You are a careful Google Ads search-term analyst. Return only strict JSON.',
-          input: prompt,
-          generation_config: {
-            temperature: 0.1,
-            thinking_level: 'low'
-          }
-        }),
-        muteHttpExceptions: true
+  for (let attempt = 1; attempt <= GEMINI_MAX_ATTEMPTS; attempt++) {
+    try {
+      const response = UrlFetchApp.fetch(
+        'https://generativelanguage.googleapis.com/v1beta/interactions',
+        {
+          method: 'post',
+          contentType: 'application/json',
+          headers: { 'x-goog-api-key': getGeminiApiKey() },
+          payload: JSON.stringify(buildGeminiRequestPayload(prompt)),
+          muteHttpExceptions: true
+        }
+      );
+
+      const code = response.getResponseCode();
+      const body = response.getContentText();
+      Logger.log(
+        'Gemini HTTP ' + code + ' attempt ' + attempt + '/' + GEMINI_MAX_ATTEMPTS +
+        ' for term: ' + ctx.term
+      );
+
+      if (code >= 400) {
+        Logger.log(limitText(body, 1000));
+
+        if (shouldRetryGeminiHttpCode(code) && attempt < GEMINI_MAX_ATTEMPTS) {
+          sleepForGeminiRetry(attempt);
+          continue;
+        }
+
+        return {
+          action: 'ERROR',
+          confidence: '',
+          reason: 'Gemini HTTP ' + code
+        };
       }
-    );
 
-    const code = response.getResponseCode();
-    const body = response.getContentText();
-    Logger.log('Gemini HTTP ' + code + ' for term: ' + ctx.term);
+      const parsedBody = JSON.parse(body);
+      const outputText = getGeminiOutputText(parsedBody);
+      const jsonText = extractJsonObject(outputText);
+      const suggestion = JSON.parse(jsonText);
 
-    if (code >= 400) {
-      Logger.log(limitText(body, 1000));
+      return normalizeGeminiSuggestion(suggestion);
+    } catch (e) {
+      Logger.log(
+        'Gemini error attempt ' + attempt + '/' + GEMINI_MAX_ATTEMPTS +
+        ' for term "' + ctx.term + '": ' + e.message
+      );
+
+      if (attempt < GEMINI_MAX_ATTEMPTS) {
+        sleepForGeminiRetry(attempt);
+        continue;
+      }
+
       return {
         action: 'ERROR',
         confidence: '',
-        reason: 'Gemini HTTP ' + code
+        reason: e.message
       };
     }
-
-    const parsedBody = JSON.parse(body);
-    const outputText = getGeminiOutputText(parsedBody);
-    const jsonText = extractJsonObject(outputText);
-    const suggestion = JSON.parse(jsonText);
-
-    return normalizeGeminiSuggestion(suggestion);
-  } catch (e) {
-    Logger.log('Gemini error for term "' + ctx.term + '": ' + e.message);
-    return {
-      action: 'ERROR',
-      confidence: '',
-      reason: e.message
-    };
   }
+
+  return {
+    action: 'ERROR',
+    confidence: '',
+    reason: 'Gemini failed after retries'
+  };
+}
+
+function buildGeminiRequestPayload(prompt) {
+  return {
+    model: GEMINI_MODEL,
+    system_instruction: 'You are a careful Google Ads search-term analyst. Return only strict JSON.',
+    input: prompt,
+    response_format: {
+      type: 'text',
+      mime_type: 'application/json',
+      schema: getGeminiSuggestionSchema()
+    },
+    generation_config: {
+      thinking_level: 'low'
+    }
+  };
+}
+
+function getGeminiSuggestionSchema() {
+  return {
+    type: 'object',
+    properties: {
+      action: {
+        type: 'string',
+        enum: [
+          'NONE',
+          'WATCH',
+          'ADD_KEYWORD',
+          'ADD_AD_GROUP_NEGATIVE',
+          'ADD_CAMPAIGN_NEGATIVE'
+        ]
+      },
+      confidence: {
+        type: 'number'
+      },
+      targetCampaign: {
+        type: 'string'
+      },
+      targetAdGroup: {
+        type: 'string'
+      },
+      matchType: {
+        type: 'string',
+        enum: ['Exact', 'Phrase', 'Broad']
+      },
+      applyAs: {
+        type: 'string'
+      },
+      negativeCampaign: {
+        type: 'string'
+      },
+      negativeAdGroup: {
+        type: 'string'
+      },
+      reason: {
+        type: 'string'
+      }
+    },
+    required: [
+      'action',
+      'confidence',
+      'targetCampaign',
+      'targetAdGroup',
+      'matchType',
+      'applyAs',
+      'negativeCampaign',
+      'negativeAdGroup',
+      'reason'
+    ]
+  };
+}
+
+function shouldRetryGeminiHttpCode(code) {
+  return code === 429 || code === 500 || code === 503 || code === 504;
+}
+
+function sleepForGeminiRateLimit() {
+  if (GEMINI_INTER_CALL_SLEEP_MS > 0) {
+    Utilities.sleep(GEMINI_INTER_CALL_SLEEP_MS);
+  }
+}
+
+function sleepForGeminiRetry(attempt) {
+  const delay = GEMINI_RETRY_BASE_SLEEP_MS * Math.pow(2, attempt - 1);
+  Utilities.sleep(delay);
 }
 
 function applyGeminiSuggestion(suggestion, ctx, sheets, keywordKeys, negativeKeys) {
@@ -968,10 +1197,16 @@ function shouldAskGemini(ctx) {
   if (!hasGeminiApiKey()) return false;
   if (!ctx.term) return false;
   if (ctx.clicks < 1) return false;
+  if (isSearchTermAlreadyHandled(ctx.searchTermStatus)) return false;
   return true;
 }
 
 function getGeminiApiKey() {
+  const hardcodedKey = String(GEMINI_API_KEY || '').trim();
+  if (hardcodedKey) {
+    return hardcodedKey;
+  }
+
   return String(PropertiesService.getScriptProperties().getProperty(GEMINI_API_KEY_PROPERTY) || '').trim();
 }
 
@@ -1107,6 +1342,11 @@ function isSearchTermAlreadyHandled(status) {
   return normalized === 'ADDED' || normalized === 'ADDED_EXCLUDED' || normalized === 'EXCLUDED';
 }
 
+function isSearchTermAlreadyExcluded(status) {
+  const normalized = String(status || '').trim().toUpperCase();
+  return normalized === 'ADDED_EXCLUDED' || normalized === 'EXCLUDED';
+}
+
 function suggestTargetForTerm(ctx) {
   if (isBrandTerm(ctx.term)) {
     return getBrandTarget();
@@ -1185,6 +1425,10 @@ function isCurrentCampaign(value) {
 }
 
 function isBrandTarget(campaignName, adGroupName) {
+  if (canonicalCampaignName(campaignName) === BRAND_CAMPAIGN) {
+    return true;
+  }
+
   const target = resolveTargetByNames(campaignName, adGroupName);
   return target && target.campaign === BRAND_CAMPAIGN && normalizeName(target.adGroup) === normalizeName(BRAND_AD_GROUP);
 }

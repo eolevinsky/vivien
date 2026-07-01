@@ -1,0 +1,149 @@
+---
+import BookingButton from './BookingButton.astro';
+import { bookingFormLocale, t, withBase } from '../content/site.js';
+
+const { locale, events = [] } = Astro.props;
+const copy = t(locale);
+const ticketLang = bookingFormLocale(locale);
+const visibleEvents = events.filter((event) => !event.hidden);
+const initialStickyEvent = visibleEvents[0] || {};
+const localeTags = {
+  en: 'en-GB',
+  lv: 'lv-LV',
+  fr: 'fr-FR',
+  ru: 'ru-RU',
+};
+const dateFormatter = new Intl.DateTimeFormat(localeTags[locale] || localeTags.en, {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'long',
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: 'Europe/Riga',
+});
+
+function localized(value) {
+  if (!value || typeof value !== 'object') return value || '';
+  return value[locale] || value.en || '';
+}
+
+function localizedList(value) {
+  const list = localized(value);
+  return Array.isArray(list) ? list : [];
+}
+
+function eventPoints(event) {
+  return localizedList(event.points)
+    .map((point) => {
+      if (!point || typeof point !== 'object') {
+        return {
+          text: point || '',
+          price: '',
+        };
+      }
+
+      return {
+        text: localized(point.text),
+        price: localized(point.price),
+      };
+    })
+    .filter((point) => point.text || point.price);
+}
+
+function eventUsesTickets(event) {
+  return event?.ticketed === true;
+}
+
+function eventCtaLabel(event) {
+  return eventUsesTickets(event) ? copy.home.eventsBookCta : copy.nav.book;
+}
+
+function eventBookingSource(event) {
+  return event?.id ? `event_${event.id}` : 'events_sticky_cta';
+}
+
+function eventStepType(event) {
+  return eventUsesTickets(event) ? 'events' : '';
+}
+
+function startLabel(event) {
+  return dateFormatter.format(new Date(event.startIso));
+}
+---
+<section
+  class="events-section section"
+  id="events"
+  data-events-carousel
+  data-events-delay="5000"
+  data-sticky-cta-label={eventCtaLabel(initialStickyEvent)}
+  data-sticky-booking-source={eventBookingSource(initialStickyEvent)}
+  data-sticky-booking-step-type={eventStepType(initialStickyEvent) || undefined}
+  data-sticky-booking-lang={ticketLang}
+>
+  <img class="events-bg" src={withBase('/assets/img/events-bg.jpg')} alt="" loading="lazy" />
+  <div class="section-title events-section-title">
+    <p>{copy.home.eventsTitle}</p>
+    <h2>{copy.home.eventsSubtitle}</h2>
+  </div>
+
+  <div class="events-shell">
+    <div class="events-viewport">
+      <div class="events-track" data-events-track>
+        {visibleEvents.map((event, index) => (
+          <article
+            class:list={['event-slide', index === 0 && 'active']}
+            data-events-slide
+            data-event-id={event.id}
+            data-sticky-cta-label={eventCtaLabel(event)}
+            data-sticky-booking-source={eventBookingSource(event)}
+            data-sticky-booking-step-type={eventStepType(event) || undefined}
+            data-sticky-booking-lang={ticketLang}
+            aria-hidden={index === 0 ? 'false' : 'true'}
+          >
+            <div class="event-media">
+              <img src={withBase(localized(event.image))} alt={localized(event.alt)} loading={index === 0 ? 'eager' : 'lazy'} />
+            </div>
+            <div class="event-content">
+              <time class="event-date" datetime={event.startIso}>{startLabel(event)}</time>
+              <h3>{localized(event.title)}</h3>
+              <div class="event-price"><span>{localized(event.price)}</span></div>
+              <p class="event-lead">{localized(event.lead)}</p>
+              <ul>
+                {eventPoints(event).map((point) => (
+                  <li>
+                    <span class="event-check" aria-hidden="true"></span>
+                    <span class="event-point">
+                      <span>{point.text}</span>
+                      {point.price && <span class="event-point-price">{point.price}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p>{localized(event.text)}</p>
+              <BookingButton
+                label={eventCtaLabel(event)}
+                source={eventBookingSource(event)}
+                stepType={eventStepType(event)}
+                lang={ticketLang}
+                className="text-button event-booking"
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="events-pagination" aria-label={copy.home.eventsPagination}>
+      {visibleEvents.map((event, index) => (
+        <button
+          type="button"
+          class:list={['events-dot', index === 0 && 'active']}
+          data-events-dot
+          data-events-index={index}
+          aria-label={`${copy.home.eventsSlideLabel} ${index + 1}: ${localized(event.title)}`}
+          aria-current={index === 0 ? 'true' : 'false'}
+        ></button>
+      ))}
+    </div>
+  </div>
+</section>

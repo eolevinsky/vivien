@@ -1,0 +1,70 @@
+---
+import { withBase } from '../content/site.js';
+
+const { locale, copy, specials = [] } = Astro.props;
+
+function localized(value) {
+  if (!value || typeof value !== 'object') return value || '';
+  return value[locale] || value.en || '';
+}
+---
+<section class="specials section" id="specials" data-specials-tabs>
+  <div class="section-title">
+    <p>{copy.home.specialsTitle}</p>
+    <h2>{copy.home.specialsSubtitle}</h2>
+  </div>
+
+  <div class="specials-layout">
+    <div class="specials-nav-column">
+      <ul class="specials-nav" role="tablist" aria-orientation="vertical">
+        {specials.map((item, index) => {
+          const paneId = `specials-tab-${item.id}`;
+          const tabId = `specials-tab-link-${item.id}`;
+          return (
+            <li>
+              <a
+                id={tabId}
+                class:list={['specials-tab-link', index === 0 && 'active']}
+                href={`#${paneId}`}
+                role="tab"
+                aria-controls={paneId}
+                aria-selected={index === 0 ? 'true' : 'false'}
+                data-specials-tab
+                data-specials-target={paneId}
+              >{localized(item.tabTitle) || localized(item.title)}</a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+    <div class="specials-content">
+      {specials.map((item, index) => {
+        const paneId = `specials-tab-${item.id}`;
+        const tabId = `specials-tab-link-${item.id}`;
+        const body = localized(item.text);
+        return (
+          <article
+            id={paneId}
+            class:list={['specials-pane', index === 0 && 'active']}
+            role="tabpanel"
+            aria-labelledby={tabId}
+            data-specials-pane
+            hidden={index !== 0}
+          >
+            <div class="specials-pane-inner">
+              <div class="specials-details">
+                <h3>{localized(item.title)}</h3>
+                <p class="specials-lead">{localized(item.lead) || localized(item.text)}</p>
+                {body && localized(item.lead) && <p>{body}</p>}
+              </div>
+              <div class="specials-image">
+                <img src={withBase(item.image)} alt={localized(item.alt) || localized(item.title)} loading={index === 0 ? 'eager' : 'lazy'} />
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

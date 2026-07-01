@@ -5,6 +5,7 @@ const { locale, active = 'home', kind = 'home', params = {} } = Astro.props;
 const copy = t(locale);
 const nav = copy.nav;
 const overlayHeader = kind !== 'legal';
+const showEventsNav = true;
 
 function languageHref(targetLocale) {
   return withBase(localizedPath(targetLocale, kind, params));
@@ -32,6 +33,7 @@ function languageHref(targetLocale) {
       <a href={withBase(localizedPath(locale, 'home'))} class:list={[active === 'home' && 'active']}>{nav.home}</a>
       <a href={withBase(localizedPath(locale, 'home') + '#menu')}>{nav.menu}</a>
       <a href={withBase(localizedPath(locale, 'home') + '#specials')}>{nav.specials}</a>
+      {showEventsNav && <a href={withBase(localizedPath(locale, 'home') + '#events')}>{nav.events}</a>}
       <a href={withBase(localizedPath(locale, 'home') + '#gallery')}>{nav.gallery}</a>
       <a href={withBase(localizedPath(locale, 'gift'))} class:list={[active === 'gift' && 'active']}>{nav.giftCard}</a>
       <a href={withBase(localizedPath(locale, 'review'))} class:list={[active === 'review' && 'active']}>{nav.review}</a>

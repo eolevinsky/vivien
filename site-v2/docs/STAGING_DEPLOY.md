@@ -25,6 +25,20 @@ If Plesk allows directory-level Apache config, also place `deploy/staging.htacce
 
 Staging must not be used for ad traffic. The build includes a visible internal staging marker when `PUBLIC_VIVIEN_BUILD_TARGET=staging` is set.
 
+## Plesk production zip
+
+Create a production-ready zip from a fresh build:
+
+```sh
+./site-v2/scripts/build-plesk-zip.sh
+```
+
+The script uses Node from `site-v2/.nvmrc`, installs it through `nvm` if needed,
+refreshes menu/gallery caches through the normal `npm run build` prebuild, and
+writes a zip to `site-v2/build-artifacts/`. The archive contains the contents of
+`site-v2/dist/` at the zip root, ready to extract into the target Plesk document
+root.
+
 ## Form and email testing
 
 The local static preview used for UI checks, for example `python3 -m http.server`, cannot execute PHP form handlers. A POST to `/forms/*.php` on that server returns `501 Unsupported method`, so it is not an SMTP credential test.
@@ -88,6 +102,7 @@ Do not place `.env` inside `httpdocs`, `_staging`, `v2`, or `dist`. The deployed
 - Confirm menu items exist in HTML source before JS runs.
 - Confirm homepage booking opens Restoplace in one tap.
 - Confirm `/book/?openBooking=1&utm_source=test&ga_client_id=1234567890.1719490000` auto-opens Restoplace.
+- Confirm short marketing links from `docs/SHORT_LINKS.md` return `302` redirects and preserve UTM parameters.
 - Confirm booking links and the Restoplace iframe pass the site locale when Restoplace supports it, with unsupported locales falling back to `lang=en` (currently French pages use `lang=en`).
 - Confirm the Restoplace iframe `src` only uses documented webhook `getparams`: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `utm_referrer`, `roistat`.
 - Confirm `roistat` carries the GA client id or Vivien session fallback id, including before CookieYes consent is accepted.

@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-06-25T10:51:32.718Z",
-  "source": "local fallback: IMAGEKIT_PRIVATE_KEY or IMAGEKIT_ENDPOINT is not configured",
+  "updatedAt": "2026-07-01T03:01:59.955Z",
+  "source": "local fallback: ImageKit folder returned no images",
   "items": [
     {
       "src": "/assets/img/gallery/1_Vivien_and_Oysters.jpg",

@@ -6,6 +6,19 @@ const NORDIC_CAMPAIGN = 'Campaign #5 Search Riga - Nordic Test';
 
 const BRAND_AD_GROUP = 'Группа объявлений\u00A01';
 
+const BRAND_NEGATIVE_TOKENS = [
+  'vivien',
+  'vivian',
+  'vivienn',
+  'vivienne',
+  "vivienne's",
+  'viviennes',
+  'вивьен',
+  'вивиен',
+  'вивиан',
+  'вивьенн'
+];
+
 const DEFAULT_TARGET = {
   campaign: CORE_CAMPAIGN,
   adGroup: 'EN / Restaurant Riga'
@@ -133,6 +146,8 @@ function applyApprovedNegativeKeywords(ss) {
         }
 
         const target = resolveTargetFromSheet(campaignName, adGroupName);
+        assertSafeNegativeTarget(target.campaign, target.adGroup, negativeText);
+
         const adGroup = findAdGroupByNames(target.campaign, target.adGroup);
         if (!adGroup) {
           throw new Error(
@@ -152,6 +167,8 @@ function applyApprovedNegativeKeywords(ss) {
         setCell(sheet, r, headers, 'Result', 'Added ad group negative keyword to ' + target.campaign + ' / ' + target.adGroup + ': ' + negativeText);
       } else {
         const campaignNameToUse = resolveCampaignForCampaignNegative(campaignName);
+        assertSafeNegativeTarget(campaignNameToUse, '', negativeText);
+
         const campaign = findCampaignByName(campaignNameToUse);
         if (!campaign) {
           throw new Error('Campaign not found in Google Ads: ' + campaignNameToUse);
@@ -296,6 +313,42 @@ function resolveCampaignForCampaignNegative(campaignName) {
     CURRENT_CAMPAIGNS.join(' | ') +
     '. Reject or recreate old Campaign #1/#2 rows.'
   );
+}
+
+function assertSafeNegativeTarget(campaignName, adGroupName, negativeText) {
+  if (!isBrandNegativeText(negativeText)) return;
+  if (canonicalCampaignName(campaignName) !== BRAND_CAMPAIGN) return;
+
+  throw new Error(
+    'Refusing to add brand-token negative keyword to Brand campaign' +
+    (adGroupName ? ' / ' + adGroupName : '') +
+    ': ' + negativeText
+  );
+}
+
+function isBrandNegativeText(value) {
+  const normalizedText = normalizeName(stripMatchSyntax(value));
+
+  for (let i = 0; i < BRAND_NEGATIVE_TOKENS.length; i++) {
+    if (containsWholeToken(normalizedText, normalizeName(BRAND_NEGATIVE_TOKENS[i]))) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function containsWholeToken(text, token) {
+  const pattern = new RegExp(
+    '(^|[^a-z0-9а-яё])' + escapeRegExp(token) + '($|[^a-z0-9а-яё])',
+    'i'
+  );
+
+  return pattern.test(text);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function defaultTargetForCampaign(campaignName) {

@@ -10,6 +10,22 @@ const docs = {
   'public-offer': 'https://vivien.restoplace.ws/form/offer/?address=5a003b0dc90935f47c87',
   'personal-data-consent': 'https://vivien.restoplace.ws/form/personaldata/?address=5a003b0dc90935f47c87',
 };
+const localizedTitles = {
+  terms: 'Lietošanas noteikumi',
+  privacy: 'Privātuma politika',
+  'public-offer': 'Publiskais piedāvājums',
+  'personal-data-consent': 'Manu personas datu apstrāde',
+};
+const localizedBodyReplacements = {
+  terms: [
+    ['kurai rezervācija veiktaю.', 'kurai rezervācija veikta.'],
+  ],
+  'public-offer': [
+    ['<p><p><b>Депозит (будет входить в счёт):</b></p><p>Bārs: Стол №103 - 0 €</p></p>', '<p><p><b>Depozīts (tiks ieskaitīts rēķinā):</b></p><p>Bārs: galds Nr. 103 - 0 €</p></p>'],
+  ],
+};
+const cyrillicPattern = /[А-Яа-яЁё]/;
+const locallyCuratedBodySlugs = new Set(['terms', 'personal-data-consent']);
 
 function cleanBody(html) {
   const bodyMatch = html.match(/<div class=['"]txt['"]>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>\s*<style/i);
@@ -32,6 +48,29 @@ function titleFrom(html) {
     || 'Legal document';
 }
 
+function localizeBody(slug, body, existingDoc) {
+  let localized = body;
+  for (const [from, to] of localizedBodyReplacements[slug] || []) {
+    localized = localized.replace(from, to);
+  }
+
+  if (
+    locallyCuratedBodySlugs.has(slug)
+    && existingDoc?.bodyHtml
+    && !cyrillicPattern.test(existingDoc.bodyHtml)
+  ) {
+    localized = existingDoc.bodyHtml;
+  } else if (
+    cyrillicPattern.test(localized)
+    && existingDoc?.bodyHtml
+    && !cyrillicPattern.test(existingDoc.bodyHtml)
+  ) {
+    localized = existingDoc.bodyHtml;
+  }
+
+  return localized;
+}
+
 const existing = JSON.parse(await readFile(outputPath, 'utf8'));
 const next = { generatedAt: new Date().toISOString(), docs: { ...existing.docs } };
 
@@ -39,10 +78,11 @@ for (const [slug, url] of Object.entries(docs)) {
   const response = await fetch(url, { headers: { 'User-Agent': 'VivienLegalSnapshot/1.0' } });
   if (!response.ok) throw new Error(`${slug}: HTTP ${response.status}`);
   const html = await response.text();
+  const bodyHtml = localizeBody(slug, cleanBody(html), existing.docs[slug]);
   next.docs[slug] = {
     sourceUrl: url,
-    sourceTitle: titleFrom(html),
-    bodyHtml: cleanBody(html),
+    sourceTitle: localizedTitles[slug] || titleFrom(html),
+    bodyHtml,
   };
 }
 

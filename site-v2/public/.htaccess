@@ -1,0 +1,145 @@
+Options -Indexes
+RewriteEngine On
+
+# Short marketing links. Keep these temporary redirects so campaign targets can
+# change without long-lived browser or platform caches.
+RewriteRule ^e/?$ /en/?lang=en&utm_source=shortlink&utm_medium=event&utm_campaign=events#events [R=302,L,NE,QSA]
+RewriteRule ^e/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=shortlink&utm_medium=event&utm_campaign=events#events [R=302,L,NE,QSA]
+RewriteRule ^e/fr/?$ /fr/?lang=en&utm_source=shortlink&utm_medium=event&utm_campaign=events#events [R=302,L,NE,QSA]
+RewriteRule ^e/[A-Za-z]{2}/?$ /en/?lang=en&utm_source=shortlink&utm_medium=event&utm_campaign=events#events [R=302,L,NE,QSA]
+RewriteRule ^e/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?lang=$1&event=$2&utm_source=shortlink&utm_medium=event&utm_campaign=event_$2#events [R=302,L,NE,QSA]
+RewriteRule ^e/fr/([A-Za-z0-9._~-]+)/?$ /fr/?lang=en&event=$1&utm_source=shortlink&utm_medium=event&utm_campaign=event_$1#events [R=302,L,NE,QSA]
+RewriteRule ^e/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$2&utm_source=shortlink&utm_medium=event&utm_campaign=event_$2#events [R=302,L,NE,QSA]
+RewriteRule ^e/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$1&utm_source=shortlink&utm_medium=event&utm_campaign=event_$1#events [R=302,L,NE,QSA]
+
+RewriteRule ^visam/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/fr/?$ /fr/?lang=en&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/[A-Za-z]{2}/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?lang=$1&event=$2&utm_source=visam&utm_medium=partner_app&utm_campaign=event_$2&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/fr/([A-Za-z0-9._~-]+)/?$ /fr/?lang=en&event=$1&utm_source=visam&utm_medium=partner_app&utm_campaign=event_$1&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$2&utm_source=visam&utm_medium=partner_app&utm_campaign=event_$2&utm_content=mobile_app#events [R=302,L,NE,QSA]
+RewriteRule ^visam/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$1&utm_source=visam&utm_medium=partner_app&utm_campaign=event_$1&utm_content=mobile_app#events [R=302,L,NE,QSA]
+
+RewriteRule ^visam-ig/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/fr/?$ /fr/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/[A-Za-z]{2}/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?lang=$1&event=$2&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$2&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/fr/([A-Za-z0-9._~-]+)/?$ /fr/?lang=en&event=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$1&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$2&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$2&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-ig/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$1&utm_content=instagram_blog#events [R=302,L,NE,QSA]
+
+RewriteRule ^visam-tt/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/fr/?$ /fr/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/[A-Za-z]{2}/?$ /en/?lang=en&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?lang=$1&event=$2&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$2&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/fr/([A-Za-z0-9._~-]+)/?$ /fr/?lang=en&event=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$1&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$2&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$2&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+RewriteRule ^visam-tt/([A-Za-z0-9._~-]+)/?$ /en/?lang=en&event=$1&utm_source=visam&utm_medium=partner_social&utm_campaign=event_$1&utm_content=tiktok_blog#events [R=302,L,NE,QSA]
+
+RewriteRule ^x/?$ /en/?lang=en&utm_source=x&utm_medium=organic_social&utm_campaign=bio&utm_content=profile#menu [R=302,L,NE,QSA]
+RewriteRule ^x/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=x&utm_medium=organic_social&utm_campaign=bio&utm_content=profile#menu [R=302,L,NE,QSA]
+RewriteRule ^x/fr/?$ /fr/?lang=en&utm_source=x&utm_medium=organic_social&utm_campaign=bio&utm_content=profile#menu [R=302,L,NE,QSA]
+RewriteRule ^x/[^/]+/?$ /en/?lang=en&utm_source=x&utm_medium=organic_social&utm_campaign=bio&utm_content=profile#menu [R=302,L,NE,QSA]
+RewriteRule ^x-book/?$ /en/?openBooking=1&lang=en&booking_source=x_pinned_post&utm_source=x&utm_medium=organic_social&utm_campaign=x_launch&utm_content=pinned_post [R=302,L,NE,QSA]
+RewriteRule ^x-book/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=x_pinned_post&utm_source=x&utm_medium=organic_social&utm_campaign=x_launch&utm_content=pinned_post [R=302,L,NE,QSA]
+RewriteRule ^x-book/fr/?$ /fr/?openBooking=1&lang=en&booking_source=x_pinned_post&utm_source=x&utm_medium=organic_social&utm_campaign=x_launch&utm_content=pinned_post [R=302,L,NE,QSA]
+RewriteRule ^x-book/[^/]+/?$ /en/?openBooking=1&lang=en&booking_source=x_pinned_post&utm_source=x&utm_medium=organic_social&utm_campaign=x_launch&utm_content=pinned_post [R=302,L,NE,QSA]
+
+RewriteRule ^ig/?$ /en/?lang=en&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^ig/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^ig/fr/?$ /fr/?lang=en&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^ig/[^/]+/?$ /en/?lang=en&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^ig-book/?$ /en/?openBooking=1&lang=en&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^ig-book/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^ig-book/fr/?$ /fr/?openBooking=1&lang=en&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^ig-book/[^/]+/?$ /en/?openBooking=1&lang=en&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/?$ /en/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/fr/?$ /fr/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?openBooking=1&lang=$1&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/fr/([A-Za-z0-9._~-]+)/?$ /fr/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/[A-Za-z]{2}/?$ /en/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^ig-lead/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+
+RewriteRule ^fb/?$ /en/?lang=en&utm_source=facebook&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^fb/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=facebook&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^fb/fr/?$ /fr/?lang=en&utm_source=facebook&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^fb/[^/]+/?$ /en/?lang=en&utm_source=facebook&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^fb-book/?$ /en/?openBooking=1&lang=en&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=organic_social&utm_campaign=page_cta&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-book/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=organic_social&utm_campaign=page_cta&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-book/fr/?$ /fr/?openBooking=1&lang=en&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=organic_social&utm_campaign=page_cta&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-book/[^/]+/?$ /en/?openBooking=1&lang=en&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=organic_social&utm_campaign=page_cta&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-organic-book/?$ /en/?openBooking=1&lang=en&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=organic_post&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-organic-book/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=organic_post&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-organic-book/fr/?$ /fr/?openBooking=1&lang=en&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=organic_post&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-organic-book/[^/]+/?$ /en/?openBooking=1&lang=en&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=organic_post&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/?$ /en/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/fr/?$ /fr/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?openBooking=1&lang=$1&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/fr/([A-Za-z0-9._~-]+)/?$ /fr/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/[A-Za-z]{2}/?$ /en/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^fb-lead/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=facebook_lead_form&utm_source=facebook&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+
+RewriteRule ^meta-lead/?$ /en/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/fr/?$ /fr/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?openBooking=1&lang=$1&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/fr/([A-Za-z0-9._~-]+)/?$ /fr/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/[A-Za-z]{2}/?$ /en/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^meta-lead/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=meta_lead_form&utm_source=meta&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+
+RewriteRule ^tt/?$ /en/?lang=en&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^tt/(en|lv|ru)/?$ /$1/?lang=$1&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^tt/fr/?$ /fr/?lang=en&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^tt/[^/]+/?$ /en/?lang=en&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=profile [R=302,L,NE,QSA]
+RewriteRule ^tt-book/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^tt-book/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^tt-book/fr/?$ /fr/?openBooking=1&lang=en&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^tt-book/[^/]+/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=booking [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/(en|lv|ru)/?$ /$1/?openBooking=1&lang=$1&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/fr/?$ /fr/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/(en|lv|ru)/([A-Za-z0-9._~-]+)/?$ /$1/?openBooking=1&lang=$1&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/fr/([A-Za-z0-9._~-]+)/?$ /fr/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/([A-Za-z]{2})/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=$2&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/[A-Za-z]{2}/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+RewriteRule ^tt-lead/([A-Za-z0-9._~-]+)/?$ /en/?openBooking=1&lang=en&booking_source=tiktok_lead_form&utm_source=tiktok&utm_medium=paid_social&utm_campaign=$1&utm_content=lead_form_thank_you [R=302,L,NE,QSA]
+
+# Legacy production redirects.
+Redirect 301 /index.html /en/
+Redirect 301 /index-lv.html /lv/
+Redirect 301 /index-fr.html /fr/
+Redirect 301 /index-ru.html /ru/
+
+Redirect 301 /gift-card/giftcard-en.html /en/gift-card/
+Redirect 301 /gift-card/giftcard-lv.html /lv/gift-card/
+Redirect 301 /gift-card/giftcard-fr.html /fr/gift-card/
+Redirect 301 /gift-card/giftcard-ru.html /ru/gift-card/
+Redirect 301 /gift-card/giftcard-thanks-en.html /en/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-lv.html /lv/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-fr.html /fr/gift-card/thanks/
+Redirect 301 /gift-card/giftcard-thanks-ru.html /ru/gift-card/thanks/
+
+Redirect 301 /review_en.html /en/review/
+Redirect 301 /review_lv.html /lv/review/
+Redirect 301 /review_fr.html /fr/review/
+Redirect 301 /review_ru.html /ru/review/
+
+Redirect 301 /new-loyal-registration-en.html /en/loyalty/
+Redirect 301 /new-loyal-registration-lv.html /lv/loyalty/
+Redirect 301 /new-loyal-registration-fr.html /fr/loyalty/
+Redirect 301 /new-loyal-registration-ru.html /ru/loyalty/
+Redirect 301 /new-loyal.html /en/loyalty/
+
+Redirect 301 /JD-Waiter.html /en/jobs/waiter/
+Redirect 301 /JD-Waiter-lv.html /lv/jobs/waiter/
+Redirect 301 /JD-Waiter-fr.html /fr/jobs/waiter/
+Redirect 301 /JD-Waiter-ru.html /ru/jobs/waiter/
+Redirect 301 /JD-Maitre-d-hotel.html /en/jobs/maitre-d-hotel/

@@ -335,6 +335,9 @@ function restoplaceBookingUrl(extraParams = {}) {
   url.searchParams.set('iframe', '1');
   url.searchParams.set('lang', bookingFormLanguage(extraParams.lang) || currentBookingLanguage());
   url.searchParams.set('source', window.location.hostname);
+  if (restoplaceParamValue(extraParams.step_type)) {
+    url.searchParams.set('step_type', restoplaceParamValue(extraParams.step_type));
+  }
   Object.entries(restoplaceGetparams(extraParams)).forEach(([key, value]) => {
     if (value && !url.searchParams.has(key)) url.searchParams.set(key, value);
   });
@@ -573,25 +576,27 @@ function showBookingFallback() {
 window.openBooking = async function openBooking(options = {}) {
   const source = options.source || 'fallback';
   const auto = Boolean(options.auto);
+  const stepType = restoplaceParamValue(options.stepType || options.step_type);
   const bookingParams = {
     booking_source: source,
-    lang: currentBookingLanguage(),
+    lang: bookingFormLanguage(options.lang) || currentBookingLanguage(),
   };
+  if (stepType) bookingParams.step_type = stepType;
   captureAttribution();
   await refreshGaAttribution().catch(() => ({}));
   ensureBookingGaClientId();
   ensureCurrentUrlCarriesAttribution(bookingParams);
   syncBookingLinks();
-  pushEvent('booking_intent', { booking_source: source, auto });
+  pushEvent('booking_intent', { booking_source: source, step_type: stepType, auto });
 
   if (shouldUseDirectBookingNavigation()) {
-    pushEvent('restoplace_direct_open_attempt', { booking_source: source, auto });
+    pushEvent('restoplace_direct_open_attempt', { booking_source: source, step_type: stepType, auto });
     window.location.assign(restoplaceBookingUrl(bookingParams));
     return;
   }
 
   openRestoplaceFrame(restoplaceBookingUrl(bookingParams));
-  pushEvent('restoplace_widget_open_attempt', { booking_source: source, auto });
+  pushEvent('restoplace_widget_open_attempt', { booking_source: source, step_type: stepType, auto });
 
   window.setTimeout(() => {
     const hasRestoplaceFrame = document.querySelector('iframe[src*="restoplace"], .restoplace-widget, [class*="restoplace"]');
@@ -655,8 +660,16 @@ function bootBookingButtons() {
     const sourceFromHref = button.href
       ? new URL(button.href, window.location.href).searchParams.get('booking_source')
       : '';
+    const stepTypeFromHref = button.href
+      ? new URL(button.href, window.location.href).searchParams.get('step_type')
+      : '';
+    const langFromHref = button.href
+      ? new URL(button.href, window.location.href).searchParams.get('lang')
+      : '';
     window.openBooking({
       source: button.dataset.bookingSource || sourceFromHref || 'fallback',
+      stepType: button.dataset.bookingStepType || stepTypeFromHref || '',
+      lang: button.dataset.bookingLang || langFromHref || '',
       auto: false,
     });
   });
@@ -664,7 +677,12 @@ function bootBookingButtons() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('openBooking') === '1') {
     window.setTimeout(() => {
-      window.openBooking({ source: params.get('booking_source') || 'book_auto', auto: true });
+      window.openBooking({
+        source: params.get('booking_source') || 'book_auto',
+        stepType: params.get('step_type') || '',
+        lang: params.get('lang') || '',
+        auto: true,
+      });
     }, 450);
   }
 }
@@ -676,6 +694,262 @@ function bootPrepareTableButtons() {
     pushEvent('prepare_table_click', {
       outbound_url: link.href,
     });
+  });
+}
+
+function bootSpecialsTabs() {
+  document.querySelectorAll('[data-specials-tabs]').forEach((section) => {
+    const tabs = Array.from(section.querySelectorAll('[data-specials-tab]'));
+    const panes = Array.from(section.querySelectorAll('[data-specials-pane]'));
+    if (!tabs.length || !panes.length) return;
+
+    const activate = (tab, focus = false) => {
+      const targetId = tab.dataset.specialsTarget || '';
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-selected', active ? 'true' : 'false');
+        item.tabIndex = active ? 0 : -1;
+      });
+      panes.forEach((pane) => {
+        const active = pane.id === targetId;
+        pane.classList.toggle('active', active);
+        pane.hidden = !active;
+      });
+      if (focus) tab.focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.tabIndex = tab.classList.contains('active') ? 0 : -1;
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        activate(tab);
+      });
+      tab.addEventListener('keydown', (event) => {
+        const keys = ['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'];
+        if (!keys.includes(event.key)) return;
+        event.preventDefault();
+        const lastIndex = tabs.length - 1;
+        let nextIndex = index;
+        if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = index === lastIndex ? 0 : index + 1;
+        if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = index === 0 ? lastIndex : index - 1;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = lastIndex;
+        activate(tabs[nextIndex], true);
+      });
+    });
+
+    const hashTab = tabs.find((tab) => `#${tab.dataset.specialsTarget}` === window.location.hash);
+    if (hashTab) activate(hashTab);
+  });
+}
+
+function bootEventsCarousel() {
+  document.querySelectorAll('[data-events-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('[data-events-track]');
+    const slides = Array.from(carousel.querySelectorAll('[data-events-slide]'));
+    const dots = Array.from(carousel.querySelectorAll('[data-events-dot]'));
+    if (!track || !slides.length) return;
+
+    const delay = Number.parseInt(carousel.dataset.eventsDelay || '5000', 10);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const linkedEventId = new URLSearchParams(window.location.search).get('event') || '';
+    const linkedEventIndex = linkedEventId
+      ? slides.findIndex((slide) => slide.dataset.eventId === linkedEventId)
+      : -1;
+    const hasLinkedEvent = linkedEventIndex >= 0;
+    let currentIndex = hasLinkedEvent
+      ? linkedEventIndex
+      : Math.max(0, slides.findIndex((slide) => slide.classList.contains('active')));
+    let timer = 0;
+    let resetTimer = 0;
+
+    const firstClone = slides.length > 1 ? slides[0].cloneNode(true) : null;
+    if (firstClone) {
+      firstClone.classList.remove('active');
+      firstClone.setAttribute('aria-hidden', 'true');
+      firstClone.dataset.eventsClone = 'true';
+      firstClone.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
+      track.appendChild(firstClone);
+    }
+
+    const setTransition = (enabled) => {
+      track.classList.toggle('is-sliding', enabled && !prefersReducedMotion);
+    };
+
+    const setPosition = (index, animated = true) => {
+      setTransition(animated);
+      track.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    const syncStickyCta = (index) => {
+      const activeSlide = slides[(index + slides.length) % slides.length];
+      if (!activeSlide) return;
+
+      [
+        'stickyCtaLabel',
+        'stickyBookingSource',
+        'stickyBookingStepType',
+        'stickyBookingLang',
+      ].forEach((key) => {
+        if (activeSlide.dataset[key]) {
+          carousel.dataset[key] = activeSlide.dataset[key];
+        } else {
+          delete carousel.dataset[key];
+        }
+      });
+
+      window.dispatchEvent(new CustomEvent('vivien:sticky-cta-context-change', {
+        detail: {
+          section: carousel,
+        },
+      }));
+    };
+
+    const syncActiveState = (index) => {
+      const activeIndex = (index + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === activeIndex;
+        slide.classList.toggle('active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach((dot, index) => {
+        const active = index === activeIndex;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+      syncStickyCta(activeIndex);
+    };
+
+    const showSlide = (nextIndex, animated = true) => {
+      window.clearTimeout(resetTimer);
+      if (nextIndex >= slides.length && firstClone) {
+        syncActiveState(0);
+        setPosition(slides.length, animated);
+        resetTimer = window.setTimeout(() => {
+          currentIndex = 0;
+          setPosition(0, false);
+        }, prefersReducedMotion ? 0 : 470);
+        return;
+      }
+
+      currentIndex = (nextIndex + slides.length) % slides.length;
+      syncActiveState(currentIndex);
+      setPosition(currentIndex, animated);
+    };
+
+    const stop = () => {
+      if (!timer) return;
+      window.clearInterval(timer);
+      timer = 0;
+    };
+
+    const start = () => {
+      if (hasLinkedEvent || prefersReducedMotion || slides.length < 2 || timer) return;
+      timer = window.setInterval(() => showSlide(currentIndex + 1), Number.isFinite(delay) ? delay : 5000);
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        stop();
+        showSlide(Number.parseInt(dot.dataset.eventsIndex || '0', 10));
+        start();
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', (event) => {
+      if (!carousel.contains(event.relatedTarget)) start();
+    });
+
+    syncActiveState(currentIndex);
+    setPosition(currentIndex, false);
+    if (hasLinkedEvent && window.location.hash === '#events') {
+      window.setTimeout(() => {
+        carousel.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }, 60);
+    }
+    start();
+  });
+}
+
+function bootStickyCtaContext() {
+  const sticky = document.querySelector('.booking-sticky');
+  const sections = Array.from(document.querySelectorAll('[data-sticky-cta-label]'));
+  if (!sticky || !sections.length || !('IntersectionObserver' in window)) return;
+
+  const defaultLabel = sticky.textContent;
+  const defaultHref = sticky.getAttribute('href') || sticky.href;
+  const defaultSource = sticky.dataset.bookingSource || '';
+  const defaultStepType = sticky.dataset.bookingStepType || '';
+  const defaultLang = sticky.dataset.bookingLang || '';
+  const visibleSections = new Set();
+
+  const updateSticky = (section) => {
+    const label = section?.dataset.stickyCtaLabel || defaultLabel;
+    const source = section?.dataset.stickyBookingSource || defaultSource;
+    const stepType = section?.dataset.stickyBookingStepType || defaultStepType;
+    const lang = section?.dataset.stickyBookingLang || defaultLang;
+    sticky.textContent = label;
+
+    if (source) {
+      sticky.dataset.bookingSource = source;
+    } else {
+      delete sticky.dataset.bookingSource;
+    }
+
+    if (stepType) {
+      sticky.dataset.bookingStepType = stepType;
+    } else {
+      delete sticky.dataset.bookingStepType;
+    }
+
+    if (lang) {
+      sticky.dataset.bookingLang = lang;
+    } else {
+      delete sticky.dataset.bookingLang;
+    }
+
+    try {
+      const url = new URL(defaultHref, window.location.href);
+      if (source) url.searchParams.set('booking_source', source);
+      if (stepType) {
+        url.searchParams.set('step_type', stepType);
+      } else {
+        url.searchParams.delete('step_type');
+      }
+      if (lang) url.searchParams.set('lang', lang);
+      sticky.href = url.toString();
+    } catch (_) {
+      // Keep the existing href if URL parsing is unavailable.
+    }
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.28) {
+        visibleSections.add(entry.target);
+      } else {
+        visibleSections.delete(entry.target);
+      }
+    });
+
+    const activeSection = sections.find((section) => visibleSections.has(section));
+    updateSticky(activeSection || null);
+  }, {
+    rootMargin: '-18% 0px -34% 0px',
+    threshold: [0, 0.28, 0.5, 0.72],
+  });
+
+  sections.forEach((section) => observer.observe(section));
+
+  window.addEventListener('vivien:sticky-cta-context-change', (event) => {
+    const section = event.detail?.section;
+    if (section && visibleSections.has(section)) {
+      updateSticky(section);
+    }
   });
 }
 
@@ -874,6 +1148,9 @@ function bootSite() {
   bootNavigation();
   bootBookingButtons();
   bootPrepareTableButtons();
+  bootSpecialsTabs();
+  bootEventsCarousel();
+  bootStickyCtaContext();
   bootMenuFilters();
   bootForms();
   bootReviewSource();

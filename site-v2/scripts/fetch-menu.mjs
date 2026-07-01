@@ -1,6 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { loadHomeEnv } from './load-home-env.mjs';
+
+loadHomeEnv();
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputPath = path.join(root, 'src/content/menu-cache.json');
@@ -31,6 +34,9 @@ function normalize(data, locale) {
     name: item.name || '',
     description: item.description || '',
     price: formatPrice(item.priceWithVatMinor ?? item.priceMinor, item.currencyCode || currencyCode, locale),
+    imageUrl: item.imageUrl || '',
+    thumbUrl: item.thumbUrl || '',
+    imageAlt: item.imageAlt || '',
   })).filter((item) => item.id && item.name);
   return { currencyCode, categories, items };
 }
