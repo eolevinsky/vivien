@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T03:01:58.490Z",
+  "updatedAt": "2026-07-01T08:31:16.253Z",
   "source": "https://app.a3-as.com/api/guest/scheduled-visits/widget/bootstrap",
   "merchant": "vivien-riga",
   "locales": {
@@ -120,9 +120,9 @@
           "name": "Gougeres  (20 pieces)",
           "description": "",
           "price": "€5.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "imageAlt": "Gougeres  (20 pieces)"
         },
         {
           "id": "cmm3mj5wr000d0js1p2jixzn2",
@@ -140,9 +140,9 @@
           "name": "Meat Plate",
           "description": "",
           "price": "€12.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "imageAlt": "Gaļas Plate"
         },
         {
           "id": "cmm3mtcli002b0js1sgedljf2",
@@ -150,9 +150,9 @@
           "name": "Meat Terrine with Pickles",
           "description": "",
           "price": "€6.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "imageAlt": "Meat Terrine with Pickles"
         },
         {
           "id": "cmm3mj5o000040js1sf5fw3ti",
@@ -210,9 +210,9 @@
           "name": "Entrecôte \"Bistrot Vivien\"",
           "description": "Entrecôte \"Bistrot Vivien\" is a main-course steak dish. The name indicates an entrecôte cut served in the style of Bistrot Vivien.",
           "price": "€25.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "imageAlt": "Entrecôte \"Bistrot Vivien\""
         },
         {
           "id": "cmm3mtcmh002i0js14qla1yox",
@@ -220,9 +220,9 @@
           "name": "Peppercorn Steak",
           "description": "",
           "price": "€20.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "imageAlt": "Peppercorn Steak"
         },
         {
           "id": "cmm3mtcmo002j0js1jwk0kf8s",
@@ -230,9 +230,9 @@
           "name": "Roasted Corn Chicken with Ju, Thyme and Potatoes",
           "description": "",
           "price": "€15.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "imageAlt": "Roasted Corn Chicken with Ju, Thyme and Potatoes"
         },
         {
           "id": "cmm3mtcmu002k0js14ucoucp5",
@@ -300,9 +300,9 @@
           "name": "Beef pasta",
           "description": "",
           "price": "€14.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "imageAlt": "Pasta ar liellopu gaļu"
         },
         {
           "id": "cmm3mtcnt002s0js1yiit0ltm",
@@ -310,9 +310,9 @@
           "name": "Pasta with Mushrooms and Truffle Cream",
           "description": "",
           "price": "€14.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "imageAlt": "Pasta with Mushrooms and Truffle Cream"
         },
         {
           "id": "cmm3mtcnl002q0js1gnwn6p52",
@@ -320,9 +320,9 @@
           "name": "Seafood pasta",
           "description": "",
           "price": "€14.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "imageAlt": "Pasta ar Jūras veltēm"
         },
         {
           "id": "cmm3mtco4002v0js1cct6qxee",
@@ -390,9 +390,9 @@
           "name": "Potato home style",
           "description": "",
           "price": "€5.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "imageAlt": "Kartupelis mājas gaumē"
         },
         {
           "id": "cmm3mtcor00300js1stg1pn0l",
@@ -420,9 +420,9 @@
           "name": "Caesar Salad ar Gravlax",
           "description": "Caesar salad with gravlax. A cold salad in Caesar style, served with cured salmon.",
           "price": "€12.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "imageAlt": "Caesar Salad ar garnelēm"
         },
         {
           "id": "cmm3mtco1002u0js1ktv1u3jq",
@@ -430,9 +430,9 @@
           "name": "Caesar Salad with Chicken",
           "description": "",
           "price": "€9.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "imageAlt": "Caesar Salad with Chicken"
         },
         {
           "id": "cmm3mtcnw002t0js1lx7a9v1s",
@@ -440,9 +440,9 @@
           "name": "Warm Goat Cheese Salad",
           "description": "A warm salad with goat cheese. Served as a light savory dish with the characteristic creamy, tangy taste of goat cheese.",
           "price": "€9.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "imageAlt": "Warm Goat Cheese Salad"
         },
         {
           "id": "cmm3mtcp900340js1kbq3fwdw",
@@ -450,9 +450,9 @@
           "name": "Cheese plate",
           "description": "A plate of assorted cheeses served as a main dish.",
           "price": "€16.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "imageAlt": "Siera Plate"
         },
         {
           "id": "cmm3mtcpt00380js14sgp1qf2",
@@ -460,9 +460,9 @@
           "name": "Cheesecake Basque",
           "description": "",
           "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "imageAlt": "Siera kūka"
         },
         {
           "id": "cmm3mtcpd00350js1wx78qofg",
@@ -480,9 +480,9 @@
           "name": "Creme Brulee",
           "description": "Crème brûlée dessert with a rich custard base and a caramelized sugar topping.",
           "price": "€6.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "imageAlt": "Creme Brulee"
         },
         {
           "id": "cmm3mtcpm00370js10hvx8942",
@@ -490,9 +490,9 @@
           "name": "Crêpe Suzette",
           "description": "",
           "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "imageAlt": "Pankūkas ar Cointreau mērci"
         },
         {
           "id": "cmm3mtcpw00390js19jbg90b2",
@@ -500,9 +500,9 @@
           "name": "Tarte tatin",
           "description": "Classic French apple tart baked upside down with caramelized apples and pastry.",
           "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "imageAlt": "Tarte Tatin"
         },
         {
           "id": "cmm3mtd7i007m0js10n31gs3j",
@@ -2363,9 +2363,9 @@
           "name": "Gaļas Plate",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "imageAlt": "Gaļas Plate"
         },
         {
           "id": "cmm3mtcli002b0js1sgedljf2",
@@ -2373,9 +2373,9 @@
           "name": "Gaļas terīne ar marinētiem gurķiem",
           "description": "",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "imageAlt": "Meat Terrine with Pickles"
         },
         {
           "id": "cmm3mtckw00280js1f3a7xwa9",
@@ -2393,9 +2393,9 @@
           "name": "Gougeres  (20 gab.)",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "imageAlt": "Gougeres  (20 pieces)"
         },
         {
           "id": "cmm3mj5wr000d0js1p2jixzn2",
@@ -2453,9 +2453,9 @@
           "name": "Cepts kukurūzas vistas gaļas gabals ar sīpoliem, timiānu un kartupeļiem",
           "description": "",
           "price": "15,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "imageAlt": "Roasted Corn Chicken with Ju, Thyme and Potatoes"
         },
         {
           "id": "cmm3mtcm6002g0js17r4qf398",
@@ -2463,9 +2463,9 @@
           "name": "Entrecôte \"Bistrot Vivien\"",
           "description": "Entrecôte \"Bistrot Vivien\" ir pamatēdiens ar liellopa entrekota steiku. Nosaukums norāda uz entrekota griezumu Bistrot Vivien stilā.",
           "price": "25,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "imageAlt": "Entrecôte \"Bistrot Vivien\""
         },
         {
           "id": "cmm3mtcmc002h0js1ljvtumqi",
@@ -2483,9 +2483,9 @@
           "name": "Piparu gaļas steiks",
           "description": "",
           "price": "20,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "imageAlt": "Peppercorn Steak"
         },
         {
           "id": "cmm3mtcn9002n0js1s7qfn1en",
@@ -2553,9 +2553,9 @@
           "name": "Pasta ar Jūras veltēm",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "imageAlt": "Pasta ar Jūras veltēm"
         },
         {
           "id": "cmm3mtcnp002r0js1i4rn5kyd",
@@ -2563,9 +2563,9 @@
           "name": "Pasta ar liellopu gaļu",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "imageAlt": "Pasta ar liellopu gaļu"
         },
         {
           "id": "cmm3mtcnt002s0js1yiit0ltm",
@@ -2573,9 +2573,9 @@
           "name": "Pasta ar sēnēm un trifeļu krējumu",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "imageAlt": "Pasta with Mushrooms and Truffle Cream"
         },
         {
           "id": "cmm3mtco8002w0js1737uyhnk",
@@ -2623,9 +2623,9 @@
           "name": "Kartupelis mājas gaumē",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "imageAlt": "Kartupelis mājas gaumē"
         },
         {
           "id": "cmm3mtcor00300js1stg1pn0l",
@@ -2673,9 +2673,9 @@
           "name": "Caesar Salad ar Gravlax",
           "description": "Cēzara salāti ar gravlax. Auksti salāti Cēzara stilā, pasniegti ar sālītu laša gravlax.",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "imageAlt": "Caesar Salad ar garnelēm"
         },
         {
           "id": "cmm3mtco1002u0js1ktv1u3jq",
@@ -2683,9 +2683,9 @@
           "name": "Caesar Salad ar Vistu",
           "description": "",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "imageAlt": "Caesar Salad with Chicken"
         },
         {
           "id": "cmm3mtcnw002t0js1lx7a9v1s",
@@ -2693,9 +2693,9 @@
           "name": "Siltie salāti ar kazas sieru",
           "description": "Silti salāti ar kazas sieru. Viegls sāļš ēdiens ar kazas sieram raksturīgo krēmīgo un viegli pikanto garšu.",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "imageAlt": "Warm Goat Cheese Salad"
         },
         {
           "id": "cmm3mtcpd00350js1wx78qofg",
@@ -2713,9 +2713,9 @@
           "name": "Creme Brulee",
           "description": "Krēma brulē deserts ar bagātīgu olu krēma pamatni un karamelizētu cukura garoziņu.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "imageAlt": "Creme Brulee"
         },
         {
           "id": "cmm3mtcpm00370js10hvx8942",
@@ -2723,9 +2723,9 @@
           "name": "Pankūkas ar Cointreau mērci",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "imageAlt": "Pankūkas ar Cointreau mērci"
         },
         {
           "id": "cmm3mtcpt00380js14sgp1qf2",
@@ -2733,9 +2733,9 @@
           "name": "Siera kūka",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "imageAlt": "Siera kūka"
         },
         {
           "id": "cmm3mtcp900340js1kbq3fwdw",
@@ -2743,9 +2743,9 @@
           "name": "Siera Plate",
           "description": "Dažādu sieru plate, pasniegta kā pamatēdiens.",
           "price": "16,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "imageAlt": "Siera Plate"
         },
         {
           "id": "cmm3mtcpw00390js19jbg90b2",
@@ -2753,9 +2753,9 @@
           "name": "Tarte tatin",
           "description": "Klasisks franču ābolu pīrāgs, kas cepts apgriezti, ar karamelizētiem āboliem un mīklu.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "imageAlt": "Tarte Tatin"
         },
         {
           "id": "cmm3mtd7i007m0js10n31gs3j",
@@ -4596,9 +4596,9 @@
           "name": "Assiette de viande",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "imageAlt": "Gaļas Plate"
         },
         {
           "id": "cmm3mtckj00250js1ak9w81mi",
@@ -4636,9 +4636,9 @@
           "name": "Gougères  (20 pièces)",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "imageAlt": "Gougeres  (20 pieces)"
         },
         {
           "id": "cmm3mj5wr000d0js1p2jixzn2",
@@ -4686,9 +4686,9 @@
           "name": "Terrine de viande aux cornichons",
           "description": "",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "imageAlt": "Meat Terrine with Pickles"
         },
         {
           "id": "cmm3mtcm1002f0js1qo4sqpxv",
@@ -4716,9 +4716,9 @@
           "name": "Entrecôte \"Bistrot Vivien\"",
           "description": "Entrecôte \"Bistrot Vivien\" est un plat principal à base de steak de bœuf. Le nom indique une entrecôte servie dans le style de Bistrot Vivien.",
           "price": "25,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "imageAlt": "Entrecôte \"Bistrot Vivien\""
         },
         {
           "id": "cmm3mtcmo002j0js1jwk0kf8s",
@@ -4726,9 +4726,9 @@
           "name": "Poulet rôti au maïs avec jus, thym et pommes de terre",
           "description": "",
           "price": "15,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "imageAlt": "Roasted Corn Chicken with Ju, Thyme and Potatoes"
         },
         {
           "id": "cmm3mtcmh002i0js14qla1yox",
@@ -4736,9 +4736,9 @@
           "name": "Steak au poivre",
           "description": "",
           "price": "20,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "imageAlt": "Peppercorn Steak"
         },
         {
           "id": "cmm3mtcmu002k0js14ucoucp5",
@@ -4806,9 +4806,9 @@
           "name": "Pâtes au bœuf",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "imageAlt": "Pasta ar liellopu gaļu"
         },
         {
           "id": "cmm3mtcnt002s0js1yiit0ltm",
@@ -4816,9 +4816,9 @@
           "name": "Pâtes aux champignons et à la crème de truffe",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "imageAlt": "Pasta with Mushrooms and Truffle Cream"
         },
         {
           "id": "cmm3mtcnl002q0js1gnwn6p52",
@@ -4826,9 +4826,9 @@
           "name": "Pâtes aux fruits de mer",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "imageAlt": "Pasta ar Jūras veltēm"
         },
         {
           "id": "cmm3mtco8002w0js1737uyhnk",
@@ -4896,9 +4896,9 @@
           "name": "Pommes de terre à la maison",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "imageAlt": "Kartupelis mājas gaumē"
         },
         {
           "id": "cmm3mtcoi002y0js16mf3j5gr",
@@ -4926,9 +4926,9 @@
           "name": "Salade César au gravlax",
           "description": "Salade César au gravlax. Salade froide de style César, servie avec du saumon gravlax.",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "imageAlt": "Caesar Salad ar garnelēm"
         },
         {
           "id": "cmm3mtco1002u0js1ktv1u3jq",
@@ -4936,9 +4936,9 @@
           "name": "Salade César au poulet",
           "description": "",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "imageAlt": "Caesar Salad with Chicken"
         },
         {
           "id": "cmm3mtcnw002t0js1lx7a9v1s",
@@ -4946,9 +4946,9 @@
           "name": "Salade tiède au fromage de chèvre",
           "description": "Salade tiède au fromage de chèvre. Un plat léger au goût crémeux et légèrement acidulé typique du fromage de chèvre.",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "imageAlt": "Warm Goat Cheese Salad"
         },
         {
           "id": "cmm3mtcp900340js1kbq3fwdw",
@@ -4956,9 +4956,9 @@
           "name": "Assiette de fromages",
           "description": "Assiette de fromages variés, servie comme plat principal.",
           "price": "16,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "imageAlt": "Siera Plate"
         },
         {
           "id": "cmm3mtcpd00350js1wx78qofg",
@@ -4976,9 +4976,9 @@
           "name": "Creme Brulee",
           "description": "Dessert crème brûlée à base de crème prise, avec une fine couche de sucre caramélisé.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "imageAlt": "Creme Brulee"
         },
         {
           "id": "cmm3mtcpm00370js10hvx8942",
@@ -4986,9 +4986,9 @@
           "name": "Crêpe Suzette",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "imageAlt": "Pankūkas ar Cointreau mērci"
         },
         {
           "id": "cmm3mtcpt00380js14sgp1qf2",
@@ -4996,9 +4996,9 @@
           "name": "Gâteau basque au fromage",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "imageAlt": "Siera kūka"
         },
         {
           "id": "cmm3mtcpw00390js19jbg90b2",
@@ -5006,9 +5006,9 @@
           "name": "Tarte tatin",
           "description": "Tarte aux pommes française classique, cuite à l’envers, avec des pommes caramélisées et une pâte.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "imageAlt": "Tarte Tatin"
         },
         {
           "id": "cmm3mtd7i007m0js10n31gs3j",
@@ -6849,9 +6849,9 @@
           "name": "Гужеры (20 штук)",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mj5np00030js15zpe0ur5/main-1782894280633.jpg",
+          "imageAlt": "Gougeres  (20 pieces)"
         },
         {
           "id": "cmm3mtckj00250js1ak9w81mi",
@@ -6879,9 +6879,9 @@
           "name": "Мясная тарелка",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcks00270js1mz7x60d2/main-1782894316513.jpg",
+          "imageAlt": "Gaļas Plate"
         },
         {
           "id": "cmm3mtcli002b0js1sgedljf2",
@@ -6889,9 +6889,9 @@
           "name": "Мясной террин с маринованными огурцами",
           "description": "",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcli002b0js1sgedljf2/main-1782894439115.jpg",
+          "imageAlt": "Meat Terrine with Pickles"
         },
         {
           "id": "cmm3mj5o000040js1sf5fw3ti",
@@ -6949,9 +6949,9 @@
           "name": "Антрекот \"Bistrot Vivien\"",
           "description": "Антрекот \"Bistrot Vivien\" — основное блюдо из говяжьего стейка антрекот. Название указывает на подачу в стиле Bistrot Vivien.",
           "price": "25,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcm6002g0js17r4qf398/main-1782894228534.jpg",
+          "imageAlt": "Entrecôte \"Bistrot Vivien\""
         },
         {
           "id": "cmm3mtcm1002f0js1qo4sqpxv",
@@ -6969,9 +6969,9 @@
           "name": "Кукурузный ципленок с соусом жю, тимьяном и картофелем",
           "description": "",
           "price": "15,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmo002j0js1jwk0kf8s/main-1782894108996.jpg",
+          "imageAlt": "Roasted Corn Chicken with Ju, Thyme and Potatoes"
         },
         {
           "id": "cmm3mtcmh002i0js14qla1yox",
@@ -6979,9 +6979,9 @@
           "name": "Перечный стейк",
           "description": "",
           "price": "20,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmh002i0js14qla1yox/main-1782894363463.jpg",
+          "imageAlt": "Peppercorn Steak"
         },
         {
           "id": "cmm3mtcmc002h0js1ljvtumqi",
@@ -7059,9 +7059,9 @@
           "name": "Паста с говядиной",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnp002r0js1i4rn5kyd/main-1782893838589.jpg",
+          "imageAlt": "Pasta ar liellopu gaļu"
         },
         {
           "id": "cmm3mtcnt002s0js1yiit0ltm",
@@ -7069,9 +7069,9 @@
           "name": "Паста с грибами и трюфельным соусом",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnt002s0js1yiit0ltm/main-1782894344127.jpg",
+          "imageAlt": "Pasta with Mushrooms and Truffle Cream"
         },
         {
           "id": "cmm3mtcnl002q0js1gnwn6p52",
@@ -7079,9 +7079,9 @@
           "name": "Паста с морепродуктами",
           "description": "",
           "price": "14,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnl002q0js1gnwn6p52/main-1782894375977.jpg",
+          "imageAlt": "Pasta ar Jūras veltēm"
         },
         {
           "id": "cmm3mtco4002v0js1cct6qxee",
@@ -7139,9 +7139,9 @@
           "name": "Картофель по-домашнему",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcom002z0js1wsf18sml/main-1782894300892.jpg",
+          "imageAlt": "Kartupelis mājas gaumē"
         },
         {
           "id": "cmm3mtcoi002y0js16mf3j5gr",
@@ -7179,9 +7179,9 @@
           "name": "Салат «Цезарь» с курицей",
           "description": "",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco1002u0js1ktv1u3jq/main-1782893884684.jpg",
+          "imageAlt": "Caesar Salad with Chicken"
         },
         {
           "id": "cmm3mtcnw002t0js1lx7a9v1s",
@@ -7189,9 +7189,9 @@
           "name": "Теплый салат с козьим сыром",
           "description": "Теплый салат с козьим сыром. Легкое соленое блюдо с характерным для козьего сыра сливочным и слегка пикантным вкусом.",
           "price": "9,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnw002t0js1lx7a9v1s/main-1782894259866.jpg",
+          "imageAlt": "Warm Goat Cheese Salad"
         },
         {
           "id": "cmm3mtd9t00880js194bek6uj",
@@ -7199,9 +7199,9 @@
           "name": "Цезарь с гравлакс из лосося",
           "description": "Салат «Цезарь» с гравлаксом из лосося. Холодный салат в стиле «Цезарь» с маринованным лососем.",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtd9t00880js194bek6uj/main-1782893956116.jpg",
+          "imageAlt": "Caesar Salad ar garnelēm"
         },
         {
           "id": "cmm3mtcph00360js1tuehc03c",
@@ -7209,9 +7209,9 @@
           "name": "Creme Brulee",
           "description": "Десерт крем-брюле с нежной заварной основой и карамелизированной сахарной корочкой.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcph00360js1tuehc03c/main-1782894126015.jpg",
+          "imageAlt": "Creme Brulee"
         },
         {
           "id": "cmm3mtcpm00370js10hvx8942",
@@ -7219,9 +7219,9 @@
           "name": "Pankūkas ar Cointreau mērci",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpm00370js10hvx8942/main-1782894202844.jpg",
+          "imageAlt": "Pankūkas ar Cointreau mērci"
         },
         {
           "id": "cmm3mtcpw00390js19jbg90b2",
@@ -7229,9 +7229,9 @@
           "name": "Tarte tatin",
           "description": "Классический французский яблочный тарт, выпеченный вверх дном, с карамелизированными яблоками и тестом.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpw00390js19jbg90b2/main-1782894395596.jpg",
+          "imageAlt": "Tarte Tatin"
         },
         {
           "id": "cmm3mtcpt00380js14sgp1qf2",
@@ -7239,9 +7239,9 @@
           "name": "Баскский чизкейк",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpt00380js14sgp1qf2/main-1782894082867.jpg",
+          "imageAlt": "Siera kūka"
         },
         {
           "id": "cmm3mtcp900340js1kbq3fwdw",
@@ -7249,9 +7249,9 @@
           "name": "Сырная тарелка",
           "description": "Ассорти из сыров, подаётся как основное блюдо.",
           "price": "16,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcp900340js1kbq3fwdw/main-1782894010965.jpg",
+          "imageAlt": "Siera Plate"
         },
         {
           "id": "cmm3mtcpd00350js1wx78qofg",
