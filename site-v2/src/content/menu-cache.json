@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T08:31:16.253Z",
+  "updatedAt": "2026-07-03T09:56:25.401Z",
   "source": "https://app.a3-as.com/api/guest/scheduled-visits/widget/bootstrap",
   "merchant": "vivien-riga",
   "locales": {
@@ -90,9 +90,9 @@
           "name": "Beef Tartare",
           "description": "",
           "price": "€11.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "imageAlt": "L/l Tartare"
         },
         {
           "id": "cmm3mtckj00250js1ak9w81mi",
@@ -180,9 +180,9 @@
           "name": "Snails 12 pieces",
           "description": "",
           "price": "€10.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "imageAlt": "Gliemeži 12gb"
         },
         {
           "id": "cmm3mtcm1002f0js1qo4sqpxv",
@@ -249,7 +249,7 @@
           "categoryId": "cmm3mtcjk001s0js1nmdd40wl",
           "name": "Mussels Marinière (0.5 kg)",
           "description": "",
-          "price": "€14.00",
+          "price": "€17.00",
           "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "imageAlt": "Mussels Marinière (0.5 kg)"
@@ -270,9 +270,9 @@
           "name": "Oysters (12 pieces)",
           "description": "",
           "price": "€45.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "imageAlt": "Oysters (12 )"
         },
         {
           "id": "cmm3mtcnd002o0js1hd09dhq5",
@@ -280,9 +280,9 @@
           "name": "Oysters (3 pieces)",
           "description": "",
           "price": "€12.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "imageAlt": "Oysters (3 pieces)"
         },
         {
           "id": "cmm3mtcng002p0js14w7cak88",
@@ -290,9 +290,9 @@
           "name": "Oysters (6 pieces)",
           "description": "",
           "price": "€23.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "imageAlt": "Oysters (6 pieces)"
         },
         {
           "id": "cmm3mtcnp002r0js1i4rn5kyd",
@@ -330,9 +330,9 @@
           "name": "French Onion Soup",
           "description": "Classic onion soup in the French style, typically made with slowly cooked onions in broth and often served with toasted bread and melted cheese.",
           "price": "€8.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "imageAlt": "French Onion Soup"
         },
         {
           "id": "cmm3mtco8002w0js1737uyhnk",
@@ -360,9 +360,9 @@
           "name": "French fries",
           "description": "",
           "price": "€5.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "imageAlt": "Kartupeļi Fri"
         },
         {
           "id": "cmm3mtcp200320js14vor420k",
@@ -470,9 +470,9 @@
           "name": "Chocolate Mousse",
           "description": "Chocolate mousse dessert with a light, airy texture and rich chocolate flavor.",
           "price": "€6.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "imageAlt": "Chocolate Mousse"
         },
         {
           "id": "cmm3mtcph00360js1tuehc03c",
@@ -2383,9 +2383,9 @@
           "name": "Gliemeži 12gb",
           "description": "",
           "price": "10,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "imageAlt": "Gliemeži 12gb"
         },
         {
           "id": "cmm3mj5np00030js15zpe0ur5",
@@ -2413,9 +2413,9 @@
           "name": "L/l Tartare",
           "description": "",
           "price": "11,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "imageAlt": "L/l Tartare"
         },
         {
           "id": "cmm3mj5o000040js1sf5fw3ti",
@@ -2493,9 +2493,9 @@
           "name": "Austeres (12 gab.)",
           "description": "",
           "price": "45,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "imageAlt": "Oysters (12 )"
         },
         {
           "id": "cmm3mtcnd002o0js1hd09dhq5",
@@ -2503,9 +2503,9 @@
           "name": "Austeres (3 gab.)",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "imageAlt": "Oysters (3 pieces)"
         },
         {
           "id": "cmm3mtcng002p0js14w7cak88",
@@ -2513,9 +2513,9 @@
           "name": "Austeres (6 gb)",
           "description": "",
           "price": "23,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "imageAlt": "Oysters (6 pieces)"
         },
         {
           "id": "cmm3mtcmu002k0js14ucoucp5",
@@ -2532,7 +2532,7 @@
           "categoryId": "cmm3mtcjk001s0js1nmdd40wl",
           "name": "Mīdijas Marinière (0.5 kg)",
           "description": "",
-          "price": "14,00 €",
+          "price": "17,00 €",
           "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "imageAlt": "Mussels Marinière (0.5 kg)"
@@ -2593,9 +2593,9 @@
           "name": "Sīpolu zupa",
           "description": "Klasiska franču stila sīpolu zupa, ko parasti gatavo no lēni sautētiem sīpoliem buljonā un bieži pasniedz ar grauzdētu maizi un kausētu sieru.",
           "price": "8,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "imageAlt": "French Onion Soup"
         },
         {
           "id": "cmm3mtcod002x0js15klsg7iz",
@@ -2613,9 +2613,9 @@
           "name": "Kartupeļi Fri",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "imageAlt": "Kartupeļi Fri"
         },
         {
           "id": "cmm3mtcom002z0js1wsf18sml",
@@ -2703,9 +2703,9 @@
           "name": "Chocolate Mousse",
           "description": "Šokolādes musss ar vieglu, gaisīgu tekstūru un izteiktu šokolādes garšu.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "imageAlt": "Chocolate Mousse"
         },
         {
           "id": "cmm3mtcph00360js1tuehc03c",
@@ -4626,9 +4626,9 @@
           "name": "Escargots 12 pièces",
           "description": "",
           "price": "10,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "imageAlt": "Gliemeži 12gb"
         },
         {
           "id": "cmm3mj5np00030js15zpe0ur5",
@@ -4676,9 +4676,9 @@
           "name": "Tartare de bœuf",
           "description": "",
           "price": "11,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "imageAlt": "L/l Tartare"
         },
         {
           "id": "cmm3mtcli002b0js1sgedljf2",
@@ -4756,9 +4756,9 @@
           "name": "Huîtres (12 pièces)",
           "description": "",
           "price": "45,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "imageAlt": "Oysters (12 )"
         },
         {
           "id": "cmm3mtcnd002o0js1hd09dhq5",
@@ -4766,9 +4766,9 @@
           "name": "Huîtres (3 pièces)",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "imageAlt": "Oysters (3 pieces)"
         },
         {
           "id": "cmm3mtcng002p0js14w7cak88",
@@ -4776,16 +4776,16 @@
           "name": "Huîtres (6 pièces)",
           "description": "",
           "price": "23,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "imageAlt": "Oysters (6 pieces)"
         },
         {
           "id": "cmm3mtcmz002l0js11znz1pga",
           "categoryId": "cmm3mtcjk001s0js1nmdd40wl",
           "name": "Moules Marinière (0.5 kg)",
           "description": "",
-          "price": "14,00 €",
+          "price": "17,00 €",
           "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "imageAlt": "Mussels Marinière (0.5 kg)"
@@ -4846,9 +4846,9 @@
           "name": "French Onion Soup",
           "description": "Soupe à l’oignon de style français, généralement préparée avec des oignons longuement cuits dans un bouillon et souvent servie avec du pain grillé et du fromage fondu.",
           "price": "8,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "imageAlt": "French Onion Soup"
         },
         {
           "id": "cmm3mtcod002x0js15klsg7iz",
@@ -4906,9 +4906,9 @@
           "name": "Pommes de terre Fri",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "imageAlt": "Kartupeļi Fri"
         },
         {
           "id": "cmm3mtcor00300js1stg1pn0l",
@@ -4966,9 +4966,9 @@
           "name": "Chocolate Mousse",
           "description": "Dessert au chocolat à la texture légère et aérienne, avec un goût riche de chocolat.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "imageAlt": "Chocolate Mousse"
         },
         {
           "id": "cmm3mtcph00360js1tuehc03c",
@@ -6929,9 +6929,9 @@
           "name": "Тартар из говядины",
           "description": "",
           "price": "11,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtclb002a0js16naycvh8/main-1782985246753.jpg",
+          "imageAlt": "L/l Tartare"
         },
         {
           "id": "cmm3mtckw00280js1f3a7xwa9",
@@ -6939,9 +6939,9 @@
           "name": "Улитки 12 штук",
           "description": "",
           "price": "10,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtckw00280js1f3a7xwa9/main-1782985686074.jpg",
+          "imageAlt": "Gliemeži 12gb"
         },
         {
           "id": "cmm3mtcm6002g0js17r4qf398",
@@ -6998,7 +6998,7 @@
           "categoryId": "cmm3mtcjk001s0js1nmdd40wl",
           "name": "Мидии Marinière (0.5 кг.)",
           "description": "",
-          "price": "14,00 €",
+          "price": "17,00 €",
           "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcmz002l0js11znz1pga/main-1781770282601.jpg",
           "imageAlt": "Mussels Marinière (0.5 kg)"
@@ -7019,9 +7019,9 @@
           "name": "Устрицы (12 шт.)",
           "description": "",
           "price": "45,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcn9002n0js1s7qfn1en/main-1782985276964.jpg",
+          "imageAlt": "Oysters (12 )"
         },
         {
           "id": "cmm3mtcnd002o0js1hd09dhq5",
@@ -7029,9 +7029,9 @@
           "name": "Устрицы (3 шт.)",
           "description": "",
           "price": "12,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcnd002o0js1hd09dhq5/main-1782985290108.jpg",
+          "imageAlt": "Oysters (3 pieces)"
         },
         {
           "id": "cmm3mtcng002p0js14w7cak88",
@@ -7039,9 +7039,9 @@
           "name": "Устрицы (6 шт.)",
           "description": "",
           "price": "23,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcng002p0js14w7cak88/main-1782985304529.jpg",
+          "imageAlt": "Oysters (6 pieces)"
         },
         {
           "id": "cmm3mtcmu002k0js14ucoucp5",
@@ -7089,9 +7089,9 @@
           "name": "French Onion Soup",
           "description": "Классический луковый суп во французском стиле, который обычно готовят из медленно томлёного лука на бульоне и часто подают с поджаренным хлебом и расплавленным сыром.",
           "price": "8,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtco4002v0js1cct6qxee/main-1782985522255.jpg",
+          "imageAlt": "French Onion Soup"
         },
         {
           "id": "cmm3mtco8002w0js1737uyhnk",
@@ -7149,9 +7149,9 @@
           "name": "Картофель фри",
           "description": "",
           "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcoi002y0js16mf3j5gr/main-1782985589102.jpg",
+          "imageAlt": "Kartupeļi Fri"
         },
         {
           "id": "cmm3mtcod002x0js15klsg7iz",
@@ -7259,9 +7259,9 @@
           "name": "Шоколадный мусс",
           "description": "Шоколадный мусс — десерт с лёгкой воздушной текстурой и насыщенным шоколадным вкусом.",
           "price": "6,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
+          "imageUrl": "https://ik.imagekit.io/a3systems/tr:w-800,h-800,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "thumbUrl": "https://ik.imagekit.io/a3systems/tr:w-240,h-240,fo-auto,q-auto,f-auto/coop-platform/prod/merchants/cmlqel37900000jpirz2c1xma/products/cmm3mtcpd00350js1wx78qofg/main-1782985218545.jpg",
+          "imageAlt": "Chocolate Mousse"
         },
         {
           "id": "cmm3mtd7i007m0js10n31gs3j",
