@@ -875,9 +875,17 @@ body.scrolled .site-header--overlay .mainbar::before {
 }
 
 .event-media img {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 10.8;
   object-fit: cover;
+}
+
+.event-media img.event-image--contain {
+  aspect-ratio: var(--event-image-aspect-ratio, 16 / 9);
+  object-fit: contain;
+  object-position: center;
+  background: #f2eadf;
 }
 
 .event-content {

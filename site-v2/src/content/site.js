@@ -1110,12 +1110,9 @@ export const events = [
   {
     id: 'cherry-days',
     startIso: '2026-07-10T17:00:00+03:00',
-    image: {
-      en: '/assets/img/events-slider/cherry-days-en.png',
-      lv: '/assets/img/events-slider/cherry-days-lv.png',
-      fr: '/assets/img/events-slider/cherry-days-fr.png',
-      ru: '/assets/img/events-slider/cherry-days-ru.png',
-    },
+    image: '/assets/img/events-slider/cherry-days.png',
+    imageFit: 'contain',
+    imageAspectRatio: '2398 / 830',
     alt: {
       en: 'Cherry Days poster with a cherry on a porcelain plate',
       lv: 'Ķiršu dienu plakāts ar ķirsi uz porcelāna šķīvja',
@@ -1268,6 +1265,7 @@ export function localizedPath(locale, kind = 'home', params = {}) {
   if (kind === 'home') return `/${locale}/`;
   if (kind === 'gift') return `/${locale}/gift-card/`;
   if (kind === 'giftThanks') return `/${locale}/gift-card/thanks/`;
+  if (kind === 'event') return `/${locale}/events/${params.event}/`;
   if (kind === 'review') return `/${locale}/review/`;
   if (kind === 'loyalty') return `/${locale}/loyalty/`;
   if (kind === 'waiter') return `/${locale}/jobs/waiter/`;

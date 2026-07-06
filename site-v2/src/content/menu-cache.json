@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T09:56:25.401Z",
+  "updatedAt": "2026-07-06T14:31:36.748Z",
   "source": "https://app.a3-as.com/api/guest/scheduled-visits/widget/bootstrap",
   "merchant": "vivien-riga",
   "locales": {
@@ -1728,16 +1728,6 @@
           "id": "cmm3mtd3u006l0js1tao36l1r",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mezcal Sour",
-          "description": "",
-          "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd12005v0js110qew7gu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Mohito",
           "description": "",
           "price": "€7.00",
           "imageUrl": "",
@@ -3998,16 +3988,6 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd12005v0js110qew7gu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Mohito",
-          "description": "",
-          "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd1u00630js1s199bj5g",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Moscow Mule",
@@ -6241,16 +6221,6 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd12005v0js110qew7gu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Mohito",
-          "description": "",
-          "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd1u00630js1s199bj5g",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Moscow Mule",
@@ -8477,16 +8447,6 @@
           "id": "cmm3mtd3u006l0js1tao36l1r",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mezcal Sour",
-          "description": "",
-          "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd12005v0js110qew7gu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Mohito",
           "description": "",
           "price": "7,00 €",
           "imageUrl": "",
