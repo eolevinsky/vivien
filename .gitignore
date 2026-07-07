@@ -10,6 +10,9 @@
 vendor/
 .phpunit.cache/
 
+# Node dependencies
+node_modules/
+
 # Python dependencies and caches
 .venv/
 .pytest_cache/

@@ -570,6 +570,8 @@ final class App
             $cards,
             $workflow,
         ): void {
+            $group->get('/process-jobs', static fn ($request, $response) =>
+                Responses::json($response, $processor->run()));
             $group->post('/process-jobs', static fn ($request, $response) =>
                 Responses::json($response, $processor->run()));
             $group->post('/orders/{id}/retry', static function (
@@ -607,11 +609,21 @@ final class App
             $handler,
         ) use ($config): ResponseInterface {
             $secret = $config->string('INTERNAL_JOB_SECRET');
-            if ($secret === ''
-                || !hash_equals('Bearer ' . $secret, $request->getHeaderLine('Authorization'))) {
+            if ($secret === '') {
                 return Responses::json(new \Nyholm\Psr7\Response(), ['error' => 'Unauthorized'], 401);
             }
-            return $handler->handle($request);
+            if (hash_equals('Bearer ' . $secret, $request->getHeaderLine('Authorization'))) {
+                return $handler->handle($request);
+            }
+
+            $path = $request->getUri()->getPath();
+            $querySecret = (string) ($request->getQueryParams()['secret'] ?? '');
+            $isCronJobEndpoint = str_ends_with($path, '/internal/process-jobs');
+            if ($isCronJobEndpoint && $querySecret !== '' && hash_equals($secret, $querySecret)) {
+                return $handler->handle($request);
+            }
+
+            return Responses::json(new \Nyholm\Psr7\Response(), ['error' => 'Unauthorized'], 401);
         });
     }
 

@@ -58,13 +58,19 @@ Deployment steps:
    - `refund.failed`
 7. Configure Syrve webhook:
    `https://api.vivien.lv/webhooks/syrve/balance-changed`.
-8. Configure an external scheduler to POST once per minute to:
-   `https://api.vivien.lv/internal/process-jobs`.
+8. Configure an external scheduler to run jobs once per minute.
 
-The scheduler must send:
+Preferred scheduler request:
 
 ```text
+POST https://api.vivien.lv/internal/process-jobs
 Authorization: Bearer <INTERNAL_JOB_SECRET>
+```
+
+If the shared-hosting scheduler can only call plain URLs without headers, use:
+
+```text
+GET https://api.vivien.lv/internal/process-jobs?secret=<INTERNAL_JOB_SECRET>
 ```
 
 ## First rollout
