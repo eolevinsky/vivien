@@ -101,7 +101,13 @@ function startLabel(event) {
             aria-hidden={index === 0 ? 'false' : 'true'}
           >
             <div class="event-media">
-              <img src={withBase(localized(event.image))} alt={localized(event.alt)} loading={index === 0 ? 'eager' : 'lazy'} />
+              <img
+                class:list={['event-image', event.imageFit === 'contain' && 'event-image--contain']}
+                style={event.imageAspectRatio ? `--event-image-aspect-ratio: ${event.imageAspectRatio}` : undefined}
+                src={withBase(localized(event.image))}
+                alt={localized(event.alt)}
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
             </div>
             <div class="event-content">
               <time class="event-date" datetime={event.startIso}>{startLabel(event)}</time>

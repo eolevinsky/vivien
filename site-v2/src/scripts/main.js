@@ -22,6 +22,7 @@ const ATTRIBUTION_KEYS = [
 const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
 const BOOKING_CLIENT_ID_STORAGE_KEY = 'vivien_booking_client_id';
 const GA_MEASUREMENT_ID = window.VIVIEN_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
+const DIRECT_GA_EVENTS_ENABLED = window.VIVIEN_GA_DIRECT_ENABLED !== false;
 const RESTOPLACE_ADDRESS_HASH = window.VIVIEN_RESTOPLACE_ADDRESS_HASH || '5a003b0dc90935f47c87';
 const RESTOPLACE_LOCALES = Array.isArray(window.VIVIEN_RESTOPLACE_LOCALES)
   ? window.VIVIEN_RESTOPLACE_LOCALES
@@ -495,6 +496,31 @@ function ensureCurrentUrlCarriesAttribution(extraParams = {}) {
   }
 }
 
+function gaEventParameterValue(value) {
+  if (value === null || value === undefined) return '';
+  if (['string', 'number', 'boolean'].includes(typeof value)) return value;
+  return String(value);
+}
+
+function gaEventParams(payload) {
+  return Object.entries(payload).reduce((memo, [key, value]) => {
+    if (key === 'event' || value === null || value === undefined || value === '') return memo;
+    memo[key] = gaEventParameterValue(value);
+    return memo;
+  }, {});
+}
+
+function sendDirectGaEvent(event, payload) {
+  if (!DIRECT_GA_EVENTS_ENABLED || !GA_MEASUREMENT_ID || typeof window.gtag !== 'function') return;
+  if (!analyticsConsentGranted()) return;
+
+  try {
+    window.gtag('event', event, gaEventParams(payload));
+  } catch (_) {
+    // GA4 should not break first-party booking or form flows.
+  }
+}
+
 function pushEvent(event, data = {}) {
   const payload = {
     event,
@@ -505,6 +531,7 @@ function pushEvent(event, data = {}) {
   };
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(payload);
+  sendDirectGaEvent(event, payload);
   if (analyticsDebugEnabled()) {
     window.vivienEvents = window.vivienEvents || [];
     window.vivienEvents.push(payload);

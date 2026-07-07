@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import BookingButton from '../../../../components/BookingButton.astro';
+import { bookingFormLocale, canonicalUrl, events, locales, site, t, withBase } from '../../../../content/site.js';
+
+export function getStaticPaths() {
+  const visibleEvents = events.filter((event) => !event.hidden);
+
+  return locales.flatMap((locale) =>
+    visibleEvents.map((event) => ({
+      params: { locale, event: event.id },
+      props: { event },
+    }))
+  );
+}
+
+const { locale } = Astro.params;
+const { event } = Astro.props;
+const copy = t(locale);
+const bookingLang = bookingFormLocale(locale);
+const eventPath = `/${locale}/events/${event.id}/`;
+const homePath = withBase(`/${locale}/`);
+const title = localized(event.title);
+const description = localized(event.lead);
+const image = localized(event.image);
+const imageAlt = localized(event.alt);
+const price = localized(event.price);
+const text = localized(event.text);
+const points = eventPoints(event);
+const alternates = {
+  links: locales.map((altLocale) => ({
+    locale: altLocale,
+    href: canonicalUrl(`/${altLocale}/events/${event.id}/`),
+  })),
+  xDefault: canonicalUrl(`/en/events/${event.id}/`),
+};
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: title,
+  description,
+  startDate: event.startIso,
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  image: canonicalUrl(image),
+  url: canonicalUrl(eventPath),
+  location: {
+    '@type': 'Restaurant',
+    name: site.name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Brivibas iela 37',
+      addressLocality: 'Riga',
+      postalCode: 'LV-1010',
+      addressCountry: 'LV',
+    },
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.domain,
+  },
+};
+
+function localized(value) {
+  if (!value || typeof value !== 'object') return value || '';
+  return value[locale] || value.en || '';
+}
+
+function localizedList(value) {
+  const list = localized(value);
+  return Array.isArray(list) ? list : [];
+}
+
+function eventPoints(event) {
+  return localizedList(event.points)
+    .map((point) => {
+      if (!point || typeof point !== 'object') {
+        return { text: point || '', price: '' };
+      }
+
+      return {
+        text: localized(point.text),
+        price: localized(point.price),
+      };
+    })
+    .filter((point) => point.text || point.price);
+}
+---
+<BaseLayout
+  locale={locale}
+  title={`${title} | ${site.name}`}
+  description={description}
+  canonicalPath={eventPath}
+  alternates={alternates}
+  image={image}
+  schema={eventSchema}
+  noindex={true}
+  bodyClass="event-landing-page"
+>
+  <Header locale={locale} active="home" kind="home" />
+  <main>
+    <script is:inline define:vars={{ homePath, eventId: event.id, bookingLang }}>
+      (() => {
+        const target = new URL(homePath, window.location.origin);
+        const params = new URLSearchParams(window.location.search);
+        params.set('event', eventId);
+        if (!params.has('lang')) params.set('lang', bookingLang);
+        target.search = params.toString();
+        target.hash = 'events';
+        window.location.replace(target.toString());
+      })();
+    </script>
+
+    <section class="section events-section" id="event-preview">
+      <div class="events-shell">
+        <article class="event-slide active" aria-hidden="false">
+          <div class="event-media">
+            <img
+              class:list={['event-image', event.imageFit === 'contain' && 'event-image--contain']}
+              style={event.imageAspectRatio ? `--event-image-aspect-ratio: ${event.imageAspectRatio}` : undefined}
+              src={withBase(image)}
+              alt={imageAlt}
+              loading="eager"
+            />
+          </div>
+          <div class="event-content">
+            <time class="event-date" datetime={event.startIso}>
+              {new Intl.DateTimeFormat(locale, {
+                day: 'numeric',
+                month: 'long',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Europe/Riga',
+              }).format(new Date(event.startIso))}
+            </time>
+            <h1>{title}</h1>
+            {price && <div class="event-price"><span>{price}</span></div>}
+            <p class="event-lead">{description}</p>
+            {points.length > 0 && (
+              <ul>
+                {points.map((point) => (
+                  <li>
+                    <span class="event-check" aria-hidden="true"></span>
+                    <span class="event-point">
+                      <span>{point.text}</span>
+                      {point.price && <span class="event-point-price">{point.price}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {text && <p>{text}</p>}
+            <p>
+              <a class="button" href={withBase(`/${locale}/?event=${event.id}&lang=${bookingLang}#events`)}>
+                {copy.nav.events}
+              </a>
+              <BookingButton
+                label={copy.nav.book}
+                source={`event_${event.id}`}
+                lang={bookingLang}
+                className="text-button event-booking"
+              />
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>
