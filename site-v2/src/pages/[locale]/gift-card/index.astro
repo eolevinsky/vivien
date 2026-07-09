@@ -14,7 +14,8 @@ const copy = t(locale);
 const path = localizedPath(locale, 'gift');
 const giftAmountMin = '10\u00a0€';
 const giftAmountMax = '500\u00a0€';
-const checkoutAction = 'https://api.vivien.lv/v1/gift-cards/checkout';
+const checkoutAction =
+  import.meta.env.PUBLIC_GIFT_CARD_CHECKOUT_URL || 'https://api.vivien.lv/v1/gift-cards/checkout';
 const checkoutLabels = {
   en: {
     formTitle: 'Create a Vivien Gift Card',

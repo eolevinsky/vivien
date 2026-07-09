@@ -35,6 +35,24 @@ Plesk document root:
 /var/www/vhosts/vivien.lv/api.vivien.lv/public
 ```
 
+If deploying by archive instead of a Plesk Git checkout, create the API archive from
+the repository root with:
+
+```sh
+./php-api/scripts/build-plesk-zip.sh
+```
+
+Extract the zip into:
+
+```text
+/var/www/vhosts/vivien.lv/api.vivien.lv/
+```
+
+The archive contains `public/`, `src/`, `migrations/`, `templates/`, Composer files,
+and `.env.example` at the archive root. It intentionally does not contain `vendor/`,
+runtime logs, or a real `.env`; run Composer Install in Plesk after extracting and
+create the private `.env` from the extracted `.env.example`.
+
 Deployment steps:
 
 1. Configure the Git repository for the `api.vivien.lv` website.

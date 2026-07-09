@@ -25,9 +25,14 @@ If Plesk allows directory-level Apache config, also place `deploy/staging.htacce
 
 Staging must not be used for ad traffic. The build includes a visible internal staging marker when `PUBLIC_VIVIEN_BUILD_TARGET=staging` is set.
 
-## Plesk production zip
+## Plesk production zips
 
-Create a production-ready zip from a fresh build:
+There are now two separate Plesk deployables:
+
+- the static website in `site-v2/`, deployed to `vivien.lv`
+- the gift-card checkout API in `php-api/`, deployed to `api.vivien.lv`
+
+Create the website zip from a fresh build:
 
 ```sh
 ./site-v2/scripts/build-plesk-zip.sh
@@ -38,6 +43,20 @@ refreshes menu/gallery caches through the normal `npm run build` prebuild, and
 writes a zip to `site-v2/build-artifacts/`. The archive contains the contents of
 `site-v2/dist/` at the zip root, ready to extract into the target Plesk document
 root.
+
+Create the API zip separately:
+
+```sh
+./php-api/scripts/build-plesk-zip.sh
+```
+
+Extract that archive into the `api.vivien.lv` subscription root, with Plesk document
+root set to `public/`. Run Composer Install in Plesk there, create a private `.env`
+from the API `.env.example`, import the SQL migrations, and confirm
+`https://api.vivien.lv/health`.
+
+The root `.env.example` belongs to the preserved Python reference implementation and
+is not used by the Plesk production website or PHP API.
 
 ## Form and email testing
 
@@ -65,6 +84,7 @@ Set these in Plesk or the CI/deploy process, not in git:
 - `PUBLIC_COOKIEYES_ID`
 - `PUBLIC_GTM_ID`
 - `PUBLIC_GA_MEASUREMENT_ID`
+- `PUBLIC_GIFT_CARD_CHECKOUT_URL` (optional, defaults to `https://api.vivien.lv/v1/gift-cards/checkout`)
 - `VIVIEN_MAIL_FROM`
 - `VIVIEN_MAIL_FROM_NAME`
 - `VIVIEN_SMTP_HOST`

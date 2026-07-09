@@ -12,7 +12,8 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const copy = t(locale);
 const path = localizedPath(locale, 'loyalty');
-const checkoutAction = 'https://api.vivien.lv/v1/gift-cards/checkout';
+const checkoutAction =
+  import.meta.env.PUBLIC_GIFT_CARD_CHECKOUT_URL || 'https://api.vivien.lv/v1/gift-cards/checkout';
 const checkoutLabels = {
   en: {
     amount: 'Starting balance, EUR',
