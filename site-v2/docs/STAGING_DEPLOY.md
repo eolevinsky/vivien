@@ -58,6 +58,12 @@ from the API `.env.example`, import the SQL migrations, and confirm
 The root `.env.example` belongs to the preserved Python reference implementation and
 is not used by the Plesk production website or PHP API.
 
+For the Plesk layout where one subscription Home directory contains both `httpdocs/`
+and `api.vivien.lv/`, the private Home `.env` may contain both sets of variables:
+the static-site form/analytics values from `site-v2/.env.example` and the checkout
+API values from `php-api/.env.example`. Do not paste the repository-root
+`.env.example` into production.
+
 ## Form and email testing
 
 The local static preview used for UI checks, for example `python3 -m http.server`, cannot execute PHP form handlers. A POST to `/forms/*.php` on that server returns `501 Unsupported method`, so it is not an SMTP credential test.

@@ -53,11 +53,28 @@ and `.env.example` at the archive root. It intentionally does not contain `vendo
 runtime logs, or a real `.env`; run Composer Install in Plesk after extracting and
 create the private `.env` from the extracted `.env.example`.
 
+The API first loads `.env` from its deployment root and then falls back to the
+subscription Home `.env` one level above it. This supports a Plesk layout such as:
+
+```text
+.env
+api.vivien.lv/
+httpdocs/
+logs/
+tmp/
+```
+
+Use the Home `.env` if you want one private file for both the static site's PHP forms
+and the checkout API. Include the API keys from this package's `.env.example` there;
+do not copy the repository-root `.env.example`, which belongs to the Python reference
+implementation.
+
 Deployment steps:
 
 1. Configure the Git repository for the `api.vivien.lv` website.
 2. Run Composer Install in Plesk.
-3. Copy `.env.example` to `.env` outside `public/` and enter real credentials.
+3. Copy `.env.example` to `.env` outside `public/`, or add the same keys to the
+   subscription Home `.env`, and enter real credentials.
 4. Import `migrations/001_initial.sql` into MariaDB database `vivien_loyalty`, then
    apply any later migration files in order on existing databases.
 5. Confirm `https://api.vivien.lv/health`.

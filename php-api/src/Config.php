@@ -13,11 +13,27 @@ final class Config
 
     public static function load(string $root): self
     {
-        if (is_file($root . '/.env')) {
-            Dotenv::createImmutable($root)->safeLoad();
+        foreach (self::envDirectories($root) as $directory) {
+            if (is_file($directory . '/.env')) {
+                Dotenv::createImmutable($directory)->safeLoad();
+            }
         }
 
         return new self(array_merge($_SERVER, $_ENV));
+    }
+
+    /** @return list<string> */
+    private static function envDirectories(string $root): array
+    {
+        $root = rtrim($root, '/');
+        $parent = dirname($root);
+        $directories = [$root];
+
+        if ($parent !== $root) {
+            $directories[] = $parent;
+        }
+
+        return $directories;
     }
 
     /** @param array<string, mixed> $values */
