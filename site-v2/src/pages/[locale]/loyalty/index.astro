@@ -12,6 +12,50 @@ export function getStaticPaths() {
 const { locale } = Astro.params;
 const copy = t(locale);
 const path = localizedPath(locale, 'loyalty');
+const checkoutAction = 'https://api.vivien.lv/v1/gift-cards/checkout';
+const checkoutLabels = {
+  en: {
+    amount: 'Starting balance, EUR',
+    firstName: 'First name',
+    lastName: 'Last name',
+    payerEmail: 'Email',
+    birthday: 'Birthday, DD.MM.YYYY (optional)',
+    note: 'Optional note',
+    submit: 'Create Card & Pay Securely',
+    cancelled: 'Payment was cancelled. Your card was not charged.',
+  },
+  lv: {
+    amount: 'Sākuma atlikums, EUR',
+    firstName: 'Vārds',
+    lastName: 'Uzvārds',
+    payerEmail: 'E-pasts',
+    birthday: 'Dzimšanas diena, DD.MM.GGGG (nav obligāti)',
+    note: 'Piezīme (nav obligāti)',
+    submit: 'Izveidot karti un droši samaksāt',
+    cancelled: 'Maksājums tika atcelts. No kartes nauda netika noņemta.',
+  },
+  fr: {
+    amount: 'Solde initial, EUR',
+    firstName: 'Prénom',
+    lastName: 'Nom',
+    payerEmail: 'E-mail',
+    birthday: 'Date de naissance, JJ.MM.AAAA (facultatif)',
+    note: 'Note facultative',
+    submit: 'Créer la carte et payer',
+    cancelled: 'Le paiement a été annulé. Votre carte n’a pas été débitée.',
+  },
+  ru: {
+    amount: 'Начальный баланс, EUR',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    payerEmail: 'E-mail',
+    birthday: 'Дата рождения, ДД.ММ.ГГГГ (необязательно)',
+    note: 'Комментарий (необязательно)',
+    submit: 'Создать карту и оплатить',
+    cancelled: 'Платёж отменён. Деньги с карты не списаны.',
+  },
+};
+const labels = checkoutLabels[locale] || checkoutLabels.en;
 ---
 <BaseLayout locale={locale} title={`${copy.loyalty.title} | Brasserie Vivien`} description={copy.loyalty.description} canonicalPath={path} alternates={alternatesFor('loyalty')}>
   <Header locale={locale} active="loyalty" kind="loyalty" />
@@ -31,26 +75,21 @@ const path = localizedPath(locale, 'loyalty');
           <h2>{copy.loyalty.description}</h2>
         </div>
         <div class="panel">
-          <FormShell locale={locale} action={withBase('/forms/register-new-loyal.php')} eventName="loyalty_registration_submit" submitLabel={copy.loyalty.submit}>
+          <FormShell locale={locale} action={checkoutAction} eventName="loyalty_checkout_start" submitLabel={labels.submit} checkout={true} cancelledMessage={labels.cancelled}>
             <div class="row">
-              <input type="text" name="name" placeholder={copy.form.name} required />
-              <input type="email" name="email" placeholder={copy.form.email} required />
+              <input type="text" name="recipient_first_name" placeholder={labels.firstName} required />
+              <input type="text" name="recipient_last_name" placeholder={labels.lastName} required />
             </div>
             <div class="row">
-              <input type="tel" name="phone" placeholder={copy.form.phone} required />
-              <input type="date" name="birthdate" aria-label={copy.loyalty.birthdate} />
+              <input type="email" name="payer_email" placeholder={labels.payerEmail} required />
+              <input type="text" name="recipient_birthday" inputmode="numeric" pattern="[0-9]{2}\.[0-9]{2}\.[0-9]{4}" placeholder={labels.birthday} aria-label={labels.birthday} />
             </div>
             <div class="row">
-              <input type="number" name="people" placeholder={copy.loyalty.people} />
-              <select name="gender" aria-label={copy.loyalty.gender}>
-                <option value="">{copy.loyalty.gender}</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
+              <input type="number" min="10" max="500" name="amount" placeholder={labels.amount} required />
+              <input type="email" name="recipient_email" placeholder={copy.form.email} />
             </div>
-            <input type="text" name="profession" placeholder={copy.loyalty.profession} />
-            <textarea name="infosource" placeholder={copy.loyalty.source}></textarea>
-            <textarea name="message" placeholder={copy.loyalty.interests}></textarea>
+            <textarea name="payer_note" placeholder={labels.note}></textarea>
+            <input type="hidden" name="card_kind" value="loyalty" />
           </FormShell>
         </div>
       </div>

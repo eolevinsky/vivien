@@ -1085,6 +1085,8 @@ function formFailureMessage(form, response, text) {
 
 function bootForms() {
   document.querySelectorAll('form.vivien-form').forEach((form) => {
+    if (form.matches('[data-giftcard-checkout]')) return;
+
     const state = form.querySelector('[data-form-state]');
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -1115,6 +1117,62 @@ function bootForms() {
           state.className = 'form-state error';
           state.textContent = error.message || form.dataset.errorMessage || 'Submission failed';
         }
+      }
+    });
+  });
+}
+
+function checkoutFailureMessage(form, data, fallback) {
+  const detail = data?.detail;
+  if (Array.isArray(detail)) {
+    return detail.map((item) => item?.msg || item?.message || String(item)).join(' ');
+  }
+  return data?.error || detail || fallback;
+}
+
+function bootGiftCardCheckout() {
+  document.querySelectorAll('form[data-giftcard-checkout]').forEach((form) => {
+    const state = form.querySelector('[data-form-state]');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+      form.action = 'http://localhost:8080/v1/gift-cards/checkout';
+    }
+
+    const showState = (className, message) => {
+      if (!state) return;
+      state.className = `form-state ${className || ''}`.trim();
+      state.textContent = message || '';
+    };
+
+    if (new URLSearchParams(window.location.search).get('payment') === 'cancelled') {
+      showState('error', form.dataset.cancelledMessage || 'Payment was cancelled. Your card was not charged.');
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      showState('', form.dataset.loadingMessage || 'Loading...');
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.checkout_url) {
+          throw new Error(checkoutFailureMessage(form, data, form.dataset.errorMessage || 'Unable to start payment.'));
+        }
+        if (form.dataset.successEvent) {
+          pushEvent(form.dataset.successEvent, { form_action: form.getAttribute('action') || '' });
+        }
+        window.location.assign(data.checkout_url);
+      } catch (error) {
+        showState('error', error.message || form.dataset.errorMessage || 'Unable to start payment.');
+        if (submitButton) submitButton.disabled = false;
       }
     });
   });
@@ -1233,6 +1291,7 @@ function bootSite() {
   bootStickyCtaContext();
   bootMenuFilters();
   bootForms();
+  bootGiftCardCheckout();
   bootReviewSource();
   bootReviewPositive();
   bootPrivateFeedback();

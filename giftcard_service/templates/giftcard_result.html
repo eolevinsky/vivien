@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="{{ language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Vivien Gift Card</title>
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css" rel="stylesheet">
+  <style>
+    body { background: #0c0b09; color: #fff; }
+    .result-shell { min-height: 100vh; padding: 72px 20px; display: grid; place-items: center; }
+    .result-panel { width: min(760px, 100%); border: 1px solid rgba(205,164,94,.55); background: #15130f; padding: 42px; }
+    .result-panel h1, .gift-amount { color: #cda45e; font-family: "Playfair Display", serif; }
+    .gift-card-print { display: none; margin-top: 30px; border: 2px solid #cda45e; padding: 36px; text-align: center; background: #fff; color: #17130d; }
+    .gift-card-print img { width: 210px; height: 210px; margin: 20px auto; display: block; }
+    .gift-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .gift-actions a, .gift-actions button { border: 2px solid #cda45e; background: transparent; color: #fff; padding: 12px 20px; }
+    .gift-actions a:hover, .gift-actions button:hover { background: #cda45e; color: #15130f; }
+    .spinner { width: 28px; height: 28px; border: 3px solid rgba(205,164,94,.3); border-top-color: #cda45e; border-radius: 50%; animation: spin 1s linear infinite; margin: 22px 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media print {
+      body { background: #fff; }
+      .result-shell { display: block; padding: 0; }
+      .result-panel > :not(.gift-card-print) { display: none !important; }
+      .result-panel { border: 0; padding: 0; background: #fff; width: 100%; }
+      .gift-card-print { display: block !important; border: 2px solid #8d6a2f; min-height: 90vh; }
+    }
+  </style>
+</head>
+<body>
+  <main class="result-shell">
+    <section class="result-panel">
+      <h1 id="result-heading">Preparing your gift card</h1>
+      <p id="result-message">Payment was received. We are creating and funding the card now.</p>
+      <div id="spinner" class="spinner" aria-label="Loading"></div>
+
+      <div id="ready-content" hidden>
+        <p><strong id="recipient-name"></strong></p>
+        <p class="gift-amount fs-2" id="balance"></p>
+        <div class="gift-actions">
+          <a id="wallet-link" href="#" rel="noopener noreferrer">Open Wallet Card</a>
+          <button type="button" onclick="window.print()">Print / Save as PDF</button>
+        </div>
+      </div>
+
+      <div id="gift-card-print" class="gift-card-print">
+        <h2>Brasserie Vivien</h2>
+        <p>Gift Card</p>
+        <h3 id="print-recipient"></h3>
+        <p class="gift-amount" id="print-balance"></p>
+        <img id="qr-code" alt="Gift card QR code">
+        <p id="gift-message"></p>
+        <p>Card <span id="card-number"></span></p>
+      </div>
+
+      <div class="gift-actions">
+        <a href="/gift-card/gift-card-choose-lang.html">Buy another card</a>
+        <a href="/index.html">Home</a>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const token = {{ public_token | tojson }};
+      const heading = document.getElementById("result-heading");
+      const message = document.getElementById("result-message");
+      const spinner = document.getElementById("spinner");
+      const ready = document.getElementById("ready-content");
+
+      async function refresh() {
+        try {
+          const response = await fetch(`/api/gift-cards/${token}/status`, {cache: "no-store"});
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.detail || "Unable to load card status.");
+
+          if (data.status === "ready") {
+            heading.textContent = "Your gift card is ready";
+            message.textContent = "The card is active and funded in Vivien’s loyalty system.";
+            spinner.hidden = true;
+            ready.hidden = false;
+            document.getElementById("recipient-name").textContent = data.recipient_name;
+            document.getElementById("balance").textContent = data.balance;
+            document.getElementById("wallet-link").href = data.wallet_url;
+            document.getElementById("print-recipient").textContent = data.recipient_name;
+            document.getElementById("print-balance").textContent = data.balance;
+            document.getElementById("qr-code").src = data.qr_url;
+            document.getElementById("gift-message").textContent = data.gift_message || "";
+            document.getElementById("card-number").textContent = data.card_number;
+            document.getElementById("gift-card-print").style.display = "block";
+            return;
+          }
+          if (data.status === "refunded") {
+            heading.textContent = "Payment refunded";
+            message.textContent = "The card could not be activated and the payment was refunded.";
+            spinner.hidden = true;
+            return;
+          }
+          if (data.status === "manual_review") {
+            heading.textContent = "We are reviewing this order";
+            message.textContent = data.error;
+            spinner.hidden = true;
+            return;
+          }
+          setTimeout(refresh, 2500);
+        } catch (error) {
+          message.textContent = error.message;
+          setTimeout(refresh, 5000);
+        }
+      }
+      refresh();
+    })();
+  </script>
+</body>
+</html>

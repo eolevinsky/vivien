@@ -1,0 +1,32 @@
+[project]
+name = "vivien-gift-cards"
+version = "0.1.0"
+description = "Stripe, PassSlot, and Syrve gift-card service for Brasserie Vivien"
+requires-python = ">=3.11"
+dependencies = [
+  "alembic>=1.14,<2",
+  "email-validator>=2.2,<3",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "jinja2>=3.1,<4",
+  "pydantic-settings>=2.7,<3",
+  "python-multipart>=0.0.20,<1",
+  "qrcode[pil]>=8,<9",
+  "sqlalchemy>=2.0,<3",
+  "stripe>=11,<14",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "pytest-cov>=6,<7",
+  "respx>=0.22,<1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
