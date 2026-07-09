@@ -16,6 +16,7 @@ export const shortLinkGroups = [
     medium: 'event',
     baseCampaign: 'events',
     eventContent: null,
+    sectionLinks: true,
   },
   {
     prefix: 'poster',
@@ -25,6 +26,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'qr_code',
     eventContent: 'qr_code',
+    sectionLinks: true,
   },
   {
     prefix: 'visam',
@@ -34,6 +36,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'mobile_app',
     eventContent: 'mobile_app',
+    sectionLinks: true,
   },
   {
     prefix: 'visam-ig',
@@ -43,6 +46,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'instagram_blog',
     eventContent: 'instagram_blog',
+    sectionLinks: true,
   },
   {
     prefix: 'visam-tt',
@@ -52,6 +56,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'tiktok_blog',
     eventContent: 'tiktok_blog',
+    sectionLinks: true,
   },
   {
     prefix: 'meta-event',
@@ -70,6 +75,26 @@ export const shortLinkGroups = [
     source: 'google',
     medium: 'cpc',
     baseCampaign: 'google_ads',
+    content: 'site_home',
+    eventContent: 'event_link',
+    campaignOverride: true,
+    sectionLinks: true,
+    pageLinks: [
+      {
+        slug: 'gift-card',
+        path: 'gift-card',
+        campaign: 'page_gift_card',
+        content: 'page_gift_card',
+      },
+    ],
+    baseHash: null,
+  },
+  {
+    prefix: 'email',
+    kind: 'event',
+    source: 'newsletter',
+    medium: 'email',
+    baseCampaign: 'newsletter',
     content: 'site_home',
     eventContent: 'event_link',
     campaignOverride: true,
@@ -185,6 +210,16 @@ export const shortLinkGroups = [
     bookingSource: 'google_ads_booking',
   },
   {
+    prefix: 'email-book',
+    kind: 'booking',
+    source: 'newsletter',
+    medium: 'email',
+    baseCampaign: 'booking',
+    baseContent: 'booking',
+    baseBookingSource: 'email_booking',
+    bookingSource: 'email_booking',
+  },
+  {
     prefix: 'tt-book',
     kind: 'booking',
     source: 'tiktok',
@@ -256,6 +291,22 @@ export const redirectFixtures = [
   {
     path: '/google/en/gift-card/campaign_4_search_riga_core_languages?utm_adgroup=en_restaurant_riga',
     location: 'https://vivien.lv/en/gift-card/?lang=en&utm_source=google&utm_medium=cpc&utm_campaign=campaign_4_search_riga_core_languages&utm_content=page_gift_card&utm_adgroup=en_restaurant_riga',
+  },
+  {
+    path: '/email/ru/menu/july_newsletter?utm_term=summer',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_menu&utm_term=summer#menu',
+  },
+  {
+    path: '/email/ru/events/july_newsletter',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_events#events',
+  },
+  {
+    path: '/email/ru/gift-card/july_newsletter',
+    location: 'https://vivien.lv/ru/gift-card/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=page_gift_card',
+  },
+  {
+    path: '/email-book/ru/july_newsletter',
+    location: 'https://vivien.lv/ru/?openBooking=1&lang=ru&booking_source=email_booking&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=booking',
   },
   {
     path: '/poster/ru/cherry-days?qr=poster-entrance',

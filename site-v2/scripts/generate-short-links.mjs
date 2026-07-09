@@ -406,13 +406,23 @@ https://vivien.lv/e/ru/cherry-days
 https://vivien.lv/poster/ru/cherry-days
 https://vivien.lv/ig/ru/cherry-days
 https://vivien.lv/ig/ru/menu
+https://vivien.lv/ig/ru/gallery
+https://vivien.lv/x/ru/contact
 https://vivien.lv/meta-event/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/meta-book/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/ig-book/ru/cherry-days/ig_cherry_days_july
 https://vivien.lv/google/ru/events/google_cherry_days_july
+https://vivien.lv/google/ru/gallery/google_gallery_july
+https://vivien.lv/google/ru/contact/google_contact_july
 https://vivien.lv/google/ru/gift-card/google_gift_card_july
 https://vivien.lv/google/ru/cherry-days/google_cherry_days_july
 https://vivien.lv/google-book/ru/cherry-days/google_cherry_days_july
+https://vivien.lv/email/ru/menu/july_newsletter
+https://vivien.lv/email/ru/events/july_newsletter
+https://vivien.lv/email/ru/gallery/july_newsletter
+https://vivien.lv/email/ru/contact/july_newsletter
+https://vivien.lv/email/ru/gift-card/july_newsletter
+https://vivien.lv/email-book/ru/july_newsletter
 \`\`\`
 
 Supported site-language segments are \`en\`, \`lv\`, \`fr\`, and \`ru\`.
@@ -430,12 +440,15 @@ Manager-facing formats:
 
 \`\`\`text
 Event landing page: https://vivien.lv/<channel>/<locale>/<event>
-Menu section:       https://vivien.lv/<channel>/<locale>/menu
+Section:            https://vivien.lv/<channel>/<locale>/<section>
+Section campaign:   https://vivien.lv/<channel>/<locale>/<section>/<campaign>
+Gift-card page:    https://vivien.lv/<channel>/<locale>/gift-card
 Booking modal:      https://vivien.lv/<channel>-book/<locale>
 Event + booking:    https://vivien.lv/<channel>-book/<locale>/<event>/<campaign>
 \`\`\`
 
-Google page links currently support \`gift-card\`.
+Page links currently support \`gift-card\` for Google Ads and email newsletter
+channels.
 
 Event links use the event \`id\` from \`src/content/site.js\`, for example
 \`cherry-days\`. A concrete event link redirects to a static event landing page
@@ -476,6 +489,12 @@ paid Google attribution. Use \`/google[/<locale>]/<section>/<campaign>\` for a
 page section, \`/google[/<locale>]/gift-card/<campaign>\` for the gift card page,
 \`/google[/<locale>]/<event>/<campaign>\` for an event landing page, and
 \`/google-book[/<locale>]/<event>/<campaign>\` when the ad should open booking.
+
+Email newsletter links use \`utm_source=newsletter\` and \`utm_medium=email\`.
+Use \`/email[/<locale>]/<section>/<campaign>\` for section links such as
+\`menu\`, \`events\`, \`gallery\`, and \`contact\`,
+\`/email[/<locale>]/gift-card/<campaign>\` for gift cards, and
+\`/email-book[/<locale>]/<campaign>\` for booking.
 
 Lead-form links use \`/<prefix>[/<locale>]/<campaign>\` and also support the base
 path without a campaign segment, using \`utm_campaign=lead_form\`.
