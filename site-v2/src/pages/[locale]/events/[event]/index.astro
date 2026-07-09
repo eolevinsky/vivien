@@ -100,7 +100,7 @@ function eventPoints(event) {
   noindex={true}
   bodyClass="event-landing-page"
 >
-  <Header locale={locale} active="home" kind="home" />
+  <Header locale={locale} active="home" kind="event" params={{ event: event.id }} />
   <main>
     <script is:inline define:vars={{ homePath, eventId: event.id, bookingLang }}>
       (() => {

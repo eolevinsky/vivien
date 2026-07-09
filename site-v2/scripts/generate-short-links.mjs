@@ -403,9 +403,12 @@ https://vivien.lv/ig/lv
 https://vivien.lv/ig-book/ru
 https://vivien.lv/ig-book/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/e/ru/cherry-days
+https://vivien.lv/poster/ru/cherry-days
 https://vivien.lv/ig/ru/cherry-days
+https://vivien.lv/ig/ru/menu
 https://vivien.lv/meta-event/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/meta-book/ru/cherry-days/meta_cherry_days_july
+https://vivien.lv/ig-book/ru/cherry-days/ig_cherry_days_july
 https://vivien.lv/google/ru/events/google_cherry_days_july
 https://vivien.lv/google/ru/gift-card/google_gift_card_july
 https://vivien.lv/google/ru/cherry-days/google_cherry_days_july
@@ -423,6 +426,15 @@ letters, numbers, dots, underscores, hyphens, or tildes.
 Section links use the visible page section id as a path segment. Supported
 section slugs are \`${sectionSlugs.join('`, `')}\`.
 
+Manager-facing formats:
+
+\`\`\`text
+Event landing page: https://vivien.lv/<channel>/<locale>/<event>
+Menu section:       https://vivien.lv/<channel>/<locale>/menu
+Booking modal:      https://vivien.lv/<channel>-book/<locale>
+Event + booking:    https://vivien.lv/<channel>-book/<locale>/<event>/<campaign>
+\`\`\`
+
 Google page links currently support \`gift-card\`.
 
 Event links use the event \`id\` from \`src/content/site.js\`, for example
@@ -431,6 +443,11 @@ such as \`/ru/events/cherry-days/\`, so Meta can scrape event-specific Open
 Graph tags. Browser users are then sent to \`#events\`, the event is selected in
 the carousel, and event carousel autoplay pauses for that page view. These event
 landing pages are \`noindex\` and intentionally omitted from \`sitemap.xml\`.
+
+Poster QR links use \`/poster[/<locale>]/<event>\` for printed event posters.
+They keep the event-specific landing page while separating offline poster
+traffic through \`utm_source=poster\`, \`utm_medium=offline\`, and
+\`utm_content=qr_code\`.
 
 Meta paid-social event links support both canonical short-link order and a
 locale-prefixed compatibility alias:
@@ -450,13 +467,15 @@ These links open the booking form with \`openBooking=1\`. For Meta previews that
 must show a specific event, include the event before the campaign:
 \`/ig-book/ru/cherry-days/meta_cherry_days_july\`.
 
-Google Ads links use \`utm_source=google\` and \`utm_medium=paid_media\` so the
-same short-link family can be used for Search, Display, YouTube, Performance
-Max, and other Google placements. Use \`/google[/<locale>]/<section>/<campaign>\`
-for a page section, \`/google[/<locale>]/gift-card/<campaign>\` for the gift
-card page, \`/google[/<locale>]/<event>/<campaign>\` for an event landing page,
-and \`/google-book[/<locale>]/<event>/<campaign>\` when the ad should open
-booking.
+X links keep the public \`/x\` and \`/x-book\` short-link prefixes, but redirect
+with \`utm_source=twitter\` and \`utm_medium=social\`. This keeps GA4 organic
+social attribution stable after X wraps public links with \`t.co\`.
+
+Google Ads links use \`utm_source=google\` and \`utm_medium=cpc\` for GA4-friendly
+paid Google attribution. Use \`/google[/<locale>]/<section>/<campaign>\` for a
+page section, \`/google[/<locale>]/gift-card/<campaign>\` for the gift card page,
+\`/google[/<locale>]/<event>/<campaign>\` for an event landing page, and
+\`/google-book[/<locale>]/<event>/<campaign>\` when the ad should open booking.
 
 Lead-form links use \`/<prefix>[/<locale>]/<campaign>\` and also support the base
 path without a campaign segment, using \`utm_campaign=lead_form\`.

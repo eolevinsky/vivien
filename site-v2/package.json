@@ -14,6 +14,7 @@
     "build:staging": "ASTRO_TELEMETRY_DISABLED=1 VIVIEN_BUILD_TARGET=staging PUBLIC_VIVIEN_BUILD_TARGET=staging VIVIEN_BASE_PATH=/_staging/v2 astro build",
     "preview": "astro preview",
     "generate:short-links": "node scripts/generate-short-links.mjs",
+    "generate:poster-qr": "node scripts/generate-poster-qr.mjs",
     "test": "node scripts/test-short-links.mjs",
     "test:short-links": "node scripts/test-short-links.mjs",
     "fetch:menu": "node scripts/fetch-menu.mjs",

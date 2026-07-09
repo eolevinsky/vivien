@@ -105,23 +105,77 @@ body.scrolled .topbar {
 .topbar a:hover { color: var(--gold); }
 
 .language-switch {
-  display: flex;
-  gap: 0.2rem;
-}
-
-.language-switch a {
-  min-width: 2rem;
-  min-height: 2rem;
-  display: inline-grid;
-  place-items: center;
-  border: 1px solid transparent;
-  color: var(--muted);
+  position: relative;
+  flex: 0 0 auto;
   font-family: var(--font-nav);
-  font-size: 0.78rem;
 }
 
-.language-switch a.active {
+.language-dropdown {
+  position: relative;
+}
+
+.language-dropdown summary {
+  min-width: 3.15rem;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.32rem;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.78rem;
+  list-style: none;
+  padding: 0 0.62rem;
+  transition: border-color .3s ease, color .3s ease, background .3s ease;
+}
+
+.language-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.language-dropdown summary::after {
+  content: "\25BE";
+  color: var(--gold);
+  font-size: 0.62rem;
+  line-height: 1;
+}
+
+.language-dropdown summary:hover,
+.language-dropdown[open] summary {
   border-color: var(--gold);
+  color: var(--gold);
+}
+
+.language-menu {
+  min-width: 4.8rem;
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 0.1rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 0.35rem;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+}
+
+.language-menu a {
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  padding: 0.25rem 0.55rem;
+  transition: background .25s ease, color .25s ease;
+}
+
+.language-menu a.active,
+.language-menu a:hover {
+  background: rgba(205, 164, 94, 0.12);
   color: var(--gold);
 }
 
@@ -151,6 +205,13 @@ body.scrolled .topbar {
 
 body.scrolled .site-header--overlay .mainbar::before {
   border-color: rgba(205, 164, 94, 0.2);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.55rem;
 }
 
 .brand, .footer-brand {
@@ -234,7 +295,6 @@ body.scrolled .site-header--overlay .mainbar::before {
 
 .booking-pill {
   min-height: 38px;
-  margin-left: 18px;
   padding: 6px 24px;
 }
 
@@ -1527,6 +1587,7 @@ html.restoplace-modal-open body {
 @media (max-width: 1050px) {
   .mainbar {
     grid-template-columns: auto auto auto;
+    justify-content: space-between;
   }
 
   .nav-toggle {
@@ -1571,6 +1632,8 @@ html.restoplace-modal-open body {
   .mainbar { min-height: 68px; width: min(100% - 1rem, 1180px); gap: 0.5rem; }
   .brand-script { font-size: 1.2rem; }
   .brand-name { font-size: 1rem; }
+  .header-actions { gap: 0.35rem; }
+  .language-dropdown summary { min-width: 2.85rem; padding: 0 0.45rem; }
   .booking-pill { padding: 0.55rem 0.7rem; font-size: 0.86rem; }
   .hero { min-height: 100svh; padding: 112px 0 48px; }
   .hero-content { padding-top: 0; }
@@ -1607,4 +1670,22 @@ html.restoplace-modal-open body {
   }
   .vivien-form .row { grid-template-columns: 1fr; }
   .compact-form { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 420px) {
+  .mainbar {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand toggle"
+      "actions actions";
+  }
+
+  .brand { grid-area: brand; }
+  .nav-toggle { grid-area: toggle; }
+
+  .header-actions {
+    grid-area: actions;
+    justify-self: stretch;
+    justify-content: center;
+  }
 }

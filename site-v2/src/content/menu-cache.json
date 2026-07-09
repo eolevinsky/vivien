@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T14:31:36.748Z",
+  "updatedAt": "2026-07-09T08:21:25.132Z",
   "source": "https://app.a3-as.com/api/guest/scheduled-visits/widget/bootstrap",
   "merchant": "vivien-riga",
   "locales": {
@@ -539,7 +539,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Caffe Latte",
           "description": "",
-          "price": "€3.00",
+          "price": "€3.50",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -549,7 +549,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Cappucino",
           "description": "",
-          "price": "€3.00",
+          "price": "€3.50",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -579,7 +579,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Double Espresso Machiato",
           "description": "",
-          "price": "€3.00",
+          "price": "€3.50",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -669,7 +669,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Matcha Latte",
           "description": "",
-          "price": "€4.00",
+          "price": "€3.50",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -679,7 +679,7 @@
           "categoryId": "cmm3mtckb00230js16g33g66h",
           "name": "Cola",
           "description": "",
-          "price": "€2.00",
+          "price": "€3.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -820,6 +820,16 @@
           "name": "Beer Aldaris chery 0,5 pud.",
           "description": "Cherry-flavoured beer from Aldaris, served in a 0.5 L bottle. It has a fruity cherry note and a beer base.",
           "price": "€4.50",
+          "imageUrl": "",
+          "thumbUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "id": "cmm3mtd9a00820js18bk9toj7",
+          "categoryId": "cmm3mtckf00240js1boy325rb",
+          "name": "BELLOT Cidre de Cru BRUT 50ml",
+          "description": "",
+          "price": "€0.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1529,7 +1539,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Bloody Mary",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1539,7 +1549,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Boulivardier",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1549,7 +1559,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Campari Spritz",
           "description": "",
-          "price": "€5.00",
+          "price": "€7.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1559,7 +1569,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Daiquiri",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1579,7 +1589,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Espresso Martini",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1589,7 +1599,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "French 75",
           "description": "",
-          "price": "€6.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1599,7 +1609,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gimlet",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1609,7 +1619,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Sour",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1619,17 +1629,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Tonic",
           "description": "",
-          "price": "€5.50",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd37006e0js1y44urnxd",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Grapefruit lemonade",
-          "description": "",
-          "price": "€3.00",
+          "price": "€7.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1639,7 +1639,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Hugo",
           "description": "",
-          "price": "€5.00",
+          "price": "€7.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1659,7 +1659,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Kir Royale",
           "description": "",
-          "price": "€6.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1675,21 +1675,11 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd3b006f0js1nkblxjgm",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Lemon lemonade",
-          "description": "",
-          "price": "€3.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd4w006w0js1v7c94r8s",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Limoncello Spritz",
           "description": "",
-          "price": "€5.00",
+          "price": "€7.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1699,7 +1689,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mai Tai",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1709,7 +1699,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Margarita",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1719,7 +1709,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Matcha Sour",
           "description": "",
-          "price": "€8.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1730,16 +1720,6 @@
           "name": "Mezcal Sour",
           "description": "",
           "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1u00630js1s199bj5g",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Moscow Mule",
-          "description": "",
-          "price": "€5.50",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1759,7 +1739,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Negroni",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1779,7 +1759,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Old Fashioned",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1789,7 +1769,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Paloma",
           "description": "",
-          "price": "€7.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1799,7 +1779,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach kiss",
           "description": "",
-          "price": "€8.00",
+          "price": "€9.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1809,17 +1789,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach Spritz",
           "description": "",
-          "price": "€5.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd3e006g0js1lf8xhxqu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Rasberry lemonade",
-          "description": "A raspberry lemonade soft drink with a sweet-tart berry and citrus profile. Served as a non-alcoholic refreshment.",
-          "price": "€3.00",
+          "price": "€7.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -1860,16 +1830,6 @@
           "name": "Sapphire&Tonic",
           "description": "A mixed drink combining Bombay Sapphire gin with tonic water. Typically served long, with a crisp, bitter profile and juniper-citrus notes.",
           "price": "€7.00",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1g005z0js1q7ykxphg",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Sazerac",
-          "description": "",
-          "price": "€6.00",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -2782,7 +2742,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Caffe Latte",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -2792,7 +2752,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Cappucino",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -2822,7 +2782,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Double Espresso Machiato",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -2912,7 +2872,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Matcha Latte",
           "description": "",
-          "price": "4,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -2932,7 +2892,7 @@
           "categoryId": "cmm3mtckb00230js16g33g66h",
           "name": "Cola",
           "description": "",
-          "price": "2,00 €",
+          "price": "3,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3063,6 +3023,16 @@
           "name": "Aldaris ķiršu 0,5 pud.",
           "description": "Aldaris ķiršu alus 0,5 l pudelē. Alum raksturīga augļaina ķiršu garšas nots uz alus bāzes.",
           "price": "4,50 €",
+          "imageUrl": "",
+          "thumbUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "id": "cmm3mtd9a00820js18bk9toj7",
+          "categoryId": "cmm3mtckf00240js1boy325rb",
+          "name": "BELLOT Cidre de Cru BRUT 50ml",
+          "description": "",
+          "price": "0,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3738,16 +3708,6 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd3e006g0js1lf8xhxqu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Aveņu limonāde",
-          "description": "Aveņu limonāde — bezalkoholisks dzēriens ar saldskābu aveņu un citrusa garšu. Atsvaidzinošs limonādes stils.",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd2t006b0js1k8dyxlsy",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "B/A Aperol Spritz",
@@ -3782,7 +3742,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Bloody Mary",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3792,7 +3752,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Boulivardier",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3802,7 +3762,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Campari Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3812,7 +3772,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Daiquiri",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3832,7 +3792,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Espresso Martini",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3842,7 +3802,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "French 75",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3852,7 +3812,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gimlet",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3862,7 +3822,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Sour",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3872,17 +3832,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Tonic",
           "description": "",
-          "price": "5,50 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd37006e0js1y44urnxd",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Greipfrūtu limonāde",
-          "description": "",
-          "price": "3,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3892,7 +3842,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Hugo",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3912,7 +3862,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Kir Royale",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3928,21 +3878,11 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd3b006f0js1nkblxjgm",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Lemon lemonade",
-          "description": "",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd4w006w0js1v7c94r8s",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Limoncello Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3952,7 +3892,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mai Tai",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3962,7 +3902,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Margarita",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3972,7 +3912,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Matcha Sour",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -3983,16 +3923,6 @@
           "name": "Mezcal Sour",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1u00630js1s199bj5g",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Moscow Mule",
-          "description": "",
-          "price": "5,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4012,7 +3942,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Negroni",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4032,7 +3962,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Old Fashioned",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4042,7 +3972,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Paloma",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4052,7 +3982,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach kiss",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4062,7 +3992,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -4103,16 +4033,6 @@
           "name": "Sapphire&Tonic",
           "description": "Jaukts dzēriens ar Bombay Sapphire džinu un toniku. Parasti pasniedz garajā glāzē; garša ir svaiga, viegli rūgtena, ar kadiķa un citrusaugļu notīm.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1g005z0js1q7ykxphg",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Sazerac",
-          "description": "",
-          "price": "6,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5025,7 +4945,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Caffe Latte",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5035,7 +4955,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Cappucino",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5065,7 +4985,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Double Espresso Machiato",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5155,7 +5075,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Matcha Latte",
           "description": "",
-          "price": "4,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5165,7 +5085,7 @@
           "categoryId": "cmm3mtckb00230js16g33g66h",
           "name": "Cola",
           "description": "",
-          "price": "2,00 €",
+          "price": "3,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -5306,6 +5226,16 @@
           "name": "Aldaris ķiršu 0,5 pud.",
           "description": "Bière aromatisée à la cerise d’Aldaris, en bouteille de 0,5 l. Elle présente des notes fruitées de cerise sur une base de bière.",
           "price": "4,50 €",
+          "imageUrl": "",
+          "thumbUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "id": "cmm3mtd9a00820js18bk9toj7",
+          "categoryId": "cmm3mtckf00240js1boy325rb",
+          "name": "BELLOT Cidre de Cru BRUT 50ml",
+          "description": "",
+          "price": "0,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6015,7 +5945,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Bloody Mary",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6025,7 +5955,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Boulivardier",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6035,7 +5965,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Campari Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6045,7 +5975,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Daiquiri",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6065,7 +5995,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Espresso Martini",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6075,7 +6005,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "French 75",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6085,7 +6015,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gimlet",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6095,7 +6025,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Sour",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6105,7 +6035,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Tonic",
           "description": "",
-          "price": "5,50 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6115,7 +6045,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Hugo",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6135,7 +6065,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Kir Royale",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6151,31 +6081,11 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd3b006f0js1nkblxjgm",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Lemon lemonade",
-          "description": "",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd37006e0js1y44urnxd",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Limonade au pamplemousse",
-          "description": "",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd4w006w0js1v7c94r8s",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Limoncello Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6185,7 +6095,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mai Tai",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6195,7 +6105,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Margarita",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6205,7 +6115,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Matcha Sour",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6216,16 +6126,6 @@
           "name": "Mezcal Sour",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1u00630js1s199bj5g",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Moscow Mule",
-          "description": "",
-          "price": "5,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6245,7 +6145,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Negroni",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6265,7 +6165,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Old Fashioned",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6275,7 +6175,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Paloma",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6285,7 +6185,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach kiss",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6295,17 +6195,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach Spritz",
           "description": "",
-          "price": "5,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd3e006g0js1lf8xhxqu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Rasberry lemonade",
-          "description": "Limonade à la framboise sans alcool, au profil fruité et acidulé. Une boisson rafraîchissante de style limonade.",
-          "price": "3,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -6346,16 +6236,6 @@
           "name": "Sapphire&Tonic",
           "description": "Boisson mélangée à base de gin Bombay Sapphire et d’eau tonique. Généralement servie en long drink, avec un profil frais et légèrement amer, sur des notes de genièvre et d’agrumes.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1g005z0js1q7ykxphg",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Sazerac",
-          "description": "",
-          "price": "6,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7268,7 +7148,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Caffe Latte",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7278,7 +7158,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Cappucino",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7298,7 +7178,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Double Espresso Machiato",
           "description": "",
-          "price": "3,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7368,7 +7248,7 @@
           "categoryId": "cmm3mtcka00220js1vvplfadl",
           "name": "Matcha Latte",
           "description": "",
-          "price": "4,00 €",
+          "price": "3,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7408,7 +7288,7 @@
           "categoryId": "cmm3mtckb00230js16g33g66h",
           "name": "Cola",
           "description": "",
-          "price": "2,00 €",
+          "price": "3,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -7539,6 +7419,16 @@
           "name": "Сок грейпфрута",
           "description": "",
           "price": "5,00 €",
+          "imageUrl": "",
+          "thumbUrl": "",
+          "imageAlt": ""
+        },
+        {
+          "id": "cmm3mtd9a00820js18bk9toj7",
+          "categoryId": "cmm3mtckf00240js1boy325rb",
+          "name": "BELLOT Cidre de Cru BRUT 50ml",
+          "description": "",
+          "price": "0,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8258,7 +8148,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Bloody Mary",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8268,7 +8158,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Boulivardier",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8278,7 +8168,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Campari Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8288,7 +8178,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Daiquiri",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8308,7 +8198,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Espresso Martini",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8318,7 +8208,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "French 75",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8328,7 +8218,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gimlet",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8338,7 +8228,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Sour",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8348,7 +8238,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Gin Tonic",
           "description": "",
-          "price": "5,50 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8358,7 +8248,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Hugo",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8378,7 +8268,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Kir Royale",
           "description": "",
-          "price": "6,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8394,21 +8284,11 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd3b006f0js1nkblxjgm",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Lemon lemonade",
-          "description": "",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd4w006w0js1v7c94r8s",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Limoncello Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8418,7 +8298,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Mai Tai",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8428,7 +8308,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Margarita",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8438,7 +8318,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Matcha Sour",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8449,16 +8329,6 @@
           "name": "Mezcal Sour",
           "description": "",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1u00630js1s199bj5g",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Moscow Mule",
-          "description": "",
-          "price": "5,50 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8478,7 +8348,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Negroni",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8498,7 +8368,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Old Fashioned",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8508,7 +8378,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Paloma",
           "description": "",
-          "price": "7,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8518,7 +8388,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach kiss",
           "description": "",
-          "price": "8,00 €",
+          "price": "9,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8528,7 +8398,7 @@
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Peach Spritz",
           "description": "",
-          "price": "5,00 €",
+          "price": "7,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8569,16 +8439,6 @@
           "name": "Sapphire&Tonic",
           "description": "Смешанный напиток на основе джина Bombay Sapphire и тоника. Обычно подаётся как long drink; вкус свежий, с лёгкой горчинкой, нотами можжевельника и цитрусов.",
           "price": "7,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd1g005z0js1q7ykxphg",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Sazerac",
-          "description": "",
-          "price": "6,00 €",
           "imageUrl": "",
           "thumbUrl": "",
           "imageAlt": ""
@@ -8674,30 +8534,10 @@
           "imageAlt": ""
         },
         {
-          "id": "cmm3mtd37006e0js1y44urnxd",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Грейпфрутовый лимонад",
-          "description": "",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
           "id": "cmm3mtd3h006h0js1wbma7qj6",
           "categoryId": "cmm3mtck800210js1gbeiwlv2",
           "name": "Клубничный лимонад",
           "description": "Безалкогольный лимонад со вкусом клубники.",
-          "price": "3,00 €",
-          "imageUrl": "",
-          "thumbUrl": "",
-          "imageAlt": ""
-        },
-        {
-          "id": "cmm3mtd3e006g0js1lf8xhxqu",
-          "categoryId": "cmm3mtck800210js1gbeiwlv2",
-          "name": "Малиновый лимонад",
-          "description": "Малиновый лимонад — безалкогольный напиток со сладко-кислым вкусом малины и цитруса. Освежающий стиль лимонада.",
           "price": "3,00 €",
           "imageUrl": "",
           "thumbUrl": "",

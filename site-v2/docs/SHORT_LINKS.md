@@ -19,9 +19,12 @@ https://vivien.lv/ig/lv
 https://vivien.lv/ig-book/ru
 https://vivien.lv/ig-book/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/e/ru/cherry-days
+https://vivien.lv/poster/ru/cherry-days
 https://vivien.lv/ig/ru/cherry-days
+https://vivien.lv/ig/ru/menu
 https://vivien.lv/meta-event/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/meta-book/ru/cherry-days/meta_cherry_days_july
+https://vivien.lv/ig-book/ru/cherry-days/ig_cherry_days_july
 https://vivien.lv/google/ru/events/google_cherry_days_july
 https://vivien.lv/google/ru/gift-card/google_gift_card_july
 https://vivien.lv/google/ru/cherry-days/google_cherry_days_july
@@ -39,6 +42,15 @@ letters, numbers, dots, underscores, hyphens, or tildes.
 Section links use the visible page section id as a path segment. Supported
 section slugs are `menu`, `events`, `gallery`, `specials`, `careers`, `contact`.
 
+Manager-facing formats:
+
+```text
+Event landing page: https://vivien.lv/<channel>/<locale>/<event>
+Menu section:       https://vivien.lv/<channel>/<locale>/menu
+Booking modal:      https://vivien.lv/<channel>-book/<locale>
+Event + booking:    https://vivien.lv/<channel>-book/<locale>/<event>/<campaign>
+```
+
 Google page links currently support `gift-card`.
 
 Event links use the event `id` from `src/content/site.js`, for example
@@ -47,6 +59,11 @@ such as `/ru/events/cherry-days/`, so Meta can scrape event-specific Open
 Graph tags. Browser users are then sent to `#events`, the event is selected in
 the carousel, and event carousel autoplay pauses for that page view. These event
 landing pages are `noindex` and intentionally omitted from `sitemap.xml`.
+
+Poster QR links use `/poster[/<locale>]/<event>` for printed event posters.
+They keep the event-specific landing page while separating offline poster
+traffic through `utm_source=poster`, `utm_medium=offline`, and
+`utm_content=qr_code`.
 
 Meta paid-social event links support both canonical short-link order and a
 locale-prefixed compatibility alias:
@@ -66,13 +83,15 @@ These links open the booking form with `openBooking=1`. For Meta previews that
 must show a specific event, include the event before the campaign:
 `/ig-book/ru/cherry-days/meta_cherry_days_july`.
 
-Google Ads links use `utm_source=google` and `utm_medium=paid_media` so the
-same short-link family can be used for Search, Display, YouTube, Performance
-Max, and other Google placements. Use `/google[/<locale>]/<section>/<campaign>`
-for a page section, `/google[/<locale>]/gift-card/<campaign>` for the gift
-card page, `/google[/<locale>]/<event>/<campaign>` for an event landing page,
-and `/google-book[/<locale>]/<event>/<campaign>` when the ad should open
-booking.
+X links keep the public `/x` and `/x-book` short-link prefixes, but redirect
+with `utm_source=twitter` and `utm_medium=social`. This keeps GA4 organic
+social attribution stable after X wraps public links with `t.co`.
+
+Google Ads links use `utm_source=google` and `utm_medium=cpc` for GA4-friendly
+paid Google attribution. Use `/google[/<locale>]/<section>/<campaign>` for a
+page section, `/google[/<locale>]/gift-card/<campaign>` for the gift card page,
+`/google[/<locale>]/<event>/<campaign>` for an event landing page, and
+`/google-book[/<locale>]/<event>/<campaign>` when the ad should open booking.
 
 Lead-form links use `/<prefix>[/<locale>]/<campaign>` and also support the base
 path without a campaign segment, using `utm_campaign=lead_form`.
@@ -81,6 +100,8 @@ path without a campaign segment, using `utm_campaign=lead_form`.
 | --- | --- |
 | `/e[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=events#events` |
 | `/e[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=event_<event>` |
+| `/poster[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=events&utm_content=qr_code#events` |
+| `/poster[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=event_<event>&utm_content=qr_code` |
 | `/visam[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events` |
 | `/visam[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=event_<event>&utm_content=mobile_app` |
 | `/visam-ig[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events` |
@@ -88,45 +109,55 @@ path without a campaign segment, using `utm_campaign=lead_form`.
 | `/visam-tt[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events` |
 | `/visam-tt[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=event_<event>&utm_content=tiktok_blog` |
 | `/meta-event[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=events&utm_content=event_link#events` |
+| `/meta-event[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/meta-event[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/meta-event[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=event_<event>&utm_content=event_link` |
 | `/meta-event[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=event_link` |
 | `/<locale>/meta-event/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=event_link` |
-| `/google[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=google_ads&utm_content=site_home` |
-| `/google[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
-| `/google[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
-| `/google[/<locale>]/gift-card` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=page_gift_card&utm_content=page_gift_card` |
-| `/google[/<locale>]/gift-card/<campaign>` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=<campaign>&utm_content=page_gift_card` |
-| `/google[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=event_<event>&utm_content=event_link` |
-| `/google[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=paid_media&utm_campaign=<campaign>&utm_content=event_link` |
-| `/x[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=x&utm_medium=organic_social&utm_campaign=bio&utm_content=profile#menu` |
-| `/x[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=x&utm_medium=organic_social&utm_campaign=event_<event>&utm_content=event_link` |
-| `/ig[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=profile` |
-| `/ig[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=instagram&utm_medium=organic_social&utm_campaign=event_<event>&utm_content=event_link` |
-| `/fb[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=facebook&utm_medium=organic_social&utm_campaign=bio&utm_content=profile` |
-| `/fb[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=facebook&utm_medium=organic_social&utm_campaign=event_<event>&utm_content=event_link` |
-| `/tt[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=profile` |
-| `/tt[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=organic_social&utm_campaign=event_<event>&utm_content=event_link` |
-| `/x-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=x_pinned_post&utm_source=x&utm_medium=organic_social&utm_campaign=x_launch&utm_content=pinned_post` |
-| `/x-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=x_booking&utm_source=x&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/x-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=x_booking&utm_source=x&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/ig-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=bio&utm_content=booking` |
-| `/ig-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/ig-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_booking&utm_source=instagram&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/fb-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=organic_social&utm_campaign=page_cta&utm_content=booking` |
-| `/fb-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/fb-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/fb-organic-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=organic_post&utm_content=booking` |
-| `/fb-organic-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/fb-organic-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
+| `/google[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=google_ads&utm_content=site_home` |
+| `/google[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/google[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/google[/<locale>]/gift-card` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=page_gift_card&utm_content=page_gift_card` |
+| `/google[/<locale>]/gift-card/<campaign>` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=page_gift_card` |
+| `/google[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=event_<event>&utm_content=event_link` |
+| `/google[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=event_link` |
+| `/x[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=bio&utm_content=profile#menu` |
+| `/x[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/x[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/x[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=event_<event>&utm_content=event_link` |
+| `/ig[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=instagram&utm_medium=social&utm_campaign=bio&utm_content=profile` |
+| `/ig[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=instagram&utm_medium=social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/ig[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=instagram&utm_medium=social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/ig[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=instagram&utm_medium=social&utm_campaign=event_<event>&utm_content=event_link` |
+| `/fb[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=facebook&utm_medium=social&utm_campaign=bio&utm_content=profile` |
+| `/fb[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=facebook&utm_medium=social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/fb[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=facebook&utm_medium=social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/fb[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=facebook&utm_medium=social&utm_campaign=event_<event>&utm_content=event_link` |
+| `/tt[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=social&utm_campaign=bio&utm_content=profile` |
+| `/tt[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/tt[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/tt[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=tiktok&utm_medium=social&utm_campaign=event_<event>&utm_content=event_link` |
+| `/x-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=x_pinned_post&utm_source=twitter&utm_medium=social&utm_campaign=x_launch&utm_content=pinned_post` |
+| `/x-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=x_booking&utm_source=twitter&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/x-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=x_booking&utm_source=twitter&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/ig-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_bio_booking&utm_source=instagram&utm_medium=social&utm_campaign=bio&utm_content=booking` |
+| `/ig-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_booking&utm_source=instagram&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/ig-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_booking&utm_source=instagram&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/fb-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_page_cta&utm_source=facebook&utm_medium=social&utm_campaign=page_cta&utm_content=booking` |
+| `/fb-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_booking&utm_source=facebook&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/fb-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_booking&utm_source=facebook&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/fb-organic-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=social&utm_campaign=organic_post&utm_content=booking` |
+| `/fb-organic-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/fb-organic-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=facebook_organic_booking&utm_source=facebook&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
 | `/meta-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=meta_booking&utm_source=meta&utm_medium=paid_social&utm_campaign=booking&utm_content=booking` |
 | `/meta-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=meta_booking&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=booking` |
 | `/meta-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=meta_booking&utm_source=meta&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/google-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=paid_media&utm_campaign=booking&utm_content=booking` |
-| `/google-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=paid_media&utm_campaign=<campaign>&utm_content=booking` |
-| `/google-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=paid_media&utm_campaign=<campaign>&utm_content=booking` |
-| `/tt-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=bio&utm_content=booking` |
-| `/tt-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
-| `/tt-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=organic_social&utm_campaign=<campaign>&utm_content=booking` |
+| `/google-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=booking&utm_content=booking` |
+| `/google-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=booking` |
+| `/google-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=booking` |
+| `/tt-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=social&utm_campaign=bio&utm_content=booking` |
+| `/tt-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
+| `/tt-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
 | `/ig-lead[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=lead_form&utm_content=lead_form_thank_you` |
 | `/ig-lead[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=lead_form_thank_you` |
 | `/ig-lead[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=instagram_lead_form&utm_source=instagram&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=lead_form_thank_you` |

@@ -13,13 +13,7 @@ function languageHref(targetLocale) {
 ---
 <header class:list={['site-header', overlayHeader && 'site-header--overlay']} id="top">
   <div class="topbar">
-    <a href={`mailto:${site.email}`}>{site.email}</a>
     <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
-    <nav class="language-switch" aria-label="Language">
-      {locales.map((item) => (
-        <a href={languageHref(item)} class:list={[item === locale && 'active']} hreflang={item}>{localeLabels[item]}</a>
-      ))}
-    </nav>
   </div>
   <div class="mainbar">
     <a class="brand" href={withBase(localizedPath(locale, 'home'))} aria-label="Brasserie Vivien">
@@ -40,6 +34,18 @@ function languageHref(targetLocale) {
       <a href={withBase(localizedPath(locale, 'waiter'))} class:list={[active === 'jobs' && 'active']}>{nav.jobs}</a>
       <a href={withBase(localizedPath(locale, 'home') + '#contact')}>{nav.contact}</a>
     </nav>
-    <button type="button" class="booking-pill js-booking-trigger" data-booking-source="header_cta">{nav.book}</button>
+    <div class="header-actions">
+      <nav class="language-switch" aria-label="Language">
+        <details class="language-dropdown">
+          <summary aria-label={`Language: ${localeLabels[locale]}`}>{localeLabels[locale]}</summary>
+          <div class="language-menu">
+            {locales.map((item) => (
+              <a href={languageHref(item)} class:list={[item === locale && 'active']} hreflang={item} data-language-link>{localeLabels[item]}</a>
+            ))}
+          </div>
+        </details>
+      </nav>
+      <button type="button" class="booking-pill js-booking-trigger" data-booking-source="header_cta">{nav.book}</button>
+    </div>
   </div>
 </header>

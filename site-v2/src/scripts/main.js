@@ -648,6 +648,58 @@ function bootNavigation() {
   });
 }
 
+function languageSectionHash() {
+  const sections = Array.from(document.querySelectorAll('main section[id]'))
+    .filter((section) => !section.hidden && section.offsetParent !== null);
+  const headerHeight = document.getElementById('top')?.offsetHeight || 0;
+  const anchorY = Math.min(window.innerHeight * 0.42, headerHeight + 220);
+  let current = '';
+
+  sections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= anchorY && rect.bottom > headerHeight + 24) {
+      current = section.id;
+    }
+  });
+
+  if (current) return `#${encodeURIComponent(current)}`;
+
+  if (window.location.hash) {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (id && document.getElementById(id)) return window.location.hash;
+  }
+
+  return '';
+}
+
+function syncLanguageLink(link) {
+  const href = link.getAttribute('href');
+  if (!href) return;
+
+  const target = new URL(href, window.location.href);
+  target.hash = languageSectionHash();
+  link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
+}
+
+function syncLanguageLinks() {
+  document.querySelectorAll('[data-language-link]').forEach(syncLanguageLink);
+}
+
+function bootLanguageSwitch() {
+  const links = document.querySelectorAll('[data-language-link]');
+  if (!links.length) return;
+
+  syncLanguageLinks();
+  document.querySelectorAll('.language-dropdown').forEach((dropdown) => {
+    dropdown.addEventListener('toggle', syncLanguageLinks);
+  });
+  window.addEventListener('hashchange', syncLanguageLinks);
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('[data-language-link]');
+    if (link) syncLanguageLink(link);
+  }, true);
+}
+
 function bootHeaderScroll() {
   const applyState = () => {
     document.body.classList.toggle('scrolled', window.scrollY > 100);
@@ -1173,6 +1225,7 @@ function bootSite() {
   bootHeaderScroll();
   bootScrollTop();
   bootNavigation();
+  bootLanguageSwitch();
   bootBookingButtons();
   bootPrepareTableButtons();
   bootSpecialsTabs();

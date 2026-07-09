@@ -46,7 +46,7 @@ export const languageNames = {
 export const content = {
   en: {
     meta: {
-      homeTitle: 'Brasserie Vivien Riga | French Bistro, Breakfast, Wine & Art',
+      homeTitle: 'Brasserie Vivien Riga | French Bistro, Wine & Art',
       homeDescription: 'French brasserie in the heart of Riga with classic brasserie cuisine, curated wines, creative atmosphere, gift cards and one-tap table booking.',
     },
     nav: {
@@ -294,7 +294,7 @@ export const content = {
   },
   lv: {
     meta: {
-      homeTitle: 'Brasserie Vivien Riga | Franču bistro, brokastis, vīns un māksla',
+      homeTitle: 'Brasserie Vivien Riga | Franču bistro, vīns un māksla',
       homeDescription: 'Franču brasserie Rīgas centrā ar klasisku virtuvi, rūpīgi atlasītiem vīniem, dāvanu kartēm un ērtu galdiņa rezervāciju.',
     },
     nav: {
@@ -487,7 +487,7 @@ export const content = {
   },
   fr: {
     meta: {
-      homeTitle: 'Brasserie Vivien Riga | Bistro français, petit-déjeuner, vin et art',
+      homeTitle: 'Brasserie Vivien Riga | Bistro français , vin et art',
       homeDescription: 'Brasserie française au centre de Riga avec cuisine classique, vins sélectionnés, cartes cadeaux et réservation de table en un clic.',
     },
     nav: {
@@ -680,7 +680,7 @@ export const content = {
   },
   ru: {
     meta: {
-      homeTitle: 'Brasserie Vivien Riga | Французское бистро, завтраки, вино и искусство',
+      homeTitle: 'Brasserie Vivien Riga | Французское бистро, вино и искусство',
       homeDescription: 'Французская brasserie в центре Риги с классической кухней, винами, подарочными картами и бронированием столика в одно касание.',
     },
     nav: {
@@ -1065,54 +1065,16 @@ export const specials = [
 
 export const events = [
   {
-    hidden: true,
-    ticketed: true,
-    id: 'bastille-day',
-    startIso: '2026-07-14T19:00:00+03:00',
-    image: '/assets/img/events-slider/bastille-day.jpg',
-    alt: {
-      en: 'Watercolor Bastille Day celebration outside Brasserie Vivien in Paris',
-      lv: 'Akvareļa Bastīlijas dienas svinības pie Brasserie Vivien Parīzē',
-      fr: 'Fête du 14 juillet en aquarelle devant Brasserie Vivien à Paris',
-      ru: 'Акварельный праздник Дня Бастилии у Brasserie Vivien в Париже',
-    },
-    title: {
-      en: 'Bastille Day at Vivien',
-      lv: 'Bastīlijas diena Vivien',
-      fr: 'Fête nationale chez Vivien',
-      ru: 'День Бастилии в Vivien',
-    },
-    price: {
-      en: '29 EUR per person',
-      lv: '29 EUR personai',
-      fr: '29 EUR par personne',
-      ru: '29 EUR с человека',
-    },
-    lead: {
-      en: 'A relaxed French National Day dinner with a special four-course brasserie menu, tricolour mood and a glass-raising atmosphere.',
-      lv: 'Nesteidzīgas Francijas nacionālās dienas vakariņas ar īpašu četru kārtu brasserie ēdienkarti, trikolora noskaņu un svētku atmosfēru.',
-      fr: 'Un dîner détendu pour le 14 juillet avec un menu brasserie spécial en quatre services, esprit tricolore et ambiance de fête.',
-      ru: 'Неспешный ужин ко Дню Франции со специальным меню brasserie из четырёх блюд, триколорным настроением и праздничной атмосферой.',
-    },
-    points: {
-      en: ['Soupe gratinée à l’oignon', 'Quiche Lorraine with a small green salad', 'Boeuf Bourguignon with potato purée', 'Mini Tarte Tatin with crème fraîche'],
-      lv: ['Soupe gratinée à l’oignon', 'Quiche Lorraine ar nelieliem zaļajiem salātiem', 'Boeuf Bourguignon ar kartupeļu biezeni', 'Mini Tarte Tatin ar crème fraîche'],
-      fr: ['Soupe gratinée à l’oignon', 'Quiche Lorraine avec petite salade verte', 'Boeuf Bourguignon et purée de pommes de terre', 'Mini Tarte Tatin avec crème fraîche'],
-      ru: ['Soupe gratinée à l’oignon', 'Quiche Lorraine с небольшим зелёным салатом', 'Boeuf Bourguignon с картофельным пюре', 'Mini Tarte Tatin с crème fraîche'],
-    },
-    text: {
-      en: 'The menu is served as a ticketed format for 29 EUR per person. Wine pairing by the glass will be available on the night.',
-      lv: 'Ēdienkarte tiek pasniegta biļetes formātā par 29 EUR personai. Vakara gaitā būs pieejama vīnu saskaņošana pa glāzēm.',
-      fr: 'Le menu est servi au format billet à 29 EUR par personne. Des accords vins au verre seront proposés pendant la soirée.',
-      ru: 'Меню подаётся в формате билета за 29 EUR с человека. Вечером можно будет добавить винное сопровождение по бокалам.',
-    },
-  },
-  {
     id: 'cherry-days',
     startIso: '2026-07-10T17:00:00+03:00',
-    image: '/assets/img/events-slider/cherry-days.png',
+    image: {
+      en: '/assets/img/events-slider/cherry-days-en.png',
+      lv: '/assets/img/events-slider/cherry-days-lv.png',
+      fr: '/assets/img/events-slider/cherry-days-fr.png',
+      ru: '/assets/img/events-slider/cherry-days-ru.png',
+    },
     imageFit: 'contain',
-    imageAspectRatio: '2398 / 830',
+    imageAspectRatio: '16 / 10.8',
     alt: {
       en: 'Cherry Days poster with a cherry on a porcelain plate',
       lv: 'Ķiršu dienu plakāts ar ķirsi uz porcelāna šķīvja',
@@ -1168,6 +1130,73 @@ export const events = [
       lv: 'Welcome sākas 10. jūlijā plkst. 17:00 ar ķiršiem glāzītēs un ķiršu šotiem noskaņai. Cherry specials būs pieejami 10.-11. jūlijā, kamēr sezona ir pašā košumā.',
       fr: 'Le welcome commence le 10 juillet à 17:00 avec des cerises en petits gobelets et des shots à la cerise pour lancer l’ambiance. Les cherry specials seront servis les 10 et 11 juillet.',
       ru: 'Welcome начинается 10 июля в 17:00: черешня в стаканчиках и вишнёвые шоты для настроения. Cherry specials действуют 10-11 июля, пока сезон в самом ярком моменте.',
+    },
+  },
+  {
+    hidden: false,
+    ticketed: false,
+    id: 'bastille-day',
+    startIso: '2026-07-14T17:00:00+03:00',
+    image: '/assets/img/events-slider/bastille-day.jpg',
+    alt: {
+      en: "Celebrate France's national holiday, Bastille Day, with a special menu",
+      lv: 'Sviniet Francijas valsts svētkus — Bastīlijas dienu — ar īpašu ēdienkarti',
+      fr: 'Célébrez la fête nationale française, le 14 juillet, avec un menu spécial',
+      ru: 'Отпразднуйте национальный праздник Франции — День Бастилии — с особым меню',
+    },
+    title: {
+      en: 'Bastille Day',
+      lv: 'Bastīlijas diena',
+      fr: 'Fête Nationale Française',
+      ru: 'День Бастилии',
+    },
+    price: {
+      en: "Celebrate France’s National Day with a special menu",
+      lv: 'Sviniet Francijas valsts svētkus — Bastīlijas dienu — ar īpašu ēdienkarti',
+      fr: 'Célébrez la Fête nationale avec un menu spécial',
+      ru: 'Отпразднуйте национальный праздник Франции — День Бастилии — с особым меню',
+    },
+    lead: {
+      en: 'On 14 July, Brasserie Vivien invites you to celebrate Bastille Day with a festive summer evening and a special menu created exclusively for the occasion.',
+      lv: '14. jūlijā Brasserie Vivien aicinām svinēt Bastīlijas dienu — vakaru vasaras noskaņās, svētku atmosfērā un ar īpaši šai dienai radītu ēdienkarti.',
+      fr: "Le 14 juillet, Brasserie Vivien vous invite à célébrer la Fête nationale dans une ambiance estivale et festive, autour d’un menu spécialement créé pour l’occasion.",
+      ru: '14 июля Brasserie Vivien приглашает отметить День Бастилии — в атмосфере летнего праздника и с особым меню, созданным специально к этому дню.',
+    },
+    points: {
+      en: [
+        { text: 'Seafood Set (0.4 kg mussels + 6 Argentine prawns), served with French fries and sauce for two', price: '35 EUR' },
+        { text: 'Duck breast salad with watermelon, cucumber and mint dressing', price: '13 EUR' },
+        { text: 'Entrecôte with home-style potatoes, herbs and Parmesan', price: '30 EUR' },
+        { text: 'Seafood risotto (bisque, shrimps, mussels)', price: '14 EUR' },
+        { text: 'Fruit plate (strawberries, cherries, melon and watermelon)', price: '13 EUR' },
+      ],
+      lv: [
+        { text: 'Jūras velšu komplekts (0,4 kg midijas + 6 Argentīnas garneles), pasniegts ar frī kartupeļiem un mērci diviem', price: '35 EUR' },
+        { text: 'Salāti ar pīles krūtiņu, arbūzu, gurķi un piparmētru mērci', price: '13 EUR' },
+        { text: 'Entrekots ar mājas kartupeļiem, zaļumiem un parmezānu', price: '30 EUR' },
+        { text: 'Jūras velšu risoto (bisque, garneles, midijas)', price: '14 EUR' },
+        { text: 'Augļu plate (zemenes, ķirši, melone, arbūzs)', price: '13 EUR' },
+      ],
+      fr: [
+        { text: 'Plateau de fruits de mer (400 g de moules + 6 crevettes argentines), servi avec des frites et une sauce, à partager pour deux', price: '35 EUR' },
+        { text: 'Salade au magret de canard, pastèque, concombre et vinaigrette à la menthe', price: '13 EUR' },
+        { text: 'Entrecôte, pommes de terre maison, herbes fraîches et parmesan', price: '30 EUR' },
+        { text: 'Risotto aux fruits de mer (bisque, crevettes, moules)', price: '14 EUR' },
+        { text: 'Assiette de fruits (fraises, cerises, melon, pastèque)', price: '13 EUR' },
+      ],
+      ru: [
+        { text: 'Морской сет (0,4 кг мидий + 6 аргентинских креветок), подаётся с картофелем фри и соусом на двоих', price: '35 EUR' },
+        { text: 'Салат с утиной грудкой, арбузом, огурцом и мятной заправкой', price: '13 EUR' },
+        { text: 'Антрекот с домашним картофелем, зеленью и пармезаном', price: '30 EUR' },
+        { text: 'Ризотто с морепродуктами (биск, креветки, мидии)', price: '14 EUR' },
+        { text: 'Фруктовая тарелка (клубника, вишня, дыня, арбуз)', price: '13 EUR' },
+      ],
+    },
+    text: {
+      en: 'Join us on 14 July for a memorable summer evening at Brasserie Vivien.',
+      lv: 'Pavadiet 14. jūlija vakaru kopā ar mums Brasserie Vivien.',
+      fr: "Nous vous attendons le 14 juillet pour partager une belle soirée d’été chez Brasserie Vivien.",
+      ru: 'Ждём вас 14 июля, чтобы провести этот летний вечер вместе в Brasserie Vivien.',
     },
   },
   {
