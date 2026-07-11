@@ -68,7 +68,7 @@ final class JobQueue
             $stmt = $this->db->query(
                 'SELECT * FROM jobs
                  WHERE status = "pending" AND run_at <= UTC_TIMESTAMP(6)
-                 ORDER BY run_at, created_at LIMIT 1 FOR UPDATE SKIP LOCKED',
+                 ORDER BY run_at, created_at LIMIT 1 FOR UPDATE',
             );
             $job = $stmt->fetch();
             if (!is_array($job)) {

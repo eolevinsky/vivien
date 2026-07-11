@@ -99,7 +99,7 @@ Preferred scheduler request:
 
 ```text
 POST https://api.vivien.lv/internal/process-jobs
-Authorization: Bearer <INTERNAL_JOB_SECRET>
+Authorization: Bearer <INTERNAL_ADMIN_SECRET or INTERNAL_JOB_SECRET>
 ```
 
 If the shared-hosting scheduler can only call plain URLs without headers, use:
@@ -107,6 +107,9 @@ If the shared-hosting scheduler can only call plain URLs without headers, use:
 ```text
 GET https://api.vivien.lv/internal/process-jobs?secret=<INTERNAL_JOB_SECRET>
 ```
+
+`INTERNAL_JOB_SECRET` remains the URL-based scheduler secret. If
+`INTERNAL_ADMIN_SECRET` is configured, use it for Authorization-header admin calls.
 
 ## First rollout
 
@@ -122,7 +125,7 @@ After a test purchase, queue compensation with:
 
 ```http
 POST /internal/orders/{order-id}/refund
-Authorization: Bearer <INTERNAL_JOB_SECRET>
+Authorization: Bearer <INTERNAL_ADMIN_SECRET or INTERNAL_JOB_SECRET>
 ```
 
 Then invoke `/internal/process-jobs` until the refund job completes. Syrve may retain a

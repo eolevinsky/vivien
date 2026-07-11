@@ -13,6 +13,7 @@ use PDO;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
+use Slim\Exception\HttpException;
 use Slim\Routing\RouteCollectorProxy;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\StripeClient;
@@ -114,10 +115,16 @@ final class App
                 bool $logErrorDetails,
             ) use ($app, $logger, $config): ResponseInterface {
                 $logger->error($error->getMessage(), ['exception' => $error]);
-                $message = $error instanceof \InvalidArgumentException
-                    ? $error->getMessage()
-                    : 'Internal server error';
-                $status = $error instanceof \InvalidArgumentException ? 422 : 500;
+                $message = match (true) {
+                    $error instanceof \InvalidArgumentException => $error->getMessage(),
+                    $error instanceof HttpException => $error->getMessage(),
+                    default => 'Internal server error',
+                };
+                $status = match (true) {
+                    $error instanceof \InvalidArgumentException => 422,
+                    $error instanceof HttpException => $error->getCode() >= 400 ? $error->getCode() : 500,
+                    default => 500,
+                };
                 $response = Responses::json(
                     $app->getResponseFactory()->createResponse(),
                     ['error' => $message],
@@ -185,6 +192,14 @@ final class App
                 $ip = self::clientIp($request);
                 $emailKey = strtolower(trim((string) (($input['payer_email'] ?? '') ?: 'none')));
                 $rateKey = 'checkout:' . hash('sha256', $ip . '|' . $emailKey);
+                $ipRateKey = 'checkout_ip:' . hash('sha256', $ip);
+                if (!$rateLimiter->allow(
+                    $ipRateKey,
+                    $config->int('CHECKOUT_IP_RATE_LIMIT', 30),
+                    $config->int('CHECKOUT_RATE_WINDOW_SECONDS', 900),
+                )) {
+                    return Responses::json($response, ['error' => 'Too many checkout attempts. Try again later.'], 429);
+                }
                 if (!$rateLimiter->allow(
                     $rateKey,
                     $config->int('CHECKOUT_RATE_LIMIT', 10),
@@ -608,18 +623,20 @@ final class App
             ServerRequestInterface $request,
             $handler,
         ) use ($config): ResponseInterface {
-            $secret = $config->string('INTERNAL_JOB_SECRET');
-            if ($secret === '') {
+            $cronSecret = $config->string('INTERNAL_JOB_SECRET');
+            $adminSecret = $config->string('INTERNAL_ADMIN_SECRET', $cronSecret);
+            if ($adminSecret === '' && $cronSecret === '') {
                 return Responses::json(new \Nyholm\Psr7\Response(), ['error' => 'Unauthorized'], 401);
             }
-            if (hash_equals('Bearer ' . $secret, $request->getHeaderLine('Authorization'))) {
+            if ($adminSecret !== ''
+                && hash_equals('Bearer ' . $adminSecret, $request->getHeaderLine('Authorization'))) {
                 return $handler->handle($request);
             }
 
             $path = $request->getUri()->getPath();
             $querySecret = (string) ($request->getQueryParams()['secret'] ?? '');
             $isCronJobEndpoint = str_ends_with($path, '/internal/process-jobs');
-            if ($isCronJobEndpoint && $querySecret !== '' && hash_equals($secret, $querySecret)) {
+            if ($isCronJobEndpoint && $querySecret !== '' && hash_equals($cronSecret, $querySecret)) {
                 return $handler->handle($request);
             }
 
