@@ -11,7 +11,7 @@
     "ext-openssl": "*",
     "ext-pdo": "*",
     "ext-pdo_mysql": "*",
-    "endroid/qr-code": "^6.0",
+    "endroid/qr-code": "^5.1",
     "guzzlehttp/guzzle": "^7.9",
     "monolog/monolog": "^3.8",
     "nyholm/psr7": "^1.8",
@@ -35,6 +35,9 @@
   },
   "config": {
     "optimize-autoloader": true,
+    "platform": {
+      "php": "8.3.32"
+    },
     "sort-packages": true
   },
   "scripts": {
