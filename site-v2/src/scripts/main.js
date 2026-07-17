@@ -1130,10 +1130,33 @@ function checkoutFailureMessage(form, data, fallback) {
   return data?.error || detail || fallback;
 }
 
+function formatBirthdayInput(value) {
+  const digits = String(value || '').replace(/\D/g, '').slice(0, 8);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
+  return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
+}
+
+function bootBirthdayFields(form) {
+  form.querySelectorAll('input[name="recipient_birthday"]').forEach((input) => {
+    const normalize = () => {
+      const formatted = formatBirthdayInput(input.value);
+      if (input.value !== formatted) {
+        input.value = formatted;
+      }
+    };
+
+    input.addEventListener('input', normalize);
+    input.addEventListener('blur', normalize);
+    input.addEventListener('paste', () => window.setTimeout(normalize, 0));
+  });
+}
+
 function bootGiftCardCheckout() {
   document.querySelectorAll('form[data-giftcard-checkout]').forEach((form) => {
     const state = form.querySelector('[data-form-state]');
     const submitButton = form.querySelector('button[type="submit"]');
+    bootBirthdayFields(form);
 
     if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
       form.action = 'http://localhost:8080/v1/gift-cards/checkout';
@@ -1152,6 +1175,9 @@ function bootGiftCardCheckout() {
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      form.querySelectorAll('input[name="recipient_birthday"]').forEach((input) => {
+        input.value = formatBirthdayInput(input.value);
+      });
       if (!form.reportValidity()) return;
 
       showState('', form.dataset.loadingMessage || 'Loading...');

@@ -78,16 +78,16 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
         <div class="panel">
           <FormShell locale={locale} action={checkoutAction} eventName="loyalty_checkout_start" submitLabel={labels.submit} checkout={true} cancelledMessage={labels.cancelled}>
             <div class="row">
-              <input type="text" name="recipient_first_name" placeholder={labels.firstName} required />
-              <input type="text" name="recipient_last_name" placeholder={labels.lastName} required />
+              <input type="text" name="recipient_first_name" autocomplete="given-name" placeholder={labels.firstName} required />
+              <input type="text" name="recipient_last_name" autocomplete="family-name" placeholder={labels.lastName} required />
             </div>
             <div class="row">
-              <input type="email" name="payer_email" placeholder={labels.payerEmail} required />
-              <input type="text" name="recipient_birthday" inputmode="numeric" pattern="[0-9]{2}\.[0-9]{2}\.[0-9]{4}" placeholder={labels.birthday} aria-label={labels.birthday} />
+              <input type="email" name="payer_email" autocomplete="email" placeholder={labels.payerEmail} required />
+              <input type="text" name="recipient_birthday" inputmode="numeric" maxlength="10" autocomplete="bday" pattern="[0-9]{2}\.[0-9]{2}\.[0-9]{4}" placeholder={labels.birthday} aria-label={labels.birthday} />
             </div>
             <div class="row">
-              <input type="number" min="10" max="500" name="amount" placeholder={labels.amount} required />
-              <input type="email" name="recipient_email" placeholder={copy.form.email} />
+              <input type="number" min="10" max="500" name="amount" inputmode="numeric" autocomplete="off" placeholder={labels.amount} required />
+              <input type="email" name="recipient_email" autocomplete="email" placeholder={copy.form.email} />
             </div>
             <textarea name="payer_note" placeholder={labels.note}></textarea>
             <input type="hidden" name="card_kind" value="loyalty" />
