@@ -1137,6 +1137,43 @@ function formatBirthdayInput(value) {
   return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
 }
 
+function birthdayValidationMessage() {
+  const lang = (document.documentElement.lang || 'en').slice(0, 2);
+  return {
+    en: 'Enter a real date as DD.MM.YYYY.',
+    lv: 'Ievadiet īstu datumu formātā DD.MM.GGGG.',
+    fr: 'Saisissez une date réelle au format JJ.MM.AAAA.',
+    ru: 'Введите реальную дату в формате ДД.ММ.ГГГГ.',
+  }[lang] || 'Enter a real date as DD.MM.YYYY.';
+}
+
+function isValidBirthday(value) {
+  const match = String(value || '').match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (!match) return false;
+  const day = Number(match[1]);
+  const month = Number(match[2]);
+  const year = Number(match[3]);
+  const now = new Date();
+  if (year < 1900 || year > now.getFullYear() || month < 1 || month > 12 || day < 1 || day > 31) {
+    return false;
+  }
+  const date = new Date(year, month - 1, day);
+  return date.getFullYear() === year
+    && date.getMonth() === month - 1
+    && date.getDate() === day
+    && date <= now;
+}
+
+function validateBirthdayInput(input) {
+  if (!input.value) {
+    input.setCustomValidity('');
+    return true;
+  }
+  const valid = isValidBirthday(input.value);
+  input.setCustomValidity(valid ? '' : birthdayValidationMessage());
+  return valid;
+}
+
 function bootBirthdayFields(form) {
   form.querySelectorAll('input[name="recipient_birthday"]').forEach((input) => {
     const normalize = () => {
@@ -1144,10 +1181,12 @@ function bootBirthdayFields(form) {
       if (input.value !== formatted) {
         input.value = formatted;
       }
+      validateBirthdayInput(input);
     };
 
     input.addEventListener('input', normalize);
     input.addEventListener('blur', normalize);
+    input.addEventListener('invalid', () => validateBirthdayInput(input));
     input.addEventListener('paste', () => window.setTimeout(normalize, 0));
   });
 }
@@ -1177,6 +1216,7 @@ function bootGiftCardCheckout() {
       event.preventDefault();
       form.querySelectorAll('input[name="recipient_birthday"]').forEach((input) => {
         input.value = formatBirthdayInput(input.value);
+        validateBirthdayInput(input);
       });
       if (!form.reportValidity()) return;
 
