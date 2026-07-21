@@ -32,6 +32,12 @@ requiredSectionSlugs.forEach((section) => {
   assert.ok(sectionSlugs.includes(section), `sectionSlugs should include ${section}`);
 });
 
+assert.equal(
+  resolveRedirect('/google/ru/menu/google_meat_test?menu_category=meat-poultry&menu_item=beef-bourguignon-with-potato', htaccess),
+  'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_meat_test&utm_content=section_menu#menu&menu_category=meat-poultry&menu_item=beef-bourguignon-with-potato',
+  'google menu links should preserve menu targeting query params',
+);
+
 let sectionChecks = 0;
 shortLinkGroups
   .filter((group) => group.kind === 'event')

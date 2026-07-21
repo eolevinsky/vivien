@@ -6,6 +6,7 @@ const allLabel = { en: 'All', lv: 'Visi', fr: 'Tous', ru: 'Все' }[locale] || 
 const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
   String(import.meta.env.VIVIEN_MENU_IMAGES_ENABLED || '').trim().toLowerCase()
 );
+const categoryKeys = new Map(menu.categories.map((category) => [category.id, category.slug || category.id]));
 ---
 <section class="section menu-section" id="menu">
   <div class="section-title">
@@ -16,12 +17,15 @@ const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
     <ul class="menu-filters isotope-filters" aria-label="Menu filters">
       <li class="filter-active active" data-menu-filter="*" tabindex="0">{allLabel}</li>
       {menu.categories.map((category) => (
-        <li data-menu-filter={category.id} tabindex="0">{category.name}</li>
+        <li data-menu-filter={category.slug || category.id} data-menu-category-id={category.id} tabindex="0">{category.name}</li>
       ))}
     </ul>
     <div class="menu-grid menu-api-grid">
-      {menu.items.map((item) => (
-        <article class:list={['menu-item', 'isotope-item', item.description && 'has-desc', menuImagesEnabled && (item.thumbUrl || item.imageUrl) && 'has-image']} data-menu-category={item.categoryId} data-menu-description={item.description || ''} tabindex={item.description ? '0' : undefined}>
+      {menu.items.map((item) => {
+        const categoryKey = categoryKeys.get(item.categoryId) || item.categoryId;
+        const itemKey = item.slug || item.id;
+        return (
+        <article id={`menu-item-${itemKey}`} class:list={['menu-item', 'isotope-item', item.description && 'has-desc', menuImagesEnabled && (item.thumbUrl || item.imageUrl) && 'has-image']} data-menu-category={categoryKey} data-menu-category-id={item.categoryId} data-menu-item={itemKey} data-menu-item-id={item.id} data-menu-description={item.description || ''} tabindex={item.description ? '0' : undefined}>
           {menuImagesEnabled && (item.thumbUrl || item.imageUrl) && (
             <figure class="menu-image">
               <img src={item.thumbUrl || item.imageUrl} alt={item.imageAlt || item.name} loading="lazy" width="96" height="96" />
@@ -36,7 +40,8 @@ const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
             {item.description && <p class="menu-ingredients">{item.description}</p>}
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>

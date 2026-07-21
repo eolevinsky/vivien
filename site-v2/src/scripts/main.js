@@ -93,6 +93,35 @@ function storeAttribution(values) {
   }
 }
 
+function normalizeSectionHashParams() {
+  if (!window.history?.replaceState || !window.location.hash) return;
+
+  const rawHash = window.location.hash.slice(1);
+  if (!rawHash) return;
+
+  let hash = rawHash;
+  try {
+    hash = decodeURIComponent(rawHash);
+  } catch (_) {
+    return;
+  }
+
+  const match = hash.match(/^([A-Za-z][A-Za-z0-9_-]*)[?&](.+)$/);
+  if (!match) return;
+
+  const [, sectionId, rawParams] = match;
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const target = new URL(window.location.href);
+  const hashParams = new URLSearchParams(rawParams);
+  hashParams.forEach((value, key) => {
+    if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+  });
+  target.hash = sectionId;
+  window.history.replaceState(null, '', `${target.pathname}${target.search}${target.hash}`);
+}
+
 function storedBookingClientId() {
   if (inMemoryBookingClientId) return inMemoryBookingClientId;
   try {
@@ -1035,29 +1064,143 @@ function bootStickyCtaContext() {
 function bootMenuFilters() {
   const shell = document.querySelector('[data-menu-shell]');
   if (!shell) return;
-  const buttons = shell.querySelectorAll('[data-menu-filter]');
-  const items = shell.querySelectorAll('[data-menu-category]');
-  buttons.forEach((button) => {
-    const applyFilter = () => {
-      const filter = button.dataset.menuFilter;
-      buttons.forEach((item) => {
-        const selected = item === button;
-        item.classList.toggle('active', selected);
-        item.classList.toggle('filter-active', selected);
-      });
-      items.forEach((item) => {
-        item.hidden = filter !== '*' && item.dataset.menuCategory !== filter;
-      });
-    };
+  const buttons = Array.from(shell.querySelectorAll('[data-menu-filter]'));
+  const items = Array.from(shell.querySelectorAll('[data-menu-category]'));
 
-    button.addEventListener('click', applyFilter);
+  const menuHashState = () => {
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash) return { targetsMenu: false, params: new URLSearchParams() };
+
+    let hash = rawHash;
+    try {
+      hash = decodeURIComponent(rawHash);
+    } catch (_) {
+      // Keep the raw hash when it is not valid percent-encoded text.
+    }
+
+    const match = hash.match(/^menu(?:[?&](.*))?$/);
+    return {
+      targetsMenu: Boolean(match),
+      params: new URLSearchParams(match?.[1] || ''),
+    };
+  };
+
+  const firstParam = (paramSets, keys) => {
+    for (const params of paramSets) {
+      for (const key of keys) {
+        const value = (params.get(key) || '').trim();
+        if (value) return value;
+      }
+    }
+    return '';
+  };
+
+  const normalizeMenuHash = () => {
+    if (!window.history?.replaceState) return;
+
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash || rawHash === 'menu') return;
+
+    let hash = rawHash;
+    try {
+      hash = decodeURIComponent(rawHash);
+    } catch (_) {
+      return;
+    }
+
+    const match = hash.match(/^menu[?&](.*)$/);
+    if (!match) return;
+
+    const target = new URL(window.location.href);
+    target.hash = 'menu';
+    const hashParams = new URLSearchParams(match[1]);
+    hashParams.forEach((value, key) => {
+      if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+    });
+    window.history.replaceState(null, '', `${target.pathname}${target.search}${target.hash}`);
+  };
+
+  const buttonForCategory = (value) => {
+    const category = String(value || '').trim();
+    if (!category) return null;
+    return buttons.find((button) => (
+      button.dataset.menuFilter === category || button.dataset.menuCategoryId === category
+    )) || null;
+  };
+
+  const itemForValue = (value) => {
+    const target = String(value || '').trim();
+    if (!target) return null;
+    return items.find((item) => (
+      item.dataset.menuItem === target || item.dataset.menuItemId === target || item.id === `menu-item-${target}`
+    )) || null;
+  };
+
+  const applyFilter = (button) => {
+    const filter = button.dataset.menuFilter || '*';
+    buttons.forEach((item) => {
+      const selected = item === button;
+      item.classList.toggle('active', selected);
+      item.classList.toggle('filter-active', selected);
+    });
+    items.forEach((item) => {
+      item.hidden = filter !== '*'
+        && item.dataset.menuCategory !== filter
+        && item.dataset.menuCategoryId !== filter;
+    });
+  };
+
+  const scrollToMenuSection = () => {
+    const section = document.getElementById('menu');
+    if (!section) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => {
+      section.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }, 80);
+  };
+
+  const scrollToLinkedItem = (item) => {
+    if (!item || item.hidden) return false;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    item.classList.add('menu-item-linked');
+    window.setTimeout(() => {
+      item.scrollIntoView({ block: 'center', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      if (item.hasAttribute('tabindex')) {
+        item.focus({ preventScroll: true });
+      }
+    }, 80);
+    return true;
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => applyFilter(button));
     button.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        applyFilter();
+        applyFilter(button);
       }
     });
   });
+
+  const menuHash = menuHashState();
+  const menuParams = [
+    new URLSearchParams(window.location.search),
+    menuHash.params,
+  ];
+  const requestedCategory = firstParam(menuParams, ['menu_category', 'menuCategory', 'menu-category', 'category']);
+  const requestedItem = firstParam(menuParams, ['menu_item', 'menuItem', 'menu-item', 'item']);
+  const linkedItem = itemForValue(requestedItem);
+  const linkedCategory = linkedItem?.dataset.menuCategory || linkedItem?.dataset.menuCategoryId || '';
+  const initialButton = buttonForCategory(requestedCategory) || (!requestedCategory && buttonForCategory(linkedCategory));
+
+  if ((requestedCategory || requestedItem) && menuHash.targetsMenu) {
+    normalizeMenuHash();
+  }
+
+  if (initialButton) applyFilter(initialButton);
+  if (!scrollToLinkedItem(linkedItem) && menuHash.targetsMenu && (requestedCategory || requestedItem)) {
+    scrollToMenuSection();
+  }
 }
 
 function formFailureMessage(form, response, text) {
@@ -1279,6 +1422,7 @@ function bootRestoplaceMessages() {
 }
 
 function bootSite() {
+  normalizeSectionHashParams();
   observeConsentUpdates();
   bootHeaderScroll();
   bootScrollTop();

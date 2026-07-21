@@ -52,12 +52,20 @@ letters, numbers, dots, underscores, hyphens, or tildes.
 Section links use the visible page section id as a path segment. Supported
 section slugs are `menu`, `events`, `gallery`, `specials`, `careers`, `contact`.
 
+Menu section links can also include A3 menu slugs as query parameters. Use
+`menu_category=<category-slug>` to preselect a menu filter and
+`menu_item=<item-slug>` to scroll to a dish after the filter is applied. The
+site also accepts A3 ids for both values as a fallback. Put these parameters on
+the short URL; the site handles them after the redirect even when Apache places
+them after the `#menu` fragment.
+
 Manager-facing formats:
 
 ```text
 Event landing page: https://vivien.lv/<channel>/<locale>/<event>
 Section:            https://vivien.lv/<channel>/<locale>/<section>
 Section campaign:   https://vivien.lv/<channel>/<locale>/<section>/<campaign>
+Menu target:        https://vivien.lv/<channel>/<locale>/menu/<campaign>?menu_category=<category-slug>&menu_item=<item-slug>
 Gift-card page:    https://vivien.lv/<channel>/<locale>/gift-card
 Booking modal:      https://vivien.lv/<channel>-book/<locale>
 Event + booking:    https://vivien.lv/<channel>-book/<locale>/<event>/<campaign>

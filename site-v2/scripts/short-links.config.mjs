@@ -282,7 +282,7 @@ export const redirectFixtures = [
   },
   {
     path: '/google/ru/events/google_cherry_days_july?gclid=test123',
-    location: 'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_cherry_days_july&utm_content=section_events&gclid=test123#events',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_cherry_days_july&utm_content=section_events#events&gclid=test123',
   },
   {
     path: '/google/ru/cherry-days/google_cherry_days_july?gbraid=test123',
@@ -294,7 +294,7 @@ export const redirectFixtures = [
   },
   {
     path: '/email/ru/menu/july_newsletter?utm_term=summer',
-    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_menu&utm_term=summer#menu',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_menu#menu&utm_term=summer',
   },
   {
     path: '/email/ru/events/july_newsletter',
@@ -334,7 +334,7 @@ export const redirectFixtures = [
   },
   {
     path: '/x/ru/menu/x_menu_july?utm_term=menu_test',
-    location: 'https://vivien.lv/ru/?lang=ru&utm_source=twitter&utm_medium=social&utm_campaign=x_menu_july&utm_content=section_menu&utm_term=menu_test#menu',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=twitter&utm_medium=social&utm_campaign=x_menu_july&utm_content=section_menu#menu&utm_term=menu_test',
   },
   {
     path: '/x/ru/cherry-days?utm_term=ignored_by_x',

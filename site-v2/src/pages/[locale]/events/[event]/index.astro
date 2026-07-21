@@ -29,6 +29,15 @@ const imageAlt = localized(event.alt);
 const price = localized(event.price);
 const text = localized(event.text);
 const points = eventPoints(event);
+const pointsTitle = localized(event.pointsTitle);
+const eventDateLabel = localized(event.dateLabel) || new Intl.DateTimeFormat(locale, {
+  day: 'numeric',
+  month: 'long',
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: 'Europe/Riga',
+}).format(new Date(event.startIso));
+const eventMedia = eventImages(event);
 const alternates = {
   links: locales.map((altLocale) => ({
     locale: altLocale,
@@ -44,7 +53,7 @@ const eventSchema = {
   startDate: event.startIso,
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
-  image: canonicalUrl(image),
+  image: eventMedia.map((media) => canonicalUrl(media.src)),
   url: canonicalUrl(eventPath),
   location: {
     '@type': 'Restaurant',
@@ -72,6 +81,32 @@ function localized(value) {
 function localizedList(value) {
   const list = localized(value);
   return Array.isArray(list) ? list : [];
+}
+
+function eventImages(event) {
+  const rawImages = Array.isArray(event.images) && event.images.length
+    ? event.images
+    : [{ src: event.image, alt: event.alt, fit: event.imageFit, aspectRatio: event.imageAspectRatio }];
+
+  return rawImages
+    .map((image) => {
+      if (!image || typeof image !== 'object') {
+        return {
+          src: localized(image),
+          alt: localized(event.alt),
+          fit: event.imageFit,
+          aspectRatio: event.imageAspectRatio,
+        };
+      }
+
+      return {
+        src: localized(image.src),
+        alt: localized(image.alt || event.alt),
+        fit: image.fit || event.imageFit,
+        aspectRatio: image.aspectRatio || event.imageAspectRatio,
+      };
+    })
+    .filter((image) => image.src);
 }
 
 function eventPoints(event) {
@@ -117,28 +152,25 @@ function eventPoints(event) {
     <section class="section events-section" id="event-preview">
       <div class="events-shell">
         <article class="event-slide active" aria-hidden="false">
-          <div class="event-media">
-            <img
-              class:list={['event-image', event.imageFit === 'contain' && 'event-image--contain']}
-              style={event.imageAspectRatio ? `--event-image-aspect-ratio: ${event.imageAspectRatio}` : undefined}
-              src={withBase(image)}
-              alt={imageAlt}
-              loading="eager"
-            />
+          <div class:list={['event-media', eventMedia.length > 1 && 'event-media--gallery']}>
+            {eventMedia.map((media, index) => (
+              <img
+                class:list={['event-image', media.fit === 'contain' && 'event-image--contain']}
+                style={media.aspectRatio ? `--event-image-aspect-ratio: ${media.aspectRatio}` : undefined}
+                src={withBase(media.src)}
+                alt={media.alt || imageAlt}
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            ))}
           </div>
           <div class="event-content">
             <time class="event-date" datetime={event.startIso}>
-              {new Intl.DateTimeFormat(locale, {
-                day: 'numeric',
-                month: 'long',
-                hour: '2-digit',
-                minute: '2-digit',
-                timeZone: 'Europe/Riga',
-              }).format(new Date(event.startIso))}
+              {eventDateLabel}
             </time>
             <h1>{title}</h1>
             {price && <div class="event-price"><span>{price}</span></div>}
             <p class="event-lead">{description}</p>
+            {pointsTitle && <p class="event-points-title">{pointsTitle}</p>}
             {points.length > 0 && (
               <ul>
                 {points.map((point) => (
