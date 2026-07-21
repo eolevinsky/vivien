@@ -26,10 +26,12 @@ function normalize(data, locale) {
   const currencyCode = menu.currencyCode || 'EUR';
   const categories = (menu.categories || []).map((category) => ({
     id: String(category.id),
+    slug: category.slug ? String(category.slug) : '',
     name: category.name || category.title || '',
   })).filter((category) => category.id && category.name);
   const items = (menu.items || []).map((item) => ({
     id: String(item.id || item.uuid || item.name),
+    slug: item.slug ? String(item.slug) : '',
     categoryId: String(item.categoryId || item.category_id || ''),
     name: item.name || '',
     description: item.description || '',

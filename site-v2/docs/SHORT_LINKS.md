@@ -22,13 +22,23 @@ https://vivien.lv/e/ru/cherry-days
 https://vivien.lv/poster/ru/cherry-days
 https://vivien.lv/ig/ru/cherry-days
 https://vivien.lv/ig/ru/menu
+https://vivien.lv/ig/ru/gallery
+https://vivien.lv/x/ru/contact
 https://vivien.lv/meta-event/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/meta-book/ru/cherry-days/meta_cherry_days_july
 https://vivien.lv/ig-book/ru/cherry-days/ig_cherry_days_july
 https://vivien.lv/google/ru/events/google_cherry_days_july
+https://vivien.lv/google/ru/gallery/google_gallery_july
+https://vivien.lv/google/ru/contact/google_contact_july
 https://vivien.lv/google/ru/gift-card/google_gift_card_july
 https://vivien.lv/google/ru/cherry-days/google_cherry_days_july
 https://vivien.lv/google-book/ru/cherry-days/google_cherry_days_july
+https://vivien.lv/email/ru/menu/july_newsletter
+https://vivien.lv/email/ru/events/july_newsletter
+https://vivien.lv/email/ru/gallery/july_newsletter
+https://vivien.lv/email/ru/contact/july_newsletter
+https://vivien.lv/email/ru/gift-card/july_newsletter
+https://vivien.lv/email-book/ru/july_newsletter
 ```
 
 Supported site-language segments are `en`, `lv`, `fr`, and `ru`.
@@ -42,16 +52,27 @@ letters, numbers, dots, underscores, hyphens, or tildes.
 Section links use the visible page section id as a path segment. Supported
 section slugs are `menu`, `events`, `gallery`, `specials`, `careers`, `contact`.
 
+Menu section links can also include A3 menu slugs as query parameters. Use
+`menu_category=<category-slug>` to preselect a menu filter and
+`menu_item=<item-slug>` to scroll to a dish after the filter is applied. The
+site also accepts A3 ids for both values as a fallback. Put these parameters on
+the short URL; the site handles them after the redirect even when Apache places
+them after the `#menu` fragment.
+
 Manager-facing formats:
 
 ```text
 Event landing page: https://vivien.lv/<channel>/<locale>/<event>
-Menu section:       https://vivien.lv/<channel>/<locale>/menu
+Section:            https://vivien.lv/<channel>/<locale>/<section>
+Section campaign:   https://vivien.lv/<channel>/<locale>/<section>/<campaign>
+Menu target:        https://vivien.lv/<channel>/<locale>/menu/<campaign>?menu_category=<category-slug>&menu_item=<item-slug>
+Gift-card page:    https://vivien.lv/<channel>/<locale>/gift-card
 Booking modal:      https://vivien.lv/<channel>-book/<locale>
 Event + booking:    https://vivien.lv/<channel>-book/<locale>/<event>/<campaign>
 ```
 
-Google page links currently support `gift-card`.
+Page links currently support `gift-card` for Google Ads and email newsletter
+channels.
 
 Event links use the event `id` from `src/content/site.js`, for example
 `cherry-days`. A concrete event link redirects to a static event landing page
@@ -93,20 +114,36 @@ page section, `/google[/<locale>]/gift-card/<campaign>` for the gift card page,
 `/google[/<locale>]/<event>/<campaign>` for an event landing page, and
 `/google-book[/<locale>]/<event>/<campaign>` when the ad should open booking.
 
+Email newsletter links use `utm_source=newsletter` and `utm_medium=email`.
+Use `/email[/<locale>]/<section>/<campaign>` for section links such as
+`menu`, `events`, `gallery`, and `contact`,
+`/email[/<locale>]/gift-card/<campaign>` for gift cards, and
+`/email-book[/<locale>]/<campaign>` for booking.
+
 Lead-form links use `/<prefix>[/<locale>]/<campaign>` and also support the base
 path without a campaign segment, using `utm_campaign=lead_form`.
 
 | Short URL | Destination |
 | --- | --- |
 | `/e[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=events#events` |
+| `/e[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/e[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/e[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=shortlink&utm_medium=event&utm_campaign=event_<event>` |
 | `/poster[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=events&utm_content=qr_code#events` |
+| `/poster[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/poster[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/poster[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=poster&utm_medium=offline&utm_campaign=event_<event>&utm_content=qr_code` |
 | `/visam[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=events&utm_content=mobile_app#events` |
+| `/visam[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/visam[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/visam[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_app&utm_campaign=event_<event>&utm_content=mobile_app` |
 | `/visam-ig[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=instagram_blog#events` |
+| `/visam-ig[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/visam-ig[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/visam-ig[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=event_<event>&utm_content=instagram_blog` |
 | `/visam-tt[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=events&utm_content=tiktok_blog#events` |
+| `/visam-tt[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/visam-tt[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
 | `/visam-tt[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=visam&utm_medium=partner_social&utm_campaign=event_<event>&utm_content=tiktok_blog` |
 | `/meta-event[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=events&utm_content=event_link#events` |
 | `/meta-event[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=meta&utm_medium=paid_social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
@@ -121,6 +158,13 @@ path without a campaign segment, using `utm_campaign=lead_form`.
 | `/google[/<locale>]/gift-card/<campaign>` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=page_gift_card` |
 | `/google[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=event_<event>&utm_content=event_link` |
 | `/google[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=event_link` |
+| `/email[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=newsletter&utm_content=site_home` |
+| `/email[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
+| `/email[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
+| `/email[/<locale>]/gift-card` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=page_gift_card&utm_content=page_gift_card` |
+| `/email[/<locale>]/gift-card/<campaign>` | `/<locale>/gift-card/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=<campaign>&utm_content=page_gift_card` |
+| `/email[/<locale>]/<event>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=event_<event>&utm_content=event_link` |
+| `/email[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?lang=<booking-lang>&utm_source=newsletter&utm_medium=email&utm_campaign=<campaign>&utm_content=event_link` |
 | `/x[/<locale>]` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=bio&utm_content=profile#menu` |
 | `/x[/<locale>]/<section>` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=section_<section>&utm_content=section_<section>#<section>` |
 | `/x[/<locale>]/<section>/<campaign>` | `/<locale>/?lang=<booking-lang>&utm_source=twitter&utm_medium=social&utm_campaign=<campaign>&utm_content=section_<section>#<section>` |
@@ -155,6 +199,9 @@ path without a campaign segment, using `utm_campaign=lead_form`.
 | `/google-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=booking&utm_content=booking` |
 | `/google-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=booking` |
 | `/google-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=google_ads_booking&utm_source=google&utm_medium=cpc&utm_campaign=<campaign>&utm_content=booking` |
+| `/email-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=email_booking&utm_source=newsletter&utm_medium=email&utm_campaign=booking&utm_content=booking` |
+| `/email-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=email_booking&utm_source=newsletter&utm_medium=email&utm_campaign=<campaign>&utm_content=booking` |
+| `/email-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=email_booking&utm_source=newsletter&utm_medium=email&utm_campaign=<campaign>&utm_content=booking` |
 | `/tt-book[/<locale>]` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_bio_booking&utm_source=tiktok&utm_medium=social&utm_campaign=bio&utm_content=booking` |
 | `/tt-book[/<locale>]/<campaign>` | `/<locale>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
 | `/tt-book[/<locale>]/<event>/<campaign>` | `/<locale>/events/<event>/?openBooking=1&lang=<booking-lang>&booking_source=tiktok_booking&utm_source=tiktok&utm_medium=social&utm_campaign=<campaign>&utm_content=booking` |
