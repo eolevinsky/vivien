@@ -20,7 +20,10 @@ const ATTRIBUTION_KEYS = [
   'ga_session_id',
 ];
 const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
+const ATTRIBUTION_COOKIE_KEY = 'vivien_attribution';
 const BOOKING_CLIENT_ID_STORAGE_KEY = 'vivien_booking_client_id';
+const BOOKING_CLIENT_ID_COOKIE_KEY = 'vivien_booking_client_id';
+const ATTRIBUTION_OVERRIDE_KEYS = new Set(ATTRIBUTION_KEYS.filter((key) => key !== 'lang'));
 const GA_MEASUREMENT_ID = window.VIVIEN_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
 const DIRECT_GA_EVENTS_ENABLED = window.VIVIEN_GA_DIRECT_ENABLED !== false;
 const RESTOPLACE_ADDRESS_HASH = window.VIVIEN_RESTOPLACE_ADDRESS_HASH || '5a003b0dc90935f47c87';
@@ -65,32 +68,112 @@ function eventId(prefix) {
   return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
-function attributionFromParams(params = new URLSearchParams(window.location.search)) {
+function attributionParamValue(value) {
+  const text = String(value || '').trim();
+  return text ? text.slice(0, 500) : '';
+}
+
+function lastParamValue(params, key) {
+  const values = params.getAll(key).map(attributionParamValue).filter(Boolean);
+  return values.length ? values[values.length - 1] : '';
+}
+
+function normalizedAttributionValues(values) {
   return ATTRIBUTION_KEYS.reduce((memo, key) => {
-    const value = params.get(key);
+    const value = attributionParamValue(values?.[key]);
     if (value) memo[key] = value;
     return memo;
   }, {});
 }
 
-function storedAttribution() {
+function attributionFromParams(params = new URLSearchParams(window.location.search)) {
+  return ATTRIBUTION_KEYS.reduce((memo, key) => {
+    const value = lastParamValue(params, key);
+    if (value) memo[key] = value;
+    return memo;
+  }, {});
+}
+
+function parseStoredAttribution(value) {
   try {
-    return JSON.parse(window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY) || '{}') || {};
+    const parsed = JSON.parse(value || '{}');
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+    return normalizedAttributionValues(parsed);
   } catch (_) {
     return {};
   }
 }
 
-function storeAttribution(values) {
-  if (!Object.keys(values).length) return;
+function writeSessionCookie(name, value) {
   try {
-    window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify({
-      ...storedAttribution(),
-      ...values,
-    }));
+    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; SameSite=Lax${secure}`;
+  } catch (_) {
+    // Cookie writes may be blocked in strict privacy modes.
+  }
+}
+
+function storedAttribution() {
+  let sessionValues = {};
+  try {
+    sessionValues = parseStoredAttribution(window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY));
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+
+  return {
+    ...parseStoredAttribution(readCookie(ATTRIBUTION_COOKIE_KEY)),
+    ...sessionValues,
+  };
+}
+
+function storeAttribution(values) {
+  const nextValues = normalizedAttributionValues({
+    ...storedAttribution(),
+    ...values,
+  });
+  if (!Object.keys(nextValues).length) return;
+
+  const serialized = JSON.stringify(nextValues);
+  try {
+    window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, serialized);
+  } catch (_) {
+    // Session storage may be unavailable in strict privacy modes.
+  }
+  writeSessionCookie(ATTRIBUTION_COOKIE_KEY, serialized);
+}
+
+function normalizeSectionHashParams() {
+  if (!window.history?.replaceState || !window.location.hash) return;
+
+  const rawHash = window.location.hash.slice(1);
+  if (!rawHash) return;
+
+  let hash = rawHash;
+  try {
+    hash = decodeURIComponent(rawHash);
+  } catch (_) {
+    return;
+  }
+
+  const match = hash.match(/^([A-Za-z][A-Za-z0-9_-]*)[?&](.+)$/);
+  if (!match) return;
+
+  const [, sectionId, rawParams] = match;
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const target = new URL(window.location.href);
+  const hashParams = new URLSearchParams(rawParams);
+  hashParams.forEach((value, key) => {
+    const normalizedValue = attributionParamValue(value);
+    if (!normalizedValue) return;
+    if (!target.searchParams.has(key) || ATTRIBUTION_OVERRIDE_KEYS.has(key)) {
+      target.searchParams.set(key, normalizedValue);
+    }
+  });
+  target.hash = sectionId;
+  window.history.replaceState(null, '', `${target.pathname}${target.search}${target.hash}`);
 }
 
 function storedBookingClientId() {
@@ -100,16 +183,18 @@ function storedBookingClientId() {
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+  if (!inMemoryBookingClientId) inMemoryBookingClientId = readCookie(BOOKING_CLIENT_ID_COOKIE_KEY) || '';
   return inMemoryBookingClientId;
 }
 
 function storeBookingClientId(value) {
-  inMemoryBookingClientId = value;
+  inMemoryBookingClientId = attributionParamValue(value);
   try {
-    window.sessionStorage.setItem(BOOKING_CLIENT_ID_STORAGE_KEY, value);
+    window.sessionStorage.setItem(BOOKING_CLIENT_ID_STORAGE_KEY, inMemoryBookingClientId);
   } catch (_) {
     // Keep the in-memory value for the current page if storage is unavailable.
   }
+  writeSessionCookie(BOOKING_CLIENT_ID_COOKIE_KEY, inMemoryBookingClientId);
 }
 
 function randomClientIdPart() {
@@ -299,8 +384,7 @@ function shouldUseDirectBookingNavigation() {
 }
 
 function restoplaceParamValue(value) {
-  const text = String(value || '').trim();
-  return text ? text.slice(0, 500) : '';
+  return attributionParamValue(value);
 }
 
 function restoplaceGetparams(extraParams = {}) {
@@ -473,7 +557,11 @@ function withAttribution(url, extraParams = {}) {
     ...attribution(),
     ...extraParams,
   }).forEach(([key, value]) => {
-    if (value && !nextUrl.searchParams.has(key)) nextUrl.searchParams.set(key, value);
+    const normalizedValue = attributionParamValue(value);
+    if (!normalizedValue) return;
+    if (!nextUrl.searchParams.has(key) || ATTRIBUTION_OVERRIDE_KEYS.has(key)) {
+      nextUrl.searchParams.set(key, normalizedValue);
+    }
   });
   return nextUrl.href;
 }
@@ -852,6 +940,23 @@ function bootEventsCarousel() {
       track.appendChild(firstClone);
     }
 
+    let heightFrame = 0;
+
+    const slideAt = (index) => slides[(index + slides.length) % slides.length];
+
+    const syncTrackHeight = (index = currentIndex) => {
+      const activeSlide = slideAt(index);
+      if (!activeSlide) return;
+
+      const height = Math.ceil(activeSlide.getBoundingClientRect().height);
+      if (height > 0) track.style.height = `${height}px`;
+    };
+
+    const queueTrackHeight = (index = currentIndex) => {
+      window.cancelAnimationFrame(heightFrame);
+      heightFrame = window.requestAnimationFrame(() => syncTrackHeight(index));
+    };
+
     const setTransition = (enabled) => {
       track.classList.toggle('is-sliding', enabled && !prefersReducedMotion);
     };
@@ -897,6 +1002,7 @@ function bootEventsCarousel() {
         dot.classList.toggle('active', active);
         dot.setAttribute('aria-current', active ? 'true' : 'false');
       });
+      queueTrackHeight(activeIndex);
       syncStickyCta(activeIndex);
     };
 
@@ -942,6 +1048,19 @@ function bootEventsCarousel() {
     carousel.addEventListener('focusout', (event) => {
       if (!carousel.contains(event.relatedTarget)) start();
     });
+
+    window.addEventListener('resize', () => queueTrackHeight(currentIndex));
+    track.querySelectorAll('img').forEach((image) => {
+      if (image.complete) return;
+      image.addEventListener('load', () => queueTrackHeight(currentIndex), { once: true });
+    });
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => queueTrackHeight(currentIndex));
+    }
+    if ('ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(() => queueTrackHeight(currentIndex));
+      slides.forEach((slide) => resizeObserver.observe(slide));
+    }
 
     syncActiveState(currentIndex);
     setPosition(currentIndex, false);
@@ -1035,29 +1154,143 @@ function bootStickyCtaContext() {
 function bootMenuFilters() {
   const shell = document.querySelector('[data-menu-shell]');
   if (!shell) return;
-  const buttons = shell.querySelectorAll('[data-menu-filter]');
-  const items = shell.querySelectorAll('[data-menu-category]');
-  buttons.forEach((button) => {
-    const applyFilter = () => {
-      const filter = button.dataset.menuFilter;
-      buttons.forEach((item) => {
-        const selected = item === button;
-        item.classList.toggle('active', selected);
-        item.classList.toggle('filter-active', selected);
-      });
-      items.forEach((item) => {
-        item.hidden = filter !== '*' && item.dataset.menuCategory !== filter;
-      });
-    };
+  const buttons = Array.from(shell.querySelectorAll('[data-menu-filter]'));
+  const items = Array.from(shell.querySelectorAll('[data-menu-category]'));
 
-    button.addEventListener('click', applyFilter);
+  const menuHashState = () => {
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash) return { targetsMenu: false, params: new URLSearchParams() };
+
+    let hash = rawHash;
+    try {
+      hash = decodeURIComponent(rawHash);
+    } catch (_) {
+      // Keep the raw hash when it is not valid percent-encoded text.
+    }
+
+    const match = hash.match(/^menu(?:[?&](.*))?$/);
+    return {
+      targetsMenu: Boolean(match),
+      params: new URLSearchParams(match?.[1] || ''),
+    };
+  };
+
+  const firstParam = (paramSets, keys) => {
+    for (const params of paramSets) {
+      for (const key of keys) {
+        const value = (params.get(key) || '').trim();
+        if (value) return value;
+      }
+    }
+    return '';
+  };
+
+  const normalizeMenuHash = () => {
+    if (!window.history?.replaceState) return;
+
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash || rawHash === 'menu') return;
+
+    let hash = rawHash;
+    try {
+      hash = decodeURIComponent(rawHash);
+    } catch (_) {
+      return;
+    }
+
+    const match = hash.match(/^menu[?&](.*)$/);
+    if (!match) return;
+
+    const target = new URL(window.location.href);
+    target.hash = 'menu';
+    const hashParams = new URLSearchParams(match[1]);
+    hashParams.forEach((value, key) => {
+      if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+    });
+    window.history.replaceState(null, '', `${target.pathname}${target.search}${target.hash}`);
+  };
+
+  const buttonForCategory = (value) => {
+    const category = String(value || '').trim();
+    if (!category) return null;
+    return buttons.find((button) => (
+      button.dataset.menuFilter === category || button.dataset.menuCategoryId === category
+    )) || null;
+  };
+
+  const itemForValue = (value) => {
+    const target = String(value || '').trim();
+    if (!target) return null;
+    return items.find((item) => (
+      item.dataset.menuItem === target || item.dataset.menuItemId === target || item.id === `menu-item-${target}`
+    )) || null;
+  };
+
+  const applyFilter = (button) => {
+    const filter = button.dataset.menuFilter || '*';
+    buttons.forEach((item) => {
+      const selected = item === button;
+      item.classList.toggle('active', selected);
+      item.classList.toggle('filter-active', selected);
+    });
+    items.forEach((item) => {
+      item.hidden = filter !== '*'
+        && item.dataset.menuCategory !== filter
+        && item.dataset.menuCategoryId !== filter;
+    });
+  };
+
+  const scrollToMenuSection = () => {
+    const section = document.getElementById('menu');
+    if (!section) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.setTimeout(() => {
+      section.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }, 80);
+  };
+
+  const scrollToLinkedItem = (item) => {
+    if (!item || item.hidden) return false;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    item.classList.add('menu-item-linked');
+    window.setTimeout(() => {
+      item.scrollIntoView({ block: 'center', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      if (item.hasAttribute('tabindex')) {
+        item.focus({ preventScroll: true });
+      }
+    }, 80);
+    return true;
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => applyFilter(button));
     button.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        applyFilter();
+        applyFilter(button);
       }
     });
   });
+
+  const menuHash = menuHashState();
+  const menuParams = [
+    new URLSearchParams(window.location.search),
+    menuHash.params,
+  ];
+  const requestedCategory = firstParam(menuParams, ['menu_category', 'menuCategory', 'menu-category', 'category']);
+  const requestedItem = firstParam(menuParams, ['menu_item', 'menuItem', 'menu-item', 'item']);
+  const linkedItem = itemForValue(requestedItem);
+  const linkedCategory = linkedItem?.dataset.menuCategory || linkedItem?.dataset.menuCategoryId || '';
+  const initialButton = buttonForCategory(requestedCategory) || (!requestedCategory && buttonForCategory(linkedCategory));
+
+  if ((requestedCategory || requestedItem) && menuHash.targetsMenu) {
+    normalizeMenuHash();
+  }
+
+  if (initialButton) applyFilter(initialButton);
+  if (!scrollToLinkedItem(linkedItem) && menuHash.targetsMenu && (requestedCategory || requestedItem)) {
+    scrollToMenuSection();
+  }
 }
 
 function formFailureMessage(form, response, text) {
@@ -1345,6 +1578,7 @@ function bootRestoplaceMessages() {
 }
 
 function bootSite() {
+  normalizeSectionHashParams();
   observeConsentUpdates();
   bootHeaderScroll();
   bootScrollTop();

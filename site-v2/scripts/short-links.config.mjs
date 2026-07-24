@@ -16,6 +16,7 @@ export const shortLinkGroups = [
     medium: 'event',
     baseCampaign: 'events',
     eventContent: null,
+    sectionLinks: true,
   },
   {
     prefix: 'poster',
@@ -25,6 +26,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'qr_code',
     eventContent: 'qr_code',
+    sectionLinks: true,
   },
   {
     prefix: 'visam',
@@ -34,6 +36,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'mobile_app',
     eventContent: 'mobile_app',
+    sectionLinks: true,
   },
   {
     prefix: 'visam-ig',
@@ -43,6 +46,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'instagram_blog',
     eventContent: 'instagram_blog',
+    sectionLinks: true,
   },
   {
     prefix: 'visam-tt',
@@ -52,6 +56,7 @@ export const shortLinkGroups = [
     baseCampaign: 'events',
     content: 'tiktok_blog',
     eventContent: 'tiktok_blog',
+    sectionLinks: true,
   },
   {
     prefix: 'meta-event',
@@ -70,6 +75,26 @@ export const shortLinkGroups = [
     source: 'google',
     medium: 'cpc',
     baseCampaign: 'google_ads',
+    content: 'site_home',
+    eventContent: 'event_link',
+    campaignOverride: true,
+    sectionLinks: true,
+    pageLinks: [
+      {
+        slug: 'gift-card',
+        path: 'gift-card',
+        campaign: 'page_gift_card',
+        content: 'page_gift_card',
+      },
+    ],
+    baseHash: null,
+  },
+  {
+    prefix: 'email',
+    kind: 'event',
+    source: 'newsletter',
+    medium: 'email',
+    baseCampaign: 'newsletter',
     content: 'site_home',
     eventContent: 'event_link',
     campaignOverride: true,
@@ -185,6 +210,16 @@ export const shortLinkGroups = [
     bookingSource: 'google_ads_booking',
   },
   {
+    prefix: 'email-book',
+    kind: 'booking',
+    source: 'newsletter',
+    medium: 'email',
+    baseCampaign: 'booking',
+    baseContent: 'booking',
+    baseBookingSource: 'email_booking',
+    bookingSource: 'email_booking',
+  },
+  {
     prefix: 'tt-book',
     kind: 'booking',
     source: 'tiktok',
@@ -226,6 +261,26 @@ export const shortLinkGroups = [
 
 export const redirectFixtures = [
   {
+    path: '/e/lv/restok-vivien-marche',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?lang=lv&utm_source=shortlink&utm_medium=event&utm_campaign=event_restok-vivien-marche',
+  },
+  {
+    path: '/poster/lv/restok-vivien-marche?qr=marche-poster',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?lang=lv&utm_source=poster&utm_medium=offline&utm_campaign=event_restok-vivien-marche&utm_content=qr_code&qr=marche-poster',
+  },
+  {
+    path: '/meta-event/ru/restok-vivien-marche/meta_restok_vivien_marche_august',
+    location: 'https://vivien.lv/ru/events/restok-vivien-marche/?lang=ru&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_restok_vivien_marche_august&utm_content=event_link',
+  },
+  {
+    path: '/google/en/restok-vivien-marche/google_restok_vivien_marche_august?gclid=test123',
+    location: 'https://vivien.lv/en/events/restok-vivien-marche/?lang=en&utm_source=google&utm_medium=cpc&utm_campaign=google_restok_vivien_marche_august&utm_content=event_link&gclid=test123',
+  },
+  {
+    path: '/meta-book/lv/restok-vivien-marche/meta_restok_vivien_marche_august',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?openBooking=1&lang=lv&booking_source=meta_booking&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_restok_vivien_marche_august&utm_content=booking',
+  },
+  {
     path: '/meta-event/cherry-days/meta_cherry_days_july',
     location: 'https://vivien.lv/en/events/cherry-days/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_cherry_days_july&utm_content=event_link',
   },
@@ -247,7 +302,7 @@ export const redirectFixtures = [
   },
   {
     path: '/google/ru/events/google_cherry_days_july?gclid=test123',
-    location: 'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_cherry_days_july&utm_content=section_events&gclid=test123#events',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_cherry_days_july&utm_content=section_events#events&gclid=test123',
   },
   {
     path: '/google/ru/cherry-days/google_cherry_days_july?gbraid=test123',
@@ -256,6 +311,22 @@ export const redirectFixtures = [
   {
     path: '/google/en/gift-card/campaign_4_search_riga_core_languages?utm_adgroup=en_restaurant_riga',
     location: 'https://vivien.lv/en/gift-card/?lang=en&utm_source=google&utm_medium=cpc&utm_campaign=campaign_4_search_riga_core_languages&utm_content=page_gift_card&utm_adgroup=en_restaurant_riga',
+  },
+  {
+    path: '/email/ru/menu/july_newsletter?utm_term=summer',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_menu#menu&utm_term=summer',
+  },
+  {
+    path: '/email/ru/events/july_newsletter',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=section_events#events',
+  },
+  {
+    path: '/email/ru/gift-card/july_newsletter',
+    location: 'https://vivien.lv/ru/gift-card/?lang=ru&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=page_gift_card',
+  },
+  {
+    path: '/email-book/ru/july_newsletter',
+    location: 'https://vivien.lv/ru/?openBooking=1&lang=ru&booking_source=email_booking&utm_source=newsletter&utm_medium=email&utm_campaign=july_newsletter&utm_content=booking',
   },
   {
     path: '/poster/ru/cherry-days?qr=poster-entrance',
@@ -283,7 +354,7 @@ export const redirectFixtures = [
   },
   {
     path: '/x/ru/menu/x_menu_july?utm_term=menu_test',
-    location: 'https://vivien.lv/ru/?lang=ru&utm_source=twitter&utm_medium=social&utm_campaign=x_menu_july&utm_content=section_menu&utm_term=menu_test#menu',
+    location: 'https://vivien.lv/ru/?lang=ru&utm_source=twitter&utm_medium=social&utm_campaign=x_menu_july&utm_content=section_menu#menu&utm_term=menu_test',
   },
   {
     path: '/x/ru/cherry-days?utm_term=ignored_by_x',

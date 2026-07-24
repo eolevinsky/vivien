@@ -32,6 +32,32 @@ function localizedList(value) {
   return Array.isArray(list) ? list : [];
 }
 
+function eventImages(event) {
+  const rawImages = Array.isArray(event.images) && event.images.length
+    ? event.images
+    : [{ src: event.image, alt: event.alt, fit: event.imageFit, aspectRatio: event.imageAspectRatio }];
+
+  return rawImages
+    .map((image) => {
+      if (!image || typeof image !== 'object') {
+        return {
+          src: localized(image),
+          alt: localized(event.alt),
+          fit: event.imageFit,
+          aspectRatio: event.imageAspectRatio,
+        };
+      }
+
+      return {
+        src: localized(image.src),
+        alt: localized(image.alt || event.alt),
+        fit: image.fit || event.imageFit,
+        aspectRatio: image.aspectRatio || event.imageAspectRatio,
+      };
+    })
+    .filter((image) => image.src);
+}
+
 function eventPoints(event) {
   return localizedList(event.points)
     .map((point) => {
@@ -67,6 +93,9 @@ function eventStepType(event) {
 }
 
 function startLabel(event) {
+  const explicitLabel = localized(event.dateLabel);
+  if (explicitLabel) return explicitLabel;
+
   return dateFormatter.format(new Date(event.startIso));
 }
 ---
@@ -100,20 +129,23 @@ function startLabel(event) {
             data-sticky-booking-lang={ticketLang}
             aria-hidden={index === 0 ? 'false' : 'true'}
           >
-            <div class="event-media">
-              <img
-                class:list={['event-image', event.imageFit === 'contain' && 'event-image--contain']}
-                style={event.imageAspectRatio ? `--event-image-aspect-ratio: ${event.imageAspectRatio}` : undefined}
-                src={withBase(localized(event.image))}
-                alt={localized(event.alt)}
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
+            <div class:list={['event-media', eventImages(event).length > 1 && 'event-media--gallery']}>
+              {eventImages(event).map((image, imageIndex) => (
+                <img
+                  class:list={['event-image', image.fit === 'contain' && 'event-image--contain']}
+                  style={image.aspectRatio ? `--event-image-aspect-ratio: ${image.aspectRatio}` : undefined}
+                  src={withBase(image.src)}
+                  alt={image.alt}
+                  loading={index === 0 && imageIndex === 0 ? 'eager' : 'lazy'}
+                />
+              ))}
             </div>
             <div class="event-content">
               <time class="event-date" datetime={event.startIso}>{startLabel(event)}</time>
               <h3>{localized(event.title)}</h3>
               <div class="event-price"><span>{localized(event.price)}</span></div>
               <p class="event-lead">{localized(event.lead)}</p>
+              {localized(event.pointsTitle) && <p class="event-points-title">{localized(event.pointsTitle)}</p>}
               <ul>
                 {eventPoints(event).map((point) => (
                   <li>

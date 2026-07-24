@@ -8,6 +8,10 @@ import {
   redirectFixtures,
   resolveRedirect,
 } from './generate-short-links.mjs';
+import {
+  sectionSlugs,
+  shortLinkGroups,
+} from './short-links.config.mjs';
 
 const siteDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const htaccessPath = path.join(siteDir, 'public/.htaccess');
@@ -23,4 +27,32 @@ for (const fixture of redirectFixtures) {
   assert.equal(resolveRedirect(fixture.path, htaccess), fixture.location, fixture.path);
 }
 
-console.log(`short-link fixtures passed: ${redirectFixtures.length}`);
+const requiredSectionSlugs = ['gallery', 'contact'];
+requiredSectionSlugs.forEach((section) => {
+  assert.ok(sectionSlugs.includes(section), `sectionSlugs should include ${section}`);
+});
+
+assert.equal(
+  resolveRedirect('/google/ru/menu/google_meat_test?menu_category=meat-poultry&menu_item=beef-bourguignon-with-potato', htaccess),
+  'https://vivien.lv/ru/?lang=ru&utm_source=google&utm_medium=cpc&utm_campaign=google_meat_test&utm_content=section_menu#menu&menu_category=meat-poultry&menu_item=beef-bourguignon-with-potato',
+  'google menu links should preserve menu targeting query params',
+);
+
+let sectionChecks = 0;
+shortLinkGroups
+  .filter((group) => group.kind === 'event')
+  .forEach((group) => {
+    assert.equal(group.sectionLinks, true, `${group.prefix} should support section short links`);
+
+    requiredSectionSlugs.forEach((section) => {
+      const campaign = `${group.prefix.replaceAll('-', '_')}_${section}_test`;
+      assert.equal(
+        resolveRedirect(`/${group.prefix}/ru/${section}/${campaign}`, htaccess),
+        `https://vivien.lv/ru/?lang=ru&utm_source=${group.source}&utm_medium=${group.medium}&utm_campaign=${campaign}&utm_content=section_${section}#${section}`,
+        `${group.prefix}/${section}`,
+      );
+      sectionChecks += 1;
+    });
+  });
+
+console.log(`short-link fixtures passed: ${redirectFixtures.length}; section checks passed: ${sectionChecks}`);
