@@ -261,6 +261,26 @@ export const shortLinkGroups = [
 
 export const redirectFixtures = [
   {
+    path: '/e/lv/restok-vivien-marche',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?lang=lv&utm_source=shortlink&utm_medium=event&utm_campaign=event_restok-vivien-marche',
+  },
+  {
+    path: '/poster/lv/restok-vivien-marche?qr=marche-poster',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?lang=lv&utm_source=poster&utm_medium=offline&utm_campaign=event_restok-vivien-marche&utm_content=qr_code&qr=marche-poster',
+  },
+  {
+    path: '/meta-event/ru/restok-vivien-marche/meta_restok_vivien_marche_august',
+    location: 'https://vivien.lv/ru/events/restok-vivien-marche/?lang=ru&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_restok_vivien_marche_august&utm_content=event_link',
+  },
+  {
+    path: '/google/en/restok-vivien-marche/google_restok_vivien_marche_august?gclid=test123',
+    location: 'https://vivien.lv/en/events/restok-vivien-marche/?lang=en&utm_source=google&utm_medium=cpc&utm_campaign=google_restok_vivien_marche_august&utm_content=event_link&gclid=test123',
+  },
+  {
+    path: '/meta-book/lv/restok-vivien-marche/meta_restok_vivien_marche_august',
+    location: 'https://vivien.lv/lv/events/restok-vivien-marche/?openBooking=1&lang=lv&booking_source=meta_booking&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_restok_vivien_marche_august&utm_content=booking',
+  },
+  {
     path: '/meta-event/cherry-days/meta_cherry_days_july',
     location: 'https://vivien.lv/en/events/cherry-days/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_cherry_days_july&utm_content=event_link',
   },

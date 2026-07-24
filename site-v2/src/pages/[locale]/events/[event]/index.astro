@@ -151,7 +151,7 @@ function eventPoints(event) {
 
     <section class="section events-section" id="event-preview">
       <div class="events-shell">
-        <article class="event-slide active" aria-hidden="false">
+        <article class="event-slide active" data-event-id={event.id} aria-hidden="false">
           <div class:list={['event-media', eventMedia.length > 1 && 'event-media--gallery']}>
             {eventMedia.map((media, index) => (
               <img

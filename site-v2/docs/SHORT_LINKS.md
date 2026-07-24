@@ -41,6 +41,26 @@ https://vivien.lv/email/ru/gift-card/july_newsletter
 https://vivien.lv/email-book/ru/july_newsletter
 ```
 
+Concrete Restok & Vivien Marché event links:
+
+```text
+https://vivien.lv/e/lv/restok-vivien-marche
+https://vivien.lv/e/ru/restok-vivien-marche
+https://vivien.lv/e/en/restok-vivien-marche
+https://vivien.lv/poster/lv/restok-vivien-marche
+https://vivien.lv/x/lv/restok-vivien-marche
+https://vivien.lv/x/ru/restok-vivien-marche
+https://vivien.lv/x/en/restok-vivien-marche
+https://vivien.lv/meta-event/lv/restok-vivien-marche/meta_restok_vivien_marche_august
+https://vivien.lv/meta-event/ru/restok-vivien-marche/meta_restok_vivien_marche_august
+https://vivien.lv/meta-event/en/restok-vivien-marche/meta_restok_vivien_marche_august
+https://vivien.lv/google/lv/restok-vivien-marche/google_restok_vivien_marche_august
+https://vivien.lv/google/ru/restok-vivien-marche/google_restok_vivien_marche_august
+https://vivien.lv/google/en/restok-vivien-marche/google_restok_vivien_marche_august
+https://vivien.lv/meta-book/lv/restok-vivien-marche/meta_restok_vivien_marche_august
+https://vivien.lv/google-book/lv/restok-vivien-marche/google_restok_vivien_marche_august
+```
+
 Supported site-language segments are `en`, `lv`, `fr`, and `ru`.
 Missing or unknown language segments redirect to `/en/` with `lang=en`.
 French URLs redirect to `/fr/` with `lang=en`, because the Restoplace

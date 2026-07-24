@@ -908,12 +908,13 @@ body.scrolled .site-header--overlay .mainbar::before {
 
 .events-track {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   will-change: transform;
+  transition: height .25s ease;
 }
 
 .events-track.is-sliding {
-  transition: transform .45s ease-in-out;
+  transition: transform .45s ease-in-out, height .25s ease;
 }
 
 .event-slide {
@@ -925,6 +926,11 @@ body.scrolled .site-header--overlay .mainbar::before {
   align-items: center;
   opacity: 0.4;
   transition: opacity .3s ease;
+}
+
+.event-slide:not([data-event-id="bastille-day"]) {
+  align-content: start;
+  align-items: start;
 }
 
 .event-slide.active {
@@ -950,7 +956,7 @@ body.scrolled .site-header--overlay .mainbar::before {
 .event-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10.8;
+  aspect-ratio: var(--event-image-aspect-ratio, 16 / 10.8);
   object-fit: cover;
   background: rgba(255, 255, 255, 0.04);
 }
@@ -1077,7 +1083,7 @@ body.scrolled .site-header--overlay .mainbar::before {
   display: flex;
   justify-content: center;
   gap: 0.55rem;
-  margin-top: clamp(1.6rem, 4vw, 2.2rem);
+  margin-top: clamp(0.7rem, 1.7vw, 1.15rem);
 }
 
 .events-dot {
@@ -1681,11 +1687,18 @@ html.restoplace-modal-open body {
   .events-section-title h2 { font-size: 2rem; }
   .event-content h3 { font-size: 1.62rem; }
   .event-date { margin-bottom: 0.55rem; font-size: 0.78rem; }
-  .event-lead { font-size: 1rem; }
-  .event-content ul { margin: 0.9rem 0 1rem; }
-  .event-content li { padding-bottom: 0.48rem; }
+  .event-price { margin-bottom: 0.75rem; font-size: 1.26rem; }
+  .event-lead { font-size: 0.96rem; line-height: 1.45; }
+  .event-points-title { margin-top: 0.75rem; font-size: 0.78rem; }
+  .event-content ul { margin: 0.65rem 0 0.75rem; }
+  .event-content li { gap: 0.52rem; padding-bottom: 0.3rem; font-size: 0.93rem; line-height: 1.42; }
+  .event-content li:last-child { padding-bottom: 0; }
+  .event-content > p:not(.event-lead):not(.event-points-title) { margin-bottom: 0.65rem; font-size: 0.94rem; line-height: 1.45; }
+  .event-check { width: 17px; height: 17px; flex-basis: 17px; margin-top: 0.11rem; }
+  .event-check::after { left: 3px; top: 2px; width: 7px; height: 4px; }
   .event-media--gallery { grid-template-columns: 1fr; }
   .event-media img { aspect-ratio: 16 / 8.2; }
+  .events-pagination { margin-top: 0.65rem; }
   .event-booking { display: none; }
   .booking-sticky {
     left: calc(12px + var(--cookieyes-revisit-size) + var(--cookieyes-revisit-gap));

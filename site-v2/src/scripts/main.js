@@ -20,7 +20,10 @@ const ATTRIBUTION_KEYS = [
   'ga_session_id',
 ];
 const ATTRIBUTION_STORAGE_KEY = 'vivien_attribution';
+const ATTRIBUTION_COOKIE_KEY = 'vivien_attribution';
 const BOOKING_CLIENT_ID_STORAGE_KEY = 'vivien_booking_client_id';
+const BOOKING_CLIENT_ID_COOKIE_KEY = 'vivien_booking_client_id';
+const ATTRIBUTION_OVERRIDE_KEYS = new Set(ATTRIBUTION_KEYS.filter((key) => key !== 'lang'));
 const GA_MEASUREMENT_ID = window.VIVIEN_GA_MEASUREMENT_ID || 'G-H3TT546F5J';
 const DIRECT_GA_EVENTS_ENABLED = window.VIVIEN_GA_DIRECT_ENABLED !== false;
 const RESTOPLACE_ADDRESS_HASH = window.VIVIEN_RESTOPLACE_ADDRESS_HASH || '5a003b0dc90935f47c87';
@@ -65,32 +68,79 @@ function eventId(prefix) {
   return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
-function attributionFromParams(params = new URLSearchParams(window.location.search)) {
+function attributionParamValue(value) {
+  const text = String(value || '').trim();
+  return text ? text.slice(0, 500) : '';
+}
+
+function lastParamValue(params, key) {
+  const values = params.getAll(key).map(attributionParamValue).filter(Boolean);
+  return values.length ? values[values.length - 1] : '';
+}
+
+function normalizedAttributionValues(values) {
   return ATTRIBUTION_KEYS.reduce((memo, key) => {
-    const value = params.get(key);
+    const value = attributionParamValue(values?.[key]);
     if (value) memo[key] = value;
     return memo;
   }, {});
 }
 
-function storedAttribution() {
+function attributionFromParams(params = new URLSearchParams(window.location.search)) {
+  return ATTRIBUTION_KEYS.reduce((memo, key) => {
+    const value = lastParamValue(params, key);
+    if (value) memo[key] = value;
+    return memo;
+  }, {});
+}
+
+function parseStoredAttribution(value) {
   try {
-    return JSON.parse(window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY) || '{}') || {};
+    const parsed = JSON.parse(value || '{}');
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+    return normalizedAttributionValues(parsed);
   } catch (_) {
     return {};
   }
 }
 
-function storeAttribution(values) {
-  if (!Object.keys(values).length) return;
+function writeSessionCookie(name, value) {
   try {
-    window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify({
-      ...storedAttribution(),
-      ...values,
-    }));
+    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; SameSite=Lax${secure}`;
+  } catch (_) {
+    // Cookie writes may be blocked in strict privacy modes.
+  }
+}
+
+function storedAttribution() {
+  let sessionValues = {};
+  try {
+    sessionValues = parseStoredAttribution(window.sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY));
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+
+  return {
+    ...parseStoredAttribution(readCookie(ATTRIBUTION_COOKIE_KEY)),
+    ...sessionValues,
+  };
+}
+
+function storeAttribution(values) {
+  const nextValues = normalizedAttributionValues({
+    ...storedAttribution(),
+    ...values,
+  });
+  if (!Object.keys(nextValues).length) return;
+
+  const serialized = JSON.stringify(nextValues);
+  try {
+    window.sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, serialized);
+  } catch (_) {
+    // Session storage may be unavailable in strict privacy modes.
+  }
+  writeSessionCookie(ATTRIBUTION_COOKIE_KEY, serialized);
 }
 
 function normalizeSectionHashParams() {
@@ -116,7 +166,11 @@ function normalizeSectionHashParams() {
   const target = new URL(window.location.href);
   const hashParams = new URLSearchParams(rawParams);
   hashParams.forEach((value, key) => {
-    if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+    const normalizedValue = attributionParamValue(value);
+    if (!normalizedValue) return;
+    if (!target.searchParams.has(key) || ATTRIBUTION_OVERRIDE_KEYS.has(key)) {
+      target.searchParams.set(key, normalizedValue);
+    }
   });
   target.hash = sectionId;
   window.history.replaceState(null, '', `${target.pathname}${target.search}${target.hash}`);
@@ -129,16 +183,18 @@ function storedBookingClientId() {
   } catch (_) {
     // Session storage may be unavailable in strict privacy modes.
   }
+  if (!inMemoryBookingClientId) inMemoryBookingClientId = readCookie(BOOKING_CLIENT_ID_COOKIE_KEY) || '';
   return inMemoryBookingClientId;
 }
 
 function storeBookingClientId(value) {
-  inMemoryBookingClientId = value;
+  inMemoryBookingClientId = attributionParamValue(value);
   try {
-    window.sessionStorage.setItem(BOOKING_CLIENT_ID_STORAGE_KEY, value);
+    window.sessionStorage.setItem(BOOKING_CLIENT_ID_STORAGE_KEY, inMemoryBookingClientId);
   } catch (_) {
     // Keep the in-memory value for the current page if storage is unavailable.
   }
+  writeSessionCookie(BOOKING_CLIENT_ID_COOKIE_KEY, inMemoryBookingClientId);
 }
 
 function randomClientIdPart() {
@@ -328,8 +384,7 @@ function shouldUseDirectBookingNavigation() {
 }
 
 function restoplaceParamValue(value) {
-  const text = String(value || '').trim();
-  return text ? text.slice(0, 500) : '';
+  return attributionParamValue(value);
 }
 
 function restoplaceGetparams(extraParams = {}) {
@@ -502,7 +557,11 @@ function withAttribution(url, extraParams = {}) {
     ...attribution(),
     ...extraParams,
   }).forEach(([key, value]) => {
-    if (value && !nextUrl.searchParams.has(key)) nextUrl.searchParams.set(key, value);
+    const normalizedValue = attributionParamValue(value);
+    if (!normalizedValue) return;
+    if (!nextUrl.searchParams.has(key) || ATTRIBUTION_OVERRIDE_KEYS.has(key)) {
+      nextUrl.searchParams.set(key, normalizedValue);
+    }
   });
   return nextUrl.href;
 }
@@ -881,6 +940,23 @@ function bootEventsCarousel() {
       track.appendChild(firstClone);
     }
 
+    let heightFrame = 0;
+
+    const slideAt = (index) => slides[(index + slides.length) % slides.length];
+
+    const syncTrackHeight = (index = currentIndex) => {
+      const activeSlide = slideAt(index);
+      if (!activeSlide) return;
+
+      const height = Math.ceil(activeSlide.getBoundingClientRect().height);
+      if (height > 0) track.style.height = `${height}px`;
+    };
+
+    const queueTrackHeight = (index = currentIndex) => {
+      window.cancelAnimationFrame(heightFrame);
+      heightFrame = window.requestAnimationFrame(() => syncTrackHeight(index));
+    };
+
     const setTransition = (enabled) => {
       track.classList.toggle('is-sliding', enabled && !prefersReducedMotion);
     };
@@ -926,6 +1002,7 @@ function bootEventsCarousel() {
         dot.classList.toggle('active', active);
         dot.setAttribute('aria-current', active ? 'true' : 'false');
       });
+      queueTrackHeight(activeIndex);
       syncStickyCta(activeIndex);
     };
 
@@ -971,6 +1048,19 @@ function bootEventsCarousel() {
     carousel.addEventListener('focusout', (event) => {
       if (!carousel.contains(event.relatedTarget)) start();
     });
+
+    window.addEventListener('resize', () => queueTrackHeight(currentIndex));
+    track.querySelectorAll('img').forEach((image) => {
+      if (image.complete) return;
+      image.addEventListener('load', () => queueTrackHeight(currentIndex), { once: true });
+    });
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => queueTrackHeight(currentIndex));
+    }
+    if ('ResizeObserver' in window) {
+      const resizeObserver = new ResizeObserver(() => queueTrackHeight(currentIndex));
+      slides.forEach((slide) => resizeObserver.observe(slide));
+    }
 
     syncActiveState(currentIndex);
     setPosition(currentIndex, false);

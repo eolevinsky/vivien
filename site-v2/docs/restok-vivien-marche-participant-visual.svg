@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Participant ad visual example for Restok and Vivien Marché</title>
+  <desc id="desc">A 4 by 5 advertising layout showing participant brand hierarchy with Restok and Brasserie Vivien event branding.</desc>
+  <rect width="1080" height="1350" fill="#f3eee8"/>
+  <rect x="54" y="54" width="972" height="1242" fill="#f7f2ec" stroke="#aa0f18" stroke-width="6"/>
+  <text x="540" y="145" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="76" fill="#aa0f18">YOUR BRAND</text>
+  <text x="540" y="203" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" letter-spacing="4" fill="#2b2b2b">AT RESTOK &amp; VIVIEN MARCHÉ</text>
+  <rect x="138" y="275" width="804" height="660" rx="0" fill="#e8dfd6"/>
+  <path d="M138 935 L942 275" stroke="#d3c6ba" stroke-width="5"/>
+  <path d="M138 275 L942 935" stroke="#d3c6ba" stroke-width="5"/>
+  <text x="540" y="590" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" letter-spacing="3" fill="#7f746c">PRODUCT / OUTFIT PHOTO</text>
+  <text x="540" y="1042" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" fill="#aa0f18">Restok x Brasserie Vivien</text>
+  <text x="540" y="1118" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#2b2b2b">01.08 | 12:00-17:00</text>
+  <text x="540" y="1176" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" fill="#2b2b2b">Brīvības iela 37, Riga</text>
+  <rect x="332" y="1218" width="416" height="58" fill="#aa0f18"/>
+  <text x="540" y="1258" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">DISCOVER US ON 1 AUGUST</text>
+</svg>
