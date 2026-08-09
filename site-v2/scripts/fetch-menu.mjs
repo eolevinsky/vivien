@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { execFile } from 'node:child_process';
 import { loadHomeEnv } from './load-home-env.mjs';
 
 loadHomeEnv();
@@ -10,6 +11,67 @@ const outputPath = path.join(root, 'src/content/menu-cache.json');
 const locales = ['en', 'lv', 'fr', 'ru'];
 const endpoint = process.env.A3_MENU_ENDPOINT || 'https://app.a3-as.com/api/guest/scheduled-visits/widget/bootstrap';
 const merchant = process.env.A3_MENU_MERCHANT || 'vivien-riga';
+
+function execFileAsync(file, args, options = {}) {
+  return new Promise((resolve, reject) => {
+    execFile(file, args, options, (error, stdout, stderr) => {
+      if (error) {
+        const wrapped = new Error(`curl failed: ${error.message}`);
+        wrapped.stderr = stderr?.toString?.() ?? '';
+        wrapped.stdout = stdout?.toString?.() ?? '';
+        return reject(wrapped);
+      }
+      return resolve(stdout.toString());
+    });
+  });
+}
+
+for (const key of ['HTTP_PROXY','http_proxy','HTTPS_PROXY','https_proxy','ALL_PROXY','all_proxy']) {
+  delete process.env[key];
+}
+
+console.log('[menu] fetch info', {
+  fetchType: typeof fetch,
+  fetchString: fetch?.toString?.()?.slice(0, 200),
+  globalFetchType: typeof globalThis.fetch,
+  fetchEqualsGlobal: fetch === globalThis.fetch,
+  envProxyKeys: ['HTTP_PROXY','http_proxy','HTTPS_PROXY','https_proxy','ALL_PROXY','all_proxy','NO_PROXY','no_proxy'].map((k) => [k, process.env[k]]),
+  envInterestingKeys: Object.keys(process.env).filter((k) => /proxy|dns|NODE|HOST|RES/.test(k)).sort(),
+});
+
+async function requestJson(url, headers = {}) {
+  console.log('[menu] requestJson', { requestUrl: url.toString(), headers });
+
+  const args = [
+    '-sS',
+    '-f',
+    '-L',
+    '--noproxy', '*',
+    ...Object.entries(headers).flatMap(([key, value]) => ['-H', `${key}: ${value}`]),
+    url.toString(),
+  ];
+
+  const env = {
+    ...process.env,
+    HTTP_PROXY: '',
+    http_proxy: '',
+    HTTPS_PROXY: '',
+    https_proxy: '',
+    ALL_PROXY: '',
+    all_proxy: '',
+    NO_PROXY: '*',
+    no_proxy: '*',
+  };
+
+  const stdout = await execFileAsync('curl', args, { env, maxBuffer: 10 * 1024 * 1024 });
+  try {
+    return JSON.parse(stdout);
+  } catch (error) {
+    const parseError = new Error(`Invalid JSON response from menu endpoint: ${error.message}`);
+    parseError.stdout = stdout;
+    throw parseError;
+  }
+}
 
 function formatPrice(minor, currency = 'EUR', locale = 'en') {
   if (typeof minor !== 'number') return '';
@@ -26,10 +88,12 @@ function normalize(data, locale) {
   const currencyCode = menu.currencyCode || 'EUR';
   const categories = (menu.categories || []).map((category) => ({
     id: String(category.id),
+    slug: category.slug ? String(category.slug) : '',
     name: category.name || category.title || '',
   })).filter((category) => category.id && category.name);
   const items = (menu.items || []).map((item) => ({
     id: String(item.id || item.uuid || item.name),
+    slug: item.slug ? String(item.slug) : '',
     categoryId: String(item.categoryId || item.category_id || ''),
     name: item.name || '',
     description: item.description || '',
@@ -58,12 +122,11 @@ for (const locale of locales) {
     const url = new URL(endpoint);
     url.searchParams.set('merchant', merchant);
     url.searchParams.set('locale', locale);
-    const response = await fetch(url, { headers: { 'User-Agent': 'VivienSiteV2Build/1.0' } });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    next.locales[locale] = normalize(await response.json(), locale);
+    next.locales[locale] = normalize(await requestJson(url, { 'User-Agent': 'VivienSiteV2Build/1.0' }), locale);
     successCount += 1;
   } catch (error) {
     console.warn(`[menu] ${locale}: ${error.message}`);
+    console.warn('[menu] error details', error);
   }
 }
 

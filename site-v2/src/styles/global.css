@@ -656,6 +656,12 @@ body.scrolled .site-header--overlay .mainbar::before {
 .menu-item {
   margin-top: 50px;
   position: relative;
+  scroll-margin-top: 110px;
+}
+
+.menu-item.menu-item-linked {
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold), transparent 35%), 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 
 .menu-item.has-image {
@@ -902,12 +908,13 @@ body.scrolled .site-header--overlay .mainbar::before {
 
 .events-track {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   will-change: transform;
+  transition: height .25s ease;
 }
 
 .events-track.is-sliding {
-  transition: transform .45s ease-in-out;
+  transition: transform .45s ease-in-out, height .25s ease;
 }
 
 .event-slide {
@@ -921,6 +928,11 @@ body.scrolled .site-header--overlay .mainbar::before {
   transition: opacity .3s ease;
 }
 
+.event-slide:not([data-event-id="bastille-day"]) {
+  align-content: start;
+  align-items: start;
+}
+
 .event-slide.active {
   opacity: 1;
 }
@@ -930,15 +942,23 @@ body.scrolled .site-header--overlay .mainbar::before {
 }
 
 .event-media {
+  display: grid;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.04);
+}
+
+.event-media--gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.45rem, 1.2vw, 0.75rem);
+  background: transparent;
 }
 
 .event-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10.8;
+  aspect-ratio: var(--event-image-aspect-ratio, 16 / 10.8);
   object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .event-media img.event-image--contain {
@@ -993,6 +1013,16 @@ body.scrolled .site-header--overlay .mainbar::before {
   font-weight: 500;
 }
 
+.event-points-title {
+  margin: 1.05rem 0 0;
+  color: var(--gold);
+  font-family: var(--font-nav);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .event-content ul {
   margin: 1.15rem 0 1.25rem;
   padding: 0;
@@ -1006,6 +1036,37 @@ body.scrolled .site-header--overlay .mainbar::before {
   padding-bottom: 0.62rem;
   color: #ffffff;
   font-weight: 500;
+}
+
+.event-point-item--sub {
+  margin-left: 1.9rem;
+  padding-left: 0;
+}
+
+.event-point-item--sub .event-check {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin-top: 0.22rem;
+  border: 0;
+}
+
+.event-point-item--sub .event-check::after {
+  content: "•";
+  left: 0;
+  top: -0.38rem;
+  width: auto;
+  height: auto;
+  border: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 1.35rem;
+  line-height: 1;
+  transform: none;
+}
+
+.event-point-item--sub .event-point {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .event-point {
@@ -1053,7 +1114,7 @@ body.scrolled .site-header--overlay .mainbar::before {
   display: flex;
   justify-content: center;
   gap: 0.55rem;
-  margin-top: clamp(1.6rem, 4vw, 2.2rem);
+  margin-top: clamp(0.7rem, 1.7vw, 1.15rem);
 }
 
 .events-dot {
@@ -1657,10 +1718,18 @@ html.restoplace-modal-open body {
   .events-section-title h2 { font-size: 2rem; }
   .event-content h3 { font-size: 1.62rem; }
   .event-date { margin-bottom: 0.55rem; font-size: 0.78rem; }
-  .event-lead { font-size: 1rem; }
-  .event-content ul { margin: 0.9rem 0 1rem; }
-  .event-content li { padding-bottom: 0.48rem; }
+  .event-price { margin-bottom: 0.75rem; font-size: 1.26rem; }
+  .event-lead { font-size: 0.96rem; line-height: 1.45; }
+  .event-points-title { margin-top: 0.75rem; font-size: 0.78rem; }
+  .event-content ul { margin: 0.65rem 0 0.75rem; }
+  .event-content li { gap: 0.52rem; padding-bottom: 0.3rem; font-size: 0.93rem; line-height: 1.42; }
+  .event-content li:last-child { padding-bottom: 0; }
+  .event-content > p:not(.event-lead):not(.event-points-title) { margin-bottom: 0.65rem; font-size: 0.94rem; line-height: 1.45; }
+  .event-check { width: 17px; height: 17px; flex-basis: 17px; margin-top: 0.11rem; }
+  .event-check::after { left: 3px; top: 2px; width: 7px; height: 4px; }
+  .event-media--gallery { grid-template-columns: 1fr; }
   .event-media img { aspect-ratio: 16 / 8.2; }
+  .events-pagination { margin-top: 0.65rem; }
   .event-booking { display: none; }
   .booking-sticky {
     left: calc(12px + var(--cookieyes-revisit-size) + var(--cookieyes-revisit-gap));

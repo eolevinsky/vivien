@@ -15,7 +15,7 @@
     "preview": "astro preview",
     "generate:short-links": "node scripts/generate-short-links.mjs",
     "generate:poster-qr": "node scripts/generate-poster-qr.mjs",
-    "test": "node scripts/test-short-links.mjs",
+    "test": "node --test test/*.test.js && node scripts/test-short-links.mjs",
     "test:short-links": "node scripts/test-short-links.mjs",
     "fetch:menu": "node scripts/fetch-menu.mjs",
     "fetch:legal": "node scripts/fetch-legal.mjs",

@@ -1,11 +1,12 @@
 ---
 import BookingButton from './BookingButton.astro';
 import { bookingFormLocale, t, withBase } from '../content/site.js';
+import { sortEventsByStartDate } from '../utils/events.js';
 
 const { locale, events = [] } = Astro.props;
 const copy = t(locale);
 const ticketLang = bookingFormLocale(locale);
-const visibleEvents = events.filter((event) => !event.hidden);
+const visibleEvents = sortEventsByStartDate(events.filter((event) => !event.hidden));
 const initialStickyEvent = visibleEvents[0] || {};
 const localeTags = {
   en: 'en-GB',
@@ -39,12 +40,14 @@ function eventPoints(event) {
         return {
           text: point || '',
           price: '',
+          variant: '',
         };
       }
 
       return {
         text: localized(point.text),
         price: localized(point.price),
+        variant: point.variant || '',
       };
     })
     .filter((point) => point.text || point.price);
@@ -116,7 +119,7 @@ function startLabel(event) {
               <p class="event-lead">{localized(event.lead)}</p>
               <ul>
                 {eventPoints(event).map((point) => (
-                  <li>
+                  <li class:list={['event-point-item', point.variant === 'sub' && 'event-point-item--sub']}>
                     <span class="event-check" aria-hidden="true"></span>
                     <span class="event-point">
                       <span>{point.text}</span>
