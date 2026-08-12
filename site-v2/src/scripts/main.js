@@ -1345,6 +1345,7 @@ function bootRestoplaceMessages() {
 }
 
 function bootSite() {
+  captureAttribution();
   observeConsentUpdates();
   bootHeaderScroll();
   bootScrollTop();
