@@ -946,13 +946,19 @@ body.scrolled .site-header--overlay .mainbar::before {
 }
 
 .events-calendar-backdrop {
+  --events-calendar-mobile-bottom-clearance: calc(
+    var(--floating-control-bottom)
+    + var(--cookieyes-revisit-size)
+    + 16px
+    + env(safe-area-inset-bottom)
+  );
   position: fixed;
   inset: 0;
   z-index: 10020;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+  padding: max(12px, env(safe-area-inset-top)) 12px var(--events-calendar-mobile-bottom-clearance);
   background: rgba(0, 0, 0, 0.76);
 }
 
@@ -960,7 +966,11 @@ body.scrolled .site-header--overlay .mainbar::before {
 
 .events-calendar-panel {
   width: min(100%, 34rem);
-  max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
+  max-height: calc(
+    100dvh
+    - max(12px, env(safe-area-inset-top))
+    - var(--events-calendar-mobile-bottom-clearance)
+  );
   overflow: auto;
   overscroll-behavior: contain;
   border: 1px solid rgba(205, 164, 94, 0.65);
@@ -1879,7 +1889,14 @@ html.restoplace-modal-open body {
 }
 
 @media (min-width: 821px) {
-  .events-calendar-backdrop { align-items: center; }
+  .events-calendar-backdrop {
+    align-items: center;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .events-calendar-panel {
+    max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
