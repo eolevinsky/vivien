@@ -1,12 +1,13 @@
 ---
 import BookingButton from './BookingButton.astro';
 import { bookingFormLocale, t, withBase } from '../content/site.js';
-import { sortEventsByStartDate } from '../utils/events.js';
+import { getUpcomingEvents, sortEventsByStartDate } from '../utils/events.js';
 
 const { locale, events = [] } = Astro.props;
 const copy = t(locale);
 const ticketLang = bookingFormLocale(locale);
 const visibleEvents = sortEventsByStartDate(events.filter((event) => !event.hidden));
+const upcomingEvents = getUpcomingEvents(events);
 const initialStickyEvent = visibleEvents[0] || {};
 const localeTags = {
   en: 'en-GB',
@@ -20,6 +21,12 @@ const dateFormatter = new Intl.DateTimeFormat(localeTags[locale] || localeTags.e
   month: 'long',
   hour: '2-digit',
   minute: '2-digit',
+  timeZone: 'Europe/Riga',
+});
+const calendarDateFormatter = new Intl.DateTimeFormat(localeTags[locale] || localeTags.en, {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
   timeZone: 'Europe/Riga',
 });
 
@@ -72,6 +79,14 @@ function eventStepType(event) {
 function startLabel(event) {
   return dateFormatter.format(new Date(event.startIso));
 }
+
+function calendarDateLabel(event) {
+  const start = new Date(event.startIso);
+  const end = new Date(event.endIso || event.startIso);
+  return event.endIso && start.getTime() !== end.getTime()
+    ? calendarDateFormatter.formatRange(start, end)
+    : calendarDateFormatter.format(start);
+}
 ---
 <section
   class="events-section section"
@@ -87,6 +102,60 @@ function startLabel(event) {
   <div class="section-title events-section-title">
     <p>{copy.home.eventsTitle}</p>
     <h2>{copy.home.eventsSubtitle}</h2>
+    {upcomingEvents.length > 0 && (
+      <div class="events-calendar" data-events-calendar>
+        <button
+          class="events-calendar-trigger"
+          type="button"
+          aria-expanded="false"
+          aria-controls={`events-calendar-panel-${locale}`}
+          data-events-calendar-trigger
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+            <path d="M7 2v3m10-3v3M3.5 9h17M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+          </svg>
+          <span>{copy.home.eventsCalendarOpen}</span>
+        </button>
+        <div class="events-calendar-backdrop" data-events-calendar-backdrop hidden>
+          <div
+            class="events-calendar-panel"
+            id={`events-calendar-panel-${locale}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`events-calendar-title-${locale}`}
+            data-events-calendar-panel
+          >
+            <div class="events-calendar-header">
+              <h3 id={`events-calendar-title-${locale}`}>{copy.home.eventsCalendarTitle}</h3>
+              <button
+                class="events-calendar-close"
+                type="button"
+                aria-label={copy.home.eventsCalendarClose}
+                data-events-calendar-close
+              >×</button>
+            </div>
+            <ul class="events-calendar-list">
+              {upcomingEvents.map((event) => (
+                <li>
+                  <button
+                    type="button"
+                    class="events-calendar-item"
+                    data-events-calendar-item
+                    data-event-id={event.id}
+                    aria-label={`${copy.home.eventsCalendarSelect}: ${localized(event.title)}`}
+                  >
+                    <time datetime={event.endIso ? `${event.startIso}/${event.endIso}` : event.startIso}>
+                      {calendarDateLabel(event)}
+                    </time>
+                    <span>{localized(event.title)}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    )}
   </div>
 
   <div class="events-shell">
