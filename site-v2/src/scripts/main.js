@@ -828,6 +828,7 @@ function bootEventsCarousel() {
     const track = carousel.querySelector('[data-events-track]');
     const slides = Array.from(carousel.querySelectorAll('[data-events-slide]'));
     const dots = Array.from(carousel.querySelectorAll('[data-events-dot]'));
+    const calendar = carousel.querySelector('[data-events-calendar]');
     if (!track || !slides.length) return;
 
     const delay = Number.parseInt(carousel.dataset.eventsDelay || '5000', 10);
@@ -916,6 +917,77 @@ function bootEventsCarousel() {
       syncActiveState(currentIndex);
       setPosition(currentIndex, animated);
     };
+
+    if (calendar) {
+      const trigger = calendar.querySelector('[data-events-calendar-trigger]');
+      const backdrop = calendar.querySelector('[data-events-calendar-backdrop]');
+      const panel = calendar.querySelector('[data-events-calendar-panel]');
+      const closeButton = calendar.querySelector('[data-events-calendar-close]');
+      const items = Array.from(calendar.querySelectorAll('[data-events-calendar-item]'));
+      let previouslyFocused = null;
+
+      const closeCalendar = ({ restoreFocus = true } = {}) => {
+        if (!backdrop || backdrop.hidden) return;
+        backdrop.hidden = true;
+        trigger?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('events-calendar-open');
+        if (restoreFocus) (previouslyFocused || trigger)?.focus();
+      };
+
+      const openCalendar = () => {
+        if (!trigger || !backdrop) return;
+        previouslyFocused = document.activeElement;
+        backdrop.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('events-calendar-open');
+        pushEvent('events_calendar_open');
+        window.requestAnimationFrame(() => (closeButton || items[0])?.focus());
+      };
+
+      trigger?.addEventListener('click', openCalendar);
+      closeButton?.addEventListener('click', () => closeCalendar());
+      backdrop?.addEventListener('click', (event) => {
+        if (event.target === backdrop) closeCalendar();
+      });
+      panel?.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeCalendar();
+          return;
+        }
+        if (event.key !== 'Tab') return;
+        const focusable = [closeButton, ...items].filter(Boolean);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          const selectedId = item.dataset.eventId || '';
+          const selectedIndex = slides.findIndex((slide) => slide.dataset.eventId === selectedId);
+          if (selectedIndex < 0) return;
+          stop();
+          showSlide(selectedIndex);
+          pushEvent('events_calendar_select', { event_id: selectedId });
+          const url = new URL(window.location.href);
+          url.searchParams.set('event', selectedId);
+          url.hash = 'events';
+          window.history.replaceState(null, '', url);
+          closeCalendar({ restoreFocus: false });
+          const selectedSlide = slides[selectedIndex];
+          selectedSlide.setAttribute('tabindex', '-1');
+          selectedSlide.scrollIntoView({ block: 'start', behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+          window.setTimeout(() => selectedSlide.focus({ preventScroll: true }), prefersReducedMotion ? 0 : 480);
+        });
+      });
+    }
 
     const stop = () => {
       if (!timer) return;
