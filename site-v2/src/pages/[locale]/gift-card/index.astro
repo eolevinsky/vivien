@@ -24,6 +24,7 @@ const checkoutLabels = {
     recipientEmail: 'Recipient email (optional)',
     birthday: 'Birthday, DD.MM.YYYY (optional)',
     payerEmail: 'Payer email',
+    emailRecipient: 'Email the card to the recipient too',
     payerNote: 'Note for our team (optional)',
     recipientMessage: 'Message to recipient (optional)',
     submit: 'Continue to Secure Payment',
@@ -36,6 +37,7 @@ const checkoutLabels = {
     recipientEmail: 'Saņēmēja e-pasts (nav obligāti)',
     birthday: 'Dzimšanas diena, DD.MM.GGGG (nav obligāti)',
     payerEmail: 'Maksātāja e-pasts',
+    emailRecipient: 'Nosūtīt karti arī saņēmējam e-pastā',
     payerNote: 'Piezīme mūsu komandai (nav obligāti)',
     recipientMessage: 'Ziņa saņēmējam (nav obligāti)',
     submit: 'Turpināt uz drošu maksājumu',
@@ -48,6 +50,7 @@ const checkoutLabels = {
     recipientEmail: 'E-mail du bénéficiaire (facultatif)',
     birthday: 'Date de naissance, JJ.MM.AAAA (facultatif)',
     payerEmail: 'E-mail du payeur',
+    emailRecipient: 'Envoyer aussi la carte par e-mail au bénéficiaire',
     payerNote: 'Note pour notre équipe (facultatif)',
     recipientMessage: 'Message au bénéficiaire (facultatif)',
     submit: 'Continuer vers le paiement sécurisé',
@@ -60,6 +63,7 @@ const checkoutLabels = {
     recipientEmail: 'E-mail получателя (необязательно)',
     birthday: 'Дата рождения, ДД.ММ.ГГГГ (необязательно)',
     payerEmail: 'E-mail плательщика',
+    emailRecipient: 'Отправить карту получателю по e-mail',
     payerNote: 'Комментарий для команды (необязательно)',
     recipientMessage: 'Сообщение получателю (необязательно)',
     submit: 'Перейти к безопасной оплате',
@@ -107,6 +111,10 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
             </div>
             <input type="email" name="recipient_email" autocomplete="email" placeholder={labels.recipientEmail} />
             <input type="email" name="payer_email" autocomplete="email" placeholder={labels.payerEmail} required />
+            <label class="consent-line recipient-email-option" data-recipient-email-option hidden>
+              <input type="checkbox" name="email_recipient" value="yes" disabled />
+              <span>{labels.emailRecipient}</span>
+            </label>
             <textarea name="payer_note" placeholder={labels.payerNote}></textarea>
             <textarea name="message_to_recipient" placeholder={labels.recipientMessage}></textarea>
             <input type="hidden" name="card_kind" value="gift" />

@@ -27,8 +27,38 @@ final class CheckoutValidatorTest extends TestCase
         self::assertSame('Jane Mary', $value['recipient_first_name']);
         self::assertSame('Doe', $value['recipient_last_name']);
         self::assertNull($value['recipient_email']);
+        self::assertSame(0, $value['email_recipient']);
         self::assertSame('1990-04-15', $value['recipient_birthday']);
         self::assertSame('fr', $value['language']);
+    }
+
+    public function testRecipientEmailOptInIsNormalized(): void
+    {
+        $value = CheckoutValidator::validate([
+            'amount' => '50',
+            'payer_email' => 'buyer@example.com',
+            'recipient_first_name' => 'Jane',
+            'recipient_last_name' => 'Doe',
+            'recipient_email' => 'recipient@example.com',
+            'email_recipient' => 'yes',
+        ]);
+
+        self::assertSame('recipient@example.com', $value['recipient_email']);
+        self::assertSame(1, $value['email_recipient']);
+    }
+
+    public function testRecipientEmailOptInIsIgnoredForSameEmail(): void
+    {
+        $value = CheckoutValidator::validate([
+            'amount' => '50',
+            'payer_email' => 'buyer@example.com',
+            'recipient_first_name' => 'Jane',
+            'recipient_last_name' => 'Doe',
+            'recipient_email' => 'BUYER@example.com',
+            'email_recipient' => 'yes',
+        ]);
+
+        self::assertSame(0, $value['email_recipient']);
     }
 
     public function testAmountOutsideAllowedRangeIsRejected(): void

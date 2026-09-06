@@ -21,7 +21,7 @@ final class GiftCardMailer
         }
 
         $payer = (string) ($order['payer_email'] ?? '');
-        $recipient = (string) ($order['recipient_email'] ?? '');
+        $recipient = $this->shouldEmailRecipient($order) ? (string) ($order['recipient_email'] ?? '') : '';
         $recipients = array_values(array_unique(array_filter([$payer, $recipient], [$this, 'validEmail'])));
         if ($recipients === []) {
             return;
@@ -118,8 +118,14 @@ final class GiftCardMailer
             'fr' => 'Ouvrir la carte',
             default => 'Open card',
         };
+        $print = match ($language) {
+            'lv' => 'Skatīt / drukāt karti',
+            'ru' => 'Посмотреть / распечатать карту',
+            'fr' => 'Voir / imprimer la carte',
+            default => 'View / print card',
+        };
 
-        return $this->cardEmail($intro, $button, $context);
+        return $this->cardEmail($intro, $button, $print, $context);
     }
 
     private function refundedSubject(string $language): string
@@ -146,7 +152,7 @@ final class GiftCardMailer
     }
 
     /** @param array<string, string> $context @return array{0: string, 1: string} */
-    private function cardEmail(string $intro, string $button, array $context): array
+    private function cardEmail(string $intro, string $button, string $print, array $context): array
     {
         $safe = array_map([$this, 'escape'], $context);
         $details = $this->detailsHtml($safe);
@@ -157,12 +163,20 @@ final class GiftCardMailer
         $buttonHtml = $primaryUrl !== ''
             ? '<p style="margin:24px 0"><a href="' . $primaryUrl . '" style="background:#0b3d3f;color:#ffffff;text-decoration:none;padding:12px 18px;border-radius:999px;display:inline-block">' . $this->escape($button) . '</a></p>'
             : '';
+        $printHtml = $safe['status_url'] !== ''
+            ? '<p style="margin:12px 0 0"><a href="' . $safe['status_url'] . '" style="color:#0b3d3f">' . $this->escape($print) . '</a></p>'
+            : '';
+        $qrHtml = $safe['qr_url'] !== ''
+            ? '<div style="margin:20px auto;text-align:center"><img src="' . $safe['qr_url'] . '" width="190" height="190" alt="Vivien card QR code" style="display:inline-block;background:#ffffff;padding:10px;border:1px solid #e6ded2"></div>'
+            : '';
 
         $html = $this->wrapHtml(
             '<p style="margin:0 0 16px">' . $this->escape($intro) . '</p>' .
             $details .
+            $qrHtml .
             $message .
-            $buttonHtml,
+            $buttonHtml .
+            $printHtml,
         );
         $text = $intro . "\n\n" . $this->detailsText($context);
         if ($context['gift_message'] !== '') {
@@ -170,6 +184,9 @@ final class GiftCardMailer
         }
         if ($primaryUrl !== '') {
             $text .= "\n{$button}: {$primaryUrl}\n";
+        }
+        if ($context['status_url'] !== '') {
+            $text .= "{$print}: {$context['status_url']}\n";
         }
         return [$html, $text];
     }
@@ -297,6 +314,13 @@ final class GiftCardMailer
     private function validEmail(string $email): bool
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
+
+    /** @param array<string, mixed> $order */
+    private function shouldEmailRecipient(array $order): bool
+    {
+        $enabled = (string) ($order['email_recipient'] ?? '0');
+        return in_array(strtolower($enabled), ['1', 'true', 'yes', 'on'], true);
     }
 
     private function escape(string $value): string

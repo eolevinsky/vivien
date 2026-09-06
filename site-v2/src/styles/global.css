@@ -1521,6 +1521,16 @@ body.events-calendar-open { overflow: hidden; }
   margin-top: 0.25rem;
 }
 
+.recipient-email-option {
+  border: 1px solid rgba(205, 164, 94, 0.28);
+  background: rgba(205, 164, 94, 0.08);
+  padding: 0.78rem 0.85rem;
+}
+
+.recipient-email-option[hidden] {
+  display: none;
+}
+
 .hp-field {
   position: absolute;
   left: -10000px;

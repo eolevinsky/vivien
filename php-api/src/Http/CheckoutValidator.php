@@ -25,6 +25,9 @@ final class CheckoutValidator
         if ($recipientEmail !== '' && !filter_var($recipientEmail, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException('Recipient email is invalid');
         }
+        $emailRecipient = self::bool($input['email_recipient'] ?? null)
+            && $recipientEmail !== ''
+            && strcasecmp($recipientEmail, $payerEmail) !== 0;
         $birthday = self::birthday($input['recipient_birthday'] ?? null);
         $firstName = self::name($input['recipient_first_name'] ?? null, 'Recipient first name');
         $lastName = self::name($input['recipient_last_name'] ?? null, 'Recipient last name');
@@ -52,6 +55,7 @@ final class CheckoutValidator
             'recipient_last_name' => $lastName,
             'recipient_email' => $recipientEmail === '' ? null : $recipientEmail,
             'recipient_birthday' => $birthday,
+            'email_recipient' => $emailRecipient ? 1 : 0,
             'message_to_recipient' => $message,
             'language' => $language,
         ];
@@ -80,5 +84,13 @@ final class CheckoutValidator
             }
         }
         throw new \InvalidArgumentException('Birthday must use DD.MM.YYYY format');
+    }
+
+    private static function bool(mixed $value): bool
+    {
+        if (!is_scalar($value)) {
+            return false;
+        }
+        return in_array(strtolower(trim((string) $value)), ['1', 'true', 'yes', 'on'], true);
     }
 }

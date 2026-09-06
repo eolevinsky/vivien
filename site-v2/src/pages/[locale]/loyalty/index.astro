@@ -20,6 +20,7 @@ const checkoutLabels = {
     firstName: 'First name',
     lastName: 'Last name',
     payerEmail: 'Email',
+    emailRecipient: 'Email the card to this recipient too',
     birthday: 'Birthday, DD.MM.YYYY (optional)',
     note: 'Optional note',
     submit: 'Create Card & Pay Securely',
@@ -30,6 +31,7 @@ const checkoutLabels = {
     firstName: 'Vārds',
     lastName: 'Uzvārds',
     payerEmail: 'E-pasts',
+    emailRecipient: 'Nosūtīt karti arī šim saņēmējam e-pastā',
     birthday: 'Dzimšanas diena, DD.MM.GGGG (nav obligāti)',
     note: 'Piezīme (nav obligāti)',
     submit: 'Izveidot karti un droši samaksāt',
@@ -40,6 +42,7 @@ const checkoutLabels = {
     firstName: 'Prénom',
     lastName: 'Nom',
     payerEmail: 'E-mail',
+    emailRecipient: 'Envoyer aussi la carte par e-mail à ce bénéficiaire',
     birthday: 'Date de naissance, JJ.MM.AAAA (facultatif)',
     note: 'Note facultative',
     submit: 'Créer la carte et payer',
@@ -50,6 +53,7 @@ const checkoutLabels = {
     firstName: 'Имя',
     lastName: 'Фамилия',
     payerEmail: 'E-mail',
+    emailRecipient: 'Отправить карту этому получателю по e-mail',
     birthday: 'Дата рождения, ДД.ММ.ГГГГ (необязательно)',
     note: 'Комментарий (необязательно)',
     submit: 'Создать карту и оплатить',
@@ -89,6 +93,10 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
               <input type="number" min="10" max="500" name="amount" inputmode="numeric" autocomplete="off" placeholder={labels.amount} required />
               <input type="email" name="recipient_email" autocomplete="email" placeholder={copy.form.email} />
             </div>
+            <label class="consent-line recipient-email-option" data-recipient-email-option hidden>
+              <input type="checkbox" name="email_recipient" value="yes" disabled />
+              <span>{labels.emailRecipient}</span>
+            </label>
             <textarea name="payer_note" placeholder={labels.note}></textarea>
             <input type="hidden" name="card_kind" value="loyalty" />
           </FormShell>

@@ -353,6 +353,7 @@ final class GiftCardWorkflow
                 'last_name' => $order['recipient_last_name'],
                 'email' => $order['recipient_email'],
                 'birthday' => $order['recipient_birthday'],
+                'email_recipient' => (bool) ($order['email_recipient'] ?? false),
             ],
             'currency' => $order['currency'],
             'stripe_payment_intent_id' => $order['stripe_payment_intent_id'],
