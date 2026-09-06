@@ -214,11 +214,6 @@ final class App
                 if (!in_array($cardKind, ['gift', 'loyalty'], true)) {
                     $cardKind = 'gift';
                 }
-                if ($cardKind === 'loyalty'
-                    && empty($input['recipient_email'])
-                    && !empty($input['payer_email'])) {
-                    $input['recipient_email'] = $input['payer_email'];
-                }
                 $checkout = CheckoutValidator::validate($input);
                 $created = $cards->createCheckout($checkout);
                 $card = $created['card'];

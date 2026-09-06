@@ -9,6 +9,73 @@ use Vivien\Api\Http\CheckoutValidator;
 
 final class CheckoutValidatorTest extends TestCase
 {
+    private function input(array $overrides = []): array
+    {
+        return array_replace([
+            'amount' => '50', 'payer_email' => 'buyer@example.com',
+            'recipient_first_name' => 'Jane', 'recipient_last_name' => 'Doe',
+        ], $overrides);
+    }
+
+    public function testGiftSenderAndDeliveryAreStored(): void
+    {
+        $value = CheckoutValidator::validate($this->input([
+            'is_gift' => '1', 'sender_name' => "  Alex   & Sam  ",
+            'email_recipient' => 'yes', 'recipient_email' => 'jane@example.com',
+            'message_to_recipient' => 'Bon appétit!',
+        ]));
+        self::assertSame(1, $value['is_gift']);
+        self::assertSame('Alex & Sam', $value['sender_name']);
+        self::assertSame(1, $value['email_recipient']);
+        self::assertSame('Bon appétit!', $value['message_to_recipient']);
+    }
+
+    public function testHandDeliveredLoyaltyGiftDoesNotUseBuyerEmailForRecipient(): void
+    {
+        $value = CheckoutValidator::validate($this->input([
+            'card_kind' => 'loyalty', 'is_gift' => '1', 'sender_name' => 'Alex',
+            'recipient_email' => 'stale@example.com',
+        ]));
+        self::assertNull($value['recipient_email']);
+        self::assertSame(0, $value['email_recipient']);
+        self::assertSame(1, $value['is_gift']);
+    }
+
+    public function testTurningGiftOffIgnoresHiddenRecipientAndSender(): void
+    {
+        $value = CheckoutValidator::validate($this->input([
+            'is_gift' => '0', 'sender_name' => 'Alex',
+            'email_recipient' => 'yes', 'recipient_email' => 'stale@example.com',
+        ]));
+        self::assertNull($value['recipient_email']);
+        self::assertSame('', $value['sender_name']);
+        self::assertSame(0, $value['email_recipient']);
+        self::assertSame(0, $value['is_gift']);
+    }
+
+    public function testOwnLoyaltyCardKeepsBuyerEmailFallback(): void
+    {
+        foreach ([[], ['is_gift' => '0']] as $fields) {
+            $value = CheckoutValidator::validate($this->input(['card_kind' => 'loyalty', ...$fields]));
+            self::assertSame('buyer@example.com', $value['recipient_email']);
+            self::assertSame(0, $value['email_recipient']);
+        }
+    }
+
+    public function testGiftEmailOptInRequiresAnAddress(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        CheckoutValidator::validate($this->input([
+            'is_gift' => '1', 'sender_name' => 'Alex', 'email_recipient' => 'yes',
+        ]));
+    }
+
+    public function testNewGiftFormRequiresSenderName(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        CheckoutValidator::validate($this->input(['is_gift' => '1']));
+    }
+
     public function testValidCheckoutIsNormalized(): void
     {
         $value = CheckoutValidator::validate([

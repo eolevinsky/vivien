@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import FormShell from '../../../components/FormShell.astro';
+import GiftDeliveryFields from '../../../components/GiftDeliveryFields.astro';
 import { alternatesFor, legalLabels, locales, localizedPath, t, withBase } from '../../../content/site.js';
 
 export function getStaticPaths() {
@@ -109,14 +110,9 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
               <input type="text" name="recipient_first_name" autocomplete="given-name" placeholder={labels.firstName} required />
               <input type="text" name="recipient_last_name" autocomplete="family-name" placeholder={labels.lastName} required />
             </div>
-            <input type="email" name="recipient_email" autocomplete="email" placeholder={labels.recipientEmail} />
             <input type="email" name="payer_email" autocomplete="email" placeholder={labels.payerEmail} required />
-            <label class="consent-line recipient-email-option" data-recipient-email-option hidden>
-              <input type="checkbox" name="email_recipient" value="yes" disabled />
-              <span>{labels.emailRecipient}</span>
-            </label>
+            <GiftDeliveryFields locale={locale} />
             <textarea name="payer_note" placeholder={labels.payerNote}></textarea>
-            <textarea name="message_to_recipient" placeholder={labels.recipientMessage}></textarea>
             <input type="hidden" name="card_kind" value="gift" />
             <input type="hidden" name="subject" value={`New Vivien Gift Card Order (${locale.toUpperCase()})`} />
           </FormShell>

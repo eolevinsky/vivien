@@ -1,3 +1,5 @@
+import { bootGiftDelivery } from './gift-delivery.js';
+
 const ATTRIBUTION_KEYS = [
   'lang',
   'utm_source',
@@ -1263,39 +1265,12 @@ function bootBirthdayFields(form) {
   });
 }
 
-function bootRecipientEmailOption(form) {
-  const option = form.querySelector('[data-recipient-email-option]');
-  if (!option) return;
-
-  const checkbox = option.querySelector('input[name="email_recipient"]');
-  const payerEmail = form.querySelector('input[name="payer_email"]');
-  const recipientEmail = form.querySelector('input[name="recipient_email"]');
-  if (!checkbox || !payerEmail || !recipientEmail) return;
-
-  const sync = () => {
-    const payer = payerEmail.value.trim().toLowerCase();
-    const recipient = recipientEmail.value.trim().toLowerCase();
-    const visible = Boolean(payer && recipient && payer !== recipient);
-    option.hidden = !visible;
-    checkbox.disabled = !visible;
-    if (!visible) {
-      checkbox.checked = false;
-    }
-  };
-
-  payerEmail.addEventListener('input', sync);
-  recipientEmail.addEventListener('input', sync);
-  payerEmail.addEventListener('blur', sync);
-  recipientEmail.addEventListener('blur', sync);
-  sync();
-}
-
 function bootGiftCardCheckout() {
   document.querySelectorAll('form[data-giftcard-checkout]').forEach((form) => {
     const state = form.querySelector('[data-form-state]');
     const submitButton = form.querySelector('button[type="submit"]');
     bootBirthdayFields(form);
-    bootRecipientEmailOption(form);
+    bootGiftDelivery(form);
 
     if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
       form.action = 'http://localhost:8080/v1/gift-cards/checkout';

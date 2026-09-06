@@ -131,6 +131,24 @@ Authorization: Bearer <INTERNAL_ADMIN_SECRET or INTERNAL_JOB_SECRET>
 Then invoke `/internal/process-jobs` until the refund job completes. Syrve may retain a
 zero-balance customer after wallet transactions; this is a known provider limitation.
 
+## Gift delivery and email presentation
+
+Before deploying the gift-sender update, import `004_add_email_recipient.sql`
+(if not already applied), then `005_add_gift_sender.sql` into the existing database.
+Deploy the API next and the built site last. No environment-variable changes are
+required for this update. Existing checkout clients can keep their old payloads.
+
+The new forms submit `is_gift` and, for gifts, `sender_name`. The sender name is
+shown to the recipient. `email_recipient` remains the opt-in for recipient delivery;
+the payer always receives their copy. An unchecked delivery option omits the
+recipient email, and a gifted loyalty card never substitutes the payer's email
+for its recipient. Self-purchased loyalty cards retain that email fallback.
+
+Gift recipients receive a personal gift introduction; buyers receive a gift
+confirmation. Self-purchases retain their existing confirmation wording. All
+versions use Vivien red and gold. The form provides an editable, localized default
+gift message; clearing it deliberately sends no personal message.
+
 ## Security
 
 - Never place `.env`, source code, migrations, logs, or `vendor/` under `public/`.

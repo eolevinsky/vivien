@@ -1,0 +1,60 @@
+---
+const { locale } = Astro.props;
+const translations = {
+  en: {
+    gift: 'Is it a gift?', sender: 'Your name — shown on the gift',
+    email: 'Email the card to the recipient', recipient: 'Recipient email',
+    message: 'Your personal message (optional)',
+    defaultMessage: 'A little invitation to slow down, savour something delicious and enjoy a lovely moment at Vivien. Bon appétit!',
+    hint: 'You’ll always receive a copy. Leave this unticked to give the card yourself.',
+  },
+  lv: {
+    gift: 'Vai tā ir dāvana?', sender: 'Jūsu vārds — redzams dāvanas saņēmējam',
+    email: 'Nosūtīt karti saņēmējam e-pastā', recipient: 'Saņēmēja e-pasts',
+    message: 'Jūsu personīgais novēlējums (nav obligāti)',
+    defaultMessage: 'Neliels aicinājums nesteigties, nobaudīt ko gardu un izbaudīt skaistu mirkli Vivien. Bon appétit!',
+    hint: 'Jūs vienmēr saņemsiet kopiju. Neatzīmējiet šo iespēju, ja vēlaties karti pasniegt personīgi.',
+  },
+  fr: {
+    gift: 'Est-ce un cadeau ?', sender: 'Votre nom — indiqué sur le cadeau',
+    email: 'Envoyer la carte au bénéficiaire par e-mail', recipient: 'E-mail du bénéficiaire',
+    message: 'Votre message personnel (facultatif)',
+    defaultMessage: 'Une invitation à prendre le temps, à savourer de belles choses et à partager un délicieux moment chez Vivien. Bon appétit !',
+    hint: 'Vous recevrez toujours une copie. Laissez cette case décochée pour offrir la carte vous-même.',
+  },
+  ru: {
+    gift: 'Это подарок?', sender: 'Ваше имя — будет указано в подарке',
+    email: 'Отправить карту получателю по e-mail', recipient: 'E-mail получателя',
+    message: 'Ваше личное пожелание (необязательно)',
+    defaultMessage: 'Небольшое приглашение замедлиться, попробовать что-нибудь вкусное и насладиться прекрасным моментом в Vivien. Bon appétit!',
+    hint: 'Вы всегда получите копию. Не отмечайте этот пункт, если хотите вручить карту лично.',
+  },
+};
+const labels = translations[locale] || translations.en;
+---
+<div class="gift-delivery" data-gift-delivery>
+  <label class="consent-line recipient-email-option">
+    <input type="checkbox" data-gift-toggle aria-expanded="false" aria-controls="gift-details" />
+    <span>{labels.gift}</span>
+  </label>
+  <input type="hidden" name="is_gift" value="0" />
+  <div id="gift-details" class="gift-delivery-details" data-gift-details hidden>
+    <label class="gift-field">
+      <span>{labels.sender}</span>
+      <input type="text" name="sender_name" autocomplete="section-sender name" maxlength="100" disabled />
+    </label>
+    <label class="gift-field">
+      <span>{labels.message}</span>
+      <textarea name="message_to_recipient" maxlength="2000" disabled>{labels.defaultMessage}</textarea>
+    </label>
+    <label class="consent-line">
+      <input type="checkbox" name="email_recipient" value="yes" aria-expanded="false" aria-controls="gift-recipient-email" disabled />
+      <span>{labels.email}</span>
+    </label>
+    <p class="gift-delivery-hint">{labels.hint}</p>
+    <label id="gift-recipient-email" class="gift-field" data-recipient-email-field hidden>
+      <span>{labels.recipient}</span>
+      <input type="email" name="recipient_email" autocomplete="section-recipient email" maxlength="254" disabled />
+    </label>
+  </div>
+</div>

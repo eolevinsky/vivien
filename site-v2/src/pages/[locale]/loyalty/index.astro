@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import FormShell from '../../../components/FormShell.astro';
+import GiftDeliveryFields from '../../../components/GiftDeliveryFields.astro';
 import { alternatesFor, locales, localizedPath, t, withBase } from '../../../content/site.js';
 
 export function getStaticPaths() {
@@ -91,12 +92,8 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
             </div>
             <div class="row">
               <input type="number" min="10" max="500" name="amount" inputmode="numeric" autocomplete="off" placeholder={labels.amount} required />
-              <input type="email" name="recipient_email" autocomplete="email" placeholder={copy.form.email} />
             </div>
-            <label class="consent-line recipient-email-option" data-recipient-email-option hidden>
-              <input type="checkbox" name="email_recipient" value="yes" disabled />
-              <span>{labels.emailRecipient}</span>
-            </label>
+            <GiftDeliveryFields locale={locale} />
             <textarea name="payer_note" placeholder={labels.note}></textarea>
             <input type="hidden" name="card_kind" value="loyalty" />
           </FormShell>
