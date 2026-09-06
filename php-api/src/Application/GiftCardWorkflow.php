@@ -7,6 +7,7 @@ namespace Vivien\Api\Application;
 use Stripe\Refund;
 use Stripe\StripeClient;
 use Vivien\Api\Config;
+use Vivien\Api\Notification\GiftCardMailer;
 use Vivien\Api\Provider\PassSlotGateway;
 use Vivien\Api\Provider\ProviderException;
 use Vivien\Api\Provider\SyrveGateway;
@@ -25,6 +26,7 @@ final class GiftCardWorkflow
         private readonly PassSlotGateway $passslot,
         private readonly SyrveGateway $syrve,
         private readonly StripeClient $stripe,
+        private readonly GiftCardMailer $mailer,
     ) {
     }
 
@@ -197,6 +199,7 @@ final class GiftCardWorkflow
             'status' => 'ready',
         ]);
         $this->event('gift_card.issued', $order, ['amount_cents' => $order['amount_cents']]);
+        $this->sendIssuedEmail([...$order, 'balance_cents' => $balance, 'card_status' => 'ready']);
     }
 
     public function syncBalance(string $cardId): void
@@ -284,6 +287,7 @@ final class GiftCardWorkflow
         ]);
         $this->cards->updateCard((string) $order['gift_card_id'], ['status' => 'refunded']);
         $this->event('gift_card.refunded', $order, ['amount_cents' => $order['amount_cents']]);
+        $this->sendRefundedEmail([...$order, 'status' => 'refunded', 'card_status' => 'refunded']);
     }
 
     public function revoke(string $orderId): void
@@ -355,5 +359,41 @@ final class GiftCardWorkflow
             'created_at' => Clock::now()->format(DATE_ATOM),
             ...$extra,
         ]);
+    }
+
+    /** @param array<string, mixed> $order */
+    private function sendIssuedEmail(array $order): void
+    {
+        try {
+            $this->mailer->sendIssued($order);
+        } catch (\Throwable $error) {
+            $this->emailFailed('gift_card.email_failed', $order, $error);
+        }
+    }
+
+    /** @param array<string, mixed> $order */
+    private function sendRefundedEmail(array $order): void
+    {
+        try {
+            $this->mailer->sendRefunded($order);
+        } catch (\Throwable $error) {
+            $this->emailFailed('gift_card.refund_email_failed', $order, $error);
+        }
+    }
+
+    /** @param array<string, mixed> $order */
+    private function emailFailed(string $type, array $order, \Throwable $error): void
+    {
+        try {
+            $this->integrations->outbox($type, (string) $order['gift_card_id'], [
+                'event' => $type,
+                'card_id' => $order['gift_card_id'],
+                'order_id' => $order['id'],
+                'error' => $error->getMessage(),
+                'created_at' => Clock::now()->format(DATE_ATOM),
+            ]);
+        } catch (\Throwable) {
+            // Email must never break payment fulfillment or refunds.
+        }
     }
 }

@@ -22,6 +22,7 @@ use Vivien\Api\Application\GiftCardWorkflow;
 use Vivien\Api\Application\JobProcessor;
 use Vivien\Api\Http\CheckoutValidator;
 use Vivien\Api\Http\Responses;
+use Vivien\Api\Notification\GiftCardMailer;
 use Vivien\Api\Provider\PassSlotClient;
 use Vivien\Api\Provider\SyrveClient;
 use Vivien\Api\Repository\GiftCardRepository;
@@ -45,6 +46,7 @@ final class App
         $passslot = new PassSlotClient($http, $config);
         $syrve = new SyrveClient($http, $config);
         $stripe = new StripeClient($config->string('STRIPE_SECRET_KEY'));
+        $mailer = new GiftCardMailer($config);
         $workflow = new GiftCardWorkflow(
             $config,
             $cards,
@@ -53,6 +55,7 @@ final class App
             $passslot,
             $syrve,
             $stripe,
+            $mailer,
         );
         $processor = new JobProcessor($config, $jobs, $cards, $integrations, $workflow);
         $logger = new Logger('vivien-api');
