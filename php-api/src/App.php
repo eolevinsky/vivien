@@ -31,6 +31,7 @@ use Vivien\Api\Repository\JobQueue;
 use Vivien\Api\Repository\RateLimiter;
 use Vivien\Api\Support\Clock;
 use Vivien\Api\Support\Ids;
+use Vivien\Api\Support\SmtpDiagnostics;
 
 final class App
 {
@@ -582,11 +583,23 @@ final class App
             $processor,
             $cards,
             $workflow,
+            $config,
+            $root,
         ): void {
-            $group->get('/process-jobs', static fn ($request, $response) =>
-                Responses::json($response, $processor->run()));
-            $group->post('/process-jobs', static fn ($request, $response) =>
-                Responses::json($response, $processor->run()));
+            $runJobs = static function ($request, $response) use ($processor, $config, $root): ResponseInterface {
+                $result = $processor->run();
+                if (!$result['locked'] && $result['processed'] === 0) {
+                    try {
+                        (new SmtpDiagnostics($config, $root))->runIfRequested();
+                    } catch (\Throwable) {
+                        // Diagnostics must not fail the scheduler or expose details in its response.
+                        error_log('Vivien SMTP diagnostic could not finish; check the private var report and file permissions.');
+                    }
+                }
+                return Responses::json($response, $result);
+            };
+            $group->get('/process-jobs', $runJobs);
+            $group->post('/process-jobs', $runJobs);
             $group->post('/orders/{id}/retry', static function (
                 $request,
                 $response,
