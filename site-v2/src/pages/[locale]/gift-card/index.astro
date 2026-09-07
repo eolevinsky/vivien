@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import FormShell from '../../../components/FormShell.astro';
+import GiftDeliveryFields from '../../../components/GiftDeliveryFields.astro';
 import { alternatesFor, legalLabels, locales, localizedPath, t, withBase } from '../../../content/site.js';
 
 export function getStaticPaths() {
@@ -24,6 +25,7 @@ const checkoutLabels = {
     recipientEmail: 'Recipient email (optional)',
     birthday: 'Birthday, DD.MM.YYYY (optional)',
     payerEmail: 'Payer email',
+    emailRecipient: 'Email the card to the recipient too',
     payerNote: 'Note for our team (optional)',
     recipientMessage: 'Message to recipient (optional)',
     submit: 'Continue to Secure Payment',
@@ -36,6 +38,7 @@ const checkoutLabels = {
     recipientEmail: 'Saņēmēja e-pasts (nav obligāti)',
     birthday: 'Dzimšanas diena, DD.MM.GGGG (nav obligāti)',
     payerEmail: 'Maksātāja e-pasts',
+    emailRecipient: 'Nosūtīt karti arī saņēmējam e-pastā',
     payerNote: 'Piezīme mūsu komandai (nav obligāti)',
     recipientMessage: 'Ziņa saņēmējam (nav obligāti)',
     submit: 'Turpināt uz drošu maksājumu',
@@ -48,6 +51,7 @@ const checkoutLabels = {
     recipientEmail: 'E-mail du bénéficiaire (facultatif)',
     birthday: 'Date de naissance, JJ.MM.AAAA (facultatif)',
     payerEmail: 'E-mail du payeur',
+    emailRecipient: 'Envoyer aussi la carte par e-mail au bénéficiaire',
     payerNote: 'Note pour notre équipe (facultatif)',
     recipientMessage: 'Message au bénéficiaire (facultatif)',
     submit: 'Continuer vers le paiement sécurisé',
@@ -60,6 +64,7 @@ const checkoutLabels = {
     recipientEmail: 'E-mail получателя (необязательно)',
     birthday: 'Дата рождения, ДД.ММ.ГГГГ (необязательно)',
     payerEmail: 'E-mail плательщика',
+    emailRecipient: 'Отправить карту получателю по e-mail',
     payerNote: 'Комментарий для команды (необязательно)',
     recipientMessage: 'Сообщение получателю (необязательно)',
     submit: 'Перейти к безопасной оплате',
@@ -105,10 +110,9 @@ const labels = checkoutLabels[locale] || checkoutLabels.en;
               <input type="text" name="recipient_first_name" autocomplete="given-name" placeholder={labels.firstName} required />
               <input type="text" name="recipient_last_name" autocomplete="family-name" placeholder={labels.lastName} required />
             </div>
-            <input type="email" name="recipient_email" autocomplete="email" placeholder={labels.recipientEmail} />
             <input type="email" name="payer_email" autocomplete="email" placeholder={labels.payerEmail} required />
+            <GiftDeliveryFields locale={locale} />
             <textarea name="payer_note" placeholder={labels.payerNote}></textarea>
-            <textarea name="message_to_recipient" placeholder={labels.recipientMessage}></textarea>
             <input type="hidden" name="card_kind" value="gift" />
             <input type="hidden" name="subject" value={`New Vivien Gift Card Order (${locale.toUpperCase()})`} />
           </FormShell>

@@ -28,6 +28,9 @@ final class GiftCardRepository
                 'recipient_last_name' => $input['recipient_last_name'],
                 'recipient_email' => $input['recipient_email'],
                 'recipient_birthday' => $input['recipient_birthday'],
+                'email_recipient' => $input['email_recipient'],
+                'is_gift' => $input['is_gift'] ?? 0,
+                'sender_name' => $input['sender_name'] ?? '',
                 'gift_message' => $input['message_to_recipient'],
                 'language' => $input['language'],
                 'currency' => 'eur',
@@ -52,11 +55,11 @@ final class GiftCardRepository
             $stmt = $this->db->prepare(
                 'INSERT INTO gift_cards
                 (id, public_token, card_number, recipient_first_name, recipient_last_name,
-                 recipient_email, recipient_birthday, gift_message, language, currency, balance_cents,
+                 recipient_email, recipient_birthday, email_recipient, is_gift, sender_name, gift_message, language, currency, balance_cents,
                  loyalty_balance_cents, status, created_at, updated_at)
                 VALUES
                 (:id, :public_token, :card_number, :recipient_first_name, :recipient_last_name,
-                 :recipient_email, :recipient_birthday, :gift_message, :language, :currency, :balance_cents,
+                 :recipient_email, :recipient_birthday, :email_recipient, :is_gift, :sender_name, :gift_message, :language, :currency, :balance_cents,
                  :loyalty_balance_cents, :status, :created_at, :updated_at)',
             );
             $stmt->execute($card);
@@ -87,6 +90,7 @@ final class GiftCardRepository
         return $this->one(
             'SELECT o.*, c.public_token, c.card_number, c.recipient_first_name,
                     c.recipient_last_name, c.recipient_email, c.recipient_birthday,
+                    c.email_recipient, c.is_gift, c.sender_name,
                     c.gift_message, c.language,
                     c.balance_cents, c.loyalty_balance_cents, c.status AS card_status,
                     c.passslot_serial_number, c.passslot_type_identifier, c.passslot_url,

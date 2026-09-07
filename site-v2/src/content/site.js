@@ -1451,6 +1451,7 @@ export const events = [
     ticketed: false,
     id: 'mussel-week',
     startIso: '2026-08-13T12:00:00+03:00',
+    endIso: '2026-08-19T23:59:59+03:00',
     image: '/assets/img/events-slider/mussels_week.jpeg',
     imageFit: 'contain',
     imageAspectRatio: '3 / 4',
@@ -1622,6 +1623,7 @@ export const events = [
     ticketed: false,
     id: 'lavender-days',
     startIso: '2026-07-26T12:00:00+03:00',
+    endIso: '2026-07-27T23:59:59+03:00',
     image: '/assets/img/events-slider/lavender-days.jpg',
     imageFit: 'cover',
     imageAspectRatio: '3 / 2',
@@ -1788,6 +1790,7 @@ export const events = [
   {
     id: 'cherry-days',
     startIso: '2026-07-10T17:00:00+03:00',
+    endIso: '2026-07-11T23:59:59+03:00',
     image: {
       en: '/assets/img/events-slider/cherry-days-en.png',
       lv: '/assets/img/events-slider/cherry-days-lv.png',

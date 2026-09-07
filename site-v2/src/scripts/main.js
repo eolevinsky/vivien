@@ -1,4 +1,5 @@
 import { isEventCurrentOrFuture } from '../utils/events.js';
+import { bootGiftDelivery } from './gift-delivery.js';
 
 const ATTRIBUTION_KEYS = [
   'lang',
@@ -1500,6 +1501,7 @@ function bootGiftCardCheckout() {
     const state = form.querySelector('[data-form-state]');
     const submitButton = form.querySelector('button[type="submit"]');
     bootBirthdayFields(form);
+    bootGiftDelivery(form);
 
     if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
       form.action = 'http://localhost:8080/v1/gift-cards/checkout';
@@ -1649,6 +1651,7 @@ function bootRestoplaceMessages() {
 }
 
 function bootSite() {
+  captureAttribution();
   observeConsentUpdates();
   bootHeaderScroll();
   bootScrollTop();

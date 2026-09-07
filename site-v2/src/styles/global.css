@@ -1053,13 +1053,19 @@ body.menu-details-open { overflow: hidden; }
 }
 
 .events-calendar-backdrop {
+  --events-calendar-mobile-bottom-clearance: calc(
+    var(--floating-control-bottom)
+    + var(--cookieyes-revisit-size)
+    + 16px
+    + env(safe-area-inset-bottom)
+  );
   position: fixed;
   inset: 0;
   z-index: 10020;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+  padding: max(12px, env(safe-area-inset-top)) 12px var(--events-calendar-mobile-bottom-clearance);
   background: rgba(0, 0, 0, 0.76);
 }
 
@@ -1067,7 +1073,11 @@ body.menu-details-open { overflow: hidden; }
 
 .events-calendar-panel {
   width: min(100%, 34rem);
-  max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
+  max-height: calc(
+    100dvh
+    - max(12px, env(safe-area-inset-top))
+    - var(--events-calendar-mobile-bottom-clearance)
+  );
   overflow: auto;
   overscroll-behavior: contain;
   border: 1px solid rgba(205, 164, 94, 0.65);
@@ -1698,6 +1708,20 @@ html.events-swipe-active body {
   margin-top: 0.25rem;
 }
 
+.recipient-email-option {
+  border: 1px solid rgba(205, 164, 94, 0.28);
+  background: rgba(205, 164, 94, 0.08);
+  padding: 0.78rem 0.85rem;
+}
+
+.recipient-email-option[hidden] {
+  display: none;
+}
+
+.gift-delivery-details { display: grid; gap: 1rem; padding: 1rem 0 0; }
+.gift-field { display: grid; gap: 0.45rem; font-size: 0.95rem; }
+.gift-delivery-hint { margin: -0.5rem 0 0; color: var(--muted); font-size: 0.85rem; }
+
 .hp-field {
   position: absolute;
   left: -10000px;
@@ -2072,6 +2096,23 @@ html.restoplace-modal-open body {
   }
   .vivien-form .row { grid-template-columns: 1fr; }
   .compact-form { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 821px) {
+  .events-calendar-backdrop {
+    align-items: center;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .events-calendar-panel {
+    max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .events-calendar-trigger,
+  .events-calendar-close,
+  .events-calendar-item { scroll-behavior: auto; }
 }
 
 @media (max-width: 420px) {
