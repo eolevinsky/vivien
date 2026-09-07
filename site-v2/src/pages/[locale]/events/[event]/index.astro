@@ -6,7 +6,7 @@ import BookingButton from '../../../../components/BookingButton.astro';
 import { bookingFormLocale, canonicalUrl, events, locales, site, t, withBase } from '../../../../content/site.js';
 
 export function getStaticPaths() {
-  const visibleEvents = events.filter((event) => !event.hidden);
+  const visibleEvents = events.filter((event) => !event.hidden && !event.comingSoon);
 
   return locales.flatMap((locale) =>
     visibleEvents.map((event) => ({

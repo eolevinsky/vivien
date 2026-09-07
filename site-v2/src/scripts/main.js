@@ -1,3 +1,5 @@
+import { isEventCurrentOrFuture } from '../utils/events.js';
+
 const ATTRIBUTION_KEYS = [
   'lang',
   'utm_source',
@@ -677,6 +679,9 @@ function syncLanguageLink(link) {
   if (!href) return;
 
   const target = new URL(href, window.location.href);
+  const currentParams = new URLSearchParams(window.location.search);
+  const linkedEventId = currentParams.get('event');
+  if (linkedEventId) target.searchParams.set('event', linkedEventId);
   target.hash = languageSectionHash();
   link.setAttribute('href', `${target.pathname}${target.search}${target.hash}`);
 }
@@ -828,6 +833,7 @@ function bootEventsCarousel() {
     const track = carousel.querySelector('[data-events-track]');
     const slides = Array.from(carousel.querySelectorAll('[data-events-slide]'));
     const dots = Array.from(carousel.querySelectorAll('[data-events-dot]'));
+    const calendar = carousel.querySelector('[data-events-calendar]');
     if (!track || !slides.length) return;
 
     const delay = Number.parseInt(carousel.dataset.eventsDelay || '5000', 10);
@@ -844,6 +850,14 @@ function bootEventsCarousel() {
     let resetTimer = 0;
 
     const firstClone = slides.length > 1 ? slides[0].cloneNode(true) : null;
+    const lastClone = slides.length > 1 ? slides[slides.length - 1].cloneNode(true) : null;
+    if (lastClone) {
+      lastClone.classList.remove('active');
+      lastClone.setAttribute('aria-hidden', 'true');
+      lastClone.dataset.eventsClone = 'true';
+      lastClone.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
+      track.prepend(lastClone);
+    }
     if (firstClone) {
       firstClone.classList.remove('active');
       firstClone.setAttribute('aria-hidden', 'true');
@@ -858,7 +872,7 @@ function bootEventsCarousel() {
 
     const setPosition = (index, animated = true) => {
       setTransition(animated);
-      track.style.transform = `translateX(-${index * 100}%)`;
+      track.style.transform = `translateX(-${(index + 1) * 100}%)`;
     };
 
     const syncStickyCta = (index) => {
@@ -902,12 +916,25 @@ function bootEventsCarousel() {
 
     const showSlide = (nextIndex, animated = true) => {
       window.clearTimeout(resetTimer);
+      resetTimer = 0;
       if (nextIndex >= slides.length && firstClone) {
         syncActiveState(0);
         setPosition(slides.length, animated);
         resetTimer = window.setTimeout(() => {
           currentIndex = 0;
           setPosition(0, false);
+          resetTimer = 0;
+        }, prefersReducedMotion ? 0 : 470);
+        return;
+      }
+
+      if (nextIndex < 0 && lastClone) {
+        syncActiveState(slides.length - 1);
+        setPosition(-1, animated);
+        resetTimer = window.setTimeout(() => {
+          currentIndex = slides.length - 1;
+          setPosition(currentIndex, false);
+          resetTimer = 0;
         }, prefersReducedMotion ? 0 : 470);
         return;
       }
@@ -916,6 +943,111 @@ function bootEventsCarousel() {
       syncActiveState(currentIndex);
       setPosition(currentIndex, animated);
     };
+
+    if (calendar) {
+      const trigger = calendar.querySelector('[data-events-calendar-trigger]');
+      const backdrop = calendar.querySelector('[data-events-calendar-backdrop]');
+      const panel = calendar.querySelector('[data-events-calendar-panel]');
+      const closeButtons = Array.from(calendar.querySelectorAll('[data-events-calendar-close]'));
+      const items = Array.from(calendar.querySelectorAll('[data-events-calendar-item]'));
+      const listView = calendar.querySelector('[data-events-calendar-list-view]');
+      const comingSoonView = calendar.querySelector('[data-events-coming-soon-view]');
+      const comingSoonDate = calendar.querySelector('[data-events-coming-soon-date]');
+      const comingSoonTitle = calendar.querySelector('[data-events-coming-soon-title]');
+      const comingSoonBack = calendar.querySelector('[data-events-coming-soon-back]');
+      const panelLabelledby = panel?.getAttribute('aria-labelledby') || '';
+      const currentItems = items.filter((item) => isEventCurrentOrFuture({
+        startIso: item.dataset.eventStart,
+        endIso: item.dataset.eventEnd,
+      }));
+      let previouslyFocused = null;
+
+      items.forEach((item) => {
+        const listItem = item.closest('li');
+        if (listItem) listItem.hidden = !currentItems.includes(item);
+      });
+      if (!currentItems.length) calendar.hidden = true;
+      let activeComingSoonItem = null;
+
+      const showList = ({ focus = false } = {}) => {
+        if (listView) listView.hidden = false;
+        if (comingSoonView) comingSoonView.hidden = true;
+        if (panelLabelledby) panel?.setAttribute('aria-labelledby', panelLabelledby);
+        if (focus) activeComingSoonItem?.focus();
+        activeComingSoonItem = null;
+      };
+
+      const showComingSoon = (item) => {
+        if (!comingSoonView || !item) return;
+        if (comingSoonDate) {
+          comingSoonDate.textContent = item.dataset.eventDate || '';
+          comingSoonDate.setAttribute('datetime', item.dataset.eventEnd
+            ? `${item.dataset.eventStart}/${item.dataset.eventEnd}`
+            : item.dataset.eventStart || '');
+        }
+        if (comingSoonTitle) comingSoonTitle.textContent = item.dataset.eventTitle || '';
+        activeComingSoonItem = item;
+        if (listView) listView.hidden = true;
+        comingSoonView.hidden = false;
+        panel?.removeAttribute('aria-labelledby');
+        pushEvent('events_calendar_coming_soon', { event_id: item.dataset.eventId || '' });
+        window.requestAnimationFrame(() => comingSoonBack?.focus());
+      };
+
+      const closeCalendar = () => {
+        if (!backdrop || backdrop.hidden) return;
+        showList();
+        backdrop.hidden = true;
+        trigger?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('events-calendar-open');
+        (previouslyFocused || trigger)?.focus();
+      };
+
+      const openCalendar = () => {
+        if (!trigger || !backdrop) return;
+        previouslyFocused = document.activeElement;
+        backdrop.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('events-calendar-open');
+        pushEvent('events_calendar_open');
+        window.requestAnimationFrame(() => (closeButtons[0] || currentItems[0])?.focus());
+      };
+
+      trigger?.addEventListener('click', openCalendar);
+      closeButtons.forEach((button) => button.addEventListener('click', closeCalendar));
+      comingSoonBack?.addEventListener('click', () => showList({ focus: true }));
+      backdrop?.addEventListener('click', (event) => {
+        if (event.target === backdrop) closeCalendar();
+      });
+      items.forEach((item) => item.addEventListener('click', (event) => {
+        if (item.matches('[data-events-coming-soon]')) {
+          event.preventDefault();
+          showComingSoon(item);
+          return;
+        }
+        pushEvent('events_calendar_select', { event_id: item.dataset.eventId || '' });
+      }));
+      panel?.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeCalendar();
+          return;
+        }
+        if (event.key !== 'Tab') return;
+        const focusable = comingSoonView && !comingSoonView.hidden
+          ? [closeButtons[1], comingSoonBack].filter(Boolean)
+          : [closeButtons[0], ...currentItems].filter(Boolean);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+    }
 
     const stop = () => {
       if (!timer) return;
@@ -935,6 +1067,103 @@ function bootEventsCarousel() {
         start();
       });
     });
+
+    const viewport = carousel.querySelector('.events-viewport');
+    if (viewport && slides.length > 1) {
+      let pointerId = null;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let pointerStartScrollY = 0;
+      let swipeDirection = '';
+      let suppressClick = false;
+
+      const resetSwipe = () => {
+        if (pointerId !== null && viewport.hasPointerCapture?.(pointerId)) {
+          viewport.releasePointerCapture(pointerId);
+        }
+        pointerId = null;
+        swipeDirection = '';
+        viewport.classList.remove('is-swiping');
+        document.documentElement.classList.remove('events-swipe-active');
+      };
+
+      viewport.addEventListener('pointerdown', (event) => {
+        if (!event.isPrimary) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        if (resetTimer) return;
+        pointerId = event.pointerId;
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+        pointerStartScrollY = window.scrollY;
+        swipeDirection = '';
+        suppressClick = false;
+        stop();
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== pointerId) return;
+        const deltaX = event.clientX - pointerStartX;
+        const deltaY = event.clientY - pointerStartY;
+
+        if (!swipeDirection && Math.max(Math.abs(deltaX), Math.abs(deltaY)) >= 8) {
+          swipeDirection = Math.abs(deltaX) >= Math.abs(deltaY) * 0.65 ? 'horizontal' : 'vertical';
+          if (swipeDirection === 'horizontal') {
+            try {
+              viewport.setPointerCapture?.(pointerId);
+            } catch (_) {
+              // The pointer may already have been released by the browser.
+            }
+            viewport.classList.add('is-swiping');
+            document.documentElement.classList.add('events-swipe-active');
+          }
+        }
+
+        if (swipeDirection === 'horizontal') {
+          if (event.cancelable) event.preventDefault();
+          setTransition(false);
+          track.style.transform = `translateX(calc(-${(currentIndex + 1) * 100}% + ${deltaX}px))`;
+        } else if (swipeDirection === 'vertical' && event.pointerType !== 'mouse') {
+          if (event.cancelable) event.preventDefault();
+          window.scrollTo(0, pointerStartScrollY + pointerStartY - event.clientY);
+        }
+      }, { passive: false });
+
+      viewport.addEventListener('pointerup', (event) => {
+        if (event.pointerId !== pointerId) return;
+        const deltaX = event.clientX - pointerStartX;
+        const swipeThreshold = viewport.clientWidth * 0.22;
+        const shouldChangeSlide = swipeDirection === 'horizontal' && Math.abs(deltaX) >= swipeThreshold;
+
+        if (shouldChangeSlide) {
+          suppressClick = true;
+          window.setTimeout(() => { suppressClick = false; }, 400);
+          showSlide(currentIndex + (deltaX < 0 ? 1 : -1));
+          pushEvent('events_swipe', {
+            direction: deltaX < 0 ? 'next' : 'previous',
+            event_id: slides[currentIndex]?.dataset.eventId || '',
+          });
+        } else if (swipeDirection === 'horizontal') {
+          setPosition(currentIndex, true);
+        }
+        resetSwipe();
+        start();
+      });
+
+      viewport.addEventListener('pointercancel', () => {
+        if (swipeDirection === 'horizontal') setPosition(currentIndex, true);
+        resetSwipe();
+        start();
+      });
+
+      viewport.addEventListener('dragstart', (event) => event.preventDefault());
+
+      viewport.addEventListener('click', (event) => {
+        if (!suppressClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      }, true);
+    }
 
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
@@ -1057,6 +1286,81 @@ function bootMenuFilters() {
         applyFilter();
       }
     });
+  });
+}
+
+function bootMenuDetails() {
+  const shell = document.querySelector('[data-menu-shell]');
+  const backdrop = document.querySelector('[data-menu-details-backdrop]');
+  const dialog = backdrop?.querySelector('[data-menu-details-dialog]');
+  const closeButton = backdrop?.querySelector('[data-menu-details-close]');
+  const imageWrap = backdrop?.querySelector('[data-menu-details-image-wrap]');
+  const image = backdrop?.querySelector('[data-menu-details-image]');
+  const title = backdrop?.querySelector('[data-menu-details-title]');
+  const price = backdrop?.querySelector('[data-menu-details-price]');
+  const description = backdrop?.querySelector('[data-menu-details-description]');
+  if (!shell || !backdrop || !dialog || !closeButton || !imageWrap || !image || !title || !price || !description) return;
+
+  let trigger = null;
+
+  const closeDetails = () => {
+    if (backdrop.hidden) return;
+    backdrop.hidden = true;
+    document.body.classList.remove('menu-details-open');
+    image.removeAttribute('src');
+    trigger?.focus();
+  };
+
+  const openDetails = (item) => {
+    trigger = item;
+    title.textContent = item.dataset.menuTitle || '';
+    price.textContent = item.dataset.menuPrice || '';
+    price.hidden = !price.textContent;
+    description.textContent = item.dataset.menuDescription || '';
+    description.hidden = !description.textContent;
+
+    const imageUrl = item.dataset.menuImage || '';
+    imageWrap.hidden = !imageUrl;
+    if (imageUrl) {
+      image.src = imageUrl;
+      image.alt = item.dataset.menuImageAlt || item.dataset.menuTitle || '';
+    } else {
+      image.removeAttribute('src');
+      image.alt = '';
+    }
+
+    backdrop.hidden = false;
+    document.body.classList.add('menu-details-open');
+    window.requestAnimationFrame(() => closeButton.focus());
+  };
+
+  image.addEventListener('error', () => {
+    imageWrap.hidden = true;
+    image.removeAttribute('src');
+  });
+  closeButton.addEventListener('click', closeDetails);
+  backdrop.addEventListener('click', (event) => {
+    if (event.target === backdrop) closeDetails();
+  });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeDetails();
+    } else if (event.key === 'Tab') {
+      event.preventDefault();
+      closeButton.focus();
+    }
+  });
+  shell.addEventListener('click', (event) => {
+    const item = event.target.closest('[data-menu-title]');
+    if (item && shell.contains(item)) openDetails(item);
+  });
+  shell.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const item = event.target.closest('[data-menu-title]');
+    if (!item || !shell.contains(item)) return;
+    event.preventDefault();
+    openDetails(item);
   });
 }
 
@@ -1356,6 +1660,7 @@ function bootSite() {
   bootEventsCarousel();
   bootStickyCtaContext();
   bootMenuFilters();
+  bootMenuDetails();
   bootForms();
   bootGiftCardCheckout();
   bootReviewSource();

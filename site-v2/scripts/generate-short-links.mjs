@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   bookingLocales,
+  eventSlugAliases,
   fallbackBookingLocale,
   fallbackLocale,
   redirectFixtures,
@@ -21,6 +22,16 @@ const LEGACY_MARKER = '# Legacy production redirects.';
 const GENERATED_START = '# BEGIN generated short marketing links';
 const GENERATED_END = '# END generated short marketing links';
 const FLAGS = '[R=302,L,NE,QSA]';
+const HTML_CACHE_HEADERS = [
+  '# Event and menu content is rendered into static HTML and changes frequently.',
+  '# Force browsers and intermediary caches to revalidate pages on every visit,',
+  '# while leaving images, fonts, CSS and JavaScript cacheable.',
+  '<IfModule mod_headers.c>',
+  '  <FilesMatch "\\.html?$">',
+  '    Header always set Cache-Control "no-cache, must-revalidate"',
+  '  </FilesMatch>',
+  '</IfModule>',
+].join('\n');
 const SUPPORTED_LOCALE_PATTERN = `(${bookingLocales.join('|')})`;
 const TWO_LETTER_LOCALE_PATTERN = '[A-Za-z]{2}';
 const SLUG_CAPTURE = `(${slugPattern})`;
@@ -140,6 +151,14 @@ function addBaseHomeRules(lines, prefix, group, params, hash = null) {
 function addEventRules(lines, prefix, group, options = {}) {
   if (!options.localePrefixed) {
     addBaseHomeRules(lines, prefix, group, baseEventParams(group), baseHash(group));
+
+    Object.entries(eventSlugAliases).forEach(([alias, event]) => {
+      const params = eventParams(group, event);
+      lines.push(rule(`${prefix}/${SUPPORTED_LOCALE_PATTERN}/events/${alias}/?`, eventDestination('$1', event, '$1', params)));
+      lines.push(rule(`${prefix}/fr/events/${alias}/?`, eventDestination('fr', event, fallbackBookingLocale, params)));
+      lines.push(rule(`${prefix}/${SUPPORTED_LOCALE_PATTERN}/${alias}/?`, eventDestination('$1', event, '$1', params)));
+      lines.push(rule(`${prefix}/fr/${alias}/?`, eventDestination('fr', event, fallbackBookingLocale, params)));
+    });
 
     if (group.pageLinks) {
       group.pageLinks.forEach((page) => {
@@ -286,6 +305,8 @@ export function buildHtaccess(existingHtaccess = fs.readFileSync(HTACCESS_PATH, 
   return [
     'Options -Indexes',
     'RewriteEngine On',
+    '',
+    HTML_CACHE_HEADERS,
     '',
     buildShortLinkRules(),
     '',

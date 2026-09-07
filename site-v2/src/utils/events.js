@@ -7,15 +7,38 @@ const dateKeyFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: EVENT_TIME_ZONE,
 });
 
-function dateKey(date) {
+export function rigaDateKey(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
   const parts = dateKeyFormatter.formatToParts(date);
   const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
 
   return `${values.year}-${values.month}-${values.day}`;
 }
 
+export function isEventCurrentOrFuture(event, now = new Date()) {
+  const start = new Date(event?.startIso);
+  const boundary = new Date(event?.endIso || event?.startIso);
+
+  return event?.hidden !== true
+    && !Number.isNaN(start.getTime())
+    && !Number.isNaN(boundary.getTime())
+    && boundary.getTime() >= start.getTime()
+    && rigaDateKey(boundary) >= rigaDateKey(now);
+}
+
+export function getUpcomingEvents(events, now = new Date()) {
+  return events
+    .map((event, index) => {
+      const start = new Date(event?.startIso);
+      return { event, index, start };
+    })
+    .filter(({ event }) => isEventCurrentOrFuture(event, now))
+    .sort((left, right) => left.start.getTime() - right.start.getTime() || left.index - right.index)
+    .map(({ event }) => event);
+}
+
 export function sortEventsByStartDate(events, now = new Date()) {
-  const today = dateKey(now);
+  const today = rigaDateKey(now);
 
   return events
     .map((event, index) => {
@@ -26,7 +49,7 @@ export function sortEventsByStartDate(events, now = new Date()) {
         event,
         index,
         start,
-        upcoming: valid && dateKey(start) >= today,
+        upcoming: valid && rigaDateKey(start) >= today,
         valid,
       };
     })

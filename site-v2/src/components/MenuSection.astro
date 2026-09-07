@@ -3,6 +3,8 @@ import { t } from '../content/site.js';
 const { locale, menu } = Astro.props;
 const copy = t(locale);
 const allLabel = { en: 'All', lv: 'Visi', fr: 'Tous', ru: 'Все' }[locale] || 'All';
+const closeLabel = { en: 'Close dish details', lv: 'Aizvērt ēdiena informāciju', fr: 'Fermer la fiche du plat', ru: 'Закрыть карточку блюда' }[locale] || 'Close dish details';
+const dialogLabel = { en: 'Dish details', lv: 'Informācija par ēdienu', fr: 'Détails du plat', ru: 'Карточка блюда' }[locale] || 'Dish details';
 const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
   String(import.meta.env.VIVIEN_MENU_IMAGES_ENABLED || '').trim().toLowerCase()
 );
@@ -21,7 +23,18 @@ const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
     </ul>
     <div class="menu-grid menu-api-grid">
       {menu.items.map((item) => (
-        <article class:list={['menu-item', 'isotope-item', item.description && 'has-desc', menuImagesEnabled && (item.thumbUrl || item.imageUrl) && 'has-image']} data-menu-category={item.categoryId} data-menu-description={item.description || ''} tabindex={item.description ? '0' : undefined}>
+        <article
+          class:list={['menu-item', 'isotope-item', 'has-details', item.description && 'has-desc', menuImagesEnabled && (item.thumbUrl || item.imageUrl) && 'has-image']}
+          data-menu-category={item.categoryId}
+          data-menu-title={item.name}
+          data-menu-description={item.description || ''}
+          data-menu-price={item.price || ''}
+          data-menu-image={item.imageUrl || item.thumbUrl || ''}
+          data-menu-image-alt={item.imageAlt || item.name}
+          role="button"
+          aria-haspopup="dialog"
+          tabindex="0"
+        >
           {menuImagesEnabled && (item.thumbUrl || item.imageUrl) && (
             <figure class="menu-image">
               <img src={item.thumbUrl || item.imageUrl} alt={item.imageAlt || item.name} loading="lazy" width="96" height="96" />
@@ -37,6 +50,21 @@ const menuImagesEnabled = ['1', 'true', 'yes', 'on'].includes(
           </div>
         </article>
       ))}
+    </div>
+  </div>
+  <div class="menu-details-backdrop" data-menu-details-backdrop hidden>
+    <div class="menu-details-dialog" role="dialog" aria-modal="true" aria-label={dialogLabel} data-menu-details-dialog>
+      <button class="menu-details-close" type="button" aria-label={closeLabel} data-menu-details-close>×</button>
+      <figure class="menu-details-image" data-menu-details-image-wrap hidden>
+        <img alt="" data-menu-details-image />
+      </figure>
+      <div class="menu-details-copy">
+        <div class="menu-details-heading">
+          <h3 data-menu-details-title></h3>
+          <span data-menu-details-price hidden></span>
+        </div>
+        <p data-menu-details-description hidden></p>
+      </div>
     </div>
   </div>
 </section>

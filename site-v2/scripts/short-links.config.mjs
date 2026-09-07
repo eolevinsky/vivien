@@ -8,6 +8,12 @@ export const fallbackBookingLocale = 'en';
 export const slugPattern = '[A-Za-z0-9._~-]+';
 export const sectionSlugs = ['menu', 'events', 'gallery', 'specials', 'careers', 'contact'];
 
+// Keep already-published event spellings working. Compatibility rules are
+// emitted before generic section routes, including the legacy /events/ form.
+export const eventSlugAliases = {
+  'chantarelle-week-2026': 'chanterelle-week-2026',
+};
+
 export const shortLinkGroups = [
   {
     prefix: 'e',
@@ -225,6 +231,10 @@ export const shortLinkGroups = [
 ];
 
 export const redirectFixtures = [
+  {
+    path: '/x/lv/events/chantarelle-week-2026',
+    location: 'https://vivien.lv/lv/events/chanterelle-week-2026/?lang=lv&utm_source=twitter&utm_medium=social&utm_campaign=event_chanterelle-week-2026&utm_content=event_link',
+  },
   {
     path: '/meta-event/cherry-days/meta_cherry_days_july',
     location: 'https://vivien.lv/en/events/cherry-days/?lang=en&utm_source=meta&utm_medium=paid_social&utm_campaign=meta_cherry_days_july&utm_content=event_link',
