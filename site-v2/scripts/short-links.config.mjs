@@ -12,6 +12,8 @@ export const sectionSlugs = ['menu', 'events', 'gallery', 'specials', 'careers',
 // emitted before generic section routes, including the legacy /events/ form.
 export const eventSlugAliases = {
   'chantarelle-week-2026': 'chanterelle-week-2026',
+  'cosmas-2026': 'saints-cosmas-damian-day-2026',
+  'cosmas-damian-days-2026': 'saints-cosmas-damian-day-2026',
 };
 
 export const shortLinkGroups = [

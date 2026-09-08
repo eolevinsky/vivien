@@ -38,8 +38,6 @@ export function getUpcomingEvents(events, now = new Date()) {
 }
 
 export function sortEventsByStartDate(events, now = new Date()) {
-  const today = rigaDateKey(now);
-
   return events
     .map((event, index) => {
       const start = new Date(event.startIso);
@@ -49,7 +47,9 @@ export function sortEventsByStartDate(events, now = new Date()) {
         event,
         index,
         start,
-        upcoming: valid && rigaDateKey(start) >= today,
+        // A multi-day event remains current through its Riga-local end date.
+        // This keeps an event that has already started ahead of future events.
+        upcoming: valid && isEventCurrentOrFuture(event, now),
         valid,
       };
     })

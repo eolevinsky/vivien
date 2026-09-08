@@ -75,6 +75,22 @@ test('keeps a multi-day event through its Riga-local end date', () => {
   assert.equal(getUpcomingEvents(events, new Date('2026-08-23T00:01:00+03:00')).length, 0);
 });
 
+test('keeps an ongoing multi-day event before later future events in the carousel', () => {
+  const events = [
+    event('future', '2026-09-17T12:00:00+03:00'),
+    {
+      ...event('ongoing', '2026-09-05T12:00:00+03:00'),
+      endIso: '2026-09-11T23:59:59+03:00',
+    },
+    event('past', '2026-09-01T12:00:00+03:00'),
+  ];
+
+  assert.deepEqual(
+    sortEventsByStartDate(events, new Date('2026-09-08T10:00:00+03:00')).map(({ id }) => id),
+    ['ongoing', 'future', 'past'],
+  );
+});
+
 test('uses the end date when present and otherwise the start date', () => {
   const events = [
     {
