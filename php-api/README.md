@@ -149,6 +149,28 @@ confirmation. Self-purchases retain their existing confirmation wording. All
 versions use Vivien red and gold. The form provides an editable, localized default
 gift message; clearing it deliberately sends no personal message.
 
+## One-time SMTP diagnostic through the existing cron
+
+For hosting without a terminal, upload the updated `src/App.php` and
+`src/Support/SmtpDiagnostics.php`. Create `var/smtp-diagnostic.request` (any content)
+outside `public/`. The existing authenticated `/internal/process-jobs` request
+checks one SendPulse port on each idle run, after processing normal jobs. It writes
+the effective PHP/settings summary and connection results to the private file
+`var/smtp-diagnostic.txt`, then removes the request flag. Read that file through
+Plesk File Manager. No new cron URL, secrets, environment variables, Composer
+dependencies or database migration are needed for this diagnostic hook.
+
+The diagnostic never authenticates to SMTP or sends email. Its connection targets
+are fixed to SendPulse ports 465 and 587 with TLS verification enabled. A file lock
+prevents duplicate probes; each attempted port is recorded before connecting so
+an interrupted request will not retry indefinitely. The report contains no SMTP
+credentials, payment keys or scheduler secrets. Idle checks use a five-second
+timeout per SMTP operation. A continuously busy queue delays the diagnostic.
+
+To deliberately repeat the diagnostic later, first remove the completed report
+and then recreate the request flag. CLI hosting can alternatively run
+`php bin/check-smtp.php` for a one-time connection check.
+
 ## Security
 
 - Never place `.env`, source code, migrations, logs, or `vendor/` under `public/`.
