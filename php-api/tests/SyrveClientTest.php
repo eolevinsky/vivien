@@ -72,6 +72,9 @@ final class SyrveClientTest extends TestCase
         self::assertSame('12345678901', $customerPayload['cardNumber']);
         self::assertSame('jane@example.com', $customerPayload['email']);
         self::assertSame('1990-04-15 00:00:00.000', $customerPayload['birthday']);
+        self::assertTrue($customerPayload['shouldReceiveLoyaltyInfo']);
+        self::assertFalse($customerPayload['shouldReceivePromoActionsInfo']);
+        self::assertSame(0, $customerPayload['consentStatus']);
         self::assertArrayNotHasKey('phone', $customerPayload);
     }
 }

@@ -281,7 +281,8 @@ class SyrveClient:
                 "name": first_name,
                 "surName": last_name,
                 "consentStatus": 0,
-                "shouldReceiveLoyaltyInfo": False,
+                # Syrve requires this subscription to emit wallet balance webhooks.
+                "shouldReceiveLoyaltyInfo": True,
                 "shouldReceivePromoActionsInfo": False,
                 "organizationId": self.settings.syrve_organization_id,
                 "userData": passslot_serial,

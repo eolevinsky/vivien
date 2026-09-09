@@ -21,6 +21,17 @@ php -S localhost:8080 -t public public/index.php
 The Python reference implementation remains in the website repository and is not used
 by this package.
 
+## Syrve balance notifications
+
+Customer creation enables `shouldReceiveLoyaltyInfo`, which Syrve requires for
+wallet balance notifications to reach the existing Planfix/PassSlot sync.
+Marketing subscriptions remain disabled; personal-data consent is unchanged.
+
+For website-created customers from before this fix, enable **Subscribed to loyalty
+notifications** in their Syrve customer profile and save. Deploying the code does
+not update existing profiles or replay missed notifications. No environment,
+database migration, or cron changes are required for this fix.
+
 ## Plesk deployment
 
 Deploy this package as the root of the separate `vivien-api` repository:

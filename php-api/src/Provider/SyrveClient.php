@@ -47,7 +47,8 @@ final class SyrveClient implements SyrveGateway
             'name' => $firstName,
             'surName' => $lastName,
             'consentStatus' => 0,
-            'shouldReceiveLoyaltyInfo' => false,
+            // Syrve requires this subscription to emit wallet balance webhooks.
+            'shouldReceiveLoyaltyInfo' => true,
             'shouldReceivePromoActionsInfo' => false,
             'organizationId' => $this->config->string('SYRVE_ORGANIZATION_ID'),
             'userData' => $serial,
